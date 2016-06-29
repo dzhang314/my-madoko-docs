@@ -26,12 +26,12 @@ Package       : physics
 \Phi_1(\uvx) &\coloneqq \qty[
   \prod_{\alpha=1}^N \prod_{k=1}^d x_{\alpha k}^{(p_1)_{\alpha k}}
 ] \exp(
-  -\frac{1}{2} \uvx^T A_1 \uvx
+  -\frac{1}{2} \uvx^T \! A_1 \uvx
 ) \\
 \Phi_2(\uvx) &\coloneqq \qty[
   \prod_{\alpha=1}^N \prod_{k=1}^d x_{\alpha k}^{(p_2)_{\alpha k}}
 ] \exp(
-  -\frac{1}{2} \uvx^T A_2 \uvx
+  -\frac{1}{2} \uvx^T \! A_2 \uvx
 )
 \end{aligned}
 ~
@@ -39,10 +39,10 @@ Package       : physics
 ~ Equation
 \begin{aligned}
 G_1(\uvx) &\coloneqq \exp(
-  -\frac{1}{2} \uvx^T A_1 \uvx + \uvt_1^T \uvx
+  -\frac{1}{2} \uvx^T \! A_1 \uvx + \uvt_1^T \uvx
 ) \\
 G_2(\uvx) &\coloneqq \exp(
-  -\frac{1}{2} \uvx^T A_2 \uvx + \uvt_2^T \uvx
+  -\frac{1}{2} \uvx^T \! A_2 \uvx + \uvt_2^T \uvx
 )
 \end{aligned}
 ~
@@ -58,7 +58,7 @@ A &\coloneqq A_1 + A_2 \\
 ~ Equation
 \begin{aligned}
 \braket{G_1}{G_2} &= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
-  \exp(\frac{1}{2} \uvt^T A^{-1} \uvt)
+  \exp(\frac{1}{2} \uvt^T \! A^{-1} \uvt)
 \end{aligned}
 ~
 
