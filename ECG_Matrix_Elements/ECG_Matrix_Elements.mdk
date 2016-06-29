@@ -14,6 +14,7 @@ Package       : physics
 \newcommand{\uvx}{\mathbf{\underline{x}}}
 \newcommand{\uvo}{\mathbf{\underline{0}}}
 \newcommand{\uvt}{\mathbf{\underline{t}}}
+\newcommand{\uvu}{\mathbf{\underline{u}}}
 \newcommand{\vx}{\mathbf{x}}
 \newcommand{\vo}{\mathbf{0}}
 \newcommand{\vt}{\mathbf{t}}
@@ -55,10 +56,44 @@ A &\coloneqq A_1 + A_2 \\
 \end{aligned}
 ~
 
+The overlap matrix element of the generating functions is given by
+
+~ Equation
+\braket{G_1}{G_2} = \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \uvt^T \! A^{-1} \uvt)
+~
+
+~ Equation
+B \coloneqq \mqty[
+  A^{-1} & A^{-1} \\
+  A^{-1} & A^{-1}
+]
+\qquad
+\uvu \coloneqq \mqty[
+  \uvt_1 \\
+  \uvt_2
+]
+~
+
 ~ Equation
 \begin{aligned}
 \braket{G_1}{G_2} &= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
-  \exp(\frac{1}{2} \uvt^T \! A^{-1} \uvt)
+  \exp(\frac{1}{2} \uvu^T \! B \uvu) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \sum_{i=1}^{2N} \sum_{j=1}^{2N}
+    B_{ij} (\vec{u}_i \cdot \vec{u}_j)) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \sum_{i=1}^{2N} \sum_{j=1}^{2N} \sum_{k=1}^d
+    B_{ij} u_{ik} u_{jk}) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d \exp(\frac{1}{2}
+    B_{ij} u_{ik} u_{jk}) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d \sum_{q_{ijk}=0}^\infty
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij} u_{ik} u_{jk})^{q_{ijk}} \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \sum_{q_{111}=0}^\infty \cdots \sum_{q_{2N,2N,d}=0}^\infty
+  \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij} u_{ik} u_{jk})^{q_{ijk}}
 \end{aligned}
 ~
-
