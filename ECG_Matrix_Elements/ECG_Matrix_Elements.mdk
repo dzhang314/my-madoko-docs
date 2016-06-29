@@ -95,11 +95,16 @@ B \coloneqq \mqty[
 &= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
   \sum_{q_{111}=0}^\infty \cdots \sum_{q_{2N,2N,d}=0}^\infty
   \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij} u_{ik} u_{jk})^{q_{ijk}} \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \sum_{q \in \N^{2N \times 2N \times d}}
+  \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
   \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij} u_{ik} u_{jk})^{q_{ijk}}
 \end{aligned}
 ~
 
-
+Note that we assume the convention $0 \in \N$. We now examine each term
+of this sum in detail:
 
 ~ Equation
 \begin{aligned}
@@ -120,5 +125,44 @@ B \coloneqq \mqty[
   u_{ik}^{\sum_{j=1}^{2N} q_{ijk}}]
   \qty[\prod_{j=1}^{2N} \prod_{k=1}^d
   u_{jk}^{\sum_{i=1}^{2N} q_{ijk}}] \\
+&= \qty[\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}] \times \\
+&\pe \qty[\prod_{i=1}^{2N} \prod_{k=1}^d
+  u_{ik}^{\sum_{j=1}^{2N} q_{ijk}}]
+  \qty[\prod_{i=1}^{2N} \prod_{k=1}^d
+  u_{ik}^{\sum_{j=1}^{2N} q_{jik}}] \\
+&= \qty[\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}] \times \\
+&\pe \qty[\prod_{i=1}^{2N} \prod_{k=1}^d
+  u_{ik}^{\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}]}]
 \end{aligned}
+~
+
+Now, we need to take derivatives with respect to the parameters $u_{ik}$.
+
+~ Equation
+\begin{aligned}
+\qty[\prod_{i=1}^{2N} \prod_{k=1}^d \pdv[p_{ik}]{u_{ik}}] &
+  \qty[\prod_{i=1}^{2N} \prod_{k=1}^d
+  u_{ik}^{\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}]}] \\
+&= \prod_{i=1}^{2N} \prod_{k=1}^d \pdv[p_{ik}]{u_{ik}}
+  u_{ik}^{\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}]} \\
+&= \prod_{i=1}^{2N} \prod_{k=1}^d \frac{
+    \qty(\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}])!
+  }{
+    \qty(\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}] - p_{ik})!
+  } u_{ik}^{\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}] - p_{ik}}
+\end{aligned}
+~
+
+Finally, we need to set $\uvu = \uvo$. Observe that the preceding
+expression is nonzero only if
+~ Equation
+\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}] = p_{ik}
+~
+for all $i = 1, \dots, 2N$ and $k = 1, \dots, d$. (In this case, each
+factor in the product becomes $0^0 = 1$.) Assuming that this condition
+is satisfied, the preceding expression simply reduces to
+~ Equation
+\prod_{i=1}^{2N} \prod_{k=1}^d p_{ik}!
 ~
