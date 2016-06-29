@@ -196,3 +196,49 @@ element of two ECG basis functions is then given by
     \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}]
 \end{aligned}
 ~
+
+
+
+~ Equation
+\begin{aligned}
+\mel{G_1}{\hat{T}}{G_2}
+&= \mel{G_1}{-\sum_{i=1}^N \sum_{k=1}^d
+  \frac{\hbar^2}{2m_{ik}} \pdv[2]{x_{ik}}}{G_2}
+\end{aligned}
+~
+
+
+
+~ Equation
+\begin{aligned}
+\pdv{x_{\iota\kappa}} G_2(\uvx)
+&= \pdv{x_{\iota\kappa}} \exp(
+  -\frac{1}{2} \uvx^T \! A_2 \uvx + \uvt_2^T \uvx) \\
+&= \pdv{x_{\iota\kappa}} \exp(
+  -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+  (A_2)_{ij} x_{ik} x_{jk}
+  + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} x_{ik}) \\
+&= G_2(\uvx) \pdv{x_{\iota\kappa}} \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+    (A_2)_{ij} x_{ik} x_{jk}
+    + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} x_{ik}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+    (A_2)_{ij} \pdv{(x_{ik} x_{jk})}{x_{\iota\kappa}}
+    + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} \pdv{x_{ik}}{x_{\iota\kappa}}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+    (A_2)_{ij} \qty(x_{ik} \delta_{j\iota} +
+      \delta_{i\iota} x_{jk}) \delta_{k\kappa}
+    + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} \delta_{i\iota} \delta_{k\kappa}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N
+    (A_2)_{ij} \qty(x_{i\kappa} \delta_{j\iota} +
+      \delta_{i\iota} x_{j\kappa})
+    + (t_2)_{\iota\kappa}
+  ] \\
+\end{aligned}
+~
