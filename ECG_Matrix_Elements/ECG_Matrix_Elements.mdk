@@ -304,3 +304,61 @@ Matrix elements of $\uvt$-derivatives:
   \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]]
 \end{aligned}
 ~
+
+Generating function matrix elements of $\uvt$-derivatives:
+
+~ Equation
+\begin{aligned}
+\mel{G_1}{\pdv{(t_2)_{\iota\kappa}}}{G_2}
+&= \pdv{(t_2)_{\iota\kappa}} \braket{G_1}{G_2} \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \pdv{u_{N+\iota,\kappa}} \exp(\frac{1}{2} \uvu^T \! B \uvu) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \uvu^T \! B \uvu)
+  \pdv{u_{N+\iota,\kappa}} \qty[\frac{1}{2} \uvu^T \! B \uvu] \\
+&= \braket{G_1}{G_2}
+  \pdv{u_{N+\iota,\kappa}} \qty[
+    \frac{1}{2} \sum_{i=1}^{2N} \sum_{j=1}^{2N} \sum_{k=1}^d
+    B_{ij} u_{ik} u_{jk}] \\
+&= \braket{G_1}{G_2} \qty[
+    \frac{1}{2} \sum_{i=1}^{2N} \sum_{j=1}^{2N} \sum_{k=1}^d
+    B_{ij} (u_{ik} \delta_{j,N+\iota} + \delta_{i,N+\iota} u_{jk})
+    \delta_{k\kappa}] \\
+&= \braket{G_1}{G_2} \qty[
+    \frac{1}{2} \sum_{i=1}^{2N} B_{i,N+\iota} u_{i\kappa}
+    + \frac{1}{2} \sum_{j=1}^{2N} B_{N+\iota,j} u_{j\kappa}] \\
+&= \braket{G_1}{G_2}
+  \sum_{i=1}^{2N} B_{i,N+\iota} u_{i\kappa} \\
+&= \braket{G_1}{G_2} \qty[
+  \sum_{i=1}^{N} B_{i,N+\iota} u_{i\kappa} + 
+  \sum_{i=N+1}^{2N} B_{i,N+\iota} u_{i\kappa}] \\
+&= \braket{G_1}{G_2} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota}
+  \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]]
+\end{aligned}
+~
+
+~ Equation
+\begin{aligned}
+\mel{G_1}{\pdv[2]{(t_2)_{\iota\kappa}}}{G_2}
+&= \pdv{\braket{G_1}{G_2}}{(t_2)_{\iota\kappa}} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota}
+  \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]] \\
+&\pe + \braket{G_1}{G_2} \pdv{(t_2)_{\iota\kappa}} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota}
+  \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]] \\
+&= \braket{G_1}{G_2} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota}
+  \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]]^2
+  + \braket{G_1}{G_2} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota} \delta_{i\iota}] \\
+&= \braket{G_1}{G_2} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota}
+  \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]]^2
+  + A^{-1}_{\iota\iota} \braket{G_1}{G_2} \\
+&= \braket{G_1}{G_2} \qty[
+  \sum_{i=1}^{N} A^{-1}_{i\iota}
+  \qty[(t_1)_{i\kappa} + (t_2)_{i\kappa}]]^2
+  + A^{-1}_{\iota\iota} \braket{G_1}{G_2} \\
+\end{aligned}
+~
