@@ -166,3 +166,22 @@ is satisfied, the preceding expression simply reduces to
 ~ Equation
 \prod_{i=1}^{2N} \prod_{k=1}^d p_{ik}!
 ~
+This leads us naturally to consider the following combinatorial problem:
+
+**Definition:** Let $p \in \N^{2N \times d}$ be a $2N \times d$ matrix
+with nonnegative integer entries. We denote by $\Omega(p)$ the set of
+all $2N \times 2N \times d$ arrays $q \in \N^{2N \times 2N \times d}$
+having nonnegative integer entries such that
+~ Equation
+\sum_{j=1}^{2N} \qty[q_{ijk} + q_{jik}] = p_{ik}
+~
+for all $i = 1, \dots, 2N$ and $k = 1, \dots, d$.
+
+We will return to solving this problem later. For now, let us assume
+that we know how to compute the set $\Omega(p)$. The overlap matrix
+element of two ECG basis functions is then given by
+~ Equation
+\begin{aligned}
+\braket{\Phi_1}{\Phi_2} &= 
+\end{aligned}
+~
