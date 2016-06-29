@@ -18,6 +18,7 @@ Package       : physics
 \newcommand{\vx}{\mathbf{x}}
 \newcommand{\vo}{\mathbf{0}}
 \newcommand{\vt}{\mathbf{t}}
+\newcommand{\pe}{\phantom{{}={}}}
 ~
 
 [TITLE]
@@ -95,5 +96,29 @@ B \coloneqq \mqty[
   \sum_{q_{111}=0}^\infty \cdots \sum_{q_{2N,2N,d}=0}^\infty
   \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
   \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij} u_{ik} u_{jk})^{q_{ijk}}
+\end{aligned}
+~
+
+
+
+~ Equation
+\begin{aligned}
+\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij} u_{ik} u_{jk})^{q_{ijk}}
+&= \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}
+    u_{ik}^{q_{ijk}} u_{jk}^{q_{ijk}} \\
+&= \qty[\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}] \times \\
+&\pe \qty[\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  u_{ik}^{q_{ijk}}]
+  \qty[\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  u_{jk}^{q_{ijk}}] \\
+&= \qty[\prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+  \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}] \times \\
+&\pe \qty[\prod_{i=1}^{2N} \prod_{k=1}^d
+  u_{ik}^{\sum_{j=1}^{2N} q_{ijk}}]
+  \qty[\prod_{j=1}^{2N} \prod_{k=1}^d
+  u_{jk}^{\sum_{i=1}^{2N} q_{ijk}}] \\
 \end{aligned}
 ~
