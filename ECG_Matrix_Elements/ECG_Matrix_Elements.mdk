@@ -15,6 +15,7 @@ Package       : physics
 \newcommand{\uvo}{\mathbf{\underline{0}}}
 \newcommand{\uvt}{\mathbf{\underline{t}}}
 \newcommand{\uvu}{\mathbf{\underline{u}}}
+\newcommand{\uvp}{\mathbf{\underline{p}}}
 \newcommand{\vx}{\mathbf{x}}
 \newcommand{\vo}{\mathbf{0}}
 \newcommand{\vt}{\mathbf{t}}
@@ -26,12 +27,12 @@ Package       : physics
 ~ Equation
 \begin{aligned}
 \Phi_1(\uvx) &\coloneqq \qty[
-  \prod_{\alpha=1}^N \prod_{k=1}^d x_{\alpha k}^{(p_1)_{\alpha k}}
+  \prod_{i=1}^N \prod_{k=1}^d x_{ik}^{(p_1)_{ik}}
 ] \exp(
   -\frac{1}{2} \uvx^T \! A_1 \uvx
 ) \\
 \Phi_2(\uvx) &\coloneqq \qty[
-  \prod_{\alpha=1}^N \prod_{k=1}^d x_{\alpha k}^{(p_2)_{\alpha k}}
+  \prod_{i=1}^N \prod_{k=1}^d x_{ik}^{(p_2)_{ik}}
 ] \exp(
   -\frac{1}{2} \uvx^T \! A_2 \uvx
 )
@@ -182,6 +183,16 @@ that we know how to compute the set $\Omega(p)$. The overlap matrix
 element of two ECG basis functions is then given by
 ~ Equation
 \begin{aligned}
-\braket{\Phi_1}{\Phi_2} &= 
+\braket{\Phi_1}{\Phi_2} &= \qty[
+    \prod_{i=1}^N \prod_{k=1}^d \pdv{(t_1)_{ik}}
+  ] \qty[
+    \prod_{i=1}^N \prod_{k=1}^d \pdv{(t_2)_{ik}}
+  ] \eval{\braket{G_1}{G_2}}_{\uvt_1 = \uvt_2 = \uvo} \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \qty[\prod_{i=1}^{N} \prod_{k=1}^d (p_1)_{ik}!]
+  \qty[\prod_{i=1}^{N} \prod_{k=1}^d (p_2)_{ik}!] \times \\
+&\pe \sum_{q \in \Omega(\uvp_1, \uvp_2)} \qty[
+    \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+    \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}]
 \end{aligned}
 ~
