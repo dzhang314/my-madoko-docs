@@ -1,0 +1,64 @@
+Title         : Closed-form matrix elements of explicitly correlated Gaussian
+                basis functions in arbitrary dimension
+Author        : David K. Zhang
+
+Package       : mathtools
+Package       : physics
+
+~ MathDefs
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\uvx}{\mathbf{\underline{x}}}
+\newcommand{\uvo}{\mathbf{\underline{0}}}
+\newcommand{\uvt}{\mathbf{\underline{t}}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vo}{\mathbf{0}}
+\newcommand{\vt}{\mathbf{t}}
+~
+
+[TITLE]
+
+~ Equation
+\begin{aligned}
+\Phi_1(\uvx) &\coloneqq \qty[
+  \prod_{\alpha=1}^N \prod_{k=1}^d x_{\alpha k}^{(p_1)_{\alpha k}}
+] \exp(
+  -\frac{1}{2} \uvx^T A_1 \uvx
+) \\
+\Phi_2(\uvx) &\coloneqq \qty[
+  \prod_{\alpha=1}^N \prod_{k=1}^d x_{\alpha k}^{(p_2)_{\alpha k}}
+] \exp(
+  -\frac{1}{2} \uvx^T A_2 \uvx
+)
+\end{aligned}
+~
+
+~ Equation
+\begin{aligned}
+G_1(\uvx) &\coloneqq \exp(
+  -\frac{1}{2} \uvx^T A_1 \uvx + \uvt_1^T \uvx
+) \\
+G_2(\uvx) &\coloneqq \exp(
+  -\frac{1}{2} \uvx^T A_2 \uvx + \uvt_2^T \uvx
+)
+\end{aligned}
+~
+
+For now, assume $A_i$ and $\uvt_i$ are real, so that
+~ Equation
+\begin{aligned}
+A &\coloneqq A_1 + A_2 \\
+\uvt &\coloneqq \uvt_1 + \uvt_2
+\end{aligned}
+~
+
+~ Equation
+\begin{aligned}
+\braket{G_1}{G_2} &= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \uvt^T A^{-1} \uvt)
+\end{aligned}
+~
+
