@@ -260,6 +260,21 @@ element of two ECG basis functions is then given by
 &= G_2(\uvx) \qty[
     -\sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa}
     + (t_2)_{\iota\kappa}
-  ]^2 - (A_2^\text{sym})_{\iota\iota} G_2(\uvx)
+  ]^2 - (A_2)_{\iota\iota} G_2(\uvx) \\
+&= \qty[
+    \qty(\sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa})^2
+    - 2 (t_2)_{\iota\kappa}
+      \sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa}
+    + (t_2)_{\iota\kappa}^2 - (A_2)_{\iota\iota}
+  ] G_2(\uvx) \\
+&= \Bigg[
+    \sum_{i=1}^N \sum_{j=1}^N
+      (A_2^\text{sym})_{i\iota} (A_2^\text{sym})_{j\iota}
+      \pdv{(t_2)_{i\kappa}} \pdv{(t_2)_{j\kappa}} \\
+&\pe \phantom{\Bigg[}
+    - 2 (t_2)_{\iota\kappa}
+      \sum_{i=1}^N (A_2^\text{sym})_{i\iota} \pdv{(t_2)_{i\kappa}}
+    + (t_2)_{\iota\kappa}^2 - (A_2)_{\iota\iota}
+  \Bigg] G_2(\uvx)
 \end{aligned}
 ~
