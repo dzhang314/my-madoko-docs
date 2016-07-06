@@ -1,0 +1,38 @@
+Title: MATH 2500 Notes - David K. Zhang - Personal Website
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/MATH_2500_2501_MathDefs]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ Begin Container
+
+~ Begin Center
+# MATH 2500 Notes {-}
+## Multivariable Calculus and Linear Algebra {-}
+
+As taught by Prof. Bruce Hughes  
+Vanderbilt University - Fall Semester 2015  
+Transcribed by David K. Zhang
+~ End Center
+
+&br;
+~ Begin Panel {.panel-danger}
+~ Begin Panel-Heading
+#### Warning! {-; margin=0px; padding=0px}
+~ End Panel-Heading
+~ Begin Panel-Body
+The notes below were taken **live in-class** during Prof. Hughes' MATH 2500 lectures at Vanderbilt University. They are provided here exclusively as a **historical record** of what topics were covered during each day of class. For readers who aim to learn this material for the first time, they are **incomplete** in several crucial ways:
+
+* Gaps in the logical flow of ideas due to missed classes.
+* Omitted discussions, proofs, and examples which I considered obvious.
+* Missing sections which were written down on paper and never typeset.
+
+Time permitting, I plan to release an **expanded and revised** version of these notes in the future to address these deficiencies.
+{margin=0px; padding=0px}
+~ End Panel-Body
+~ End Panel
+
+[INCLUDE=../include/MATH_2500_Notes]
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

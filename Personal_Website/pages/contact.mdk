@@ -1,0 +1,26 @@
+Title: Contact - David K. Zhang - Personal Website
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_Contact.html]
+
+~ MathDefs
+\newcommand{\dkz}{\text{david.k.zhang}}
+\newcommand{\vandy}{\text{vanderbilt.edu}}
+\newcommand{\mysite}{\text{david-k-zhang.com}}
+~
+
+~ Begin Container
+
+# Contact Information {-}
+
+**University e-mail address:** $\dkz@\vandy$\
+**Personal e-mail address:** $\text{me}@\mysite$\
+
+_(To avoid detection by spammers, these e-mail addresses deliberately cannot be
+copy/pasted.)_
+
+Feel free to contact me for corrections, questions, comments, or suggestions
+regarding anything on this site!
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

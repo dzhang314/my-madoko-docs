@@ -1,0 +1,1703 @@
+# Lecture 02 (2015-08-28) {  - }
+
+**Definition:** A _vector space_ $V$ is a set with two operations:
+
+1. [(VA)]{font-family:sans-serif} Vector addition: $\forall \vx, \vy \in V$, there is a vector $\vx + \vy \in V$.
+2. [(SM)]{font-family:sans-serif} Scalar multiplication: $\forall t \in \mathbb{R}$, $\forall \vx \in V$, there is a vector $t\vx \in V$.
+
+These operations must satisfy the following properties:
+
+* [VS1]{font-family:sans-serif}. $\forall \vx, \vy \in V$, $\vx + \vy = \vy + \vx$.
+* [VS2]{font-family:sans-serif}. $\forall \vx, \vy, \vz \in V$, $(\vx + \vy)  + \vz = \vx + (\vy  + \vz)$.
+* [VS3]{font-family:sans-serif}. $\exists \vo \in V$ such that $\forall \vx \in V$, $\mathbf{0} + \vx = \vx$. ($\vo$ is called a _zero vector_.)
+* [VS4]{font-family:sans-serif}. $\forall \vx \in V$, $\exists \vy \in V$ such that $\vx + \vy = \vo$. ($\vy$ is called an _additive inverse_ of $\vx$, and is denoted by $-\vx$.)
+* [VS5]{font-family:sans-serif}. $\forall s, t \in \mathbb{R}$, $\forall \vx \in V$, $(st)\vx = s(t\vx)$.
+* [VS6]{font-family:sans-serif}. $\forall s \in \mathbb{R}$, $\forall \vx, \vy \in V$, $s(\vx + \vy) = s\vx + s\vy$.
+* [VS7]{font-family:sans-serif}. $\forall s, t \in \mathbb{R}$, $\forall \vx \in V$, $(s + t)\vx = s\vx + t\vx$.
+* [VS8]{font-family:sans-serif}. $\forall \vx \in V$, $1\vx = \vx$.
+
+**Theorem** (Cancellation Property of Vector Addition)**:** If $\vx, \vy, \vz \in V$ and $\vx + \vy = \vx + \vz$, then $\vy = \vz$.
+
+_Proof:_ By hypothesis, $\vx + \vy = \vx + \vz$. Applying [VS1]{font-family:sans-serif}, we have $\vy + \vx = \vz + \vx$. Letting $(-\vx)$ be the additive inverse of $\vx$ (using [VS4]{font-family:sans-serif}), we have $(\vy + \vx) + (-\vx) = (\vz + \vx) + (-\vx)$. We use [VS2]{font-family:sans-serif} to regroup this as $\vy + (\vx + (-\vx)) = \vz + (\vx + (-\vx))$, and [VS4]{font-family:sans-serif} to conclude that $\vy + \vo = \vz + \vo$. Finally, applying [VS3]{font-family:sans-serif} and [VS1]{font-family:sans-serif}, we have $\vy = \vz$, as desired. **QED**
+
+**Theorem:** The additive inverse of a vector is unique. (In other words, if $\vx, \vy, \vz \in V$ and $\vy + \vx = \vo$ and $\vz + \vx = \vo$, then $\vy = \vz$.)
+
+_Proof:_ It follows that $\vx + \vy = \vx + \vz$. The cancellation property implies $\vy = \vz$. **QED**
+
+**Theorem:** $-\vo = \vo$.
+
+_Proof:_ We need to show that $\vo + \vo = \vo$. This follows from [VS3]{font-family:sans-serif}. **QED**
+
+
+
+# Lecture 03 (2015-08-31) {  - }
+
+We will temporarily leave the realm of abstract vector spaces and return to $\R^n$. Recall that any vector $\vx \in \R^n$ is an $n$-tuple of real numbers. We adopt the convention that $\vx$ be written $(x_1, \ldots, x_n)$ when interpreted as a point, and $\mqty[x_1 \\ \vdots \\x_n]$ when interpreted as a vector.  Points are simply visualized as points in $\R^n$, while vectors are visualized as directed line segments from the origin $\vo$ to the point $\vx$.
+
+**Definition:** If $\vx = (x_1, \ldots, x_n),\ \vy = (y_1, \ldots, y_n) \in \R^n$, then the _distance from $x$ to $y$_ is
+
+~ Math
+\norm{\vx - \vy} \equiv \sqrt{(x_1-y_1)^2 + \cdots + (x_n-y_n)^2}.
+~
+
+This definition generalizes the Pythagorean theorem for $n = 1,2,3$.
+
+**Definition:** The _length_ (aka _norm_, _magnitude_) of a vector $\vx = \mqty[x_1 \\ \vdots \\ x_n] \in \R^n$ is
+
+~ Math
+\norm{x} = \sqrt{x_1^2 + \cdots + x_n^2},
+~
+
+i.e., the distance from $\vx$ to the origin.
+
+How do scalar multiplication and vector addition interact with this geometric interpretation? If $c \in \R$, $\vx \in \R^n$, then
+
+~ Math
+\norm{c\vx} = \sqrt{(cx_1)^2 + \cdots + (cx_n)^2} = \abs{c} \sqrt{x_1^2 + \cdots + x_n^2} = \abs{c} \norm{\vx}.
+~
+
+
+**Definition:** If $c>0$, then $\vx$ and $c\vx$ have the _same direction_. If $c<0$, then they have _opposite direction_.
+
+**Definition:** $\vx, \vy \in \R^n$ are _parallel_ if one is a scalar multiple of the other, i.e., $\exists c \in \R$ such that $\vy = c\vx$ or $\vx = c\vy$.
+
+**Note:** The zero vector $\vo$ is parallel to every vector.
+
+If $\vx, \vy \in \R^2$, then $\vx + \vy$ can be interpreted as the fourth point of the parallelogram with legs $\vx$ and $\vy$ (situated at the origin). This can be confirmed by checking that the vector from $\vy$ to $\vx + \vy$ has the same slope as $\vx$, and vice versa. We call this interpretation the _parallelogram law of vector addition_.
+
+**Definition:** If $\vx = \gcvec{x}{n}, \vy = \gcvec{y}{n} \in \R^n$, then their _dot product_ is
+
+~ Math
+\vx \cdot \vy = x_1y_1 + x_2y_2 + \cdots + x_ny_n.
+~
+
+This is an operation $\R^n \times \R^n \to \R$.
+
+Observe that $\vx \cdot \vx = x_1^2 + \cdots + x_n^2 = \norm{\vx}^2$. This is the **length formula**.
+
+Basic algebraic properties of the dot product (See Proposition 2.1 in Shifrin):
+
+1. $\forall \vx, \vy \in \R^n$, $\vx \cdot \vy = \vy \cdot\ \vx$.
+* $\forall \vx \in \R^n$, $\vx \cdot \vx \ge 0$ and $\vx \cdot \vx = 0$ iff $\vx = \vo$.
+* $\forall c \in \R, \vx, \vy \in \R^n$, $(c\vx) \cdot \vy = c(\vx \cdot \vy)$.
+* $\forall \vx, \vy, \vz \in \R^n$, $\vx \cdot (\vy + \vz) = \vx \vdot \vy + \vx \cdot \vz$.
+
+
+
+# Lecture 04 (2015-09-02) {  - }
+
+**Proposition:** $\forall \vx, \vy \in \R^n$, $\norm{\vx + \vy}^2 = \norm{\vx}^2 + 2\vx\cdot\vy + \norm{\vy}^2$.
+
+_Proof._
+~ Math 
+\begin{aligned}
+   \norm{\vx + \vy}^2 &= (\vx+\vy) \cdot (\vx+\vy) & \text{(Length formula)} \\
+   &= (\vx+\vy) \cdot \vx + (\vx+\vy) \cdot \vy & \text{(Property 4)} \\
+   &= \vx\cdot\vx + \vy\cdot\vx + \vx\cdot\vy + \vy\cdot\vy & \text{(Properties 4 and 1)} \\
+   &= \norm{\vx}^2 + 2\vx\cdot\vy + \norm{\vy}^2 & \text{(Length formula and property 1)}
+\end{aligned}
+~
+ **QED**
+
+The dot product can be used to define a notion of angle in $\R^n$. To motivate the definition to come, draw a triangle in $\R^2$ and interpret its sides as vectors $\vx$, $\vy$, and $\vx+\vy$. The law of cosines then implies that
+
+~ Math
+\norm{\vx+\vy}^2 = \norm{\vx}^2 + \norm{\vy}^2 - 2\norm{\vx}\norm{\vy} \cos(\pi-\theta),
+~
+
+where $\theta$ is the angle between $\vx$ and $\vy$. We then use the above proposition to deduce that in $\R^2$,
+~ Math
+\vx\cdot\vy = \norm{\vx}\norm{\vy} \cos(\theta).
+~
+
+**Definition.** If $\vx, \vy \in \R^n$, then $\vx$ and $\vy$ are _orthogonal_ (or _perpendicular_) if $\vx \cdot \vy = \vo$.
+
+**Definition.** If $\vx, \vy \in \R^n$ and $\vx \ne \vo \ne \vy$, then the _cosine of the angle between $\vx$ and $\vy$_ is $\displaystyle \frac{\vx \cdot \vy}{\norm{\vx} \norm{\vy}}$. The _angle between $\vx$ and $\vy$_ is the unique number $0 \le \theta < \pi$ such that $\displaystyle \cos(\theta) = \frac{\vx \cdot \vy}{\norm{\vx} \norm{\vy}}$.
+
+For this definition to make sense, we need to know that $\displaystyle -1 \le \frac{\vx \cdot \vy}{\norm{\vx} \norm{\vy}} \le 1$. This is established in the following theorem.
+
+**Theorem** (Cauchy-Schwarz Inequality): If $\vx, \vy \in \R^n$, then $\abs{\vx \cdot \vy} \le \norm{\vx}\norm{\vy}$. Moreover, $\abs{\vx \cdot \vy} = \norm{\vx}\norm{\vy}$ iff $\vx$ and $\vy$ are parallel.
+
+_Proof:_ _Case 1._ If $\vx$ and $\vy$ are unit vectors (i.e., $\norm{\vx} = \norm{\vy} = 1$), then the above proposition implies
+~ Math
+0 \le \norm{\vx+\vy}^2 = \norm{\vx}^2 + 2\vx\cdot\vy + \norm{\vy}^2 = 2 + 2\vx\cdot\vy
+~
+and
+~ Math
+0 \le \norm{\vx-\vy}^2 = \norm{\vx}^2 - 2\vx\cdot\vy + \norm{\vy}^2 = 2 - 2\vx\cdot\vy.
+~
+It follows that $-2 \le 2\vx \cdot \vy \le 2$, and thus $\abs{\vx \cdot \vy} \le 1$, as desired.
+
+_Case 2._ If $\vx \ne \vo \ne \vy$, then $\frac{\vx}{\norm{\vx}}$ and $\frac{\vy}{\norm{\vy}}$ are unit vectors, and case 1 implies that
+~ Math
+\abs{\frac{\vx}{\norm{\vx}} \cdot \frac{\vy}{\norm{\vy}}} \le 1.
+~
+By property 1 of the dot product, we have $\abs{\vx\cdot\vy} \le \norm{\vx} \norm{\vy}$, as desired.
+
+_Case 3._ If $\vx = \vo$ or $\vy = \vo$, then $\abs{0} \le \vo \cdot \vo = 0$, as desired. **QED**
+
+
+
+# Lecture 05 (2015-09-04) {  - }
+
+_Discussion of homework hints omitted._
+
+**Theorem** (Triangle Inequality): If $\vx, \vy \in \R^n$, then $\norm{\vx + \vy} \le \norm{\vx} + \norm{\vy}$.
+
+_Proof:_ Observe that
+~ Math
+\norm{\vx + \vy}^2 = \norm{\vx}^2 + 2\vx\cdot\vy + \norm{\vy}^2 \le \norm{\vx}^2 + 2\norm{\vx}\norm{\vy} + \norm{\vy}^2 = (\norm{\vx} + \norm{\vy})^2
+~
+where the middle inequality follows from Cauchy-Schwarz. It follows that $\norm{\vx + \vy} \le (\norm{\vx} + \norm{\vy})^2$, as desired. **QED**
+
+_(Proof of_ $\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$ _omitted. Trivial by induction)._
+
+**Definition:** A subset $V$ of $\R^n$ is a _linear subspace_ if:
+
+* The zero vector $\vo$ is a member of $V$.
+* For all $\mathbf{v}, \mathbf{w} \in V$, it follows that $\mathbf{v} + \mathbf{w} \in V$. (We say that $V$ is "closed under vector addition.")
+* For all $\mathbf{v} \in V$ and $c \in \R$, it follows that $c\mathbf{v} \in V$. (We say that $V$ is "closed under scalar multiplication.")
+
+**Example:** Let $V$ be the line $y = 2x$ in $\R^2$. $V$ is a linear subspace of $\R^2$. _(Straightforward proofs of [LS1]{font-family:sans-serif}-[LS3]{font-family:sans-serif} omitted.)_
+
+**Example:** The line $y = 2x + 1$ is not a linear subspace of $\R^2$, as [LS1]{font-family:sans-serif} fails. We call such spaces _affine subspaces_.
+
+**Definition:** If $\mathbf{u}, \mathbf{w} \in \R^n$ with $\mathbf{u} \ne \vo$, then the _affine line $L$ in $\R^n$ in the direction $\mathbf{u}$ passing through $\mathbf{w}$_ is the set
+~ Math
+L \equiv \{ t\mathbf{u} + \mathbf{w} : t \in \R \}.
+~
+
+In other words, $\vx \in L$ iff $\exists t \in \R$ such that $\vx = t\mathbf{u} + \mathbf{w}$. In coordinate form, this is the system of equations
+~ Math 
+\begin{aligned}
+   x_1 &= tu_1 + w_1 \\
+   x_2 &= tu_2 + w_2 \\
+   &\vdots \\
+   x_n &= tu_n + w_n.
+\end{aligned}
+~
+
+This is the set of _parametric equations_ defining $L$. (In this form, $L$ is said to be "given explicitly.") In addition, we call
+
+~ Math
+V \equiv \{ t\mathbf{u} : t \in \R^n \}
+~
+
+the _linear line_ in the direction $\mathbf{u}$.
+
+
+
+# Lecture 06 (2015-09-07) {  - }
+
+**Definition:** If $\vva, \vw \in \R^n$ with $\vva \ne \vo$, then the _hyperplane $P$ in $\R^n$ with normal vector $\vva$ passing through $\vw$_ is
+
+~ Math
+P = \{x \in \R^n : \vva \cdot (\vx - \vw) = 0 \}.
+~
+
+In other words, $P$ is the solution set of
+
+~ Math
+a_1(x_1-w_1) + a_2(x_2-w_2) + \cdots + a_n(x_n-w_n) = 0.
+~
+
+This is an example of an affine subspace of $\R^n$, and we will eventually see that $\dim P = n-1$. We may observe that the equation $\vva \cdot (\vx - \vw) = 0$ can be rewritten as
+
+~ Math
+\vva \cdot \vx = \vva \cdot \vw,
+~
+
+and since $\vva$ and $\vw$ are given, the RHS of the above equation is simply a constant. Hence, every hyperplane in $\R^n$ is the solution set of an equation of the form $\vva \cdot \vx = c$. The converse also holds; given an equation of the form $\vva \cdot \vx = c$, we can describe its solution as a hyperplane in $\R^n$ by setting
+
+~ Math
+\vw = \mqty[\frac{c}{a_1} \\ 0 \\ \vdots \\ 0],
+~
+
+(or using some other component of $\vva$ if $a_1 = 0$).
+
+**Claim:** $P$ is a linear subspace of $\R^n$ iff $c = 0$.
+
+_Proof:_ If $P$ is a linear subspace, then $\vo \in P$, and $c = \vva \cdot \vo = 0$. Conversely, if $c = 0$, then it is straightforward to check that [LS1]{font-family:sans-serif}-[LS3]{font-family:sans-serif} hold. **QED**
+
+**Definition:** Let $\vv_1, \ldots, \vv_k \in \R^n$. 
+
+1. If $c_1, \ldots, c_k \in \R$, then
+~ Math
+c_1 \vv_1 + c_2 \vv_2 + \cdots + c_k \vv_k
+~
+   is called a _linear combination_ of $\vv_1, \ldots, \vv_k$.
+* The _span_ of $\vv_1, \ldots, \vv_k$ is the set of all linear combinations of $\vv_1, \ldots, \vv_k$.
+~ Math
+\operatorname{span} \{ \vv_1, \ldots, \vv_k \} = \{ c_1 \vv_1 + \cdots + c_k \vv_k : c_1, \ldots, c_k \in \R^n \}
+~
+
+**Examples:** 
+
+1. If $\mathbf{u} \in \R^n$ with $\mathbf{u} \ne \vo$, then $\operatorname{span} \{\mathbf{u}\}$ is the linear line in the direction $\mathbf{u}$.
+* $\operatorname{span} \{\vo\} = \{\vo\}.$
+* If $\mathbf{u}, \vv \in \R^n$ are nonparallel, then $P = \operatorname{span} \{ \mathbf{u}, \vv \}$ is called the _{linear plane in $\R^n$ spanned by $\mathbf{u}$ and $\vv$}_.
+
+**Claim:** $P = \operatorname{span} \{ \vv_1, \ldots, \vv_k \}$ is a linear subspace of $\R^n$.
+
+_(Proof omitted. It is straightforward to check that [LS1]{font-family:sans-serif}-[LS3]{font-family:sans-serif} hold.)_
+
+
+
+# Lecture 07 (2015-09-09) {  - }
+
+**Definition:** If $V,W$ are linear subspaces of $\R^n$, then $V$ and $W$ are _orthogonal_ if $\forall \vv \in V$, $\forall \vw \in W$, $\vv \cdot \vw = 0$.
+
+**Exercise:** Are the following pairs of subspaces orthogonal?
+
+
+* The $x$- and $y$-axes in $\R^2$. (Yes.)
+   
+
+* The $xy$- and $yz$-planes in $\R^3$. (No.)
+   
+
+* The $x$-axis and $yz$-plane in $\R^3$. (Yes.)
+
+**Definition:** If $V$ is a linear subspace of $\R^n$, then the _orthogonal complement of $V$_ is
+
+~ Math
+V^\perp = \{ \vx \in \R^n : \forall \vv \in V, \vx \cdot \vv = 0 \}.
+~
+
+
+**Problem 16 (HW3):** $V^\perp$ is a linear subspace. (Clearly, $V$ and $V^\perp$ are orthogonal.)
+
+We will eventually show that $(V^\perp)^\perp = V$ (i.e., that the map $V \mapsto V^\perp$ is an involution), but this fact actually requires some work.
+
+**Definition:** A _linear transformation_ $T: \R^n \to \R^m$ is a function satisfying
+
+
+1. $\forall \vv, \vw \in \R^n$, $T(\vv + \vw) = T(\vv) + T(\vw)$
+   
+
+* $\forall c \in \R$, $\forall \vv \in \R^n$, $T(c\vv) = cT(\vv)$
+
+**Examples:** 
+
+* Define $T: \R^2 \to \R^2$ by $T\qty(\mqty[x_1 \\ x_2]) = \mqty[3x_1 \\ 3x_2]$. Then $T$ is a linear transformation. _{(Straightforward verification of [LT1]{font-family:sans-serif}-[LT2]{font-family:sans-serif} omitted.)}_
+* Define $T: \R^2 \to \R$ by $T(x_1,x_2) = x_1 - x_2$. Again, $T$ is a linear transformation. _{(Straightforward verification of [LT1]{font-family:sans-serif}-[LT2]{font-family:sans-serif} omitted.)}_
+* Define $T: \R^2 \to \R$ by $T(\vx) = 3$. Then $T$ is **not** a linear transformation. Indeed, [LT2]{font-family:sans-serif} fails, as $T(0 \vo) = 3 \ne 0 = 0T(\vo)$. This motivates the following proposition:
+
+**Proposition:** If $T: \R^n \to \R^m$ is a linear transformation, then $T(\vo) = \vo$.
+
+_Proof:_ Observe that
+~ Math
+T(\vo) + \vo = T(\vo) = T(\vo + \vo) = T(\vo) + T(\vo).
+~
+It then follows from the cancellation property that $T(\vo) = \vo$. **QED**
+
+* Define $T: \R \to \R$ by $T(x) = x^2$. Then $T$ is **not** a linear transformation. Indeed, [LT2]{font-family:sans-serif} can be shown to fail by taking $c = 2$ and $v = 1$. This motivates the following proposition:
+
+**Proposition:** A function $T: \R \to \R$ is a linear transformation iff $\exists m \in \R$ such that $T(x) = mx$ $\forall x \in \R$. _(To be proven next lecture.)_
+
+
+
+# Lecture 08 (2015-09-11) {  - }
+
+_Proof_ (of last lecture's proposition): The reverse direction is trivial (simply check [LT1]{font-family:sans-serif} and [LT2]{font-family:sans-serif}). For the forward direction, let $a = T(1)$, and let $x \in \R$ be given. Then
+
+~ Math
+T(x) = T(x \cdot 1) = x T(1) = xa = ax.
+~
+
+This is the desired result. **QED**
+
+**Goal:** A function $T: \R^n \to \R^m$ is a linear transformation iff there exists an $(m \times n)$ matrix $A$ such that $T(x) = Ax$ for all $x \in \R^n$.
+
+**Definition:** Suppose $A$ is an $(m \times n)$ matrix and $B$ is an $(n \times p)$ matrix. (We say that $A \in \matspace{m}{n}$ and $B \in \matspace{n}{p}$.) The _product_ of $A$ and $B$ is a matrix $C \in \matspace{m}{p}$ having $(i,j)$-entry
+
+~ Math
+C_{ij} = A_{i1}B_{1j} + A_{i2}B_{2j} + \dots + A_{in}B_{nj}.
+~
+
+If we let $a_1, \dots, a_n$ be the $n$ columns of $A$, and $A_1, \dots, A_m$ be the $m$ rows of $A$, then $C_{ij} = A_i \cdot b_j$.
+
+**Example:** Take $A = \mqty[3&-1\\1&0] \in \matspace{2}{2}$ and $B = \mqty [-1&1&0\\4&1&5] \in \matspace{2}{3}$. Then $AB = \mqty [-7&2&-5\\-1&1&0] \in \matspace{2}{3}$, and $AA = A^2 = $
+
+
+
+# Lecture 09 (2015-09-14) {  - }
+
+**Recall our goal:** A function $T: \R^n \to \R^m$ is a linear transformation iff there exists a matrix $A \in \mathbb{M}_{m,n}$ such that $T(\vx) = A\vx$ for all $\vx \in \R^n$. (We have already proved the reverse direction.)
+
+**Proposition:** If $T: \R^n \to \R^m$ is a linear transformation, $\vv_1, \dots, \vv_k \in \R^n$, and $c_1, \dots, c_k \in \R$, then
+
+~ Math
+T(c_1 \vv_1 + c_2 \vv_2 + \dots + c_k \vv_k) = c_1 T(\vv_1) + c_2 T(\vv_2) + \dots + c_k T(\vv_k).
+~
+
+_Proof:_
+~ Math 
+\begin{aligned}
+T(c_1 \vv_1 + c_2 \vv_2 + \dots + c_k \vv_k)
+&= T(c_1 \vv_1) + T(c_2 \vv_2 + \dots + c_k \vv_k) \\
+&= T(c_1 \vv_1) + T(c_2 \vv_2) + T(c_3 \vv_3 + \dots + c_k \vv_k) \\
+&\vdots \\
+&= T(c_1 \vv_1) + T(c_2 \vv_2) + \dots + T(c_k \vv_k) \\
+&= c_1 T(\vv_1) + c_2 T(\vv_2) + \dots + c_k T(\vv_k).
+\end{aligned}
+~
+
+This is the desired result. **QED**
+
+**Matrix representation of a linear transformation.** If $\vx = \gcvec{x}{n} \in \R^n$, then
+~ Math
+\vx = x_1 \ve_1 + x_2 \ve_2 + \dots + x_k \ve_k = \sum_{j=1}^n x_j \ve_j.
+~
+It follows that
+~ Math
+T(\vx) = T\qty(\sum_{j=1}^{n} x_j \ve_j) = \sum_{j=1}^{n} x_j T(\ve_j) = x_1 T(\ve_1) + x_2 T(\ve_2) + \dots + x_k T(\ve_k),
+~
+and we see that the action of $T$ on any vector in $\R^n$ is uniquely specified by its action on the standard basis vectors $\ve_j$. This motivates us to give these vectors a name; let
+~ Math
+\vva_j = T(\ve_j) = \mqty[a_{1j} \\ \vdots \\ a_{mj}] \in \R^m
+~
+for all $j = 1, \dots, n$.
+
+**Definition:**
+~ Math
+A = \mqty[
+   a_{11} & a_{12} & \dots & a_{1n} \\
+   a_{21} & a_{22} & \dots & a_{2n} \\
+   \vdots & \vdots & \ddots & \vdots \\
+   a_{m1} & a_{m2} & \dots & a_{mn}
+]
+~
+
+is the _standard matrix representation of $T$_, denoted by $[T] = A$.
+
+_Remark:_ Stated alternatively, $[T]$ is the matrix whose $j$th column is given by $T(\ve_j)$.
+
+**Examples:** 
+
+1. Let $T: \R^2 \to \R^2$ be defined by $T(\vx) = 3\vx$. Then
+   
+~ Math
+[T] = \mqty[3&0\\0&3].
+~
+
+   
+   
+
+* Let $T: \R^2 \to \R$ be defined by $T(x_1,x_2) = x_1 - x_2$. Then
+   
+~ Math
+[T] = \mqty[1&-1].
+~
+
+   
+   
+
+* Let $T: \R^2 \to \R^4$ be defined by $T(x_1,x_2) = \smqty[x_1\\x_2\\x_1\\0]$. Then
+   
+~ Math
+[T] = \mqty[1&0\\0&1\\1&0\\0&0].
+~
+
+   
+   
+
+* Let $T: \R \to \R$ be defined by $T(x) = ax$. Then
+   
+~ Math
+[T] = \mqty[a].
+~
+
+
+**Theorem:** If $T: \R^n \to \R^m$ is a linear transformation, then $T(\vx) = [T]\vx$ for all $\vx \in \R^n$.
+
+_Proof:_ Let $\vx = \gcvec{x}{n} \in \R^n$ be given. Write $\displaystyle \vx = \sum_{j=1}^n x_j \ve_j$. Then
+
+~ Math
+T(\vx) = T\qty(\sum_{j=1}^n x_j \ve_j) = \sum_{j=1}^n x_j T(\ve_j) = [T]\vx,
+~
+
+where in the third equality we have used the column POV. **QED**
+
+**Matrix algebra.** Recall that $\mathbb{M}_{m,n}$ denotes the set of all $(m \times n)$ matrices. _This is a vector space!_ "Vector addition" and "scalar multiplication" are performed entrywise, and [VS1]{font-family:sans-serif}-[VS8]{font-family:sans-serif} are straightforward to show. Furthermore, matrix multiplication "mixes" these spaces, in the sense that it gives a map $\mathbb{M}_{m,n} \times \mathbb{M}_{n,p} \to \mathbb{M}_{m,p}$.
+
+
+
+# Lecture 10 (2015-09-16) {  - }
+
+Three basic properties of matrix multiplication:
+
+
+1. $(A+B)C = AC + BC$.
+   
+
+* $C(A+B) = CA + CB$.
+   
+
+* $t(AB) = (tA)B = A(tB)$.
+
+However, observe that
+
+~ Math
+\mqty[1&0\\0&0] \mqty[0&1\\0&0] = \mqty[0&1\\0&0],
+~
+
+while
+
+~ Math
+\mqty[1&0\\0&1] \mqty[0&1\\0&0] = \mqty[0&1\\0&0].
+~
+
+Thus, matrix multiplication does not satisfy the cancellation property. Furthermore,
+
+
+~ Math
+\mqty[0&1\\0&0] \mqty[1&0\\0&0] = \mqty[0&0\\0&0],
+~
+
+so matrix multiplication is not necessarily commutative, nor does it satisfy the zero product property.
+
+**Back to linear transformations.** Recall that every matrix $A \in \matspace{m}{n}$ induces a linear transformation $T_A: \R^n \to \R^m$ given by $T_A(\vx) = A\vx$. Conversely, every linear transformation $T: \R^n \to \R^m$ has a matrix representation $[T] = \mqty [T(\ve_1) & T(\ve_2) & \cdots & T(\ve_n)] \in \matspace{m}{n}$. It was proven in a previous lecture that $T(\vx) = [T]\vx$ for all $\vx \in \R^n$.
+
+It follows that $[T_A] = A$, since the $j$th column of $[T_A]$ is $T_A(\ve_j) = A\ve_j = a_j$, and furthermore that $T_{[T]} = T$, since $T_{[T]}(\vx) = [T](\vx) = T(\vx)$.
+
+**Example:** Suppose $T: \R^3 \to \R^3$ is a linear transformation satisfying
+~ Math 
+\begin{aligned}
+T(\ve_1) &= 2\ve_2 \\
+T(\ve_2) &= \ve_1 - \frac{1}{2}\ve_2 + 3\ve_3 \\
+T(\ve_3) &= \ve_2 \\
+\end{aligned}
+~
+
+Given $(x_1,x_2,x_3) \in \R^3$, what is $T(x_1,x_2,x_3)$? _(Solution omitted.)_
+
+**Rotations.** Let $0 \le \theta \le 2\pi$, and let $T: \R^2 \to \R^2$ be the counterclockwise rotation about the origin through the angle $\theta$. It is easy to see that, by geometric principles, $T$ is a linear transformation. By considering the action of $T$ on $\ve_1$ and $\ve_2$, we see that
+
+~ Math
+[T] = \mqty[\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta].
+~
+
+We often denote this matrix by $R_\theta$.
+
+_(Some notes seem to have gone missing here. There should be some information on interpreting matrix multiplication as composition of linear maps. In particular, this point of view makes proving associativity of matrix multiplication trivial, since functional composition is evidently associative.)_
+
+
+
+# Lecture 11 (2015-09-18) {  - }
+
+**CLT Theorem:** $[T \circ S] = [T][S]$.
+
+_Proof:_ Column $j$ of $[T \circ S]$ is $(T \circ S)(\ve_j) = T(S(\ve_j)) = [T] S(\ve_j)$, while column $j$ of $[T][S]$ is $[T][\text{column j of } S] = [T]S(\ve_j)$. **QED**
+
+**Example:** Let $S,T: \R^2 \to \R^2$, where $S$ is the rotation through $\pi/2$, and $T$ is reflection across the line $x+y=0$. We have
+
+~ Math
+[S] = \mqty [0&-1\\1&0] \qquad [T] = \mqty [0&-1\\-1&0].
+~
+
+Then
+
+~ Math
+[S \circ T] = [S] [T] = \mqty [1&0\\0&-1] \qquad [T \circ S] = [T] [S] = \mqty [-1&0\\0&1].
+~
+
+Intuitively, $S \circ T$ is reflection across the $x$-axis, while $T \circ S$ is reflection across the $y$-axis.
+
+**Theorem:** Matrix multiplication is associative. That is, if $A \in \matspace{m}{n}$, $B \in \matspace{n}{p}$, and $C \in \matspace{p}{q}$, then
+
+~ Math
+(AB)C = A(BC).
+~
+
+_Proof:_ Since composition of functions is associative, $(T_A \circ T_B) \circ T_C = T_A \circ (T_B \circ T_C)$. Thus $[(T_A \circ T_B) \circ T_C] = [T_A \circ (T_B \circ T_C)]$. But by the CLT theorem, this means $([T_A][T_B])[T_C] = [T_A]([T_B][T_C])$, or equivalently, that $(AB)C = A(BC)$. **QED**
+
+**Matrix invertibility.** For the moment we will restrict attention to square matrices, writing $\mathbb{M}_n = \matspace{n}{n}$. A very special member of $\mathbb{M}_n$ is the $(n \times n)$ identity matrix
+
+~ Math
+I_n = \mqty [1&0&\cdots&0\\0&1&\cdots&0\\\vdots&\vdots&\ddots&\vdots\\0&0&\cdots&1]
+~
+
+whose columns are the standard basis vectors. Note that $I_n$ is a multiplicative identity. If $A \in \matspace{m}{n}$ and $B \in \matspace{n}{p}$, then $AI_n = A$ and $I_nB = B$.
+
+**Definition:** $A \in \mathbb{M}_n$ is _invertible_ if there exists $B \in \mathbb{M}_n$ such that
+
+~ Math
+AB = I_n = BA.
+~
+
+If this holds, we write $B = A^{-1}$ and call $B$ the "inverse of $A$." (It turns out that this is unique if it exists.)
+
+**Examples:** 
+
+1. $A = \mqty [1&0\\0&1]$ has no inverse, since
+   
+~ Math
+\mqty [1&0\\0&1] \mqty [a&b\\c&d] = \mqty [a&b\\0&0] \ne I_2.
+~
+
+   
+   
+
+* $I_2$ is its own inverse ($I_2^{-1} = I_2$), since $I_2 I_2 = I_2$.
+   
+   
+
+* The matrix $A = \mqty [1&2\\3&4]$ has inverse $A^{-1} = \mqty [-2&1\\3/2&-1/2]$.
+
+**Theorem:** If $A = \mqty [a&b\\c&d] \in \mathbb{M}_2$, then $A$ is invertible iff $ad-bc=0$. If this holds, then
+
+~ Math
+A^{-1} = \frac{1}{ad-bc} \mqty [d&-b\\-c&a].
+~
+
+
+**Definition:** The _determinant_ of $A \in \mathbb{M}_2$ is
+
+~ Math
+\det(A) = ad-bc.
+~
+
+
+_Proof:_ For the reverse direction, it suffices to verify that
+
+~ Math
+\mqty [a&b\\c&d] \mqty [d&-b\\-c&a] = \mqty [d&-b\\-c&a] \mqty [a&b\\c&d] = \mqty [ad-bc&0\\0&ad-bc].
+~
+
+For the forward direction, observe that
+
+~ Math
+1 = \det(I_2) = \det(AA^{-1}) = \det(A) \det(A^{-1}).
+~
+
+It follows that $\det(A) \ne 0$. **QED**
+
+
+
+
+# Lecture 12 (2015-09-21) {  - }
+
+**Shoe-Sock Theorem:** If $A,B \in \mathbb{M}_n$ are invertible,  then $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$.
+
+_Proof:_ Check $(AB)(B^{-1}A^{-1}) = I_n$ and $(B^{-1}A^{-1})(AB) = I_n$.
+~ Math 
+\begin{aligned}
+(AB)(B^{-1}A^{-1}) &= A(BB^{-1})A^{-1} \\
+&= AI_nA^{-1} \\
+&= AA^{-1} \\
+&= I_n.
+\end{aligned}
+~
+
+The other identity follows similarly. **QED**
+
+**Definition:** If $A \in \matspace{m}{n}$, then the _transpose of $A$_ is $A^\intercal \in \matspace{n}{m}$, defined in the following way: if $A = [a_{ij}]$, then $(i,j)$-entry of $A^\intercal$ is $a_{ji}$.
+
+**Dot products as matrix products.** If $\vx = \gcvec{x}{n} \in \R^n = \matspace{n}{1}$ and $\vy = \gcvec{y}{n} \in \R^n = \matspace{n}{1}$, then $\vx^\intercal = \mqty[x_1 & \cdots & x_n] \in \matspace{1}{n}$, and $\vx \cdot \vy = \vx^\intercal \vy$.
+
+**Straightforward properties of transposition.** 
+
+1. $(A^\intercal)^\intercal = A$.
+   
+
+* $(A+B)^\intercal = A^\intercal + B^\intercal$.
+   
+
+* $(cA)^\intercal = cA^\intercal$.
+
+These properties imply that the transposition operator $\tau: \matspace{m}{n} \to \matspace{n}{m}$ is a linear transformation.
+
+**Shoe-Sock-y Theorem:** If $A \in \matspace{m}{n}$ and $B \in \matspace{n}{p}$, then $(AB)^\intercal = B^\intercal A^\intercal$.
+
+_Proof:_ The $(i,j)$-entry of $(AB)^\intercal$ is $A_j \cdot b_i$, while the $(i,j)$-entry of $B^\intercal A^\intercal$ is $b_i \cdot A_j$. **QED**
+
+**Theorem:** If $A \in \matspace{m}{n}$, $\vx \in \R^n$, and $\vy \in \R^m$, then $A\vx \cdot \vy = \vx \cdot A^\intercal \vy$.
+
+_Proof:_ $A\vx \cdot \vy = (A\vx)^\intercal \vy = (\vx^\intercal A^\intercal) \vy = \vx^\intercal (A^\intercal \vy) = \vx \cdot A^\intercal \vy$. **QED**
+
+**Theorem:** If $A \in \mathbb{M}_n$ is invertible, then $A^\intercal$ is invertible, and
+
+~ Math
+(A^\intercal)^{-1} = (A^{-1})^\intercal.
+~
+
+_Proof:_ Check that $A^\intercal (A^{-1})^\intercal = I_n$ and $(A^{-1})^\intercal A^\intercal = I_n$.
+
+~ Math
+A^\intercal (A^{-1})^\intercal = (A^{-1} A)^\intercal = I_n^\intercal = I_n
+~
+
+The other identity follows similarly. **QED**
+
+**Point-set Topology of $\R^n$.** Balls and open sets.
+
+**Definition:** Let $\vp \in \R^n$ and let $\delta > 0$. The _ball of radius $\delta$ about $\vp$_ is the set
+
+~ Math
+B(\vp, \delta) = \{ \vx \in \R^n : \norm{\vx - \vp} < \delta \}.
+~
+
+
+**Definition:** A subset $U$ of $\R^n$ is _open_ if
+
+~ Math
+\forall \vp \in U\ \exists \delta > 0 : B(\vp, \delta) \subseteq U.
+~
+
+
+
+
+# Lecture 13 (2015-09-23) {  - }
+
+Exam preparation Q/A session.
+
+
+
+# Lecture 14 (2015-09-25) {  - }
+
+**Example:** Show that $U = \{(x_1,x_2) \in \R^2 : x_1 > 0 \}$ is open.
+
+_Proof:_ Let $p \in U$ be given. We can write $\vp = (p_1,p_2)$ with $p_1>0$. Choose $\delta = p_1$. We would like to show that $B(p,\delta) \subset U$. To see this, let $\vx \in B(p,\delta)$ be given. Then
+~ Math 
+\begin{aligned}
+\norm{\vx-\vp} < \delta &\implies \sqrt{(x_1-p_1)^2 + (x_2-p_2)^2} < \delta = p_1 \\
+&\implies (x_1-p_1)^2 + (x_2-p_2)^2 < p_1^2 \\
+&\implies (x_1-p_1)^2 < p_1^2 \\
+&\implies x_1^2 - 2x_1p_1 + p_1^2 < p_1^2 \\
+&\implies x_1^2 < 2x_1p_1 \\
+&\implies x_1 > 0.
+\end{aligned}
+~
+
+**QED**
+
+**Example:** Show that $U = \{(x_1,x_2) \in \R^2 : x_1 \ge 0 \}$ is not open.
+
+_Proof:_ Pick $\vp = (0,0)$ and show that every open ball around $\vp$ is not fully contained in $U$. _(Details omitted.)_
+
+**Definition:** A _sequence_ in a set $X$ is a set of elements of $X$ indexed by the natural numbers $\mathbb{N}$. Alternatively, it is a function $f: \mathbb{N} \to X$.
+
+_Remark:_ Note that while a sequence has, by definition, an infinite number of terms, it may only contain a finite number of _distinct_ entries.
+
+**Definition:** If $\vp \in \R^n$ and $\{\vx_i\}_{i=1}^\infty$ is a sequence in $\R^n$, then we say $\{\vx_i\}_{i=1}^\infty$ _converges to $p$_ iff $\forall \eps > 0$ $\exists k \in \mathbb{N}$ such that if $i \ge k$, then $\norm{\vx_i - \vp} < \eps$.
+
+**Example:** The sequence $\{-1, 1, -1, 1, \dots\}$ does not converge in $\R$. _(Proof omitted. Pick $\eps=1$.)_
+
+
+
+# Lecture 15 (2015-09-28) {  - }
+
+**Example:** Let $\vx_i = \mqty[2/i \\ 3+1/i] \in \R^2$ for $i = 1,2,3,\dots$. Does $\{\vx_i\}_{i=1}^\infty$ converge, and if so, to what point?
+
+_Solution:_ Intuitively, we would guess that $\lim_{i \to \infty} \vx_i = \vp = \mqty[0\\3]$. To prove this, we let $\eps>0$ be given and figure out the appropriate $k$. Since we need
+
+~ Math
+\norm{\vx_i - \vp} = \norm{\mqty[2/i \\ 1/i]} = \frac{\sqrt{5}}{i} < \eps
+~
+
+a good choice would be to take $k = \left\lceil \sqrt{5}/\eps \right\rceil + 1$.
+
+_Proof:_ Let $\eps>0$ be given. Choose $k = \left\lceil \sqrt{5}/\eps \right\rceil + 1$. If $i \ge k$, then $\eps > \sqrt{5}/i$, and it follows that
+
+~ Math
+\norm{\vx_i - \vp} = \norm{\mqty[2/i \\ 1/i]} = \frac{\sqrt{5}}{i} < \eps.
+~
+
+**QED**
+
+**Example:** Let $\vx_i = \mqty[2/i \\ 3+1/i \\ i \\ 1/i^3] \in \R^4$ for $i = 1,2,3,\dots$. Does $\{\vx_i\}_{i=1}^\infty$ converge, and if so, to what point?
+
+**Lemma:** $\{\vx_i\}_{i=1}^\infty$ does not converge if $\forall \vp \in \R^n$ $\exists \eps > 0$ such that $\forall k \in \mathbb{N}$ $\exists i \ge k$ such that $\norm{\vx_i-\vp} \ge \eps$. (In other words, there exist infinitely many terms of the sequence outside $B(\vp,\eps)$.)
+
+_(Scratch work omitted.)_
+
+_Proof:_ Let $\vp \in \R^4$ be given, and choose $\eps = 1$. We would like to show that infinitely many points of the sequence lie outside $B(\vp, 1)$. For all $k \in \N$ choose $i \ge \max\{k, p_3+1\}$. Then
+
+~ Math
+\norm{\vx_i - \vp} \ge \abs{i-p^3} \ge 1 = \eps.
+~
+
+**QED**
+
+**Theorem:** If $\{\vx_i\}_{i=1}^\infty$ converges to $\vp$ and $\{\vy_i\}_{i=1}^\infty$ converges to $\vq$, then $\{\vx_i+\vy_i\}_{i=1}^\infty$ converges to $\vp + \vq$.
+
+_Proof:_ Let $\eps>0$ be given. Since $\{\vx_i\}_{i=1}^\infty$ converges to $\vp$, there exists $k_1 \in \N$ such that $i \ge k_1 \implies \norm{\vx_i-\vp} < \eps/2$. Similarly, since $\{\vy_i\}_{i=1}^\infty$ converges to $\vq$, there exists $k_2 \in \N$ such that $i \ge k_2 \implies \norm{\vy_i-\vq} < \eps/2$. Choose $k = \max\{k_1,k_2\}$. If $i \ge k$, then
+~ Math 
+\begin{aligned}
+\norm{(\vx_i + \vy_i) - (\vp+\vq)} &= \norm{(\vx_i - \vp) + (\vy_i - \vq)} \\
+&\le \norm{(\vx_i - \vp)} + \norm{(\vy_i - \vq)} \\
+&< \frac{\eps}{2} + \frac{\eps}{2} = \eps.
+\end{aligned}
+~
+
+**QED**
+
+**Definition:** A subset $C$ of $\R^n$ is _closed_ if $\R^n \setminus C$ is open.
+
+**Examples:** 
+
+1. Recall that $U = \{(x_1,x_2) \in \R^2 : x_1 > 0\}$ is open. It follows that $C = \R^2 \setminus U = \{(x_1,x_2) \in \R^2 : x_1 \le 0\}$ is closed.
+   
+   
+
+* Let $\vp \in R^n$ and $C = \{\vp\}$.
+   
+   **Claim:** $C$ is closed.
+   
+   _Proof:_ Let $U = \R^n \setminus C$ and show that $U$ is open. Let $\vq \in U$ be given. Choose $\delta = \norm{\vp-\vq}$. Since $\vp\ne\vq$, $\delta>0$. Note that $B(q,\delta) \cap C = \varnothing$. **QED**
+
+# Lecture 18 (2015-10-05) {  - }
+
+Recall our discussion of the following three topics:
+
+
+1. **Limits of sequences.** Given a sequence $\{\vx_i\}_{i=1}^\infty$ in $\R^n$ and a point $\vp \in \R^n$, we say that
+~ Math
+\lim_{i \to \infty} \vx_i = \vp
+~
+   if $\forall \eps > 0$ $\exists k \in \N$ such that if $i \ge k$, then $\norm{\vp - \vx_i} < \eps$.
+
+2. **Continuity of functions.** We say that $f: X \to \R^n$ is continuous at $\vp \in X \subseteq \R^n$ if $\forall \eps > 0$ $\exists \delta > 0$ such that if $\vx \in B(\vp, \delta) \cap X$, then $f(\vx) \in B(f(\vp), \eps)$.
+
+    **Theorem:** A function $f: X \to \R^n$ is continuous at $\vp \in X$ iff for all sequences $\{\vx_i\}_{i=1}^\infty$ in $X$ converging to $\vp$, the sequence $\{f(\vx_i)\}_{i=1}^\infty$ converges to $f(\vp)$.
+
+    _Proof:_ See online notes.
+
+3. **Limits of functions.** Given a subset $X$ of $\R^n$, a function $f: X \to \R^m$, and two points $\vp, \vq \in \R^n$, we say that
+~ Math
+\lim_{\vx \to \vp} f(\vx) = \vq
+~
+   if $\forall \eps > 0$ $\exists \delta > 0$ such that if $0 < \norm{\vp-\vx} < \delta$ and $\vx \in X$, then $\norm{\vq - f(\vx)} < \eps$.
+
+   _Remark:_ If $\exists \delta > 0$ such that $\nexists \vx \in X$ such that $0 < \norm{\vp-\vx} < \delta$, then
+~ Math
+\lim_{\vx \to \vp} f(\vx) = \vq
+~
+   for all $\vq \in \R^n$.
+
+**Definition:** We call $\vp$ a _limit point of $X$_ if $\forall \delta > 0$ $\exists \vx \in X$ such that $0 < \norm{\vp-\vx} < \delta$. Points in $X$ which are not limit points of $X$ are called _isolated points of $X$_.
+
+**Example:** Let $X = \{(x,y) \in \R^2 : x < 0\}$. Then $(-1,0)$ and $(0,0)$ are limit points of $X$, but $(1,0)$ is not a limit point of $X$.
+
+**Theorem:** If $\vp \in X \subset \R^n$ and $\vp$ is a limit point of $X$, then a function $f: X \to \R^m$ is continuous at $\vp$ iff $\lim_{\vx \to \vp} f(\vx) = f(\vp)$.
+
+**Example:** Let $X = \{(x,y) \in \R^2 : x,y \in \Z \}$. Then $X$ has no limit points, and all of its points are isolated.
+
+**Definition:** Let $U$ be an open subset of $\R^n$ and $\vp \in U$. We say that a function $f: U \to \R^m$ is _differentiable at $\vp$_ if there exists a linear transformation $Df(\vp) : \R^n \to \R^m$ such that
+
+~ Math
+\lim_{\vh \to \vo} \frac{f(\vp + \vh) - f(\vp) - Df(\vp)(\vh)}{\norm{\vh}} = 0.
+~
+
+In this case, $Df(\vp)$ is called the _derivative of $f$ at $\vp$_.
+
+_Remark:_ This definition gives no clue how to find the derivative of a given function, or even if it exists.
+
+_Remark:_ Note that $\vo$ needs to be a limit point of the domain of
+
+~ Math
+\vh \mapsto \frac{f(\vp + \vh) - f(\vp) - Df(\vp)(\vh)}{\norm{\vh}}
+~
+
+in order for this definition to make sense. This is why we take $U$ to be an open set.
+
+
+
+# Lecture 19 (2015-10-07) {  - }
+
+_Remark:_ The idea behind this definition of the derivative is that $Df(\vp)$ should be a good local linear approximation to $f(\vp + \vh) - f(\vp)$. In fact, it should be such a good linear approximation that the error
+
+~ Math
+f(\vp + \vh) - f(\vp) - Df(\vp) \in o\qty(\frac{1}{\norm{\vh}})
+~
+
+should fall off faster than $1/\norm{\vh}$.
+
+**Theorem:** If $T: \R^n \to \R^m$ is a linear transformation and $\vp \in \R^n$, then $T$ is differentiable at $\vp$, and $DT(\vp) = T$.
+
+_Proof:_
+~ Math 
+\begin{aligned}
+\lim_{\vh\to\vo} \frac{T(\vp + \vh) - T(\vp) - T(\vh)}{\norm{\vh}}
+&= \lim_{\vh\to\vo} \frac{T(\vp) + T(\vh) - T(\vp) - T(\vh)}{\norm{\vh}} \\
+&= \lim_{\vh\to\vo} \frac{0}{\norm{\vh}} \\
+&= 0
+\end{aligned}
+~
+
+**QED**
+
+**Relationship to the 1D case.** Recall that we say $f: \R \to \R$ is differentiable at $p \in \R$ when
+
+~ Math
+\lim_{h \to 0} \frac{f(p+h) - f(p)}{h}
+~
+
+exists. When it does, we call it $f'(p)$, the "derivative of $f$ at $p$." Two ideas underlie this definition: first, the geometric, which motivates this definition as the slope of the tangent line to the graph of $f$ at $p$, and second, the physical, which sees it as the rate of change of $f$ at $p$. To see the correspondence to the multivariate definition, note that
+
+~ Math
+m \coloneqq \lim_{h \to 0} \frac{f(p+h) - f(p)}{h}
+~
+
+exists iff
+
+~ Math
+\lim_{h \to 0} \frac{f(p+h) - f(p)}{h} - m = \lim_{h \to 0} \frac{f(p+h) - f(p) - mh}{h} = 0.
+~
+
+Here, the linear transformation $Df(p): \R \to \R$ is simply multiplication by the scalar $m$.
+
+**Definition:** Let $\vp \in U \opensubset \R^n$ and $f: U \to \R^m$. If $1 \le j \le n$, then the _$j$th partial derivative of $f$ at $p$_ is
+
+~ Math
+\pdv{f}{x_j}(p) \coloneqq \lim_{t \to 0} \frac{f(\vp + t\ve_j) - f(\vp)}{t},
+~
+
+provided this limit exists. (Here, $\ve_j$ is the $j$th standard basis vector.)
+
+_Remark:_ The $j$th partial derivative of $f$ at $\vp$ measures the rate of change of $f(\vp)$ with respect to change in $\vp$ in the $\ve_j$ direction.
+
+**Goal theorem:** If $\vp \in U \opensubset \R^n$ and $f: U \to \R^m$ is differentiable at $\vp$, then
+
+~ Math
+[Df(\vp)] = \mqty[\pdv{f}{x_1} (\vp) & \pdv{f}{x_2} (\vp) & \cdots & \pdv{f}{x_n} (\vp)].
+~
+
+
+_Remark:_ This matrix is called the _Jacobian matrix of $f$ at $\vp$_, denoted by $Jf(\vp)$.
+
+
+
+# Lecture 20 (2015-10-09) {  - }
+
+**Definition:** Let $\vp \in U \opensubset \R^n$ and $f: U \to \R^m$. Given $\vv \in \R^n$, the _directional derivative of $f$ at $\vp$ in the direction $\vv$_ is
+
+~ Math
+D_\vv f(\vp) \coloneqq \lim_{t \to 0} \frac{f(\vp + t\vv) - f(\vp)}{t} \in \R^m,
+~
+
+provided this limit exists.
+
+_Remark:_ We interpret $D_\vv f(\vp)$ as the instantaneous rate of change of $f$ with respect to a change in $\vp$ in the direction $\vv$.
+
+_Special cases:_ 
+
+1. If $\vv = \vo$, then $D_\vo f(\vp) = \vo$.
+   
+
+* If $\vv = \ve_j$, then $\displaystyle D_{\ve_j} f(\vp) = \pdv{f}{x_j}(\vp)$.
+
+**Theorem:** If $f$ is differentiable at $\vp$, then $\forall \vv \in \R^n$, $D_\vv f(\vp)$ exists, and
+
+~ Math
+D_\vv f(\vp) = Df(\vp)(\vv).
+~
+
+
+_Corollary:_ $\forall j = 1, \dots, n$, $\displaystyle \pdv{f}{x_j}(\vp) = Df(\vp)(\ve_j)$.
+
+_(Example omitted.)_
+
+_Proof:_ If $\vv = \vo$, the result holds trivially. For $\vv \ne \vo$, since $f$ is differentiable at $\vp$, we have
+
+~ Math
+\lim_{\vh \to \vo} \frac{f(\vp+\vh) - f(\vp) - Df(\vp)(\vh)}{\norm{\vh}} = \vo.
+~
+
+Let $\vh = t\vv$. Since $\lim_{t \to 0} t\vv = \vo$, we have
+
+~ Math
+\lim_{t \to 0} \frac{f(\vp+t\vv) - f(\vp) - Df(\vp)(t\vv)}{\norm{t\vv}} = \vo.
+~
+
+Recall that $\norm{t\vv} = \abs{t} \norm{\vv}$. We consider separately the right-hand and left-hand limits.
+~ Math 
+\begin{aligned}
+\vo &= \lim_{t \to 0^+} \frac{f(\vp+t\vv) - f(\vp) - tDf(\vp)(\vv)}{t\norm{\vv}} \\
+&= \lim_{t \to 0^+} \frac{f(\vp+t\vv) - f(\vp)}{t\norm{\vv}} - \lim_{t \to 0^+} \frac{tDf(\vp)(\vv)}{t\norm{\vv}} \\
+&= \lim_{t \to 0^+} \frac{f(\vp+t\vv) - f(\vp)}{t\norm{\vv}} - \frac{Df(\vp)(\vv)}{\norm{\vv}}
+\end{aligned}
+~
+
+Hence,
+
+~ Math
+\lim_{t \to 0^+} \frac{f(\vp+t\vv) - f(\vp)}{t} = Df(\vp)(\vv),
+~
+
+as desired. The left-hand case follows similarly. **QED**
+
+_Example:_ Let $f: \R^2 \to \R$ be defined by $f(\vo) = 0$ and
+
+~ Math
+f(x,y) = \frac{x^2 y}{x^2+y^2}
+~
+
+elsewhere. Note that $Jf(\vo) = \mqty[0&0]$, but
+
+~ Math
+\lim_{\vh \to \vo} \frac{f(\vo + \vh) - f(\vo) - Jf(\vo)\vh}{\norm{\vh}} = \lim_{\vh \to \vo} \frac{h_1^2 h_2}{(h_1^2 + h_2^2)^{3/2}}
+~
+
+where the limit on the RHS does not exist. Hence, $f$ is not differentiable at $\vo$.
+
+
+
+# Lecture 21 (2015-10-12) {  - }
+
+Let $\vp \in U \opensubset \R^n$, and $f: U \to \R^n$. Recall that $f$ is _differentiable at $\vp$_ if there exists a linear transformation $Df(\vp): \R^n \to \R^n$ such that
+
+~ Math
+\lim_{\vh \to \vo} \frac{f(\vp+\vh) - f(\vp) - Df(\vp)(\vh)}{\norm{\vh}} = \vo.
+~
+
+The idea of this definition is to require $Df(\vp)$ to be a good local linear approximation to $f$ at $\vp$.
+
+_(These notes have been lost! Recover them from a classmate.)_
+
+
+
+# Lecture 22 (2015-10-14) {  - }
+
+**Definition:** let $\vp \in U \opensubset \R^n$ and $f: U \to \R$ be differentiable at $\vp$. The _gradient of $f$ at $\vp$_ is
+
+~ Math
+\nabla f(\vp) = Jf(\vp)^\intercal = \mqty[\pdv{f}{x_1}(\vp) \\ \vdots \\ \pdv{f}{x_n}(\vp)] \in \R^n.
+~
+
+
+**Theorem:** The tangent space to the graph of $f$ at $\vp$ is the hyperplane in $\R^{n+1}$ with normal vector $\mqty[\nabla f(\vp) \\ -1] \in \R^{n+1}$.
+
+_Proof:_ Recall that the tangent space to the graph of $f$ at $\vp$ is the graph of $Df(\vp)$ (i.e., the set of points in $\R^{n+1}$ of the form $\mqty[\vx \\ Df(\vp)(\vx)]$ for $\vx \in \R^n$). Thus, the tangent space is uniquely specified by the equation $Df(\vp)(\vx) - \vx_{n+1} = 0$. Now recall that
+~ Math 
+\begin{aligned}
+Df(\vp)(\vx) &= Jf(\vp)\vx = Jf(\vp)^\intercal \cdot \vx = \nabla f(\vp) \cdot \vx \\
+&= \pdv{f}{x_1}(\vp) x_1 + \pdv{f}{x_2}(\vp) x_2 + \dots + \pdv{f}{x_n}(\vp) x_n.
+\end{aligned}
+~
+
+The equation $Df(\vp)(\vx) - \vx_{n+1} = 0$ then becomes
+
+~ Math
+\pdv{f}{x_1}(\vp) x_1 + \pdv{f}{x_2}(\vp) x_2 + \dots + \pdv{f}{x_n}(\vp) x_n - x_{n+1} = 0,
+~
+
+as desired. **QED**
+
+_Remark:_ Note that we must distinguish between the linear tangent space, defined by $\nabla f(\vp) \cdot \vx - \vx_{n+1} = 0$ and the affine tangent space, defined by $\nabla f(\vp) \cdot (\vx-\vp) - (\vx_{n+1} - f(\vp)) = 0$.
+
+**Example:** Let $f: \R^2 \to \R$ be defined by $f(x,y) = 9 - x^2 - y^2$. Find the equation of the tangent (hyper)-planes (both linear and affine) to the graph of $f$ at $\vp = (2,1)$.
+
+_Solution:_ $f(\vp) = 4$ and $\nabla f(\vp) = \mqty[-4\\-2]$, so the normal vector to both tangent planes is $\mqty[\nabla f(\vp) \\ -1] = \mqty[-4\\-2\\-1]$. Hence the linear tangent plane is given by $-4x-2y-z=0$, and the affine tangent plane by $-4(x-2)-2(y-1)-(z-4)=0$.
+
+**{Geometric interpretation of $\pdv{f}{x_j} (\vp)$.}** Define $g(t) = f(\vp + t\ve_j)$. By definition, $g'(0) = \pdv{f}{x_j} (\vp)$. This means that the cross-section of the graph of $f$ parallel to the $(x_j,f)$-plane containing $p$ has slope $g'(0) = \pdv{f}{x_j} (\vp)$ directly over $\vp$. Furthermore, if we define $\vv_j = \mqty [\ve_j \\ \pdv{f}{x_j} (\vp)]$, then $\vv_j \cdot \mqty[\nabla f(\vp) \\ -1] = 0$.
+
+**Theorem:** The tangent space to the graph of $f$ at $\vp$ is $\operatorname{span}\{\vv_1, \dots, \vv_n\}$. (To be proven next lecture.)
+
+
+
+# Fall Break (2015-10-16) {  - }
+
+
+
+
+# Lecture 23 (2015-10-19) {  - }
+
+Let $\vp \in U \opensubset \R^n$ and $f: U \to \R$ be differentiable at $\vp$. Recall the definition of the gradient
+
+~ Math
+\nabla f(\vp) \coloneqq \mqty[\pdv{f}{x_1} (\vp) \\ \vdots \\ \pdv{f}{x_n} (\vp)] \in \R^n.
+~
+
+Recall also that the tangent space to the graph of $f$ at $\vp$ is the graph of its derivative $Df(\vp)$. It was proven last lecture that this is precisely the hyperplane in $\R^{n+1}$ with normal vector $\mqty[\nabla f(\vp) \\ -1] \in \R^{n+1}$.
+
+Let $1 \le j \le n$, and $\ve_j$ be the $j$th standard basis vector. It follows from the previous result that
+
+~ Math
+\vv_j \coloneqq \mqty [\ve_j \\ \pdv{f}{x_j} (\vp)]
+~
+
+is a member of this tangent space.
+
+**Theorem:** The tangent space to the graph of $f$ at $\vp$ is $\operatorname{span}\{\vv_1, \dots, \vv_n\}$.
+
+_Proof:_ The reverse inclusion is clear from the previous observation. For the forward inclusion, let $\vz$ be a member of the tangent space. By definition we can write
+
+~ Math
+\vz = \mqty[\vx \\ Df(\vp)(\vx)]
+~
+
+for some $\vx \in \R^n$. It follows that
+~ Math 
+\begin{aligned}
+\vz &= \mqty[\sum_{j=1}^n x_j \ve_j \\ Df(\vp)\qty(\sum_{j=1}^n x_j \ve_j)] \\
+&= \mqty[\sum_{j=1}^n x_j \ve_j \\ \sum_{j=1}^n x_j Df(\vp)\qty(\ve_j)] \\
+&= \sum_{j=1}^n x_j \mqty[\ve_j \\ Df(\vp)\qty(\ve_j)] \\
+&= \sum_{j=1}^n x_j \mqty[\ve_j \\ \pdv{f}{x_j} (\vp)] = \sum_{j=1}^n x_j \vv_j.
+\end{aligned}
+~
+
+**QED**
+
+What about $\nabla f(\vp)$? Does it have any nice interpretation of its own?
+
+**Physical interpretation of $\nabla f(\vp)$.** Suppose you are standing at $\vp \in \R^n$ and want to move so that $f$ changes as rapidly as possible. Which direction should you move in? In other words, find a unit vector $\vv$ maximizing $D_\vv f(\vp)$.
+
+To solve this problem, recall that
+
+~ Math
+D_\vv f(\vp) = Df(\vp)(\vv) = Jf(\vp) \vv = \nabla f(\vp) \cdot \vv.
+~
+
+It follows from Cauchy-Schwarz that
+
+~ Math
+\abs{\nabla f(\vp) \cdot \vv} \le \norm{\nabla f(\vp)} \norm{\vv} = \norm{\nabla f(\vp)}
+~
+
+where we have equality iff $\nabla f(\vp)$ and $\vv$ are parallel. Thus, the maximum rate of change occurs in the direction of $\nabla f(\vp)$, and moreover, the minimum rate of change occurs in the direction of $-\nabla f(\vp)$.
+
+**Geometric interpretation of $\nabla f(\vp)$.** **Definition:** If $c \in \R$, then
+
+~ Math
+f^{-1}(c) \coloneqq \{\vx \in \R^n : f(\vx) = c \}
+~
+
+is called the _level set of $f$ corresponding to $c$_.
+
+
+
+1. Let $f: \R^2 \to \R$ be defined by $f(x,y) = \sqrt{x^2+y^2}$. For $c \ge 0$, the level set $f^{-1}(c)$ is a circle of radius $c$ centered at the origin in $\R^2$.
+   
+   
+
+* Let $T: \R^n \to \R$ be a linear transformation. Then the level set $T^{-1}(0) = \ker T$ is a linear subspace of $\R^n$.
+
+**Definition:** Let $\vp \in U \opensubset \R^n$ and $f: U \to \R$ be differentiable at $\vp$. If $f(\vp) = c$ and $M = f^{-1}(c)$, then the _tangent space to $M$ at $\vp$_ is $\ker Df(\vp)$.
+
+_Why is this a reasonable definition?_
+
+**Example:** Again take $f(x,y) = \sqrt{x^2+y^2}$, and let $\vp = (2,3)$. Also let $c = f(\vp) = \sqrt{13}$. Then $M = f^{-1}(c)$ is a circle of radius $\sqrt{13}$, and
+
+~ Math
+Jf(\vp) = \mqty[\frac{2}{\sqrt{13}} & \frac{3}{\sqrt{13}}].
+~
+
+Thus, the tangent space is the line (hyperplane) in $\R^2$ with equation
+
+~ Math
+\frac{2}{\sqrt{13}}x + \frac{3}{\sqrt{13}}y = 0
+~
+
+which, by drawing a graph, is easily seen to be a tangent line to $M$.
+
+**Theorem:** The tangent space to the level set of $f$ at $\vp$ is precisely the hyperplane in $\R^n$ with normal vector $\nabla f(\vp)$.
+
+_Proof:_ If $\vx \in \R^n$, then $\vx$ is in the tangent space iff $Df(\vp)(\vx) = Jf(\vp) \vx = \nabla f(\vp) \cdot \vx = 0$. **QED**
+
+
+
+# Lecture 24 (2015-10-21) {  - }
+
+Review session for exam 2. Problems and solutions omitted.
+
+
+
+# Lecture 25 (2015-10-23) {  - }
+
+**The chain rule.** Let $g: \R^n \to \R^m$, $f: \R^m \to \R^\ell$, $\vp \in \R^n$, and $\vq = g(\vp)$.
+
+**Theorem:** If $g$ is differentiable at $\vp$ and $f$ is differentiable at $\vq$, then $f \circ g$ is differentiable at $p$, and $D(f \circ g)(\vp) = Df(\vq) \circ Dg(\vp)$.
+
+_(Example computation omitted.)_
+
+_Proof:_ Let $A = Jg(\vp)$ and $B = Jf(\vq)$. Write $f = f_1 + f_2$, where $f_1(\vw) = B\vw$ and $f_2(\vw) = f(\vw) - B\vw$. Note that $f_1$ and $f_2$ are differentiable at $\vq$, with $Df_1(\vq) = B$ and $Df_2(\vq) = 0$, and that $f \circ g = (f_1 + f_2) \circ g = (f_1 \circ g) + (f_2 \circ g)$.
+
+Observe that $f_1 \circ g$ is differentiable at $\vp$ with derivative $BA$, since
+~ Math 
+\begin{aligned}
+\lim_{\vh \to 0} \frac{(f_1 \circ g)(\vp+\vh) - (f_1 \circ g)(\vp) - BA\vh}{\norm{\vh}}
+&= \lim_{\vh \to 0} \frac{Bg(\vp+\vh) - Bg(\vp) - BA\vh}{\norm{\vh}} \\
+&= \lim_{\vh \to 0} B\frac{g(\vp+\vh) - g(\vp) - A\vh}{\norm{\vh}} \\
+&= B \lim_{\vh \to 0} \frac{g(\vp+\vh) - g(\vp) - A\vh}{\norm{\vh}} \\
+&= B0 = 0.
+\end{aligned}
+~
+
+Similarly, $f_2 \circ g$ is differentiable at $\vp$ with derivative $0$. To show this, we introduce the _Lipschitz condition._
+
+**Lemma:** If $g$ is differentiable at $\vp$, then there exists a constant $C$ and $\delta > 0$ such that if $\norm{\vh} < \delta$, then $\norm{g(\vp+\vh) -g(\vp)} \le C\norm{\vh}$.
+
+Now define $\vw = \vw(\vh) = g(\vp+\vh) - g(\vp)$ and pick a Lipschitz constant $C$ for $\vw$. Then $\norm{\vw} \le C\norm{\vh}$ whenever $\norm{\vh} < \delta$, and
+~ Math 
+\begin{aligned}
+\lim_{\vh \to 0} \frac{(f_2 \circ g)(\vp+\vh) - (f_2 \circ g)(\vp)}{\norm{\vh}}
+&= \lim_{\vh \to 0} \frac{f_2(g(\vp+\vh)) - f_2(g(\vp))}{\norm{\vw}} \frac{\norm{\vw}}{\norm{\vh}} \\
+&\le \lim_{\vh \to 0} \frac{f_2(g(\vp+\vh)) - f_2(g(\vp))}{\norm{\vw}} C \\
+&= 0
+\end{aligned}
+~
+
+since $Df_2(\vq) = 0$. _(Note that this proof is not quite correct. It needs some fixing up in the case that $g$ is locally constant and $\vw = 0$. Nonetheless, it contains the essence of the correct idea.)_ **QED**
+
+
+
+# Lecture 26 (2015-10-26) {  - }
+
+**Definition:** A _linear system of $m$ equations in $n$ unknowns_ is a system of the form
+~ Math 
+\begin{aligned}
+a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n &= b_1 \\
+a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n &= b_2 \\
+&\vdots \\
+a_{m1} x_1 + a_{m2} x_2 + \dots + a_{mn} x_n &= b_m
+\end{aligned}
+~
+
+with known coefficients $[a_{ij}]$ and unknowns $[x_j]$. A _solution_ of this system is a vector $\vx = [x_j] \in \R^n$ that satisfies each equation.
+
+All such systems admit a matrix representation $A\vx = \vvb$, where $A = [a_{ij}]$ is the _matrix of coefficients_, $\vx = [x_j]$ is the _vector of unknowns_, and $\vvb = [b_i]$ is the _vector of constants_. If $\vvb = \vo$, then we say that the corresponding system is _homogeneous_. We call $\mqty[A & \vvb] \in \matspace{m}{(n+1)}$ the _augmented matrix_ of the system. Note that the solution set $\{\vx \in \R^n : A\vx = \vvb\}$ is the intersection of $m$ affine hyperplanes in $\R^n$.
+
+Given a linear transformation $T: \R^n \to \R^m$, where $A = [T] \in \matspace{m}{n}$, recall that
+
+~ Math
+\operatorname{Ker}(T) = \{ \vx \in \R^n : T(\vx) = \vo \} = \{ \vx \in \R^n : A\vx = \vo \}
+~
+
+is the solution set of the linear system $A\vx = \vo$. Furthermore,
+~ Math 
+\begin{aligned}
+\operatorname{Im}(T)
+&= \{ \vy \in \R^m : \exists \vx \in \R^n \text{ s.t. } T(\vx) = \vy \} \\
+&= \{ \vy \in \R^m : \exists \vx \in \R^n \text{ s.t. } A\vx = \vy \}
+\end{aligned}
+~
+
+is precisely the linear span of the columns of $A$ (by the column POV).
+
+**Definition:** The _null space_ of a matrix $A \in \matspace{m}{n}$ is the set of vectors
+
+~ Math
+\operatorname{Null}(A) = \{ \vx \in \R^n : A\vx = \vo \}.
+~
+
+
+**Definition:** The _column space_ of a matrix $A \in \matspace{m}{n}$ is
+
+~ Math
+C(A) = \operatorname{span} \{ a_1, \dots, a_n \}
+~
+
+where $a_j$ is the $j$th column of $A$.
+
+_(Example of solving a linear system by Gaussian elimination omitted.)_
+
+**Allowed row operations.** 
+
+* Type I: interchange two rows.
+   
+
+* Type II: replace a row by a scalar multiple.
+   
+
+* Type III: replace a row by itself plus a scalar multiple of another row.
+
+# Lecture 28 (2015-10-30) {  - }
+
+**Linear systems solutions theorem.** Let $A\vx = \vvb$ be a linear system with $m$ equations and $n$ unknowns. To solve such a system, we find a sequence of elementary row operations by which $[A,\vvb] \rightsquigarrow [\tilde{A}, \vc]$ in RREF. At this point there are two cases:
+
+
+1. If $\vc$ has a pivot 1, there are no solutions. (The system is said to be _inconsistent_.)
+   
+
+* If $\vc$ has no pivot 1, then there are solutions. (The system is said to be _consistent_.) 
+
+1. If there are no free variables, then the linear system has a unique solution, given by the first $n$ components of $\vc$.
+   
+
+* If there is at least one free variable, then the system has infinitely many solutions. (The free variables can take on all values, and the pivot variables are determined by the free variables.)
+   
+
+**Example:** Let $A =\mqty[2&1&3\\1&-1&0\\1&1&2]$. Determine its null space $N(A)$.
+
+_Solution:_ We solve the linear system $A\vx = \vo$. Omitting intermediate steps, we find
+
+~ Math
+[A,\vo] \rightsquigarrow \mqty[1&0&1&0\\0&1&1&0\\0&0&0&0]
+~
+
+from which we see that
+
+~ Math
+\vx = \mqty[x_1\\x_2\\x_3] = x_3 \mqty[-1\\-1\\1].
+~
+
+This is the _standard form of the general solution_, which in this case turns out to be a line in $\R^3$.
+
+**Example:** With the same matrix $A$ as the previous example, are $\vvb = \smqty[1\\1\\1]$ and $\vc = \smqty[1\\1\\1/3]$ members of the column space $C(A)$?
+
+_Solution:_ We solve the linear systems $A\vx = \vvb$ and $A\vx = \vc$. Again omitting intermediate steps,
+
+~ Math
+[A,\vvb] \rightsquigarrow \mqty[1&0&1&0\\0&1&1&0\\0&0&0&1]
+~
+
+and since the rightmost column contains a pivot 1, $A\vx = \vvb$ has no solution. Hence $\vvb \notin C(A)$. Similarly,
+
+~ Math
+[A,\vc] \rightsquigarrow \mqty[1&0&1&2/3\\0&1&1&-1/3\\0&0&0&0]
+~
+
+which has general solution
+
+~ Math
+\vx = \mqty[x_1\\x_2\\x_3] = \mqty[2/3\\-1/3\\0] + x_3 \mqty[-1\\-1\\1].
+~
+
+Note that this is an affine line in $\R^3$ which is parallel to the line from the previous example. This suggests that $A$ "crushes" the family of lines parallel to $\smqty[-1\\-1\\1]$ into points, making its column space a plane. But how can we verify this?
+
+**Problem:** With the same matrix $A$ as the previous example, what is its column space $C(A)$?
+
+Clearly, $C(A)$ is the span of the columns of $A$. However, this not a particularly useful description. Our approach will be to find an _implicit_ description of $C(A)$, which will lead to a better explicit description. Let $\vvb = \smqty[b_1\\b_2\\b_3]$, and reduce $[A,\vvb]$.
+
+~ Math
+\mqty[A,\vvb] \rightsquigarrow \mqty[1&1&2&b_3\\0&1&1&2b_3-b_1\\0&0&0&-2b_1+b_2-3b_3]
+~
+
+Note that we cannot reach RREF without knowing $\vvb$, but we can still reach REF. The lowest row gives a _constraint equation_ $-2b_1+b_2-3b_3 = 0$. This tells us that $C(A)$ is a plane in $\R^3$ with normal vector $\smqty[-2\\1\\-3]$. In general, we will obtain more than one constraint equation, and these will form a linear system. In our case,
+
+~ Math
+\mqty[-2&1&-3&0] \rightsquigarrow \mqty [1&-1/2&3/2&0],
+~
+
+and we have
+
+~ Math
+\vvb = b_2 \mqty[1/2\\1\\0] + b_3 \mqty[-3/2\\0\\1]
+~
+ 
+
+
+
+# Lecture 29 (2015-11-02) {  - }
+
+**Definiton:** The _rank_ of a matrix $A$, denoted by $\rank(A)$, is the number of non-zero rows in its RREF.
+
+_Note:_ If $A$ is the coefficient matrix of a linear system, then $\rank(A)$ is the number of pivot variables.
+
+_Goal:_ We will eventually show that, for a suitable definition of the dimension operator, $\dim C(A) = \rank(A)$ and $\dim N(A) = n - \rank(A)$.
+
+Let $A \in \matspace{m}{n}$. Observe that $\rank(A) \le m$, since the number of non-zero rows cannot exceed the number of rows. But simultaneously $\rank(A) \le n$, since a linear system $A\vx = \vvb$ cannot have more pivot variables than variables. Hence $\rank(A) \le \min\{m,n\}$.
+
+Recall that a function $f: X \to Y$ is said to be 
+
+* _surjective_ (or _onto_) if $\operatorname{Image}(f) = Y$, or in other words, if $\forall y \in Y$ $\exists x \in X$ such that $f(x) = y$.
+   
+
+* _injective_ (or _one-to-one_) if whenever $a,b \in X$ satisfy $f(a) = f(b)$, we have $a = b$.
+   
+
+* _bijective_ if it is surjective and injective, or in other words, if $\forall y \in Y$ $\exists! x \in X$ such that $f(x) = y$.
+
+_(Examples of surjective, injective, and bijective functions omitted.)_
+
+Observe that a linear transformation $T: \R^n \to \R^m$ represented by a matrix $A = [T]$ is 
+
+* surjective if $A\vx = \vvb$ has a solution for every $\vvb$,
+   
+
+* injective if whenever $A\vx = \vvb$ has a solution, it is unique, and
+   
+
+* bijective if $A\vx = \vvb$ has a unique solution for every $\vvb$.
+
+**Theorem 1:** $\rank(A) = m$ iff $\forall \vvb \in \R^m$, $A\vx = \vvb$ has a solution.
+
+_Proof:_ Suppose $\rank(A) = m$ and let $\vvb \in \R^m$ be given. Row reduce $[A,\vvb] \rightsquigarrow [\tilde{A},\vc]$ in RREF. Each row of $\tilde{A}$ must have a pivot 1, so $\vc$ has no pivots, and it follows that $A\vx = \vvb$ has a solution.
+
+Conversely, assume for contradiction that $\rank(A) < m$. Row reduce $A \rightsquigarrow \tilde{A}$ in RREF. $\tilde{A}$ must have at least one zero row, and consequently $[\tilde{A}, \ve_m]$ will have a pivot 1 in its bottom-right corner. Now apply the inverse of the row operations taking $A \rightsquigarrow \tilde{A}$ to $[\tilde{A}, \ve_m] \rightsquigarrow [A,\vvb]$. By hypothesis $A\vx = \vvb$ has a solution, but $\tilde{A}\vx = \ve_m$ has no solution. This is the desired contradiction. **QED**
+
+**Theorem 2:** Suppose $A\vx = \vvb$ has a solution. Then $A\vx = \vvb$ has a unique solution iff $A\vx = \vo$ has a unique solution.
+
+_Remark:_ Note that $A\vx = \vo$ always has the trivial solution $\vx = \vo$.
+
+_Proof:_ Let $\vvu$ be the unique solution of $A\vx = \vvb$ and $\vv$ be a solution of $A\vx = \vo$. Then $A(\vvu-\vv) = A\vvu - A\vv = \vvb - \vo = \vvb$, hence $\vvu - \vv = \vvu$, and $\vv = \vo$, as desired.
+
+Conversely, Suppose $\vvu_1, \vvu_2$ are solutions of $A\vx = \vvb$. Then $A(\vvu_1-\vvu_2) = A\vvu_1 - A\vvu_2 = \vvb - \vvb = \vo$, and it follows that $\vvu_1-\vvu_2 = \vo$, or equivalently, that $\vvu_1 = \vvu_2$. **QED**
+
+**Lemma:** $\rank(A) = n$ iff $A\vx = \vo$ has a unique solution.
+
+_Proof:_ $\rank(A) = n$ iff the system $A\vx = \vo$ has no free variables, which occurs iff $A\vx = \vo$ has a unique solution. **QED**
+
+
+
+# Lecture 30 (2015-11-04) {  - }
+
+**Theorem:** Let $A = [T] \in \matspace{m}{n}$. Then $\rank(A) = m$ iff $T$ is surjective, and $\rank(A) = n$ iff $T$ is injective.
+
+_Corollary:_ $\rank(A) = m = n$ iff $T$ is bijective.
+
+_Corollary:_ If $T: \R^n \to \R^n$, then $T$ is surjective iff $T$ is injective.
+
+Note that if $T: \R^n \to \R^n$ is bijective, there exists an inverse $T^{-1}: \R^n \to \R^n$ defined by $T^{-1}(y) = x$ iff $T(x) = y$.
+
+**Homework:** If $T: \R^n \to \R^n$ is a bijective linear transformation, then $T^{-1}: \R^n \to \R^n$ is also a linear transformation.
+
+**Theorem 4:** $T: \R^n \to \R^n$ is bijective iff $A = [T]$ is invertible.
+
+_Proof:_ Suppose $T$ is bijective, and let $B = [T^{-1}]$. Then $BA = [T^{-1}][T] = [T^{-1} \circ T] = [\mathrm{id}_{\R^n}] = I_n$. Likewise, $AB = I_n$. Thus, $B = A^{-1}$.
+
+Conversely, suppose $A$ is invertible, and let $[S] = A^{-1}$. Then $[S \circ T] = [S][T] = A^{-1}A = I_n$, and hence $S \circ T = \mathrm{id}_{\R^n}$. Similarly $T \circ S = \mathrm{id}_{\R^n}$, and bijectivity of $T$ follows via diagram chasing. **QED**
+
+_Corollary:_ Suppose $A \in \mathbb{M}_n$. Then $A$ is invertible iff $\rank(A) = n$, which occurs iff the RREF of $A$ is $I_n$.
+
+_Corollary:_ Suppose $A \in \mathbb{M}_n$. TFAE: 
+
+* $\forall \vvb \in \R^n$, $A\vx = \vvb$ has a solution.
+   
+
+* $\forall \vvb \in \R^n$, $A\vx = \vvb$ has a unique solution.
+   
+
+* $A\vx = \vo$ has a unique solution.
+   
+
+* $A$ is invertible.
+   
+
+* The RREF of $A$ is $I_n$.
+   
+
+* $\rank(A) = n$.
+
+**Theorem:** If $A \in \mathbb{M}_n$ and $A$ has either a left or right inverse, then $A$ is invertible. Moreover, either one-sided inverse is $A^{-1}$.
+
+_Proof:_ Suppose $A$ has a left inverse $B \in \mathbb{M}_n$. Then $A\vx = \vo$ has a unique solution, and hence $A$ is invertible. Moreover, $BAA^{-1} = BI_n = I_nA^{-1}$, so $B = A^{-1}$.
+
+Now suppose $A$ has a right inverse $D \in \mathbb{M}_n$. Then $D$ has left inverse $A$, and by the previous case, inverse $A = D^{-1}$. Hence, $A^{-1} = (D^{-1})^{-1} = D$. **QED**
+
+How do we find the inverse of an invertible matrix $A \in \mathbb{M}_n$? We know that $A \rightsquigarrow I_n$. Apply the same sequence of operations to the augmented matrix $[A,I_n] \rightsquigarrow [I_n,B]$ to obtain a matrix $B \in \mathbb{M}_n$.
+
+**Claim:** $B = A^{-1}$.
+
+_Proof:_ Let $1 \le j \le n$. Let $\vvb_j$ be the solution of $A\vx = \ve_j$. Then $A\vvb_j = \ve_j$, and $AB = \mqty [A\vvb_1 & A\vvb_2 & \cdots & A\vvb_n] = \mqty [\ve_1 & \ve_2 & \cdots & \ve_n] = I_n$. **QED**
+
+
+
+# Lecture 31 (2015-11-06) {  - }
+
+**Linear independence, basis, and dimension.** Let $\vv_1, \dots, \vv_k \in \R^n$, and $A = \mqty[\vv_1 & \cdots & \vv_k]$ be the matrix with columns $\vv_i$. Let $T: \R^k \to \R^n$ be the linear transformation represented by $A$. Recall that if $c_1, \dots, c_k \in \R$, then $\vv = c_1\vv_1 + \dots + c_k\vv_k$ is a _linear combination_ of $\vv_1, \dots, \vv_k$, and we define $\operatorname{span}\{\vv_1, \dots, \vv_k\}$ to be the set of all such linear combinations.
+
+Observe that, using the column POV, $A\vx$ is a linear combination of $\vv_1, \dots, \vv_k$ with coefficients $x_1, \dots, x_k$. Hence, $C(A) = \operatorname{Image}(T) = \operatorname{span}\{\vv_1, \dots, \vv_k\}$.
+
+**Definition:** Vectors $\vv_1, \dots, \vv_k \in \R^n$ are _linearly independent_ if
+
+~ Math
+c_1\vv_1 + \dots + c_k\vv_k = \vo
+~
+
+only when $c_1 = \cdots = c_k = 0$.
+
+Note that $\vv_1, \dots, \vv_k$ are linearly independent iff $A\vx = \vo$ has only the trivial solution, which occurs iff $T: \R^k \to \R^n$ is injective, which occurs iff $\operatorname{rank}(A) = k$, which occurs iff $\forall \vvb \in C(A)$, $A\vx = \vvb$ has a unique solution.
+
+**Definiton:** Let $V$ be a linear subspace of $\R^n$. A _basis_ for $V$ is a set of vectors $\vv_1, \dots, \vv_k \in \R^n$ such that 
+
+* $\operatorname{span}\{\vv_1, \dots, \vv_k\} = V$, and
+   
+
+* $\vv_1, \dots, \vv_k$ are linearly independent.
+
+In other words, if $V = C(A)$ where $A \in \matspace{n}{k}$ has rank $k$.
+
+**Goals:** We would like to show that every $V$ has a basis, and that any two bases for $V$ have the same number of elements. That number will be defined as the _dimension_ of $V$.
+
+**Theorem:** $\{\vv_1, \dots, \vv_k\} \subseteq V$ is a basis for $V$ iff every $\vvb \in V$ can be written as a linear combination of $\vv_1, \dots, \vv_k$ in a unique way.
+
+_(Examples omitted. These took up the rest of the lecture.)_
+
+
+
+# Lecture 32 (2015-11-09) {  - }
+
+Let $\vv_1, \dots, \vv_k \in \R^n$, and $A = \mqty[\vv_1&\cdots&\vv_k] \in \matspace{n}{k}$. Let $T: \R^k \to \R^n$ be the linear transformation represented by $A$. Recall that TFAE:
+
+
+* $\vv_1, \dots, \vv_k$ are linearly independent.
+   
+
+* $A\vx = \vo$ has only the trivial solution.
+   
+
+* $T$ is injective.
+   
+
+* $\rank(A) = k$.
+
+**Lemma 1:** If $\vv_1, \dots, \vv_k \in \R^n$ are linearly independent, then $k \le n$.
+
+**Lemma 2:** If $\vv_1, \dots, \vv_k \in \R^n$ are linearly independent and $\vv_{k+1} \in \R^n \setminus \operatorname{span}\{\vv_1,\dots,\vv_k\}$, then $\vv_1, \dots, \vv_k, \vv_{k+1}$ are linearly independent.
+
+_Proof:_ Suppose $c_1\vv_1 + \dots + c_k\vv_k + c_{k+1}\vv_{k+1} = 0$. We must have $c_{k+1} = 0$, since otherwise $\vv_{k+1} \in \operatorname{span}\{\vv_1,\dots,\vv_k\}$. Then, since $\vv_1, \dots, \vv_k$ are linearly independent, $c_1 = \dots = c_k = 0$. **QED**
+
+**Theorem:** If $V$ is a nontrivial linear subspace of $\R^n$, then $V$ has a basis.
+
+_Proof:_ Choose $\vv_1 \in V$ such that $\vv_1 \ne \vo$. If $V = \operatorname{span}\{\vv_1\}$, then $\{\vv_1\}$ is a basis for $V$ and we're done.
+
+Otherwise, if $V \ne \operatorname{span}\{\vv_1\}$, then choose $\vv_2 \in V \setminus \operatorname{span}\{\vv_1\}$. If $V = \operatorname{span}\{\vv_1,\vv_2\}$, then $\{\vv_1,\vv_2\}$ is a basis for $V$ and we're done. (Linear independence of $\{\vv_1,\vv_2\}$ is guaranteed by lemma 2.)
+
+Otherwise, if $V \ne \operatorname{span}\{\vv_1,\vv_2\}$, then choose $\vv_3 \in V \setminus \operatorname{span}\{\vv_1,\vv_2\}$. If $V = \operatorname{span}\{\vv_1,\vv_2,\vv_3\}$, then $\{\vv_1,\vv_2,\vv_3\}$ is a basis for $V$ and we're done.
+
+Continue inductively in this fashion, and observe that by lemma 1, this process stops at or before step $n$. **QED**
+
+**Corollary:** If $V$ is a linear subspace of $\R^n$, then $V = C(A)$ for some $A \in \matspace{n}{k}$ where $1 \le k \le n$.
+
+_Proof:_ If $V \ne \{\vo\}$, choose a basis $\vv_1, \dots, \vv_k$ of $V$. Then $A = \mqty[\vv_1&\cdots&\vv_k]$ works. Otherwise, if $V = \{\vo\}$, then let $A$ be a single column of zeroes. **QED**
+
+**Theorem:** If $V$ is a linear subspace of $\R^n$ with basis $\vv_1, \dots, \vv_k$, and $\vw_1, \dots, \vw_\ell \in V$ are linearly independent, then $\ell \le k$.
+
+_Proof:_ Let $A = \mqty[\vv_1&\cdots&\vv_k]$, and $T: \R^k \to \R^n$ be the linear transformation represented by $A$. Then $T$ is injective, and $\operatorname{Image}(T) = C(A) = V$. Let $\vx_1, \dots, \vx_\ell \in \R^k$ such that $T(\vx_i) = \vw_i$. (These are in fact unique, but that fact is not necessary for this proof.)
+
+We claim that $\vx_1, \dots, \vx_\ell \in \R^k$ are linearly independent. This will establish the theorem through lemma 1. To see this, observe that $c_1\vx_1 + \dots + c_\ell\vx_\ell = \vo$ only when $T(c_1\vx_1 + \dots + c_\ell\vx_\ell) = \vo$, but
+~ Math
+T(c_1\vx_1 + \dots + c_\ell\vx_\ell) = c_1\vw_1 + \dots + c_\ell\vw_\ell = \vo
+~
+only when $c_1 = \dots = c_\ell = 0$ by the linear independence of $\vw_1, \dots, \vw_\ell$. **QED**
+
+**Corollary:** If $V$ is a linear subspace of $\R^n$, then any two bases for $V$ have the same number of vectors.
+
+_Proof:_ Say one basis has $k$ vectors and the other has $\ell$ vectors. Then $k \le \ell$ and $\ell \le k$ by the above theorem, hence $k = \ell$.
+
+**Definition:** If $V$ is a linear subspace of $\R^n$, then the _dimension_ of $V$ is
+~ Math
+\dim V = \begin{cases}
+0 & \text{ if } V = \{\vo\} \\
+k & \text{ if } V \ne \{\vo\} \text{ and $V$ has a basis with $k$ elements}. \\
+\end{cases}
+~
+
+_Examples:_ 
+
+* $\dim \R^n = n$, since $\{\ve_1, \dots, \ve_n\}$ is a basis.
+* Let $V$ be a linear line in $\R^n$ with direction vector $\vv \ne \vo$. Then $V = \{t\vv : t \in \R\}$, and $\{\vv\}$ is a basis for $V$. Hence, $\dim V = 1$. Conversely, if $V$ is a linear subspace of $\R^n$ such that $\dim V = 1$, then $V$ is a line.
+* Let $V$ be a linear hyperplane in $\R^n$ with normal $\vva = \gcvec{a}{n} \ne \vo$. Then it is not hard to show that $\dim V = n-1$. (Converse takes a bit more work and will be shown later.)
+
+
+
+# Lecture 33 (2015-11-11) {  - }
+
+_One more example:_ 
+
+* Let $A \in \matspace{m}{n}$. Then $\dim N(A)$ is given by the number of free variables in the system $A\vx = \vo$, or equivalently, by $n - \rank(A)$.
+
+**Theorem:** Let $W \subseteq V$ be linear subspace of $\R^n$. Then $\dim W = \dim V$ iff $W = V$.
+
+_Corollary:_ If $V$ is a linear subspace of $\R^n$ with $\dim V = n$, then $V = \R^n$.
+
+_Proof:_ The reverse implication is obvious. For the forward implication, suppose for contradiction that $W \ne V$. Then $\exists \vv \in V \setminus W$. Let $\{\vw_1, \dots, \vw_k\}$ be a basis for $W$, where $k = \dim W = \dim V$. Then $\vv \notin \operatorname{span}\{\vw_1, \dots, \vw_k\}$, and $\{\vw_1, \dots, \vw_k, \vv\}$ is linearly independent in $V$. But $\dim V = k$, a contradiction. **QED**
+
+**The big picture.** So far, given a matrix $A \in \matspace{m}{n}$, we have considered its null space $N(A) \subseteq \R^n$ with dimension $\dim N(A) = n - \rank(A)$ and its column space $C(A) \in \R^m$. We have seen how to compute bases for $N(A)$ and $C(A)$, but our method for the latter (using constraint equations) was clunky. Can we do better?
+
+**A natural idea.** Let the _row space of $A$_, denoted by $R(A)$, be the linear span of the rows of $A$. In some sense, this is nothing new; it is simply $C(A^\intercal) \subseteq \R^n$. But the important observation is that we have now brought $A^\intercal$ into the picture, and this leads us to consider $N(A^\intercal) \subseteq \R^m$. We call the collection of subspaces $N(A), C(A), R(A), N(A^\intercal)$ the _four fundamental subspaces_ generated by $A$, and we will see that there is a deep relationship between these.
+
+**Goals:** We would like to find ways to compute the bases of $N(A)$, $C(A)$, $R(A)$, and $N(A^\intercal)$ (the middle two in particular). We will soon see that $m$, $n$, and $\rank(A)$ uniquely specify the dimensions of these spaces, and in fact, that $N(A) \perp R(A)$ and $C(A) \perp N(A^\intercal)$.
+
+**Theorem:** The pivot columns of $A$ form a basis for $C(A)$. Moreover, the transpose of the nonzero rows of $\tilde{A}$, the RREF of $A$, form a basis for $R(A)$.
+
+_Corollaries:_ Let $r = \rank(A)$. Then 
+
+1. $\dim C(A) = r$
+* $\dim N(A) = n-r$
+* $\dim R(A) = r$
+* $\dim N(A^\intercal) = m-r$
+* $n = \dim N(A) + r$. (This is often called the _rank-nullity theorem_.)
+* $n = \dim R(A) + \dim N(A)$.
+* $m = \dim C(A) + \dim N(A^\intercal)$.
+
+_Special case:_ The pivot columns of $\tilde{A}$ form a basis for $C(\tilde{A})$.
+
+_Proof of special case:_ The pivot columns of $\tilde{A}$ are precisely $\{\ve_1, \dots, \ve_r\}$. The free columns of $\tilde{A}$ have only nonzero entries in their first $r$ places. **QED**
+
+
+
+# Lecture 34 (2015-11-13) {  - }
+
+**Definition:** $E \in \mathbb{M}_n$ in _elementary_ iff $E$ can be obtained from $I_n$ by a single elementary row operation.
+
+_Remark:_ Elementary matrices are invertible.
+
+**Theorem:** If $E \in \mathbb{M}_n$ is elementary and $A \in \matspace{n}{m}$, then $EA$ is the matrix obtained from $A$ by doing the corresponding row operation.
+
+_(Proof presented in class and omitted. Simple verification of cases.)_
+
+_Corollary:_ If $A \in \matspace{m}{n}$, then there exists a product $E = E_1 \cdots E_k$ of elementary matrices such that $EA = \tilde{A}$, where $\tilde{A}$ is the RREF of $A$.
+
+**Theorem:** The pivot columns of $A$ form a basis for $C(A)$. (It follows that $\dim C(A) = \rank(A)$.)
+
+_Proof:_ We already handled the special case of $A$ already being in RREF. Otherwise, let $\tilde{A} = EA$ in RREF. $E$ restricts to a bijective linear transformation $C(A) \to C(EA)$, and a basis for $C(EA)$ is given by the pivot columns of $\tilde{A}$. $E$ takes pivot columns of $A$ to pivot columns of $\tilde{A}$. A problem on homework 11 implies that the pivot columns of of $A$ are thus a basis for $C(A)$. **QED**
+
+_(Example omitted.)_
+
+**Theorem:** Let $\tilde{A}$ be the RREF of $A \in \matspace{m}{n}$. The transposes of the nonzero rows of $\tilde{A}$ form a basis for $R(A)$.
+
+_Proof:_ First observe that $R(A) = R(\tilde{A})$. Clearly the nonzero rows of $\tilde{A}$ span $R(A)$; for linear independence, observe that each of these nonzero rows contains a pivot 1 in a location where all other rows have zeroes. **QED**
+
+_(Example omitted.)_
+
+
+
+# Lecture 35 (2015-11-16) {  - }
+
+**The story of perps.** Let $V \subseteq \R^n$ be a linear subspace. We showed earlier this year that $V \subseteq (V^\perp)^\perp$. We would now like to show the reverse inclusion and prove that $V = (V^\perp)^\perp$.
+
+Let $A \in \matspace{m}{n}$.
+
+**Theorem:** $R(A)^\perp = N(A)$.
+
+_Proof:_ If $\vv \in R(A)^\perp$, then $A_i \cdot \vv = 0$ for all $i = 1, \dots, m$. It follows that $A\vv = \vo$, and $\vv \in N(A)$.
+
+Conversely, if $\vv \in N(A)$, then $A\vv = \vo$, and $A_i \cdot \vv = 0$ for all $i = 1, \dots, m$. Since $R(A) = \operatorname{span}\{A_1, \dots, A_m\}$, we have $\vv \in R(A)^\perp$. **QED**
+
+_Corollary:_ $C(A)^\perp = R(A^\intercal)^\perp = N(A^\intercal)$.
+
+**Theorem:** If $V \subseteq \R^n$ is a $k$-dimensional linear subspace, then $\dim V^\perp = n-k$.
+
+_Proof:_ For $V \ne \{\vo\}$, let $\vv_1, \dots, \vv_k$ be a basis for $V$, and let $A$ be the matrix with rows $\vv_1, \dots, \vv_k$. Then $V = R(A)$, and $V^\perp = R(A)^\perp = N(A)$. By the rank-nullity theorem, $n = \dim R(A) + \dim N(A) = k + \dim V^\perp$, as desired. **QED**
+
+_Corollary 1:_ If $V$ is a linear subspace of $\R^n$, then $V = (V^\perp)^\perp$.
+
+_Proof:_ We know that $V \subseteq (V^\perp)^\perp$. Let $k = \dim V$. Then $\dim (V^\perp)^\perp = n - (n-k) = k$. Hence, $\dim V = \dim (V^\perp)^\perp$, and by a previous theorem, $V = (V^\perp)^\perp$. **QED**
+
+_Corollary 2:_ If $V \subseteq \R^n$ is an $(n-1)$-dimensional subspace, then $V$ is a hyperplane. (The converse was shown earlier.)
+
+_Proof:_ $\dim V^\perp = n - (n-1) = 1$. Hence $V^\perp$ is a linear line. By corollary 1, $V = (V^\perp)^\perp$, the orthogonal complement of a linear line, and is hence a hyperplane. **QED**
+
+_Corollary 3:_ If $V,W$ are linear subspaces of $\R^n$, then $V^\perp = W$ iff $V = W^\perp$.
+
+_Corollary 4:_ $R(A) = N(A)^\perp$, and $C(A) = N(A^\intercal)^\perp$.
+
+_Corollary 5:_ $R(A) \cap N(A) = \{\vo\}$, and $C(A) \cap N(A^\intercal) = \{\vo\}$ (since the only vector orthogonal to itself is $\vo$).
+
+**Theorem:** Let $V$ be a linear subspace of $\R^n$ with $\dim V = k$. If $\vv_1, \dots, \vv_k \in V$ span $V$ OR are linearly independent, then $\{\vv_1, \dots, \vv_k\}$ is a basis for $V$.
+
+_Proof:_ If $\vv_1, \dots, \vv_k$ span $V$, then $V =  C(A)$ where $A$ is the matrix with columns $\vv_1, \dots, \vv_k$. It follows that some subset of $\{\vv_1, \dots, \vv_k\}$ is a basis for $V$, but since we can't have less than $k$ vectors in this basis, $\{\vv_1, \dots, \vv_k\}$ is the desired basis.
+
+For the other case, if $\vv_1, \dots, \vv_k$ are linearly independent, then
+
+~ Math
+W = \operatorname{span}\{\vv_1, \dots, \vv_k\} \subseteq V
+~
+
+where $\dim W = k$. Hence $W = V$. **QED**
+
+
+
+# Lecture 37 (2015-11-20) {  - }
+
+**Extreme value problems**. Let $X \subseteq U \opensubset \R^n$ and $f: U \to \R$ be differentiable. We will now begin the study of finding local and global maxima and minima of $f$.
+
+**Single Variable Maximum Value Theorem:** If $f: [a,b] \to \R$ is continuous, then $f$ has a maximum value, i.e., $\exists c \in [a,b]$ such that $f(x) \le f(c)$ for all $x \in [a,b]$.
+
+_Remark:_ We call $f(c)$ the _maximum value_ of $f$ on $[a,b]$.
+
+**Maximum Value Theorem:** If $X \subseteq \R^n$ is nonempty, closed, and bounded, and $f: X \to \R$ is continuous, then $f$ has a maximum value in $X$.
+
+**Definition:** Let $X \subseteq \R$ and $p \in \R$. We say that $p$ is an _upper bound_ for $X$ iff $x \le p$ for all $x \in X$. Furthermore, we say that $p$ is a _least upper bound_ for $X$ iff $p \le q$ whenever $q$ is another upper bound for $X$. If $X$ has a least upper bound, we call it the _supremum_ of $X$, denoted by $p = \sup X$.
+
+**The Completeness Axiom:** If $X \subseteq \R$ is nonempty and bounded above, then $\sup X$ exists.
+
+_(Examples omitted.)_
+
+**Theorem 2:** If $X \subseteq \R$ is nonempty and has a supremum, then there exists a sequence $\{x_i\}_{i=1}^\infty$ in $X$ such that $\lim_{i \to \infty} x_i = \sup X$.
+
+_Proof:_ Let $p = \sup X$. For each $i \in \N$, choose $x_i \in (p-\frac{1}{i}, p] \cap X$. Then $x_i \to p$. **QED**
+
+**Definition:** If $\{x_k\}_{k=1}^\infty$ and $k_1 < k_2 < k_3 < \cdots$, then $\{x_{k_i}\}_{i=1}^\infty$ is a _subsequence_.
+
+_Remark:_ Subsequences can converge even when the original sequence in question does not converge. For example, $\{(-1)^k\}_{k=1}^\infty$ clearly does not converge, but $\{(-1)^{2k}\}_{k=1}^\infty$ is a constant subsequence and hence converges.
+
+**Theorem 3:** Every sequence in $[a,b]$ has a convergent subsequence.
+
+_Proof:_ Method of bisection. Let $\{x_k\}_{k=1}^\infty$ be given. Divide $[a,b]$ in half. One of the halves, say $[a_1,b_1]$, must contain infinitely many terms of $\{x_k\}_{k=1}^\infty$. Choose $k_1$ such that $x_{k_1} \in [a_1,b_1]$. Then, divide $[a_1,b_1]$ in half. Again, one of the halves, say $[a_2,b_2]$, must contain infinitely many terms of $\{x_k\}_{k=1}^\infty$. Choose $k_2 > k_1$ such that $x_{k_2} \in [a_2,b_2]$.
+
+Continuing in this fashion, we obtain a subsequence $\{x_{k_i}\}_{i=1}^\infty$. Let $p = \sup_i a_i$. It is not too hard to see that $x_{k_i} \to p$. **QED**
+
+**Theorem 4:** If $X \subseteq \R^n$ is bounded, then every sequence in $X$ has a convergence subsequence.
+
+_Proof sketch (see online notes for details):_ Repeatedly apply theorem 3 to the coordinates of the sequence, passing to a new subsequence each time.
+
+**Maximum Value Theorem:** Let $X \subseteq \R^n$ be nonempty, closed, and bounded, and let $f: X \to \R$ be continuous. Then $f$ has a maximum value on $X$.
+
+_Proof:_ Let $Y = \{f(x) : x \in X\}$ Observe that $Y$ is bounded above, since (FIXME: See online notes). Furthermore, $Y$ is closed, since...
+
+
+
+# Lecture 38 (2015-11-30) {  - }
+
+**Critical Points and Extreme Values.** Let $X \subseteq \R^n$, $f: X \to \R$, and $\vp \in X$. Before the break, we defined $f$ to have a _maximum value_ at $\vp$ if $\forall \vx \in X$, $f(\vx) \le f(\vp)$. In this case, $f(\vp)$ is said to be _the_ maximum value. We also say that $f$ has a _local maximum_ at $\vp$ if $\exists \delta > 0$ such that $\forall \vx \in B(\vp, \delta) \cap X$, $f(\vx) \le f(\vp)$.
+
+**Maximum Value Theorem:** If $f$ is continuous and $X$ is closed and bounded, then $f$ has both a max and min value on $X$.
+
+**Goal:** How do we find the max and min values?
+
+_(Straightforward examples omitted.)_
+
+Assume $f$ is differentiable at $\vp$. This means that $f$ must be defined on an open ball centered at $\vp$.
+
+**Definition:** $\vp$ is a _critical point_ of $f$ if $\nabla f(\vp) = \vo$.
+
+Recall that $\smqty[\nabla f(\vp)\\-1]$ is the normal vector of the tangent hyperplane to the graph of $f$ at $(\vp, f(\vp))$. This means that the tangent hyperplane is "horizontal" at critical points.
+
+**Theorem ("First Derivative Test"):** If $\vp \in X \subseteq \R^n$, $f: X \to \R$ is differentiable at $\vp$, and $f$ has a local extremum at $\vp$, then $\vp$ is a critical point of $f$.
+
+_Proof:_ It suffices to show that $D_\vv f(\vp) \ne \vo$ for all $\vv \ne \vo$. WLOG suppose $f$ has a local min at $\vp$; the local max case is similar. Then $\exists \delta > 0$ such that $B(\vp, \delta) \subseteq X$, and $f(\vp) \le f(\vp + t\vv)$ whenever $\vp + t\vv \in B(\vp, \delta)$. (FIXME: Finish this proof using board photos.)
+
+
+
+# Lecture 40 (2015-12-04) {  - }
+
+**Lagrange Multiplier Theorem:** Suppose $\vp \in \R^n$, $f: \R^n \to \R$ and $g: \R^n \to \R^m$ are differentiable, $g(\vp) = \vo$, and $\rank(Jg(\vp)) = m$. (Note that this means $m \le n$.) Let $M = g^{-1}(\vo)$. If $\vp$ is a local extremum of $f$ on $M$, then there exist scalars $\lambda_1, \dots, \lambda_m$ (called _Lagrange multipliers_) such that $\nabla f(\vp) = \lambda_1 \nabla g_1(\vp) + \lambda_2 \nabla g_2(\vp) + \dots + \lambda_m \nabla g_m(\vp)$.
+
+_Proof in the special case that $g$ is linear:_ In this case, the conclusion of the theorem reduces to
+
+~ Math
+\nabla f(\vp) \in \operatorname{span}\{\nabla g_1(\vp), \nabla g_2(\vp), \dots, \nabla g_m(\vp)\} = R(Jg(\vp)),
+~
+
+or equivalently, $R(Jf(\vp)) \subseteq R(Jg(\vp))$. Note that $M = \ker g = N([g])$, and hence $\dim M = \dim N([g]) = n-m$.
+
+At this point, the key idea is that $N([g])$, an _implicitly_ defined linear subspace, can be given an _explicit_ description. (In the nonlinear case, we would invoke the Implicit Function Theorem here.) Let $\Phi: \R^{n-m} \to \R^n$ be a linear transformation such that $C([\Phi]) = N([g])$. Then $g \circ \Phi = \vo$. Since $p \in N([g])$, there exists $\vvb \in \R^{n-m}$ such that $\Phi(\vvb) = \vp$. It follows that $(f \circ \Phi)(\vvb) = f(\vp)$, and hence that $\vvb$ is a local (unconstrained!) extremum for $f \circ \Phi: \R^{n-m} \to \R$.
+
+By the first derivative test, we have that $\vvb$ is a critical point of $f \circ \Phi$. (FIXME: Finish this proof using board photos.)
+
+
+
+# Lecture 41 (2015-12-07) {  - }
+
+**Orthogonal Projection onto a Linear Subspace.** Recall that for $\vx, \vy \in \R^n$ with $\vy \ne \vo$, the _projection of $\vx$ onto $\vy$_ is $\proj_\vy \vx = \frac{\vx \cdot \vy}{\vy \cdot \vy} \vy$. The idea behind this definition was to ensure that $\vy \cdot (\vx - \proj_\vy \vx) = 0$. If we let $V = \lspan\{\vy\}$, we can alternatively state this idea as $\vx - \proj_\vy \vx \in V^\perp$.
+
+**Theorem:** If $V$ is a nontrivial linear subspace of $\R^n$ and $\vx \in \R^n$, then there exists a unique $\vvb \in V$ such that $\vx - \vvb \in V^\perp$.
+
+**Definition:** We call this vector the _orthogonal projection of $\vx$ onto $V$_, denoted by $\proj_V \vx$.
+
+_Proof:_ Let $m = \dim V$, and choose $A \in \matspace{n}{m}$ such that $V = C(A)$. Note that $\rank(A) = m$, and that $A^\intercal A$ is an $m \times m$ square matrix.
+
+_Lemma:_ $\rank(A^\intercal A) = m$.
+
+_Proof:_ $\rank(A^\intercal A) = \dim R(A^\intercal A) = m - \dim N(A^\intercal A)$, so it suffices to show that $N(A^\intercal A)$ is trivial. To see this, suppose $A^\intercal A \vx = \vo$. Then $A \vx \in N(A^\intercal) \cap C(A) = \{\vo\}$. Hence $A\vx = \vo$, and in fact $\vx = \vo$ because $\dim N(A) = 0$. **QED**
+
+_Corollary:_ $A^\intercal A$ is invertible.
+
+Let $\proj_V \vx = A(A^\intercal A)^{-1} A^\intercal \vx$.
+
+_Claim:_ $\vx - \proj_V \vx \in V^\perp$.
+
+_Proof:_ Since $V^\perp = C(A)^\perp = N(A^\perp)$, it suffices to observe that
+~ Math
+A^\intercal (\vx - A(A^\intercal A)^{-1} A^\intercal \vx) = A^\intercal \vx - (A^\intercal A)(A^\intercal A)^{-1} A^\intercal \vx = A^\intercal \vx - A^\intercal \vx = \vo.
+~
+This establishes existence. For uniqueness, suppose we have $\vy, \vz \in V$ such that $\vx - \vy, \vx - \vz \in V^\perp$. Then $(\vx - \vy) - (\vx - \vz) = \vz - \vy \in V \cap V^\perp = \{\vo\}$. Hence, $\vz = \vy$. **QED**
+
+**How might we have discovered this formula?** It is reasonable to guess that $\proj_V \vx$ is the point in $V$ closest to $\vx$. Define $f: \R^m \to \R$ by $f(\vy) = \norm{A\vy - \vx}^2$. Our goal can now be restated as finding $\vy = \arg \min f$. We might then guess $\proj_V \vx = A\vy$.
+
+To minimize $f$, we will need its gradient. Write $f = h \circ g$ where $h(\vx) = \norm{\vx}$ and $g(\vy) = A\vy - \vx$. Then $Jf(\vy) = Jh(g(\vy)) Jg(\vy)$, where $Jh(\vz) = 2\vz^\intercal$ and $Jg(\vy) = A$. Hence, $Jf(\vy) = 2(A\vy - \vx)^\intercal A$, and $\nabla f(\vy) = 2A^\intercal(A\vy - \vx)$. Setting this to zero, we find $A^\intercal A \vy = A \vx$, recovering our previous guess.

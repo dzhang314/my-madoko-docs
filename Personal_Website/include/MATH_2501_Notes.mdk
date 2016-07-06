@@ -1,0 +1,1961 @@
+# Lecture 01 (2016-01-11) {  - }
+
+**Introduction to manifolds.**\/ The main new topic of the second semester will be integration of functions $f: \R^n \to \R$. We will generalize the one-dimensional integral
+
+~ Math
+\int_a^b f(x) \dd{x} = \int_{[a,b]} f(x) \dd{x}
+~
+
+to more exciting higher-dimensional domains called _manifolds_\/ (possibly with boundary).
+
+**Rough idea of manifolds.**\/ We call $M \subseteq \R^n$ a _$k$-dimensional manifold_\/ if each point in $M$ has a neighborhood that can be described by a $k$-dimensional curvilinear coordinate system.
+
+**Definition:**\/ $M \subseteq \R^n$ is a _$k$-dimensional manifold_\/ if for each $\vp \in M$, there exist open sets $U \subseteq \R^k$ and $W \subseteq \R^n$ and a function $g: U \to \R^n$ such that
+
+
+1. $\vp \in W$.
+   
+
+* $g(U) = M \cap W$.
+   
+
+* $g$ is smooth (i.e., infinitely differentiable).
+   
+
+* $g$ in injective.
+   
+
+* $g^{-1}: M \cap W \to U$ is continuous.
+   
+
+* For all $\vx \in U$, $\rank(Jg(\vx)) = k$. (Recall that $\rank(Jg(\vx))$ is the dimension of the image of $Dg(\vx)$. We call this image the _tangent space to the image of $g$ at $g(\vx)$_\/.)
+
+**Example:**\/ Let $M \subseteq \R^3$ be the solution set of $z = x^2 + y^2$. This is the unit paraboloid, i.e., the graph of $f(x,y) = x^2 + y^2$. Given $\vp \in M$, let $U = \R^2$ and $W = \R^3$. Define
+
+~ Math
+g(s,t) = \mqty[s\\t\\s^2+t^2]
+~
+
+Then, we have that 
+
+1. $\vp \in W$.
+   
+
+* $g(U) = M = M \cap W$.
+   
+
+* $g$ is smooth (since it has polynomial components).
+   
+
+* $g$ is injective.
+   
+
+* $g^{-1}: M \to \R^2$ is given by $g^{-1}(x,y,z) = (x,y)$.
+   
+
+* $Jg(s,t) = \mqty[1&0\\0&1\\2s&2t]$ has rank 2.
+
+Hence, $M$ is a 2-dimensional manifold.
+
+
+
+# Lecture 02 (2016-01-13) {  - }
+
+**Recall:**\/ $M \subseteq \R^n$ is a _$k$-dimensional manifold_\/ if $\forall \vp \in M$ $\exists U \opensubset \R^k$, $W \opensubset \R^n$, $g: U \bijto M \cap W$ such that
+
+
+1. $\vp \in W$.
+   
+
+* $g$ is smooth.
+   
+
+* $g^{-1}$ is continuous.
+   
+
+* $\forall \vx \in U,\ \rank Jg(\vx) = k$.
+
+**Manifold Characterization Theorem:**\/ Let $M \subseteq \R^n$. The following are equivalent:
+
+
+1. $M$ is a $k$-dimensional manifold in $\R^n$.
+   
+
+* $\forall \vp \in M$ $\exists W \opensubset \R^n$, $F: W \to \R^{n-k}$ such that
+   
+
+1. $\vp \in W$.
+   
+
+* $M \cap W = F^{-1}(\vo)$.
+   
+
+* $F$ is smooth.
+   
+
+* $\forall \vx \in M$, $\rank JF(\vx) = n-k$.
+   
+
+**Remark:**\/ This theorem gives an _implicit_\/ characterization of manifolds as _local level sets_\/ of smooth locally invertible functions. Its proof requires machinery which will be developed later in the course.
+
+**Examples:**\/ 
+
+1. The sphere $S^{n-1} \subseteq \R^n$ is defined by
+   
+~ Math
+S^{n-1} = \{ \vx \in \R^n : \norm{\vx} = 1 \}.
+~
+
+   Define $F: \R^n \to \R$ by $F(\vx) = x_1^2 + \dots + x_n^2 - 1$, and let $W = \R^n$. Then $S^{n-1} = F^{-1}(0)$, $F$ is smooth, and
+   
+~ Math
+JF(\vx) = \mqty[2x_1 & 2x_2 & \cdots & 2x_n]
+~
+
+   has rank $1$ for all $\vx \in S^{n-1}$. Hence, by the manifold characterization theorem, $S^{n-1}$ is a manifold.
+   
+   We can also verify that $S^{n-1}$ is a manifold directly by definition. _(This part omitted. Proceeds straightforwardly by pushing a disk up to a half-sphere.)_\/
+   
+   
+
+* Consider the configuration space $M$ of all ordered pairs of orthogonal unit vectors in $\R^3$.
+   
+~ Math
+M = \{ (\vva, \vvb) \in \R^3 \times \R^3 : \norm{\vva} = \norm{\vvb} = 1,\ \vva \cdot \vvb = 0 \}.
+~
+
+   Let $W = \R^6$ and define $F: \R^6 \to \R^3$ by
+   
+~ Math
+F(x_1, \dots, x_6) = \mqty[x_1^2 + x_2^2 + x_3^2 - 1 \\ x_4^2 + x_5^2 + x_6^2 - 1 \\ x_1x_4 + x_2x_5 + x_3x_6].
+~
+
+   Then $M = F^{-1}(\vo)$, $F$ is smooth, and
+   
+~ Math
+JF(\vx) = \mqty[2x_1 & 2x_2 & 2x_3 & 0 & 0 & 0 \\ 0 & 0 & 0 & 2x_4 & 2x_5 & 2x_6 \\ x_4 & x_5 & x_6 & x_1 & x_2 & x_3]
+~
+
+   has rank $3$ (any smaller and $\vva$ would be a scalar multiple of $\vvb$).
+
+# Lecture 03 (2016-01-15) {  - }
+
+**The Inverse Function Theorem.**\/ Let $\vp \in U \opensubset \R^n$, and suppose $f: U \to \R^n$ is a smooth function with $[Df(\vp)] = Jf(\vp)$ invertible. Then $f$ is invertible near $f(\vp)$. More precisely, there exists $V \opensubset \R^n$ such that $\vp \in V \subseteq U$, $f|_V : V \to f(V)$ is a bijection, and the inverse $g: f(V) \to V$ of $f|_V$ is smooth. Moreover, $Jg(f\vp) = Jf(\vp)^{-1}$.
+
+**Example:**\/ Let $f: \R^2 \to \R^2$ be defined by $f(x,y) = (x^2,y)$. Then near $\vp = (2,1)$, a local inverse of $f$ is given by $g(s,t) = (\sqrt{s}, t)$. In this case, we can take
+
+~ Math
+V = f(V) = \{ (x,y) \in \R^2 : x > 0 \}
+~
+
+and for $(x,y) \in V$, we have
+
+~ Math
+Jf(x,y) = \mqty[2x&0\\0&1] \qquad Jg(f(x,y)) = Jg(x^2,y) = \mqty[\frac{1}{2x}&0\\0&1]
+~
+
+so indeed $Jg(f(x,y)) = Jf(x,y)^{-1}$.
+
+**Using IFT to prove the Manifold Characterization Theorem.**\/ We will show that (II) implies (I). (The converse will be proven later.) Recall that we are given a smooth function $F: \R^n \to \R^{n-k}$ with $\rank JF(\vx) = n-k$ for all $\vx \in M \coloneqq F^{-1}(\vo)$. We want to show that $M$ is a $k$-dimensional manifold.
+
+Let $\vp \in M$ be given. Since $\rank JF(\vp) = n-k$, there are $k$ free variables in the system $JF(\vp)\vx = \vo$. For notational simplicity, assume the free variables are $x_1, \dots, x_k$. Then the RREF of $JF(\vp)$ is $\mqty[0 & I_{n-k}]$. Define $f: \R^n \to \R^n$ by
+
+~ Math
+f(\vx) = \mqty[x_1\\\vdots\\x_k\\F_1(\vx)\\\vdots\\F_{n-k}(\vx)].
+~
+
+Then
+
+~ Math
+Jf(\vp) = \mqty[I_k & 0 \\ \multicolumn{2}{c}{JF(\vp)}] \rightsquigarrow \mqty[I_k & 0 \\ 0 & I_{n-k}] = I_n,
+~
+
+Hence, $Jf(\vp)$ is invertible, and IFT applies, giving us $\vp \in V \opensubset \R^n$ with $f(V) \opensubset \R^n$ where $f|_V: V \to f(V)$ has a smooth inverse $g: f(V) \to V$. This gives the necessary data to show that $M$ is a $k$-dimensional manifold. **QED**\/
+
+
+# Lecture 04 (2016-01-20) {  - }
+
+**Banach's Contraction Mapping Principle.**\/ This will be our main tool for proving the implicit function theorem.
+
+**Definition:**\/ Let $X \subseteq \R^n$. A function $f: X \to X$ is a _contraction mapping_\/ if $\exists c \in \R$ such that $0 \le c < 1$ and
+
+~ Math
+\norm{f(\vx) - f(\vy)} \le c\norm{\vx - \vy}
+~
+
+for all $\vx, \vy \in X$.
+
+_Examples:_\/ 
+
+1. Let $f: \R^n \to \R^n$ be defined by $f(\vx) = \frac{1}{4} \vx + \ve_1$. Then $\norm{f(\vx) - f(\vy)} = \frac{1}{4} \norm{\vx - \vy}$, so $f$ is a contraction mapping with $c = \frac{1}{4}$.
+   
+   
+
+* Let $f: \R^n \to \R^n$ be defined by $f(\vx) = \vx + 5\ve_1$. Then $\norm{f(\vx) - f(\vy)} = \norm{\vx - \vy}$, so $f$ is _not_\/ a contraction mapping.
+
+**Theorem**\/ (CMP): Suppose $X \subseteq \R^n$ is nonempty and closed. If $f: X \to X$ is a contraction mapping, then there exists a unique $\vx \in X$ such that $f(\vx) = \vx$. (In other words, $f$ has a unique fixed point.)
+
+_Examples:_\/ 
+
+1. Take $f: \R^n \to \R^n$ from example (1) above. Then the unique fixed point of $f$ is $\vx = \frac{4}{3} \ve_1$.
+   
+   
+
+* Every linear transformation $T: \R^n \to \R^n$ has a fixed point $\vo$. This may or may not be the only fixed point.
+
+**Two Facts about Infinite Series.**\/ 
+
+1. If $a_k \in \R$, $a_k \ge 0$ for all $k = 1, 2, 3, \dots$, and $\{s_n\}_{n=1}^\infty$ is bounded, then $\sum_{k=1}^\infty a_k$ converges.
+   
+   
+
+* If $\sum_{k=1}^\infty \norm{\vva_k}$ converges, then so does $\sum_{k=1}^\infty \vva_k$.
+
+_Proof of Existence in CMP:_\/ Fix any $\vx_0 \in X$, and let $\vx_{k+1} = f(\vx_k)$. We claim that $\{\vx_k\}_{k=1}^\infty$ converges. To see this, let $\vva_k = \vx_k - \vx_{k-1}$. Then
+
+~ Math
+\norm{\vva_k} = \norm{\vx_k - \vx_{k-1}} = \norm{f(\vx_{k-1}) - f(\vx_{k-2})} \le c\norm{\vx_{k-1} - \vx_{k-2}} = c\norm{\vva_{k-1}}.
+~
+
+This shows that $\{\norm{\vva_k}\}_{k=1}^\infty$ is a positive series bounded above by a geometric series. It follows by fact 1 that $\sum_{k=1}^\infty \norm{\vva_k}$ converges, and by fact 2 that $\sum_{k=1}^\infty \vva_k$ converges. Since $X$ is closed, $\vx \coloneqq \lim_{k \to \infty} \vx_k = \vx_0 + \vva$ exists and is a member of $X$.
+
+By homework problem &hash;3, every contraction mapping is continuous. It follows that
+
+~ Math
+\vx = \lim_{k \to \infty} \vx_k = \lim_{k \to \infty} \vx_{k+1} = \lim_{k \to \infty} f(\vx_k) = f(\vx),
+~
+
+as desired. **QED**\/
+
+_(Proving uniqueness is a homework problem.)_\/
+
+
+
+# Lecture 4.5 (2016-01-21) {  - }
+
+**The Operator Norm and Mean Value Theorem.**\/ These will be useful tools for the proof of the inverse function theorem.
+
+_Example:_\/ We illustrate how the univariate MVT can be used to show that a function is a contraction mapping. Define $f: [0,1] \to [0,1]$ by $f(x) = \cos x$. By the mean value theorem, whenever $0 \le x < y \le 1$, there exists $z \in [x,y]$ such that
+
+~ Math
+f(x) - f(y) = f'(z)(x-y).
+~
+
+It follows that
+
+~ Math
+\abs{f(x) - f(y)} = \abs{f'(z)} \abs{(x-y)}
+~
+
+and since $f'(x) = \sin x$ is bounded above on $[0,1]$ by $\sin \frac{\pi}{3} = \frac{\sqrt{3}}{2} < 1$, we have that $f$ is a contraction mapping, since
+
+~ Math
+\abs{f(x) - f(y)} \le \frac{\sqrt{3}}{2} \abs{(x-y)}.
+~
+
+Moreover, if we wanted to, we could numerically solve the equation $x = \cos x$ by taking any $x_0 \in [0,1]$ and repeatedly taking its cosine.
+
+**Definition:**\/ Let $T: \R^n \to \R^m$ be a linear transformation. The _operator norm_\/ of $T$ is
+
+~ Math
+\norm{T} \coloneqq \sup_{\norm{\vx} = 1} \norm{T(\vx)}.
+~
+
+Note that this sup exists by the maximum value theorem.
+
+**Theorem:**\/ For all $\vx \in \R^n$, we have $\norm{T(\vx)} \le \norm{T} \norm{\vx}$.
+
+_Proof:_\/ The result holds trivially for $\vx = \vo$. For nonzero $\vx$, we have
+
+~ Math
+\frac{1}{\norm{\vx}} \norm{T(\vx)} = \norm{T\qty(\frac{\vx}{\norm{\vx}})} \le \norm{T}
+~
+
+by definition. Hence,
+
+~ Math
+\norm{T(\vx)} \le \norm{T} \norm{\vx},
+~
+
+as desired. **QED**\/
+
+_Corollary:_\/ If $T: \R^n \to \R^n$ is a linear transformation such that $\norm{T} < 1$, then $T$ is a contraction mapping.
+
+_Proof:_\/ Let $c = \norm{T}$. Then for all $\vx, \vy \in \R^n$, we have
+
+~ Math
+\norm{T(\vx) - T(\vy)} = \norm{T(\vx - \vy)} \le \norm{T} \norm{\vx - \vy} = c\norm{\vx - \vy}.
+~
+
+**QED**\/
+
+_Remark:_\/ Note that any such $T$ has $\vo$ as its unique fixed point.
+
+**Example:**\/ Let $T: \R^n \to \R$ be a linear transformation, and let $\vv = [T]^\top$. Then $T(\vx) = \vv \cdot \vx$ for all $\vx \in \R^n$, and $\norm{T} = \norm{\vv}$. To see this, observe by Cauchy-Schwarz that
+
+~ Math
+\norm{T(\vx)} = \norm{\vv \cdot \vx} \le \norm{\vv} \norm{\vx}
+~
+
+This means that $\norm{T}$ is bounded above by $\norm{\vv}$. Moreover, if $\vv \ne \vo$, then
+
+~ Math
+\norm{\vv} = \norm{\frac{\vv \cdot \vv}{\norm{\vv}}} = \norm{T\qty(\frac{\vv}{\norm{\vv}})} \le \norm{T}
+~
+
+giving a bound below. For the $\vv = \vo$ case, we have $\norm{T} = \norm{\vv} = 0$.
+
+**Multivariable Mean Value Theorem:**\/ Suppose $U \opensubset \R^n$ and $f: U \to \R^n$ is smooth. Let $\vva,\vvb \in U$ such that $[\vva,\vvb] \subseteq U$. (Here, $[\vva,\vvb]$ is the line segment joining $\vva$ to $\vvb$.) If there exists $M \in \R$ such that $\norm{Df(\vx)} \le M$, then $\norm{f(\vvb) - f(\vva)} \le M \norm{\vvb - \vva}$.
+
+
+
+# Lecture 05 (2016-01-25) {  - }
+
+**Inverse Function Theorem:**\/ Let $\vp \in U \opensubset \R^n$ and suppose $f: U \to \R^n$ has the property that $Jf(\vp)$ is invertible. Then $f$ is smoothly invertible near $f(\vp)$. More precisely, there exists $V \opensubset \R^n$ such that $\vp \in V \subseteq U$, $f(V) \opensubset \R^n$, and $f|_V: V \bijto f(V)$ is a bijection. Moreover, its inverse $g: f(V) \to V$ is smooth.
+
+_Proof sketch:_\/ By translation, we can take $\vp = f(\vp) = \vo$ without loss of generality. By replacing $f$ by $Df(\vp)^{-1} \circ f$, we can take $[Df(\vp)] = I_n$. We will show that there exists $\eps > 0$ such that $B(\vo, \eps) \subseteq U$ and $f$ is injective on $B(\vo, \eps)$. We will then take $V = B(\vo, \eps)$ and do a little more work to show that $f(V)$ is open and $g$ is smooth.
+
+Since $f$ is smooth, whenever $\vx$ is close to $\vo$, the entries of $[Df(\vx)]$ will be close to those of $I_n$. It follows that there exists $r>0$ for which $\norm{\vx} \le r$ implies $\vx \in U$ and $\norm{Df(\vx) - Df(\vo)} < \frac{1}{2}$.
+
+We claim that for all $\vq \in B(\vo, \frac{r}{2})$, there exists a unique $\vvb \in B(\vo, r)$ such that $f(\vvb) = \vq$. To see this, it suffices to show that $F: \overline{B(\vo, r)} \to \R^n$ defined by $F(\vx) = \vx + \vq - f(\vx)$ a unique fixed point $\vvb$. For this, we wish to apply Banach's CMP, so we must show that $F$ is a contraction mapping taking $\overline{B(\vo, r)}$ to $\overline{B(\vo, r)}$.
+
+Observe that
+
+~ Math
+\norm{[DF(\vx)]} = \norm{I_n - [Df(\vx)]} < \frac{1}{2}
+~
+
+for all $\vx \in \overline{B(\vo, r)}$. Moreover,
+
+~ Math
+\norm{F(\vx)} = \norm{\vx + \vq - f(\vx)} \le \norm{\vx - f(\vx)} + \norm{\vq} \le \norm{\vx - f(\vx)} + \frac{r}{2}.
+~
+
+Now, by MMVT,
+
+~ Math
+\norm{\vx - f(\vx)} = \norm{F(\vx) - F(\vo)} \le \frac{1}{2} \norm{\vx - \vo} \le \frac{r}{2}.
+~
+
+Hence,
+
+~ Math
+\norm{F(\vx)} \le \norm{\vx - f(\vx)} + \frac{r}{2} \le \frac{r}{2} + \frac{r}{2} = r.
+~
+
+This means that for all $\vx,\vy \in \overline{B(\vo, r)}$, we have
+
+~ Math
+\norm{F(\vx) - F(\vy)} \le \frac{1}{2} \norm{\vx - \vy}
+~
+
+so $F$ is a contraction mapping. (Extra work to show that $f(V)$ is open and $g$ is smooth omitted.) **EOS**\/
+
+
+
+# Lecture 06 (2016-01-27) {  - }
+
+**One-Dimensional Integration.**\/ Given a continuous function $f: [a,b] \to \R$, we define
+
+~ Math
+\int_a^b f(x) \dd{x} = \lim_{k \to \infty} \sum_{i=1}^k f(x_i^*) \Delta_x
+~
+
+where $a = x_0 < x_1 < x_2 < \dots < x_k = b$ is a _partition_\/ of $[a,b]$ into $k$ subintervals of equal length $\Delta x = (b-a)/k$, and $x_i^* \in [x_{i-1}, x_i]$ are arbitrary sample points from these intervals.
+
+**Remarks:**\/ 
+
+* If $f \ge 0$ on $[a,b]$, then $\int_a^b f(x) \dd{x}$ _defines_\/ the area under the graph about $[a,b]$.
+   
+   
+
+* This limit always exists (assuming $f$ is continuous) and is independent of the sample points.
+   
+   
+
+* Recall the fundamental theorem of calculus: there exists $F: [a,b] \to \R$ such that $F' = f$, and moreover $\int_a^b f(x) \dd{x} = F(b) - F(a)$.
+
+**Double Integrals.**\/ Given a rectangle $R \subseteq \R^2$ and a bounded function $f: R \to \R$, we define $\int_R f$ (sometimes written $\int_R f \dd{A}$) as follows: for each _product partition_\/ $\PP = \PP_1 \times \PP_2$ of $R = [a,b] \times [c,d]$, let
+
+~ Math
+M_{ij} = \sup_{\vx \in R_{ij}} f(\vx) \qquad m_{ij} = \inf_{\vx \in R_{ij}} f(\vx)
+~
+
+where $R_{ij}$ is the $(i,j)$th subrectangle of $R$ in $\PP$. Then we define the _upper and lower sums of $f$ according to $\PP$_\/ as
+
+~ Math
+U(f,\PP) = \sum_{i,j} M_{ij} \operatorname{area}(R_{ij})
+\qquad
+L(f,\PP) = \sum_{i,j} m_{ij} \operatorname{area}(R_{ij}).
+~
+
+
+**Definition:**\/ We say that $f$ is _integrable_\/ on $R$ iff there exists a unique number $I$ such that for every partition $\PP$ of $R$,
+
+~ Math
+L(f,\PP) \le I \le U(f,\PP).
+~
+
+If so, we define $\int_R f \coloneqq I$ and call it the _Riemann integral of $f$ on $R$_\/.
+
+**Example:**\/ Let $R = [0,1] \times [0,1] \subseteq \R^2$, and let $f: R \to \R$ be defined by
+
+~ Math
+f(x,y) = \begin{cases}
+0 & \text{ if } 0 \le y \le \frac{1}{2} \\
+3 & \text{ if } \frac{1}{2} < y \le 1 \\
+\end{cases}
+~
+
+We would guess $\int_R f = 3/2$. Consider the partition $\PP = \{R_{11}, R_{12}\}$ of $R$ into two rectangles across $y = \frac{1}{2}$. Then
+
+~ Math
+U(f,\PP) = 0\operatorname{area}(R_{11}) + 3\operatorname{area}(R_{12}) = \frac{3}{2}
+~
+
+and
+
+~ Math
+L(f,\PP) = 0\operatorname{area}(R_{11}) + 0\operatorname{area}(R_{12}) = 0.
+~
+
+
+
+
+# Lecture 07 (2016-01 29) {  - }
+
+**A First Glimpse of Fubini and the Gap Dichotomy.**\/ Fubini's theorem allows us to reduce _multiple integrals_\/ to _iterated integrals_\/.
+
+**Fubini's Theorem:**\/ If $R = [a,b] \times [c,d] \subseteq \R^2$ and $f: \R \to \R$ is continuous, then $f$ is integrable on $R$, and
+
+~ Math
+\int_R f = \int_c^d \int_a^b f(x,y) \dd{x} \dd{y}.
+~
+
+
+**Example:**\/ Let $R = [1,3] \times [2,4]$ and $f(x,y) = x/y$. Then
+
+~ Math
+\int_R f = \int_2^4 \int_1^3 \frac{x}{y} \dd{x} \dd{y} = \int_2^4 \frac{4}{y} \dd{y} = 4 \log 2.
+~
+
+
+**Definition:**\/ Let $R = [a_1,b_1] \times \dots \times [a_n,b_n] \subseteq \R^n$. A _partition_\/ $\PP$ of $R$ is a tuple $\PP = (\PP_1, \PP_2, \dots, \PP_n)$ of one-dimensional partitions, where $\PP_i$ is a partition of $[a_i,b_i]$. We define the _volume_\/ of $R$ to be $\vol(R) = \prod_i (b_i - a_i)$.
+
+**{$\bm{n}$-dimensional integration.}**\/ Similarly to the 2D case, we let $\PP$ be a partition of a rectangle $R \subseteq \R^n$. Then for each $S \in \PP$, we define
+
+~ Math
+m_S = \inf_{\vx \in S} f(\vx) \qquad M_S = \sup_{\vx \in S} f(\vx).
+~
+
+We then define the _lower and upper sums_\/
+
+~ Math
+L(f,\PP) = \sum_{S \in \PP} m_S \vol(S) \qquad U(f,\PP) = \sum_{S \in \PP} M_S \vol(S).
+~
+
+
+**Definition:**\/ $f$ is _integrable_\/ on $R$ iff there exists a unique $I \in \R$ such that for every partition $\PP$ of $R$,
+
+~ Math
+L(f,\PP) \le I \le U(f,\PP).
+~
+
+When this occurs, we define $\int_R f \coloneqq I$.
+
+_(Example of a non-integrable function omitted. Take the characteristic function of $\Q$.)_\/
+
+**The Gap Dichotomy.**\/ For any function $f: R \to \R$, let $\mathcal{L}$ be the collection of lower sums of $f$ over $R$, and let $\mathcal{U}$ be the collection of upper sums. Then either there is a gap between $\mathcal{L}$ and $\mathcal{U}$, in which case $f$ is not integrable, or $\mathcal{L}$ and $\mathcal{U}$ touch, and $f$ is integrable.
+
+_Corollary:_\/ If there exists a sequence $\{\PP_n\}_{n=1}^\infty$ of partitions of $R$ such that
+
+~ Math
+\lim_{n \to \infty} L(f, \PP_n) = \lim_{n \to \infty} U(f, \PP_n),
+~
+
+then $f$ is integrable over $R$, and $\int_R f$ is that common limit.
+
+**Definition:**\/ Let $\PP$ and $\PP'$ be partitions of $R$. We say that $\PP'$ is a refinement of $\PP$ if every subrectangle $Q \in \PP'$ is contained in some subrectangle $S \in \PP$. This means that $\PP'$ is obtained from $\PP$ by adding extra endpoints to $\PP$.
+
+_Proof of Gap Dichotomy:_\/ Observe that if $\PP'$ is a refinement of $\PP$, then
+
+~ Math
+L(f,\PP) \le L(f,\PP') \le U(f,\PP') \le U(f,\PP)
+~
+
+Furthermore, if $\PP_1$ and $\PP_2$ are two partitions, then they have a common refinement $\PP'$. (Simply draw $\PP_1$ and $\PP_2$ on top of each other.) Then
+
+~ Math
+L(f,\PP_1) \le L(f,\PP') \le U(f,\PP') \le U(f,\PP_2).
+~
+
+This means that for any two partitions $\PP_1$ and $\PP_2$, we have $L(f,\PP_1) \le U(f,\PP_2)$, as desired. **QED**\/
+
+
+
+# Lecture 08 (2016-02-01) {  - }
+
+**Integration over Bounded Sets and Volume.**\/ Let $\Omega \subseteq \R^n$ be bounded, and let $f: \Omega \to \R$ be a bounded function. Then there exists a rectangle $R \supseteq \Omega$, and we can extend $f$ to $R$ by defining
+
+~ Math
+\tilde{f}(\vx) = \begin{cases}
+f(\vx) & \vx \in \Omega \\
+0 & \vx \in R \setminus \Omega
+\end{cases}
+~
+
+This allows us to define integrals over non-rectangular bounded regions. Provided the RHS exists, we define
+
+~ Math
+\int_\Omega f \coloneqq \int_R \tilde{f}.
+~
+
+
+**Warning:**\/ The RHS might fail to exist even for really "nice" functions $f$. For example, take $\Omega = \Q \cap [0,1]$, and let $f: \Omega \to \R$ be the constant function 1. Then
+
+~ Math
+\int_\Omega f = \int_{[0,1]} f
+~
+
+fails to exist. This tells us that "niceness" of $f$ is not sufficient to guarantee integrability; we also need "niceness" of the region $\Omega$.
+
+**A Second Glimpse of Fubini.**\/ Suppose we have two functions $g_1,g_2 : [a,b] \to [c,d]$ for which $g_1(x) \le g_2(x)$ for all $x \in [a,b]$. Let $R = [a,b] \times [c,d]$, and let $\Omega \subseteq R$ be the region bounded by the graphs of $g_1$ and $g_2$. Then by Fubini's theorem,
+
+~ Math
+\int_\Omega f \coloneqq \int_R \tilde{f} = \int_a^b \int_c^d \tilde{f}(x,y) \dd{y} \dd{x} = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y) \dd{y} \dd{x}
+~
+
+
+**Example:**\/ Find $\int_\Omega (6x + 2y^2)$ where $\Omega$ is the region in $\R^2$ bounded by $x=y^2$ and $x+y=2$. _(Solution omitted.)_\/
+
+**Definition:**\/ Let $\Omega \subseteq \R^n$ be bounded. The _$n$-dimensional volume of $\Omega$_\/ is
+
+~ Math
+\vol_n(\Omega) \coloneqq \int_\Omega 1
+~
+
+if the RHS exists. _(Some discussion omitted.)_\/
+
+
+
+# Lecture 09 (2016-02-03) {  - }
+
+_(Discussion of the definition of $n$-dimensional volume omitted.)_\/
+
+**Theorem:**\/ $\vol_n(X) = 0$ iff for every $\eps > 0$, there exists a partition $\PP$ of $R \supset X$ such that
+
+~ Math
+\sum_{\mathclap{S \in \PP, S \cap X \ne \varnothing}} \vol_n(S) < \eps.
+~
+
+
+_Proof_\/ ($\implies$): Let $\chi$ be the characteristic function of $X$. Given $\eps > 0$, the gap dichotomy implies the existence of a partition $\PP$ such that
+
+~ Math
+\sum_{\mathclap{S \in \PP, S \cap X \ne \varnothing}} \vol_n(S) = U(\chi,\PP) < \eps
+~
+
+as desired.
+
+($\impliedby$): We first show that $\chi$ is integrable. Let $\eps > 0$ be given. By hypothesis, there exists a partition $\PP$ for which
+
+~ Math
+\sum_{\mathclap{S \in \PP, S \cap X \ne \varnothing}} \vol_n(S) < \eps.
+~
+
+It follows that
+
+~ Math
+U(\chi, \PP) - L(\chi, \PP) = \sum_{\mathclap{S \in \PP, S \cap X \ne \varnothing}} \vol_n(S) - \sum_{\mathclap{S \in \PP, S \subseteq X}} \vol_n(S) \le \sum_{\mathclap{S \in \PP, S \cap X \ne \varnothing}} \vol_n(S) < \eps.
+~
+
+It follows that the upper and lower sums of $\chi$ get arbitrarily close; hence, $\int_R \chi$ exists. Moreover, $\inf_\PP U(\chi, \PP) = 0$, so $\int_R \chi = 0$, as desired. **QED**\/
+
+_Corollary:_\/ If $\vol_n(X) = 0$, then $X$ does not contain any $n$-dimensional rectangle.
+
+**Theorem:**\/ Let $R \subseteq \R^n$ be a rectangle and let $f: R \to \R$ be continuous. Then $\int_R f$ exists.
+
+_Proof:_\/ Let $\eps > 0$ be given. By the gap dichotomy, it suffices to find a partition $\PP$ of $R$ such that
+
+~ Math
+U(f,\PP) - L(f,\PP) < \eps.
+~
+
+Because $R$ is compact, $f$ is uniformly continuous on $R$, and there exists $\delta > 0$ such that
+
+~ Math
+\norm{\vx - \vy} < \delta \implies \abs{f(\vx) - f(\vy)} < \frac{\eps}{\vol_n(R)}
+~
+
+for all $\vx,\vy \in R$. Choose $\PP$ such that every subrectangle $S \in \PP$ has side lengths strictly less than $\delta/\sqrt{n}$. This guarantees that the diameter of $S$ is less than $\delta$, so that
+
+~ Math
+\sum_{S \in \PP} (M_s - m_s) \vol_n(S) < \frac{\eps}{\vol_n(R)} \sum_{S \in \PP} \vol_n(S) = \eps
+~
+
+as desired. **QED**\/
+
+
+
+# Lecture 10 (2016-02-05) {  - }
+
+**Fubini's Theorem.**\/ Let $f$ be integrable in $R = A \times B \subseteq \R^2$. We want to show that
+
+~ Math
+\int_R f = \int_A \int_B f(x,y) \dd{y} \dd{x}.
+~
+
+**Notation:**\/ For all $x \in A$, define $g_x: B \to \R$ by
+
+~ Math
+g_x(y) = f(x,y)
+~
+
+for all $y$ in $B$. Assume further that for all $x \in A$, $g_x$ is integrable on $B$, and define $G: A \to \R$ by
+
+~ Math
+G(x) = \int_B g_x(y) \dd{y} = \int_B g_x.
+~
+
+This is the inner integral in the statement of Fubini's theorem.
+
+**Theorem:**\/ $G$ is integrable on $A$, and
+
+~ Math
+\int_R f = \int_A g
+~
+
+
+_Proof:_\/ Let $\PP$ be a partition of $R$. We can write $\PP = (\PP_A, \PP_B)$ where $\PP_A$ and $\PP_B$ are partitions of $A$ and $B$, respectively. We will show that
+
+~ Math
+L(f,\PP) \le L(G,\PP_A) \le U(G,\PP_A) \le U(f,\PP).
+~
+
+This will prove the theorem by the gap dichotomy. Indeed, we are given that no gap exists between $L(f,\PP)$ and $U(f,\PP)$. The preceding inequality will show that no gap exists between $L(G,\PP_A)$ and $U(G,\PP_A)$. Let
+~ Math 
+\begin{aligned}
+\PP_A &= \{T_1, T_2, \dots, T_{k_1}\} \\
+\PP_B &= \{U_1, U_2, \dots, U_{k_2}\}.
+\end{aligned}
+~
+
+Then every $S \in \PP$ is of the form $T_i \times U_j$ for some $(i,j)$, and we can write
+
+~ Math
+L(f,\PP) = \sum_{S \in \PP} m_S(f) \vol_2(S) = \sum_{i=1}^{k_1} \sum_{j=1}^{k_2} m_{T_i \times U_j}(f) \vol_1(T_i) \vol_1(U_j).
+~
+
+Now note that for all $x \in T_i$, we have
+
+~ Math
+m_{T_i \times U_j}(f) \le m_{U_j}(g_x).
+~
+
+It follows that for all $1 \le i \le k_1$ and $x \in T_i$, we have
+
+~ Math
+\sum_{j=1}^{k_2} m_{T_i \times U_j}(f) \vol_1(U_j) \le \sum_{j=1}^{k_2} m_{T_i \times U_j}(g_x) \vol_1(U_j) = L(g_x,\PP) \le \int_B g_x = G(x)
+~
+
+Now multiply both sides by $\vol_1(T_i)$ and sum over $i$ to obtain
+
+~ Math
+\sum_{i=1}^{k_1} \sum_{j=1}^{k_2} m_{T_i \times U_j}(f) \vol_1(U_j) \vol_1(T_i) \le \sum_{i=1}^{k_1} m_{T_i}(G) \vol_1(T_i) = L(G,\PP_A).
+~
+
+This shows that
+
+~ Math
+L(f,\PP) \le L(G,\PP_A),
+~
+
+as desired. The inequality for the upper sums follows similarly. **QED**\/
+
+
+
+# Lecture 11 (2016-02-08) {  - }
+
+**Introduction to Change of Variables.**\/ We will often find that a multiple integral can be broken into iterated integrals more naturally in a non-Cartesian coordinate system. For example, the area of a circular sector is easier to calculate in polar coordinates.
+
+**Polar Coordinates**\/ $(r,\theta)$. These coordinates are defined by
+
+~ Math
+x = r \cos\theta \qquad y = r \sin\theta.
+~
+
+Let $g: \R^2 \times \R^2$ be the coordinate transformation function
+
+~ Math
+g(r,\theta) = \mqty[r\cos\theta \\ r\sin\theta].
+~
+
+We usually restrict $g: [0,\infty) \times [0,2\pi) \to \R^2$. Note that
+
+~ Math
+\det Jg(r,\theta) = \det\mqty[\cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta] = r.
+~
+
+
+**Area Distortion.**\/ Let $X$ be a domain in the $(r,\theta)$-plane and let $\Omega = g(X)$. In general, we will find
+
+~ Math
+\int_\Omega f \ne \int_X f \circ g
+~
+
+because the coordinate transformation $g$ does not preserve area. We need to multiply the RHS by $\det Jg$ to compensate for this.
+
+~ Math
+\int_\Omega f \ne \int_X (f \circ g) \det Jg
+~
+
+_(Example omitted.)_\/
+
+**Cylindrical Coordinates in $\R^3$.**\/ Let $g: [0,\infty) \times [0,2\pi) \times \R \to \R^3$ be defined by
+
+~ Math
+g(r,\theta,z) = \mqty[r\cos\theta \\ r\sin\theta \\ z].
+~
+
+Then $\det Jg(r,\theta,z) = r$.
+
+_(Example omitted.)_\/
+
+
+
+# Lecture 12 (2016-02-10) {  - }
+
+Discussion of test review omitted.
+
+
+
+# Lecture 13 (2016-02-12) {  - }
+
+**Spherical Coordinates.**\/ This is the coordinate system $(\rho, \phi, \theta)$ defined by $g: [0,\infty) \times [0,\pi] \times [0,2\pi) \to \R^3$, where
+~ Math 
+\begin{aligned}
+x &= \rho\sin\phi\cos\theta \\
+y &= \rho\sin\phi\sin\theta \\
+z &= \rho\cos\phi.
+\end{aligned}
+~
+
+(Note that $\theta$ is the azimuthal angle, and $\phi$ is the polar angle.) The determinant of this transformation is
+
+~ Math
+\det[Jg(\rho,\phi,\theta)] = \rho^2 \sin\phi
+~
+
+
+_(Example omitted: volume of sphere.)_\/
+
+
+
+# Lecture 14 (2016-02-15) {  - }
+
+**Definition:**\/ An $n \times n$ _determinant_\/ is an alternating multilinear function $\mathcal{D}: \underbrace{\R^n \times \R^n \times \cdots \times \R^n}_{n \text{ times}} \to \R$ with the _normalization property_\/ $\mathcal{D}(\ve_1, \dots, \ve_n) = 1$.
+
+**Theorem:**\/ For every $n \in \N$, there exists a unique $n \times n$ determinant.
+
+_Proof:_\/ The theorem is clear in the $1 \times 1$ case: for a scalar $a$, we must have $\mathcal{D}(a) = a$.
+
+To demonstrate existence for higher $n$, we can inductively define $\det: \mathbb{M}_n \to \R$ as follows: for $A \in \mathbb{M}_n$, let $M_{ij} \in \mathbb{M}_{n-1}$ be the matrix obtained by deleting the $i$th row and $j$th column of $A$. Let $c_{ij} \coloneqq (-1)^{i+j} \det M_{ij}$ be the cofactors of $A$. Then we define
+
+~ Math
+\det A = \sum_{i=1}^n A_{i1} c_{i1} = A_{11}c_{11} + A_{21}c_{21} + \dots + A_{n1}c_{n1}.
+~
+
+The function $\det$ defined in this way (so-called "cofactor expansion") is an $n \times n$ determinant. (We omit details of the verification here.)
+
+The proof of uniqueness requires the following 12-step program: Let $\mathcal{D}: \mathbb{M}_n \to \R$ be an $n \times n$ determinant.
+
+
+1. If $A \in \mathbb{M}_n$ has two distinct equal columns, then $\mathcal{D}(A) = 0$.
+   
+
+* If $B \in \mathbb{M}_n$ is obtained from $A$ by multiplying one of its columns by $c$, then $\mathcal{D}(B) = c\mathcal{D}(A)$.
+   
+
+* If $\vo$ is a column of $A$, then $\mathcal{D}(A) = 0$.
+   
+
+* If $B$ is obtained from $A$ by adding a scalar multiple of column $i$ to column $j \ne i$, then $\mathcal{D}(B) = \mathcal{D}(A)$.
+
+# Lecture 15 (2016-02-17) {  - }
+
+
+\setcounter{enumi}{4}
+   
+
+* Using steps 1-4, we can easily compute determinants of elementary matrices.
+   
+
+* If $E, A \in \mathbb{M}_n$ with $E$ elementary, then $AE$ performs an elementary column operation on $A$.
+   
+
+* If $E$ is elementary, then $\mathcal{D}(AE) = \mathcal{D}(A) \mathcal{D}(E)$.
+   
+
+* If $\rank(A) < n$, then $\det(A) = 0$, since we can express one of the columns of $A$ as a linear combination of the others.
+   
+
+* $\mathcal{D}(AB) = \mathcal{D}(A) \mathcal{D}(B)$. Indeed, if $\rank(B) < n$, then both sides are zero, and if $\rank(B) = n$, we can write $B$ as a product of elementary matrices and repeatedly apply step 8.
+   
+
+* If $A$ is invertible, then $\mathcal{D}(A) \ne 0$ and $\mathcal{D}(A^{-1}) = \mathcal{D}(A)^{-1}$. This follows by considering $\mathcal{D}(AA^{-1}) = 1$.
+   
+
+* The following are equivalent:
+   
+
+1. $\mathcal{D}(A) \ne 0$.
+   
+
+* $A$ is invertible.
+   
+
+* $\rank(A) = n$.
+   
+Indeed, the equivalence of (b) and (c) was shown last semester. Step 10 shows (b) implies (a), and the contrapositive of step 8 shows (a) implies (c).
+   
+
+* Let $\mathcal{D}_1$ and $\mathcal{D}_2$ be two $n \times n$ determinants. Then for all $A \in \mathbb{M}_n$, $\mathcal{D}_1(A) = \mathcal{D}_2(A)$. Indeed, if $\rank(A) < n$, then both sides are zero by step 8, and if $\rank(A) = n$, then we write $A$ as a product of elementary matrices and apply steps 5 and 7.
+
+# Lecture 15.5 (2016-02-18) {  - }
+
+**Theorem:**\/ If $A \in \mathbb{M}_n$, then $\det(A) = \det(A^\intercal)$.
+
+_Proof:_\/ If $\rank(A) < n$, then $\det(A) = \det(A^\intercal) = 0$ since $\rank(A) = \rank(A^\intercal)$.
+
+If $\rank(A) = n$, write $A = E_1E_2\cdots E_m$ as a product of elementary matrices. It is easy to show by cases that $\det(E) = \det(E^\intercal)$. Hence, $\det(A) = \det(A^\intercal)$ by the product rule. **QED**\/
+
+**Theorem:**\/ If $X \in \R^n$ has an $n$-dimensional volume and $T: \R^n \to \R^n$ is a linear transformation, then $T(X)$ has $n$-dimensional volume, and
+
+~ Math
+\vol_n(T(X)) = \abs{\det[T]} \vol_n(X).
+~
+
+
+**Proposition:**\/ Let $R = [a_1,b_1] \times [a_2,b_2] \times \dots \times [a_n,b_n]$ be a rectangle in $\R^n$ and $T: \R^n \to \R^n$ be a linear transformation. Then
+
+~ Math
+\vol_n(T(R)) = \begin{cases}
+   0                 & \text{if $[T]$ is not invertible} \\
+   \vol_n(R)         & \text{if $[T]$ is elementary of type I} \\
+   \abs{c} \vol_n(R) & \text{if $[T]$ is elementary of type II$_c$} \\
+   \vol_n(R)         & \text{if $[T]$ is elementary of type III}
+\end{cases}
+~
+
+
+_Proof:_\/ If $[T]$ is not invertible, then $\operatorname{Image}(T)$  is a linear subspace of $\R^n$ of dimension $k < n$. Any bounded subset of $\operatorname{Image}(T)$ thus has volume $0$.
+
+If $[T]$ is elementary of type I or II$_c$, then $T$ takes rectangles to rectangles, and the theorem is established with simple casework. (We omit details here.)
+
+If $[T]$ is elementary of type III, then $[T]$ has one nonzero off-diagonal entry. Say $[T]$ performs the elementary row operation $R_j \mapsto R_j + cR_i$, so that the nonzero entry $c$ occurs at location $(j,i)$. Then the region $T(R)$ is bounded by
+~ Math 
+\begin{aligned}
+a_1 \le &y_1 \le b_1 \\
+&\vdots \\
+a_i \le &y_i \le b_i \\
+cy_i + a_j \le &y_j \le cy_i + b_j \\
+&\vdots \\
+a_n \le &y_n \le b_n
+\end{aligned}
+~
+
+and a simple application of Fubini's theorem finishes the proof. **QED**\/
+
+
+
+# Lecture 16 (2016-02-19) {  - }
+
+
+**Proposition:**\/ Let $T: \R^n \to \R^n$ be a linear transformation, and suppose $X \subseteq \R^n$ has $n$-dimensional volume. Then $\vol_n(T(X)) = \abs{\det[T]}\vol_n(X)$, provided $T$ is either singular or elementary.
+
+_Proof:_\/ Let $X \subseteq R \subseteq \R^n$ for some rectangle $R$, so that $\vol_n(X) = \int_X 1 = \int_R \chi$. For any partition $\PP$ of $R$, we have
+
+~ Math
+\vol_n(X) \le \mathcal{U}(\chi, \PP) = \sum_{\mathclap{\substack{S \in \PP \\ S \cap X \ne \varnothing}}} \vol_n(S).
+~
+
+It follows, by the preceding proposition, that
+~ Math 
+\begin{aligned}
+\vol_n(T(X)) &\le \sum_{\mathclap{\substack{S \in \PP \\ S \cap X \ne \varnothing}}} \vol_n(T(S)) \\
+&= \sum_{\mathclap{\substack{S \in \PP \\ S \cap X \ne \varnothing}}} \abs{\det[T]} \vol_n(S) \\
+&= \abs{\det[T]} \sum_{\mathclap{\substack{S \in \PP \\ S \cap X \ne \varnothing}}} \vol_n(S) \\
+&= \abs{\det[T]} \mathcal{U}(\chi, \PP)
+\end{aligned}
+~
+
+A similar argument for lower sums shows that
+
+~ Math
+\abs{\det[T]} \mathcal{L}(\chi, \PP) \le \vol_n(T(X)) \le \abs{\det[T]} \mathcal{U}(\chi, \PP).
+~
+
+Now, either $\det[T] = 0$, in which case $\vol_n(T(X)) = 0$, $\det[T] \ne 0$, in which case
+
+~ Math
+\mathcal{L}(\chi, \PP) \le \frac{\vol_n(T(X))}{\abs{\det[T]}} \le \mathcal{U}(\chi, \PP) \implies \vol_n X = \frac{\vol_n(T(X))}{\abs{\det[T]}}.
+~
+
+**QED**\/
+
+**Theorem:**\/ Let $T: \R^n \to \R^n$ be a linear transformation, and suppose $X \subseteq \R^n$ has $n$-dimensional volume. Then $\vol_n(T(X)) = \abs{\det[T]}\vol_n(X)$.
+
+_Proof:_\/ If $[T]$ is singular, then both sides are zero by the preceding proposition. If $[T]$ is invertible, write $T$ as a product of elementary matrices and repeatedly apply the preceding proposition using the product rule for determinants. **QED**\/
+
+**The Linear Change of Variables Theorem:**\/ Let $T: \R^n \to \R^n$ be a linear transformation, $X \subseteq \R^n$, and $f: T(X) \to \R$ be bounded. Then
+
+~ Math
+\int_{T(X)} f = \int_X f \circ T \abs{\det[T]}
+~
+
+assuming either integral exists.
+
+_Proof sketch (assuming both integrals exist):_\/ For simplicity of notation, let
+
+~ Math
+g(\vx) = f(T(\vx)) \abs{\det[T]}
+~
+
+and assume $X$ is a rectangle. Let $\PP$ be a partition of $X$. Then
+~ Math 
+\begin{aligned}
+\int_X g &\le \mathcal{U}(g, \PP) \\
+&= \sum_{S \in \PP} M_S(g) \vol_n(S) \\
+&= \sum_{S \in \PP} M_S(f \circ T) \abs{\det[T]} \vol_n(S) \\
+&= \sum_{S \in \PP} M_S(f \circ T) \vol_n(T(S)) \\
+&= \sum_{S \in \PP} M_{T(S)}(f) \vol_n(T(S)) \\
+&\ge \sum_{S \in \PP} \int_{T(S)} f = \int_{T(X)} f.
+\end{aligned}
+~
+
+A similar argument for lower sums shows that $\int_{T(X)} f$ is between every upper and lower sum of $\int_X g$, so the two are equal. **QED**\/
+
+**The General Change of Variables Theorem:**\/ For $g$ smooth,
+
+~ Math
+\int_{g(X)} f = \int_X (f \circ g) \abs{\det Jg}.
+~
+
+
+
+
+# Lecture 17 (2016-02-22) {  - }
+
+**{Parallelepipeds and $\bm{k}$-dimensional volume.}**\/ Let $\vva_1, \dots, \vva_k$ be linearly independent vectors in $\R^n$.
+
+**Definition:**\/ The _$k$-dimensional parallelepiped_\/ spanned by $\vva_1, \dots, \vva_k$ is
+
+~ Math
+P(\vva_1, \dots, \vva_k) = \qty{\sum_{i=1}^k t_i\vva_i : 0 \le t_i \le 1}.
+~
+
+For $k = n$, we define the _unit $n$-cube_\/ $Q^n = P(\ve_1, \dots, \ve_n)$.
+
+Let $A = \mqty[\vva_1 & \cdots & \vva_k] \in \mathbb{M}_{n,k}$. Then $P(\vva_1, \dots, \vva_k) = A(Q^k)$. If $k = n$, we define
+
+~ Math
+\vol_n P(\vva_1, \dots, \vva_n) = \abs{\det A}
+~
+
+which is motivated by our Linear Change of Variables Theorem.
+
+**{Volume with $\bm{k < n}$.}**\/ If $V$ is a linear subspace of $\R^n$ and $X \subseteq V$ is bounded, we would like to have a reasonable definition of $\vol_k(X)$. We will take the following approach:
+
+
+1. Find a linear isometry $V \to \R^k$, that is, a linear transformation $T: \R^n \to \R^k$ such that $T|_V$ is an isometry.
+   
+   
+
+* Define $\vol_k(X) \coloneqq \vol_k(T(X))$.
+   
+   
+
+* Prove that this definition is independent of the choice of $T$.
+   
+   
+
+* **Theorem:**\/ If $A = \mqty[\vva_1 & \cdots & \vva_k] \in \mathbb{M}_{n,k}$ has rank $k$, then
+   
+~ Math
+\vol_k P(\vva_1, \dots, \vva_k) = \sqrt{\det(A^\intercal A)}.
+~
+
+   Note that for $n = k$, this reduces to $\vol_k P(\vva_1, \dots, \vva_n) = \abs{\det A}$, as before.
+
+**Recall:**\/ $A \in \mathbb{M}_n$ is _orthogonal_\/ if $A^\intercal A = I_n$, that is, if the columns of $A$ form an _orthonormal basis_\/.
+
+**Theorem:**\/ If $V \subseteq \R^n$ is a $k$-dimensional linear subspace, then $V$ has an orthonormal basis.
+
+_Proof:_\/ Build up the basis incrementally. Take any unit vector $\vvb_1$, take $\vvb_2 \in V \cap \operatorname{span}\{\vvb_1\}^\perp$, and so on. **QED**\/
+
+Thus, we can always find $B = \mqty[\vvb_1 & \cdots & \vvb_k] \in \mathbb{M}_{n,k}$ with $C(B) = V$, $\rank(B) = k$, and $B^\intercal B = I_k$.
+
+
+
+# Lecture 18 (2016-02-24) {  - }
+
+**Proposition:**\/ If $B \in \mathbb{M}_{n,k}$ satisfies $B^\intercal B = I_k$ (i.e., the columns of $B$ are orthonormal), then $B^\intercal$ preserves dot products of vectors in $V = C(B)$. That is, for all $\vx, \vy \in V$, we have $\vx \cdot \vy = B^\intercal \vx \cdot B^\intercal \vy$.
+
+_Proof:_\/ Since $\vx, \vy \in C(B)$, we can write $\vx = B\vz$ and $\vy = B\vw$ for some $\vz, \vw \in \R^k$. It follows that
+
+~ Math
+\vx \cdot \vy = B\vz \cdot B\vw = B^\intercal B \vz \cdot \vw = \vz \cdot \vw = B^\intercal \vx \cdot B^\intercal \vy
+~
+
+as desired. **QED**\/
+
+_Corollary:_\/ If $B \in \mathbb{M}_{n,k}$ satisfies $B^\intercal B = I_k$, then $B^\intercal$ is an isometric embedding of $V$ in $\R^k$.
+
+**Definition:**\/ If $X$ is a subset of a $k$-dimensional linear subspace $V$ of $\R^n$, then we define $\vol_k(X) = \vol_k(B^\intercal(X))$, where $B^\intercal$ is an isometric embedding of $V$ in $\R^k$. (By the preceding proposition,  such an embedding always exists by taking the columns of $B$ to be an orthonormal basis of $V$.)
+
+The following theorem shows that $\vol_k$ is well-defined.
+
+**Theorem:**\/ Let $A \in \mathbb{M}_{n,k}$ have rank $k$. Let $Y \subseteq \R^k$ be bounded. Then
+
+~ Math
+\vol_k(A(Y)) = \sqrt{\det(A^\intercal A)} \vol_k(Y).
+~
+
+_Proof:_\/ Let $B \in \mathbb{M}_{n,k}$ be a matrix whose columns form an orthonormal basis for $C(A)$. By definition,
+
+~ Math
+\vol_k(A(Y)) = \vol_k(B^\intercal A(Y)) = \abs{\det(B^\intercal A)} \vol_k(Y)
+~
+
+where we note that $B^\intercal A$ is square. Thus, it suffices to show that
+
+~ Math
+\det(B^\intercal A)^2 = \det(A^\intercal A).
+~
+
+Observe that
+~ Math 
+\begin{aligned}
+\det(B^\intercal A)^2 &= \det(B^\intercal A) \det(B^\intercal A) \\
+&= \det(A^\intercal B) \det(B^\intercal A) \\
+&= \det(A^\intercal B) \det(B^\intercal A) \\
+&= \det(A^\intercal B B^\intercal A).
+\end{aligned}
+~
+
+We claim that $A^\intercal B B^\intercal A = A^\intercal A$. To see this, let $\vx \in \R^k$ be arbitrary. Then there exists $\vy \in \R^k$ such that $A\vx = B\vy$. It follows that
+
+~ Math
+A^\intercal B B^\intercal A \vx = A^\intercal B B^\intercal B \vy = A^\intercal B \vy = A^\intercal A \vx.
+~
+
+Since this holds for arbitrary $\vx \in \R^k$, we have $A^\intercal B B^\intercal A = A^\intercal A$, as desired. This completes the proof. **QED**\/
+
+_Corollary:_\/ If $A \in \mathbb{M}_{n,k}$ has rank $k$, then $\det(A^\intercal A) > 0$.
+
+_Proof:_\/ We have already seen that $\det(A^\intercal A)$ is nonnegative, so it suffices to show that $\det(A^\intercal A)$ is nonzero. Suppose $A^\intercal A \vx = \vo$. Then
+
+~ Math
+0 = A^\intercal A \vx \cdot \vx = A\vx \cdot A\vx \implies A\vx = \vo \implies \vx = \vo
+~
+
+where the last implication follows from the rank-nullity theorem. Thus, $A^\intercal A$ is invertible, and $\det(A^\intercal A) \ne 0$. **QED**\/
+
+_Corollary:_\/ If $A = \mqty[\vva_1 & \cdots & \vva_k]$ has rank $k$, then
+
+~ Math
+\vol_k P(\vva_1, \dots, \vva_k) = \sqrt{\det(A^\intercal A)}.
+~
+
+
+
+
+# Lecture 19 (2016-02-26) {  - }
+
+**Integration of Scalar-Valued Functions on Manifolds.**\/ Let $X$ be a bounded subset of an open set $U$ in $\R^k$, and let $g: U \to \R^n$ be smooth. Then $g(X)$ is a $k$-parameterized region in $\R^n$. We would like to construct a reasonable definition for the integral of $f$ over $g(X)$.
+
+**Design Criteria:**\/ 
+
+1. If $f = 1$ is a constant function and $g$ is injective, our definition should give the $k$-dimensional volume of $g(X)$.
+   
+
+* Our definition should be consistent with previous theorems. In particular,
+   
+
+* If $g$ is a linear transformation and $f = 1$, we should get $\vol_k(g(X))$.
+   
+
+* If $n=k$ and $g = \operatorname{id}_U$, we should get $\int_X f$.
+   
+
+Based on these criteria, we can rule out a few possible candidates:
+
+
+* The definition should NOT be $\int_{g(X)} f$, since when $f = 1$, this gives $\vol_n(g(X))$, which vanishes when $k < n$.
+   
+
+* The definition should NOT be $\int_X (f \circ g)$, since when $f = 1$ and $g$ is a linear transformation, we want to get $\vol_k g(X)$, not $\vol_k(X)$.
+
+**Definition:**\/ The integral of $f$ on $g(X)$ with respect to $k$-dimensional volume is
+
+~ Math
+\int_{g(X)} f \dd{V_k} \coloneqq \int_X (f \circ g) \sqrt{\det(Jg^\intercal Jg)}.
+~
+
+
+**Remark:**\/ We often write $\dd{V}$ for $\dd{V_3}$, $\dd{A}$ for $\dd{V_2}$, and $\dd{s}$ or $\abs{\dd{x}}$ for $\dd{V}_1$.
+
+_(Omitted discussion of physical interpretation of this integral as measuring total mass for a given density distribution.)_\/
+
+
+
+# Lecture 20 (2016-02-29) {  - }
+
+_{(Missed proof that $\vol_k$ is well-defined. Show that $\vol_k(B^\intercal X) = \vol_k(A^\intercal X)$ for any two matrices $A, B$ whose columns form an orthonormal basis of $V$. Let $Y,Z \subseteq \R^k$ such that $AY = BZ = X$. Then 
+~ Math
+\vol_k(Z) = \vol_k(B^\intercal X) = \vol_k(X) = \sqrt{\det(A^\intercal A)} \vol_k(Y) = \vol_k(Y)
+~
+ as desired.)}_\/
+
+Recall our new integral
+
+~ Math
+\int_{g(X)} f \dd{V}_k \coloneqq \int_X (f \circ g) \sqrt{\det(Jg^\intercal Jg)}.
+~
+
+If $g$ is injective on $X$, then
+
+~ Math
+\vol_k(g(X)) \coloneqq \int_{g(X)} 1 \dd{V}_k = \int_X \sqrt{\det(Jg^\intercal Jg)}.
+~
+
+Note that in the special case $k=1$, we obtain the usual formula for the arc length of a parametric curve:
+
+~ Math
+\vol_1(g([a,b])) = \int_{g([a,b])} \dd{V}_1 = \int_a^b \norm{g'(t)} \dd{t}.
+~
+
+
+_(Examples omitted: arc length of conical helix and surface area of unit 2-sphere.)_\/
+
+
+
+# Lecture 21 (2016-03-02) {  - }
+
+_(Missed definition of $k$-forms.)_\/
+
+**Main Example:**\/ Let $I = (i_1, \dots, i_k)$ where $i_1, \dots, i_k$ are integers between $1$ and $n$. we call $I$ a _multi-index_\/. Define $\phi: \mathbb{M}_{n,k} \to \R$ as follows: write
+
+~ Math
+A = \mqty[A_1^\intercal \\ \vdots \\ A_n^\intercal]
+\text{, and let }
+A_I = \mqty[A_{i_1}^\intercal \\ \vdots \\ A_{i_k}^\intercal].
+~
+
+Then we define $\phi(A) = \det(A_I)$.
+
+**Notation:**\/ We typically give this $k$-form $\phi$ the name $\dd{x}_I$. We call $\dd{x}_I$ an _elementary $k$-form_\/.
+
+_(Basic examples of computations omitted.)_\/
+
+**Fact:**\/ If $I = (i_1, \dots, i_k)$, then
+
+~ Math
+\dd{x}_I\!\qty(\ve_{i_1}, \dots, \ve_{i_k}) = \begin{cases*}
+0 & \text{if two indices are the same} \\
+1 & \text{otherwise}.
+\end{cases*}
+~
+
+
+**Geometric interpretation.**\/ Let $A = \mqty[\vv_1 & \cdots & \vv_k]$ and $I = (i_1, \dots, i_k)$. Then the columns of $A$ span a $k$-dimensional parallelepiped $P$ in $\R^n$. Project $P$ to the $k$-dimensional coordinate subspace $\R_I^k \subseteq \R^n$ to obtain a $k$-dimensional parallelepiped $P_I$ in $\R_I^k$. Then $\dd{x}_I\!(A) = \pm \vol_k(P_I)$.
+
+**Definition:**\/ $\bigwedge\!\!^k(\R^n)$ is the set of all $k$-forms on $\R^n$. (This notation is not universal; other authors may call this $\Lambda^k(\R^{n*})$ or $A^k(\R^n)$, where $A$ stands for "alternating.") We also define a $0$-form to be a number, so that $\bigwedge\!\!^0(\R^n) = \R$.
+
+**Note:**\/ $\bigwedge\!\!^k(\R^n) = \{\vo\}$ if $k > n$.
+
+**Definition:**\/ If $I = (i_1, \dots, i_k)$ is strictly increasing, then $\dd{x}_I$ is called a _basic $k$-form_\/.
+
+**Theorem:**\/ 
+
+1. $\bigwedge\!\!^k(\R^n)$ is a vector space (under the standard addition and scalar multiplication of real-valued functions).
+   
+
+* If $0 \le k \le n$, then $\dim \bigwedge\!\!^k(\R^n) = \binom{n}{k}$.
+   
+
+* For $1 \le k \le n$, the basic $k$-forms on $\R^n$ form a basis for $\bigwedge\!\!^k(\R^n)$.
+
+# Lecture 22 (2016-03-04) {  - }
+
+**{$\bm{k}$-forms and differential $\bm{k}$-forms.}**\/ Recall that $\bigwedge^k(\R^n)$ is the vector space of all $k$-forms on $\R^n$, which are multilinear alternating functions
+
+~ Math
+\underbrace{\R^n \times \dots \times \R^n}_{\text{$k$ times}} \to \R.
+~
+
+There are $\binom{n}{k}$ basic $k$-forms on $\R^n$. Thus, $\bigwedge^k(\R^n)$ is $\binom{n}{k}$-dimensional.
+
+**Proposition:**\/ $\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}$.
+
+_(Proof omitted. Elementary combinatorics.)_\/
+
+
+
+# Lecture 23 (2016-03-14) {  - }
+
+Recall that a $k$-form on $\R^n$ is a multilinear alternating function $\varphi: (\R^n)^k \to \R$. We denote by $\bigwedge^k(\R^n)$ the vector space of all $k$-forms on $\R^n$. If $I = (i_1, \dots, i_k)$ is an increasing multi-index (i.e., if $1 \le i_1 < i_2 < \dots < i_k \le n$), then we define the basic $k$-form $\dd{x}_I \in \bigwedge^k(\R^n)$ by $\dd{x}_I(A) = \det(A_I)$, where $A_I$ is the matrix formed by taking rows $i_1, \dots, i_k$ of $A$.
+
+**Theorem:**\/ If $1 \le k \le n$, then the basic $k$-forms on form a basis for $\bigwedge^k(\R^n)$. Hence, $\dim \bigwedge^k(\R^n) = \binom{n}{k}$.
+
+_Special Case:_\/ If $k = n$, then $\dim \bigwedge^n(\R^n) = 1$, with $\dd{x}_{(1,2,\dots,n)} = \det$. For each $\varphi \in \bigwedge^n(\R^n)$, there exists $c \in \R$ such that $\varphi = c\det$. In particular, $c = \varphi(I_n)$.
+
+_Special Case:_\/ If $k = 1$, then the 1-forms $\varphi \in \bigwedge^1(\R^n)$ are precisely the linear transformations $\varphi: \R^n \to \R$. Thus, $\bigwedge^1(\R^n)$ can be viewed as the space of row vectors of length $n$, which clearly has dimension $n$.
+
+**Remark:**\/ We call $\{ \dd{x}_1, \dots, \dd{x}_n \}$ the _dual basis_\/ for $\bigwedge^1(\R^n)$.
+
+_General case:_\/ Given $\varphi \in \bigwedge^k(\R^n)$, we can write $\varphi = \sum_I a_I \dd{x}_I$, where the sum is taken over strictly increasing multi-indices $I$, and
+
+~ Math
+a_I = \varphi(\ve_{i_1}, \dots, \ve_{i_k}).
+~
+
+It is not difficult to show that this expansion holds for all $k$-forms $\varphi$. We will omit the details here.
+
+**Definition:**\/ If $\omega \in \bigwedge^k(\R^n)$ and $\eta \in \bigwedge^\ell(\R^n)$, then their _wedge product_\/ $\omega \wedge \eta \in \bigwedge^{k+\ell}(\R^n)$ is the $(k+\ell)$-form defined by
+
+~ Math
+\dd{x}_I \wedge \dd{x}_J = \dd{x}_{(I,J)}
+~
+
+for basic forms and extending linearly for other forms. _(Example omitted.)_\/
+
+
+
+# Lecture 24 (2016-03-16) {  - }
+
+Review for Exam II. Discussion omitted.
+
+
+
+# Lecture 25 (2016-03-18) {  - }
+
+Missed this lecture.
+
+
+
+# Lecture 26 (2016-03-21) {  - }
+
+**The Exterior Derivative, Vector Fields, Work.**\/
+Let $U \opensubset \R^n$. Recall that $\Omega^k(U)$ denotes the vector space of all differential $k$-forms on $U$, where $\omega \in \Omega^k(U)$ iff for each increasing multi-index $I = (i_1, \dots, i_k)$ there exists a smooth function $f_I: U \to \R$ such that
+
+~ Math
+\omega = \sum_I f_I \dd{x}_I.
+~
+
+We can _evaluate $\omega$ at a point $p$_\/ to obtain an ordinary $k$-form
+
+~ Math
+\omega_p = \sum_I f_I(p) \dd{x}_I \in \bigwedge{}^{\!\!\!k}(\R^n).
+~
+
+We also define $\Omega^0(U) = C^\infty(U) = $ set of all smooth functions $f: U \to \R$.
+
+The _exterior derivative_\/ is a map $\dd: \Omega^k(U) \to \Omega^{k+1}(U)$. For $k = 0$, we define $\dd: \Omega^0(U) \to \Omega^1(U)$ by
+
+~ Math
+\dd{f} = \pdv{f}{x_1} \dd{x}_1 + \dots + \pdv{f}{x_n} \dd{x}_n.
+~
+
+Note that $\dd(x_i) = \dd{x}_i$. The object on the left is the exterior derivative of a smooth function; the object on the right is a basic 1-form.
+
+For $k \ge 1$, we define the exterior derivative by declaring
+
+~ Math
+\dd(f_I \dd{x}_I) = \dd{f}_I \wedge \dd{x}_I = \sum_{i=1}^n \pdv{f_I}{x_i} \dd{x}_i \wedge \dd{x}_I
+~
+
+and extending linearly.
+
+_(Example of differentiating a 1-form omitted.)_\/
+
+
+
+# Lecture 27 (2016-03-23) {  - }
+
+Missed this lecture.
+
+
+
+# Lecture 28 (2016-03-25) {  - }
+
+Let $U$ be an open subset of $\R^n$.
+
+**Definition:**\/ $F \in VF^\infty(U)$ is _conservative_\/ iff there exists $f \in C^\infty(U)$ such that $\nabla f = F$. In this case, we say that $f$ is a _potential function_\/ for $F$. Similarly, $\omega \in \Omega^1(U)$ is _exact_\/ iff there exists $f \in \Omega^0(U)$ such that $\dd f = \omega$.
+
+**Fundamental Theorem of Line Integrals:**\/ Let $F$ be a conservative vector field on $U$ with potential function $f$, and let $C$ be a smooth curve in $U$ parameterized by $g: [a,b] \to U$. Then
+
+~ Math
+\int_C W_F = f(g(b)) - f(g(a)).
+~
+
+Here, $W_F = \dd{f}$ is the _work form_\/ of $F$, which is obtained from $F$ by replacing unit vectors $\hat{\mathbf{x}}$ by unit 1-forms $\dd{x}_1$.
+
+_Proof:_\/ Straightforward chasing through definitions. **QED**\/
+
+**Example:**\/ Consider the "toilet bowl" field
+
+~ Math
+F(x,y) = \frac{1}{x^2 + y^2} \mqty[-y\\x]
+~
+
+defined on $\R^2 \setminus \{\vo\}$. Observe that $F$ is not conservative (since the integral of $F$ over the unit circle is nonzero), but $\dd{W}_F = 0$.
+
+
+
+# Lecture 29 (2016-03-28) {  - }
+
+Missed this lecture.
+
+
+
+# Lecture 30 (2016-03-30) {  - }
+
+**Stokes' Theorem:**\/ Let $M$ be a compact oriented $(k+1)$-manifold with boundary. Suppose $M \subseteq U \opensubset \R^n$ and $\omega \in \Omega^k(U)$. Then
+
+~ Math
+\int_M \dd{\omega} = \int_{\partial M} \omega.
+~
+
+
+**Definition:**\/ An _orientation_\/ of $\R^n$ is represented by an ordered basis \linebreak $(\vv_1, \dots, \vv_n)$ of $\R^n$. This orientation is the _positive orientation_\/ iff
+
+~ Math
+\det\mqty[\vv_1 & \cdots & \vv_n] > 0.
+~
+
+Otherwise, it is the _negative orientation_\/.
+
+**Examples:**\/ 
+
+* The orientation represented by the basis $\{c\ve_1\}$ of $\R^1$ is positive if $c > 0$ and negative if $c < 0$.
+   
+
+* A basis $(\vv_1, \vv_2)$ of $\R^2$ represents the positive (resp. negative) orientation if $\vv_2$ is reached from $\vv_1$ by traveling in a counterclockwise (resp. clockwise) direction.
+   
+
+* In $\R^3$, positive/negative orientation of a basis corresponds to right/left-handedness.
+
+**Fact:**\/ $(\vv_1, \dots, \vv_n)$ represents the positive orientation iff the matrix
+
+~ Math
+\mqty[\vv_1 & \cdots & \vv_n]
+~
+
+can be column reduced to $I_n$ such that the number $N$ of column exchanges and scalar multiplications of columns by negative scalars is even.
+
+**Fancier way:**\/ Choose a nonzero $\eta \in \bigwedge^{\!\!n}(\R^n)$. Then the bases $(\vv_1, \dots, \vv_n)$ and $(\vw_1, \dots, \vw_n)$ represent the same orientation iff $\eta(\vv_1, \dots, \vv_n)$ and \linebreak $\eta(\vw_1, \dots, \vw_n)$ have the same sign.
+
+**Definition:**\/ Let $M$ be a $k$-dimensional manifold in $\R^n$. An _orientation form_\/ for $M$ is a differential form $\eta \in \Omega^k(U)$ defined on some neighborhood $U$ of $M$ such that $\eta$ is _non-vanishing_\/ on $M$. This means $\forall \vp \in M$ $\exists \vv_1, \dots, \vv_k \in T_{\vp} M$ such that $\eta_{\vp}(\vv_1, \dots, \vv_k) \ne 0$.
+
+**Fact:**\/ This is true iff $\eta_{\vp}(\vv_1, \dots, \vv_k) \ne 0$ for every basis $(\vv_1, \dots, \vv_k)$ of $T_{\vp} M$.
+
+**Example:**\/ Consider $S^2 = \{\vp \in \R^3 : \norm{\vp} = 1\}$. Define $\eta \in \Omega^2(\R^3)$ by
+
+~ Math
+\eta_\vp(\vv_1, \vv_2) = \det\mqty[\vp & \vv_1 & \vv_2].
+~
+
+This an orientation form on $S^2$, since $\vp$ is always orthogonal to the plane $T_\vp S^2$. This shows that $S^2$ is _orientable_\/.
+
+Alternatively, recall that the flux form $\Phi_F \in \Omega^{n-1}(\R^n)$ of a vector field $F \in VF^\infty(\R^n)$ is defined by
+
+~ Math
+\Phi_{F(\vp)}(\vv_1, \dots, \vv_{n-1}) = \det\mqty[F(\vp) & \vv_1 & \cdots & \vv_n]
+~
+
+so our orientation form is actually the flux form of the identity vector field on $\R^3$.
+
+
+
+# Lecture 30.5 (2016-03-31) {  - }
+
+
+**Orientation of hypersurfaces.**\/ Let $M$ be a $k$-dimensional manifold embedded in $\R^n$, where $k = n - 1$.
+
+**Definition:**\/ A vector field $V$ defined on a neighborhood of $M$ is a _normal field_\/ on $M$ iff for all $\vp \in M$, $V(\vp)$ is orthogonal to $M$. It is _nowhere zero_\/ on $M$ iff $V(\vp) \ne \vo$ for all $\vp \in M$.
+
+**Theorem:**\/ $M$ is orientable iff $M$ admits a nowhere zero normal field.
+
+_(Some example computations omitted.)_\/
+
+
+
+# Lecture 31 (2016-04-01) {  - }
+
+_(Example computations with Stokes's theorem. Omitted.)_\/
+
+
+
+# Lecture 32 (2016-04-04) {  - }
+
+**Stokes's Theorem:**\/ If $M$ is a compact oriented $(k+1)$-manifold in $\R^n$ and $\omega \in \Omega^k(M)$, then
+
+~ Math
+\int_M \dd{\omega} = \int_{\partial M} \omega
+~
+
+where $\partial M$ has the induced orientation compatible with $M$.
+
+**What does compatible mean?**\/ Suppose $\eta \in \Omega^{k+1}(M)$ and $\beta \in \Omega^k(\partial M)$ are orientations for $M$ and $\partial M$.
+
+**Definition:**\/ $\beta$ and $\eta$ are _compatible_\/ iff $\forall \vp \in \partial M$, $\forall$ bases $\vv_1, \dots, \vv_k$ of $T_\vp \partial M$, $\beta_\vp(\vv_1, \dots, \vv_k)$ has the same sign as $\eta_\vp(\mu_\vp, \vv_1, \dots, \vv_k)$, where $\mu_\vp = Dg(\vq)(-\ve_{k+1}) \in T_\vp M$ is an outward-pointing tangent vector to $M$ at $\vp$. Here, $g$ is a boundary chart mapping $\R^k \times [0,\infty)$ to a coordinate neighborhood of $\vp$ in $M$ such that $g(\vq) = \vp$.
+
+**Example:**\/ $\R^{k+1}_+$ is a $(k+1)$-manifold with boundary in $\R^{k+1}$.
+
+**Theorem:**\/ If $\eta$ is the standard orientation of $\R_+^{k+1} \subseteq \R^{k+1}$ and $\omega$ is the standard orientation of $\R^k = \partial \R^{k+1}_+$, then $(-1)^{k+1}\omega = \beta$ and $\eta$ are compatible.
+
+_Proof:_\/ Immediate. **QED**\/
+
+
+
+# Lecture 33 (2016-04-06) {  - }
+
+_(Some discussion of partitions of unity omitted. To integrate a form over a manifold, pick a coordinate cover and a partition of unity subordinate to it, and integrate the form as usual in coordinates. Sum up the results.)_\/
+
+_Proof of Stokes's Theorem:_\/ It suffices to prove Stokes's theorem for compact rectangles $R$ in $\R^{k+1}_+$. Indeed, by taking a partition of unity on a manifold with boundary, we reduce integration of a form to integration over coordinate charts and boundary charts.
+
+Given $\omega \in \Omega^k(\R^{k+1}_+)$ where $\omega = 0$ outside a compact rectangle $R$, write
+
+~ Math
+\omega = \sum_{i=1}^{k+1} f_i \dd{x}_1 \wedge \dots \wedge \widehat{\dd{x}_i} \wedge \dots \wedge \dd{x}_{k+1}
+~
+
+where the hat denotes omission as usual, and $f$ is zero on the boundaries of $R$, except for the boundary of the upper half-space $\R^{k+1}_+$. (This is the boundary that matters in Stokes's theorem.) Then
+
+~ Math
+\dd{\omega} = \sum_{i=1}^{k+1} (-1)^{i-1} \pdv{f_i}{x_i} \dd{x}_1 \wedge \dots \wedge \dd{x}_{k+1}
+~
+
+and it follows that
+~ Math 
+\begin{aligned}
+\int_R \dd{\omega} &= \sum_{i=1}^{k+1} (-1)^{i-1} \int_R \pdv{f_i}{x_i} \\
+&= \sum_{i=1}^{k+1} (-1)^{i-1} \int_0^{b_{k+1}} \!\! \int_{a_k}^{b_k} \dots \int_{a_1}^{b_1} \pdv{f_i}{x_i} (x_1, \dots, x_{k+1}) \\
+&= (-1)^{k+1} \int_{a_k}^{b_k} \dots \int_{a_1}^{b_1} f_{k+1}(x_1, \dots, x_k, 0).
+\end{aligned}
+~
+
+On the other hand,
+~ Math 
+\begin{aligned}
+\int_{\partial R} \omega &= \int_{\partial R \cap \partial \R^{k+1}_+} \omega \\
+&= \sum_{i=1}^{k+1} \int f_i(x_1, \dots, x_k, 0) {\determinant}_i^*\mqty[I_k\\0] \\
+&= \int_{[a_1, b_1] \times \dots \times [a_k, b_k]} f_{k+1}(x_1, \dots, x_k, 0)
+\end{aligned}
+~
+
+where ${\determinant}_i^*(A)$ denotes the determinant of $A$ omitting the $i$th row. **QED**\/
+
+
+
+# Lecture 34 (2016-04-08) {  - }
+
+**Change of Basis.**\/ The goal of our next unit will be to represent a linear transformation with respect to a (possibly more convenient) basis, other than the standard basis $\mathcal{E} = \{\ve_1, \dots, \ve_n\}$.
+
+**Set-up.**\/ Let $\mathcal{B} = \{\vv_1, \dots, \vv_n\}$ be an _ordered_\/ basis for a vector space $V$. This means that any $\vx \in V$ can be uniquely written as a linear combination of members of the basis:
+
+~ Math
+\vx = \sum_{i=1}^n a_i \vv_i.
+~
+
+The scalars $a_1, \dots, a_n$ are called the _coordinates_\/ of $\vx$ with respect to the basis $\mathcal{B}$. The map $C_\mathcal{B}: V \to \R^n$ sending each vector $\vx \in V$ to its (ordered) tuple of coordinates is clearly a linear isomorphism between $V$ and $\R^n$.
+
+**Definition:**\/ Let $T: V \to V$ be a linear transformation. The _{matrix representation of $T$ with respect to $\mathcal{B}$}_\/ is
+
+~ Math
+[T]_\B \coloneqq \mqty[\CB(T(\vv_1)) & \cdots & \CB(T(\vv_n))] \in \mathbb{M}_n.
+~
+
+
+_Example:_\/ Let $\mathcal{P}_2$ be the set of polynomials of degree $\le 2$, with ordered basis $\B = \{1, x, x^2\}$. The derivative operator $D: \mathcal{P}_2 \to \mathcal{P}_2$ is a linear transformation with matrix representation
+
+~ Math
+[T]_\B = \mqty[0&1&0\\0&0&2\\0&0&0].
+~
+
+
+**Theorem:**\/ The diagram
+
+~ Begin Tikzcd 
+V \rar{T} \dar[swap]{\CB} & V \dar{\CB} &br;
+   \R^n \rar{\[T\]\_\B} & \R^n
+
+~ End Tikzcd
+commutes.
+
+_Proof:_\/ It suffices to check commutativity on a basis. Observe that
+
+~ Math
+\begin{tikzcd}
+\vv_j \rar[mapsto]{T} \dar[mapsto,swap]{\CB} & T(\vv_j) \dar[mapsto]{\CB} \\
+\ve_j \rar[mapsto]{[T]_\B} & \text{$j$th col.\ of $[T]_\B$}
+\end{tikzcd}
+~
+
+clearly commutes by our definition of $[T]_\B$. **QED**\/
+
+_Example:_\/ Let $W$ be a $k$-dimensional linear subspace of $\R^n$, and let $T: \R^n \to \R^n$ be the orthogonal projection operator $T = \operatorname{proj}_W$ from $\R^n$ onto $W$. Let
+
+~ Math
+\B = \{\vv_1, \dots, \vv_k, \vv_{k+1}, \dots, \vv_n\}
+~
+
+be an ordered basis of $\R^n$, where $\vv_1, \dots, \vv_k$ is a basis for $W$, and $\vv_{k+1}, \dots, \vv_n$ is a basis for $W^\perp$. Then clearly,
+
+~ Math
+T(\vv_i) = \begin{cases}
+\vv_i & \text{if } 1 \le i \le k \\
+\vo &\text{if } k+1 \le i \le n.
+\end{cases}
+~
+
+This means that
+
+~ Math
+[T]_\B = \mqty[I_k & 0_{k,n-k} \\ 0_{n-k,k} & 0_{n-k}].
+~
+
+How can we use this to figure out the matrix representation $[T]_\mathcal{E}$ with respect to the standard basis $\mathcal{E}$?
+
+**Change-of-Coordinates Matrix.**\/ Suppose we have two ordered bases $\B_1, \B_2$ for $V$. The _change-of-coordinates matrix_\/ $P$ between $\B_1$ and $\B_2$ is defined by $P = \mqty[C_{\B_2} \circ C_{\B_1}^{-1}]$. This is equivalent to defining $P$ so that the diagram
+
+~ Math
+\begin{tikzcd}
+& V \dlar[swap]{C_{\B_1}} \drar{C_{\B_2}} & \\
+\R^n \ar{rr}{P} & & \R^n
+\end{tikzcd}
+~
+
+commutes. We write $\B_1 \overset{P}{\rightsquigarrow} \B_2$, and say that $P$ changes $\B_1$-coordinates to $\B_2$-coordinates.
+
+**{How to find $\bm{P}$?}**\/ Say $\B_1 = \{\vv_1, \dots, \vv_n\}$. Then using the preceding diagram,
+
+~ Math
+\begin{tikzcd}
+& \vv_j \dlar[swap,mapsto]{C_{\B_1}} \drar[mapsto]{C_{\B_2}} & \\
+\ve_j \ar[mapsto]{rr}{P} & & \text{$j$th col.\ of $P$}
+\end{tikzcd}
+~
+
+so we conclude that
+
+~ Math
+P = \mqty[C_{\B_2}(\vv_1) & \cdots & C_{\B_2}(\vv_n)].
+~
+
+
+_Example:_\/ Let $W \subseteq \R^3$ be the plane defined by $x_1 - 2x_2 + x_3 = 0$, and let $T = \operatorname{proj}_W$. Find $[T]_\mathcal{E}$.
+
+_Solution:_\/ First, find bases for $W$ and $W^\perp$. We will use the basis
+
+~ Math
+\B = \qty{\mqty[2\\1\\0], \mqty[-1\\0\\1], \mqty[1\\-2\\1]}
+~
+
+and the matrix representation of $T$ with respect to $\mathcal{B}$ is
+
+~ Math
+[T]_\B = \mqty[1&0&0\\0&1&0\\0&0&0].
+~
+
+Let $\mathcal{E} \overset{P}{\rightsquigarrow} \mathcal{B}$, where
+
+~ Math
+P^{-1} = \mqty[C_\mathcal{E}(\vv_1) & C_\mathcal{E}(\vv_2) & C_\mathcal{E}(\vv_3)] = \mqty[2&-1&1\\1&0&-2\\0&1&1].
+~
+
+(Note that we define $P^{-1}$, not $P$, because we know the coordinates of $\mathcal{B}$ with respect to the standard basis, not the other way around.) Then
+
+~ Math
+P = \frac{1}{6}\mqty[ 2 & 2 & 2 \\ -1 & 2 & 5 \\ 1 & -2 & 1]
+~
+
+and using the change-of-basis formula, we have
+
+~ Math
+[T]_\mathcal{E} = P^{-1} [T]_\mathcal{B}P = \frac{1}{6} \mqty[ 5 & 2 & -1 \\ 2 & 2 & 2 \\ -1 & 2 & 5].
+~
+
+
+
+
+# Lecture 35 (2016-04-11) {  - }
+
+**Eigenvalues and Eigenvectors.**\/ Recall from last lecture that if we have two ordered bases $\B_1 = \{\vv_1, \dots, \vv_n\}$ and $\B_2 = \{\vw_1, \dots, \vw_n\}$ of a vector space $V$, then we have natural isomorphisms $C_{\B_1}, C_{\B_2}: V \to \R^n$, given by taking the coordinates of a vector $\vv \in V$ with respect to the corresponding basis.
+
+If $T: V \to V$ is a linear transformation, then $T$ can be represented as a matrix with respect to either basis. Explicitly,
+
+~ Math
+[T]_{\B_1} = \mqty[C_{\B_1}(T(\vv_1)) & \cdots &  C_{\B_1}(T(\vv_n))] \in \mathbb{M}_n.
+~
+
+Using these objects, we can set up three commutative diagrams:
+
+~ Math
+\begin{tikzcd}
+& V \dlar[swap]{C_{\B_1}} \drar{C_{\B_2}} & \\
+\R^n \ar{rr}{P} & & \R^n
+\end{tikzcd}
+~
+
+Here, $P$ is the _change-of-coordinates matrix_\/ $\B_1 \overset{P}{\rightsquigarrow} \B_2$ which takes $\B_1$-coordinates to $\B_2$-coordinates. Explicitly,
+
+~ Math
+P = \mqty[C_{\B_2}(\vv_1) & \cdots & C_{\B_2}(\vv_n)] \in \mathbb{M}_n.
+~
+
+Clearly, we also have $\B_2 \overset{P^{-1}}{\rightsquigarrow} \B_1$. Additionally, by taking representations of $T$, we have
+
+~ Math
+\begin{tikzcd}
+V \rar{T} \dar[swap]{C_{\B_1}} & V \dar{C_{\B_1}} \\
+\R^n \rar{[T]_{\B_1}} & \R^n
+\end{tikzcd} \qquad \begin{tikzcd}
+V \rar{T} \dar[swap]{C_{\B_2}} & V \dar{C_{\B_2}} \\
+\R^n \rar{[T]_{\B_2}} & \R^n
+\end{tikzcd}
+~
+
+Putting these diagrams together, we find that
+
+~ Math
+\begin{tikzcd}
+\R^n \ar{rrr}{[T]_{\B_2}} & & & \R^n \ar{dd}{P^{-1}} \\
+& V \rar{T} \ular{C_{\B_2}} \dlar[swap]{C_{\B_1}} & V \urar[swap]{C_{\B_2}} \drar{C_{\B_1}} & \\
+\R^n \ar{rrr}{[T]_{\B_1}} \ar{uu}{P} & & & \R^n
+\end{tikzcd}
+~
+
+commutes. From the perimeter of this diagram, we can read off the _Change-of-Basis Formula_\/
+
+~ Math
+[T]_{\B_1} = P^{-1} [T]_{\B_2} P.
+~
+
+
+**Definition:**\/ Two matrices $A$ and $B$ are _similar_\/ iff there exists an invertible matrix $P$ such that $A = P^{-1}BP$.
+
+**Example:**\/ Take $V = \R^2$, and let $\B = \{\vv_1, \vv_2\} = \{\smqty[3\\1], \smqty[1\\4]\}$. Define $T: \R^2 \to \R^2$ by
+
+~ Math
+[T]_\B = \mqty[2&0\\0&3].
+~
+
+This means $T(a\vv_1 + b\vv_2) = 2a\vv_1 + 3b\vv_2$. So $T$ has a very simple geometric interpretation with respect to the basis $\B$! But if we were instead handed
+
+~ Math
+[T]_\mathcal{E} = \frac{1}{11} \mqty[21&3\\-4&34],
+~
+
+it would not be evident at all that $T$ has such a simple geometric interpretation.
+
+**Question:**\/ Given any matrix $[T]_\mathcal{E}$, can we find a basis for which $T$ has a simple geometric interpretation (i.e., with respect to which $T$ is diagonal)?
+
+**Definition:**\/ Let $T: V \to V$ be a linear transformation. A vector $\vv \in V$ is an _eigenvector for $T$_\/ if $\vv \ne \vo$ and $\exists \lambda \in \R$ such that $T(\vv) = \lambda\vv$.
+
+**Definition:**\/ $T: V \to V$ is _diagonalizable_\/ iff there exists a basis $\B$ of $V$ for which $[T]_\B$ is a diagonal matrix.
+
+**Theorem:**\/ $T$ is diagonalizable iff there exists a basis for $V$ consisting of eigenvectors for $T$.
+
+_Proof:_\/ Immediate. **QED**\/
+
+
+
+# Lecture 36 (2016-04-13) {  - }
+
+_(Discussion of exam 3 review omitted.)_\/
+
+**Definition:**\/ Given a linear transformation $T: V \to V$, we define
+
+~ Math
+E(\lambda) = \{\vv \in V : T(\vv) = \lambda\vv\}.
+~
+
+Note that $\lambda$ is an eigenvalue of $T$ iff $E(\lambda) \ne \{\vo\}$. In this case, $E(\lambda)$ is called the _eigenspace_\/ of $\lambda$. Clearly, $E(\lambda)$ is a linear subspace of $V$.
+
+If $V = \R^n$, then observe that $T(\vv) = \lambda \vv$ iff $(T - \lambda I_n)\vv = \vo$. Hence, $E(\lambda) = \ker(T - \lambda I_n)$. This shows that $\lambda$ is an eigenvalue of $T$ iff $\det([T] - \lambda I_n) = 0$.
+
+**Definition:**\/ $p_T(t) = \det([T] - tI_n)$ is the _characteristic polynomial_\/ of $T$.
+
+
+
+# Lecture 37 (2016-04-15) {  - }
+
+**Theorem:**\/ Let $T: \R^n \to \R^n$ be a linear transformation. Then eigenvalues of $T$ are precisely the roots of its characteristic polynomial $t \mapsto \det([T] - t I_n)$.
+
+**Definition:**\/ $T$ is _diagonalizable_\/ iff there exists a basis $\B$ for $\R^n$ such that $[T]_\B$ is diagonal.
+
+**Theorem:**\/ $T$ is diagonalizable iff $\R^n$ has a basis consisting of eigenvectors for $T$.
+
+**Definition:**\/ $A \in \mathbb{M}_n$ is _diagonalizable_\/ iff $A$ is similar to a diagonal matrix.
+
+**Fact:**\/ $T$ is diagonalizable iff $[T]$ is diagonalizable.
+
+**Definition:**\/ If $\lambda$ is an eigenvalue of $T$, then $E(\lambda) = \{ \vv \in \R^n : T(\vv) = \lambda\vv \}$ has positive dimension.
+
+Note that $E(\lambda) = N([T] - \lambda I_n)$.
+
+_(Some examples omitted.)_\/
+
+**General 3D Fact:**\/ Suppose $T: \R^3 \to \R^3$ has two distinct eigenvalues $\lambda_1 \ne \lambda_2$ such that $\dim E(\lambda_1) = 1$ and $\dim E(\lambda_2) = 2$. Then $T$ is diagonalizable.
+
+_Proof:_\/ Let $\{\vv_1\}$ be a basis for $E(\lambda_1)$, and $\{\vv_2, \vv_3\}$ be a basis for $E(\lambda_2)$. It suffices to show that $\{\vv_1, \vv_2, \vv_3\}$ is a basis for $\R^3$. Suppose
+
+~ Math
+c_1\vv_1 + c_2\vv_2 + c_3\vv_3 = \vo.
+~
+
+If $c_1 = 0$, then $c_2 = c_3 = 0$, since $\{\vv_2, \vv_3\}$ form a basis. If $c_1 \ne 0$, then $\vv_1$ can be written as a linear combination of $\vv_2$ and $\vv_3$. It follows that $\vv_1$ is an eigenvalue of $T$ with eigenvalue $\lambda_2$, but $\lambda_1 \ne \lambda_2$, a contradiction. **QED**\/
+
+**Definition:**\/ Let $\lambda$ be an eigenvalue of a linear transformation $T: V \to V$.
+
+
+1. The _geometric multiplicity_\/ of $\lambda$ is $d \coloneqq \dim E(\lambda)$.
+   
+
+* The _algebraic multiplicity_\/ of $\lambda$ is the largest integer $m$ such that $(t - \lambda)^m$ is a factor of the characteristic polynomial $p_T(t)$.
+
+We will later prove that $d \le m$. It is not always the case that $d = m$!
+
+**Example:**\/ Take the shear transformation $T: \R^2 \to \R^2$ defined by $\mqty[1&1\\0&1]$. The only eigenvalue of $T$ is 1, with geometric multiplicity $d = 1$ but algebraic multiplicity $m = 2$.
+
+**Diagonalization Theorem:**\/ Let $T: V \to V$ be a linear transformation, with $\dim V = n$. The following are equivalent:
+
+
+1. $T$ is diagonalizable.
+   
+
+* The characteristic polynomial $p_T(t)$ splits over $\R$, and for each eigenvalue $\lambda$, $d = m$.
+   
+
+* If $\lambda_1, \dots, \lambda_k$ are the distinct eigenvalues of $T$, with geometric multiplicities $d_1, \dots, d_k$, then $d_1 + \dots + d_k = n$.
+
+# Lecture 38 (2016-04-18) {  - }
+
+_(Missed part of this lecture.)_\/
+
+**Lemma 1:**\/ If $\lambda_1, \dots, \lambda_k$ are distinct eigenvalues with associated eigenvectors $\vv_1, \dots, \vv_k$, then $\vv_1, \dots, \vv_k$ are linearly independent.
+
+_Proof:_\/ Let $m$ be the largest integer such that $\vv_1, \dots, \vv_m$ are linearly independent. We will show that $m = k$. Suppose $m < k$. Then there exist coefficients $c_1, \dots, c_m$ such that $\vv_{m+1} = c_1\vv_1 + \dots + c_m\vv_m$. It follows that
+~ Math 
+\begin{aligned}
+\vo &= (T - \lambda_{m+1}I_n) \vv_{m+1} \\
+&= (T - \lambda_{m+1}I_n)(c_1\vv_1 + \dots + c_m\vv_m) \\
+&= c_1\lambda_1\vv_1 + \dots + c_m\lambda_m\vv_m - c_1\lambda_{m+1}\vv_1 - \dots - c_m\lambda_{m+1}\vv_m \\
+&= c_1(\lambda_1 - \lambda_{m+1})\vv_1 + \dots + c_m(\lambda_m - \lambda_{m+1})\vv_m
+\end{aligned}
+~
+
+Since the eigenvalues $\lambda_1, \dots, \lambda_{m+1}$ are assumed to be pairwise distinct, we must have $c_1 = \dots = c_m = 0$, a contradiction (since eigenvectors are required to be nonzero). **QED**\/
+
+_Corollaries:_\/ 
+
+1. $T$ has at most $n$ eigenvalues.
+   
+
+* If $T$ has $n$ distinct eigenvalues, then $T$ is diagonalizable.
+
+**Lemma 2:**\/ If $\lambda_1, \dots, \lambda_k$ are distinct eigenvalues and $\B_i$ is a basis for $E(\lambda_i)$ for each $1 \le i \le k$, then $\B = \B_1 \cup \dots \cup \B_k$ is linearly independent.
+
+_Proof:_\/ Say $\B_i = \{\vv_{i1},, \vv_{i2}, \dots, \vv_{id_i}\}$ for each $1 \le i \le k$. Suppose
+
+~ Math
+(c_{11}\vv_{11} + \dots + c_{1d_1}\vv_{1d_1}) + \dots + (c_{k1}\vv_{k1} + \dots + c_{kd_k}\vv_{kd_k}) = \vo
+~
+
+Let $\vw_i = c_{i1}\vv_{i1} + \dots + c_{id_i}\vv_{id_i}$. Then
+
+~ Math
+\vw_1 + \dots + \vw_k = \vo.
+~
+
+Now, any $\vw_j \ne \vo$ is an eigenvector for $\lambda_j$. But any nonzero $\vw_j$'s must be linearly independent by Lemma 1. Linearly independent vectors cannot add up to $\vo$. Hence, we must have $\vw_j = \vo$ for all $j$, and consequently, $c_{ij} = 0$ for all $i,j$. **QED**\/
+
+**Lemma 3:**\/ If $\lambda$ is an eigenvalue, then $1 \le d \le m$.
+
+_Proof:_\/ Let $\{\vv_1, \dots, \vv_d\}$ be a basis for $E(\lambda)$. We can extend this to a basis $\B = \{\vv_1, \dots, \vv_n\}$ of $V$. It follows that
+
+~ Math
+A \coloneqq [T]_\B = \mqty[\lambda I_d & B \\ \vo & C]
+~
+
+for some matrices $B$ and $C$. Consequently,
+
+~ Math
+A - tI_n = \mqty[(\lambda-t) I_d & B \\ \vo & C - tI_d]
+~
+
+and it follows that
+
+~ Math
+\det(A - tI_n) = (\lambda-t)^d \det(C-tI_n).
+~
+
+This shows that $(\lambda-t)$ is a factor of $\det(A - tI_n)$ with multiplicity at least $d$. **QED**\/
+
+
+
+**Lemma 4:**\/ If $T$ is diagonalizable, then $p_T(t)$ splits over $\R$.
+
+_Proof:_\/ This follows immediately from the observation that the characteristic polynomial is independent of basis.
+
+
+
+# Lecture 39 (2016-04-20) 
+
+**Lemma 5:**\/ If $p_T(t)$ splits over $\R$, say $p_T(t) = \pm(t - \lambda_1)^{m_1} \cdots (t - \lambda_k)^{m_k}$ where $\lambda_1, \dots, \lambda_k$ are distinct, then $n = m_1 + \dots + m_k$.
+
+_Proof:_\/ The characteristic polynomial has degree $n$. This is easy to show inductively. The fundamental theorem of algebra immediately implies the result. **QED**\/
+
+**Diagonalization Theorem:**\/ Let $T: V \to V$ be a linear transformation, with $\dim V = n$. The following are equivalent:
+
+
+1. $T$ is diagonalizable.
+   
+
+* The characteristic polynomial $p_T(t)$ splits over $\R$, and for each eigenvalue $\lambda$, $d = m$.
+   
+
+* If $\lambda_1, \dots, \lambda_k$ are the distinct eigenvalues of $T$, with geometric multiplicities $d_1, \dots, d_k$, then $d_1 + \dots + d_k = n$.
+
+_Proof:_\/ We first show that (1) implies (2). Suppose $T$ is diagonalizable. By lemma 4, $p_T(t)$ splits. Let $\lambda_1, \dots, \lambda_k$ be the distinct roots of $p_T(t)$. Since $T$ is diagonalizable, $V$ has a basis $\B$ consisting of eigenvectors for $T$. Since $d_i \coloneqq \dim E(\lambda_i)$, at most $d_i$ of the vectors in $\B$ can be in $E(\lambda_i)$. It follows, by lemmas 3 and 5, that
+
+~ Math
+n = \abs{\B} \le d_1 + \dots + d_k \le m_1 + \dots + m_k = n.
+~
+
+This implies $d_i = m_i$, as desired.
+
+The implication from (2) to (3) follows immediately from lemma 5.
+
+Finally, to see that (3) implies (1), choose a basis $\B_i$ for each $E(\lambda_i)$. Then by lemma 2, $\B = \B_1 \cup \B_2 \cup \dots \cup \B_k$ is linearly independent. By hypothesis, $\abs{\B} \ge n$, but linear independence implies $\B = n$. Since $V$ has a basis of eigenvectors for $T$, $T$ is diagonalizable. **QED**\/
+
+**Spectral Theorem:**\/ Let $T: \R^n \to \R^n$ be a linear transformation. If $T$ has an orthogonal basis of eigenvectors, then $[T]_\mathcal{E}$ is symmetric.
+
+_Proof:_\/ Let $\B = \{\vv_1, \dots, \vv_n\}$ be an orthonormal basis of eigenvectors. Then $[T]_\B = D$ is a diagonal matrix. Let $Q = \mqty[\vv_1 & \cdots & \vv_n] \in \mathbb{M}_n$. Then $Q$ is orthogonal, and $Q^\top = Q^{-1}$. Since $\B \overset{Q}{\rightsquigarrow} \mathcal{E}$ is a change-of-basis matrix, we have
+
+~ Math
+[T]_{\mathcal{E}} = Q[T]_\B Q^{-1} = QDQ^\top
+~
+
+which is clearly symmetric. **QED**\/
+
+**Definition:**\/ $T$ is symmetric iff $[T]_\mathcal{E}$ is symmetric.
+
+**Spectral Theorem:**\/ $T$ is symmetric iff there exists an orthogonal basis for $\R^n$ consisting of eigenvectors of $T$.
+
+**Corollary:**\/ If $T$ is symmetric, then
+
+
+1. $T$ is diagonalizable.
+   
+
+* $p_T(t)$ splits over $\R$.
+   
+
+* All roots of $p_T(t)$ are real.
+
+# Lecture 40 (2016-04-22) 
+
+**Lemma**\/ (Lagrange's Revenge): If $A$ is symmetric, then $A$ has an eigenvalue.
+
+_Proof:_\/ Define $f: \R^n \to \R$ by $f(\vx) = \vx^\top\!A\vx$. Then it is straightforward to show that $Jf(\vx) = 2(A\vx)^\top$. By the maximum value theorem, the restriction of $f$ to the unit sphere $S^{n-1}$ assumes a maximum at some point $\vx_0 \in S^{n-1}$.
+
+**FINISH NOTES HERE LATER**\/
+
+**Second Derivative Test.**\/ Let $U$ be an open subset of $\R^n$, and let $f: U \to \R$ be a smooth function. Let $\vp \in U$ be a critical point of $f$, i.e., $\nabla f(\vp) = \vo$. Recall that the tangent hyperplane to the graph of $f$ at $\vp$ is defined by the normal vector
+
+~ Math
+\mqty[\nabla f(\vp) \\ -1] = \mqty[\vo \\ -1]
+~
+
+When $n = 1$, the second derivative test assumes the following simple form:
+
+
+* If $f''(p) > 0$, then $p$ is a local minimum of $f$.
+   
+
+* If $f''(p) < 0$, then $p$ is a local maximum of $f$.
+   
+
+* If $f''(p) = 0$, then anything might happen.
+
+One proof uses second-order Taylor expansion. Write
+
+~ Math
+f(p+h) = f(p) + f'(p)h + \frac{1}{2}f''(p)h^2 + \eps(h)
+~
+
+where $\eps(h) \in O(h^2)$. Since $f'(p) = 0$, it follows that
+
+~ Math
+\frac{f(p+h) - f(p)}{h^2} = \frac{1}{2}f''(p) + \frac{\eps(h)}{h^2}.
+~
+
+Thus, if $f''(p) > 0$, then $f(p+h) > f(p)$ for all sufficiently small $h$. The $f''(p) < 0$ case follows similarly.
+
+For $n > 1$, let
+
+~ Math
+A \coloneqq Hf(\vp) = \qty[\pdv{f}{x_i}{x_j} (\vp)]
+~
+
+be the Hessian of $f$ at $p$. Let $q: \R^n \to \R$ be the associated quadratic form $q(\vx) = \vx^\top\!Hf(\vp)\vx$. Using multivariable Taylor expansion, we can write
+
+~ Math
+f(\vp + \vh) = f(\vp) + Jf(\vp) \cdot \vh + \frac{1}{2}q(\vh) + \eps(\vh)
+~
+
+whenever $\vp + \vh \in U$, where $\eps(\vh) \in O(\vh^2)$. This suggests that $q(\vh)$ should have a central role in determining whether $\vp$ is a local minimum or maximum (or neither) of $f$.
+
+
+
+# Lecture 41 (2016-04-25) {  - }
+
+**Definition:**\/ We say that the quadratic form $q(\vx) = \vx^\top\!Hf(\vp)\vx$ is
+
+
+* _positive definite_\/ if $q(\vx) > 0$ for all $\vx \ne \vo$. In this case, $\vp$ is a local minimum of $f$.
+   
+
+* _negative definite_\/ if $q(\vx) < 0$ for all $\vx \ne \vo$. In this case, $\vp$ is a local maximum of $f$.
+   
+
+* _indefinite_\/ if $q(\vx)$ assumes both positive and negative values. In this case, $\vp$ is not a local extremum (a "saddle point").
+   
+
+* _semidefinite, but not definite_\/ if none of the above hold. In this case, we cannot make a conclusion; $\vp$ could be a minimum, maximum, or saddle point.
+
+**How to tell the type of a quadratic form?**\/ Let $A \in \mathbb{M}_n$ be a symmetric matrix, and $q: \R^n \to \R$ be the associated quadratic form $q(\vx) = \vx^\top\!\!A\vx$. Let $T: \R^n \to \R^n$ be the linear transformation with standard matrix $A$.
+
+By the spectral theorem, there exists an orthonormal basis $\B$ consisting of eigenvectors of $T$. Thus, there exists an orthogonal change-of-basis matrix $Q$ such that $D = Q^{-1}AQ$ is diagonal. It follows that
+
+~ Math
+q(\vx) = \vx^\top\!\!A\vx = \vx^\top QDQ^\top \vx = (Q^\top \vx)D(Q^\top \vx).
+~
+
+Since $Q^\top$ is a linear isomorphism, this shows that the quadratic forms associated to $A$ and $D$ have the same type. Hence, $A$ is
+
+
+* positive definite if all of its eigenvalues are positive,
+   
+
+* negative definite if all of its eigenvalues are negative,
+   
+
+* indefinite if it has positive and negative eigenvalues, and
+   
+
+* semidefinite if none of the above hold.
+

@@ -1,0 +1,33 @@
+~ Begin HtmlOnly
+~ Begin Nav {.navbar; .navbar-default; .navbar-fixed-top}
+~ Begin Container
+~ Begin Navbar-Header
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/index.html">
+  <img src="/resources/favicon_crop.png" style="max-height:38px" alt="David K. Zhang - Logo" />
+</a>
+~ End Navbar-Header
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li><a href="/index.html">Home</a></li>
+<li><a href="/projects.html">Current Projects</a></li>
+<li><a href="/publications.html">Publications</a></li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lecture Notes <span class="caret"></span></a>
+<ul class="dropdown-menu">
+[INCLUDE=../include/navbar/Notes_List.html]
+</ul>
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li class="active"><a href="/contact.html">Contact</a></li>
+</ul>
+</div>
+~ End Container
+~ End Nav
+~ End HtmlOnly

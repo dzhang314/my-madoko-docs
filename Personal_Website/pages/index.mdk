@@ -1,0 +1,28 @@
+Title: David K. Zhang - Personal Website
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_Home.html]
+
+~ Begin Container
+
+&br;&br;
+
+~ Center
+![linedrawing]
+~
+
+[linedrawing]: ../resources/favicon.png "David K. Zhang - Profile" {width:16em}
+
+Welcome to my personal website! I'm a first-year undergraduate student at
+Vanderbilt University studying math, physics, and computer science.
+Here you can find information on my current research projects and publications,
+along with my personal lecture notes from selected courses.
+
+[Unfortunately, the name "David Zhang" happens to be very common,
+particularly in academia!]{.text-danger}
+If you're looking for someone who doesn't
+wear glasses or an impressive 'fro (pictured above),
+then you've found the wrong website.
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

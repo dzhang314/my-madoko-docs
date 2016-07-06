@@ -1,0 +1,39 @@
+
+Package    : mathtools
+Package    : physics
+Package    : parskip
+Package    : bm
+Package    : tikz-cd
+
+~ MathDefs
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\CB}{C_\mathcal{B}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\gcvec}[2]{\smqty[{#1}_1 \\ \vdots \\ {#1}_{#2}]}
+\newcommand{\vva}{\mathbf{a}}
+\newcommand{\vvb}{\mathbf{b}}
+\newcommand{\vc}{\mathbf{c}}
+\newcommand{\ve}{\mathbf{e}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vp}{\mathbf{p}}
+\newcommand{\vq}{\mathbf{q}}
+\newcommand{\vvu}{\mathbf{u}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vo}{\mathbf{0}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\matspace}[2]{\mathbb{M}_{#1,#2}}
+\newcommand{\opensubset}{\stackrel{\mathclap{\textsf{\mbox{open}}}}{\subseteq}}
+\newcommand{\proj}{\mathrm{proj}}
+\newcommand{\lspan}{\mathrm{span}}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\bijto}{\hookrightarrow \!\!\!\!\! \rightarrow}
+~
