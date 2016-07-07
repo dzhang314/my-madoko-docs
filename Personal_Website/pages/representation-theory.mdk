@@ -1,0 +1,41 @@
+Title: Representation Theory - David K. Zhang - Personal Website
+
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ Begin MathDefs
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+~ End MathDefs
+
+~ Begin Container
+
+~ Begin Center
+# Notes on Representation Theory {-}
+
+By David K. Zhang
+~ End Center
+
+&br;
+~ Begin Panel {.panel-info}
+~ Begin Panel-Heading
+#### Under Construction! {-; margin=0px; padding=0px}
+~ End Panel-Heading
+~ End Panel
+
+~ Begin Well {.well-sm}
+**Definition:** Let $G$ be a finite group, and $V$ a finite-dimensional vector space over $\C$. A *representation of $G$ over $V$* is a homomorphism
+{margin:0px; padding:0px}
+~ End Well
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+_Note:_ 
+~ End Panel-Body
+~ End Panel
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

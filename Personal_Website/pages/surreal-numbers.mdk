@@ -132,9 +132,9 @@ where each $a_n \in \No$ is a surreal number of length $n$ obtained by appending
 ~
 allowing us to represent $\frac{1}{3}$ by the surreal number
 ~ Math
-({+}{-}{-}{+}{-}{+}\overline{{-}{+}}...)
+({+}{-}{-}{+}{-}{+}\overline{{-}{+}}\cdots)
 ~
-where the overline indicates the repeating part of the $\{+,-\}$-expansion. In this way, we can represent any real number by a surreal number of length at most $\omega$. One might imagine that the real line is obtained by drawing the surreal tree down to "level $\omega$," and projecting the resulting points onto a horizontal axis, excluding the two "points at infinity" given by the sequences $({+}{+}{+}\dots)$ and $({-}{-}{-}\dots).$
+where the overline indicates the repeating part of the $\{+,-\}$-expansion. In this way, we can represent any real number by a surreal number of length at most $\omega$. One might imagine that the real line is obtained by drawing the surreal tree down to "level $\omega$," and projecting the resulting points onto a horizontal axis, excluding the two "points at infinity" given by the sequences $({+}{+}{+}\cdots)$ and $({-}{-}{-}\cdots).$
 
 ~ Begin Well {.well-sm}
 [**Warning!**]{.text-danger} The correspondence described in this section should, at present, be considered purely conjectural. It remains to be shown that this assignment of numbers to $\{+,-\}$ sequences has any algebraic validity --- for example, when addition of surreal numbers is defined in a later chapter, we will have to _prove_ that the number here identified as $0$ is in fact the additive identity. Likewise, simple arithmetic facts, such as $1 + 1 = 2$ or $3 \div 6 = \frac{1}{2}$, should presently be considered unproven theorems. (They will, of course, turn out to be correct in due time.)
@@ -144,17 +144,24 @@ Nonetheless, it will be useful to keep this correspondence in mind, as it will p
 ~ End Well
 
 ## Order Properties of $\No$
+
+Before we can begin doing arithmetic in $\No$, it will first be necessary to establish some fundamental properties of the lexicographic order relation $<$. Our goal will be to establish the *Canonical Representation Theorem,* which allows us to recursively represent any given surreal number in terms of strictly simpler surreal numbers. This will allow us to construct *inductively* the operations of surreal arithmetic, in similar fashion to the usual definitions of natural- and ordinal-number arithmetic.
+
+We begin with a lemma establishing the counterinuitive property that *all subsets of $\No$ are bounded.*
+
 ~ Begin Well {.well-sm}
-~ Begin Theorem {margin:0px; padding:0px}
+~ Begin Lemma {margin:0px; padding:0px}
 Let $F$ be _any set_ of surreal numbers. Then $F$ has a unique simplest upper bound and a unique simplest lower bound.
 {margin:0px; padding:0px}
-~ End Theorem
-
+~ End Lemma
 ~ End Well
+
 ~ Begin Well {.well-sm}
 **Notation:** We write $\sub(F)$ and $\slb(F)$ for the simplest upper bound and simplest lower bound of $F$, respectively.
 {margin:0px; padding:0px}
 ~ End Well
+
+Note that we must be careful to distinguish *subsets* of $\No$ from *subclasses* of $\No$. Clearly, $\No$ itself is unbounded, since there exist arbitrarily long ordinal sequences of the form $({+}{+}{+}\cdots)$. However, any *set-sized* subcollection of $\No$ is "too small" to contain all such sequences. This is essentially the intutition behind the following proof.
 
 ~ Begin Proof
 Let $F \subset \No$ be given. First, observe that if $\sub(F)$ exists, then it cannot contain any minuses. Indeed, if $\sub(F)$ were to contain a minus, then by deleting everything from that minus onward, we would obtain a strictly larger and strictly simpler surreal number, contradicting the definition of $\sub(F)$.
