@@ -1,4 +1,4 @@
-Title: Representation Theory - David K. Zhang - Personal Website
+Title: [TOPIC NAME HERE] - David K. Zhang - Personal Website
 
 [INCLUDE=../include/DZ_Bootstrap.mdk]
 [INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
@@ -13,7 +13,7 @@ Title: Representation Theory - David K. Zhang - Personal Website
 ~ Begin Container
 
 ~ Begin Center
-# Notes on the Representation Theory of Finite Groups {-}
+# Notes on [TOPIC NAME HERE] {-}
 
 By David K. Zhang
 ~ End Center
@@ -23,6 +23,17 @@ By David K. Zhang
 ~ Begin Panel-Heading
 #### Under Construction! {-; margin=0px; padding=0px}
 ~ End Panel-Heading
+~ End Panel
+
+~ Begin Well {.well-sm}
+**Definition:** This is a well, used for definitions and theorems.
+{margin:0px; padding:0px}
+~ End Well
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+_Note:_ This is a panel, used for inessential clarifying discussion.
+~ End Panel-Body
 ~ End Panel
 
 [INCLUDE=../include/DZ_Footer]
