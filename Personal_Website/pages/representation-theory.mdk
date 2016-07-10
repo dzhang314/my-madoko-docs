@@ -1,4 +1,6 @@
 Title: Representation Theory - David K. Zhang - Personal Website
+Package: physics
+Package: mathrsfs
 
 [INCLUDE=../include/DZ_Bootstrap.mdk]
 [INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
@@ -8,6 +10,10 @@ Title: Representation Theory - David K. Zhang - Personal Website
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
+\newcommand{\GL}{\mathbf{GL}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vo}{\mathbf{0}}
 ~ End MathDefs
 
 ~ Begin Container
@@ -24,6 +30,136 @@ By David K. Zhang
 #### Under Construction! {-; margin=0px; padding=0px}
 ~ End Panel-Heading
 ~ End Panel
+
+**Definition:** Let $G$ be a group, and let $V$ be a vector space over a field $F.$ A _representation of $G$ on $V$_ is a group homomorphism $\rho: G \to \GL(V),$ where $\GL(V)$ denotes the group of invertible linear transformations $V \to V.$
+
+We can think of the representation $\rho$ as defining a left action of the group $G$ on the vector space $V,$ given by
+~ Math
+g \cdot v = \rho(g)(v) = \rho_g v
+~
+for each $g \in G$ and $v \in V.$ (For brevity of notation, we will often write $\rho_g$ in place of $\rho(g).$) Since $\rho$ is a homomorphism, we must have $\rho_e = \operatorname{Id}_V,$ where $e \in G$ denotes the identity element, and $\rho_{g^{-1}} = (\rho_g)^{-1}$ for all $g \in G.$
+
+**Definition:** The cardinal number $\dim_F(V)$ is called the _degree_ of the representation $\rho.$
+
+In these notes, we will focus on the special case in which $G$ is a finite group and $V$ is a finite-dimensional vector space over the field $\C$ of complex numbers. This case occurs frequently in physical and chemical applications. **TODO: Add some motivation for studying representation theory.**
+
+In this special case, we can identify $V$ with the vector space $\C^n$ of $n$-tuples of complex numbers by choosing an ordered basis $\{\vb{v}_1, \dots, \vb{v}_n\}$ of $V$ to identify with the standard basis $\{\vb{e}_1, \dots, \vb{e}_n\}$ of $\C^n.$ The representation $\rho$ thus associates to each group element $g \in G$ an invertible $n \times n$ complex matrix $[\rho_g]$ (which depends implicitly on the choice of basis in $V$).
+
+**Definition:** The _character_ of the representation $\rho$ is the function $\chi: G \to \C$ defined by
+~ Math
+\chi(g) = \Tr[\rho_g] = \sum_{i=1}^n [\rho_g]_{ii}
+~
+for all $g \in G.$ (Recall that the trace of the matrix representation of a linear transformation is independent of the choice of basis.)
+
+-----
+
+# Elementary Theory of Vector Spaces
+
+
+**Definition:** Let $G$ be a group, and let $X$ be an arbitrary set. An _action of $G$ on $X$_ is a function $\alpha: G \times X \to X$ satisfying the following axioms:
+
+1. $\alpha(g, \alpha(h, x)) = \alpha(gh, x)$ for all $g,h \in G$ and $x \in X.$
+2. $\alpha(e, x) = x$ for all $x \in X,$ where $e$ denotes the identity element of $G.$
+
+We write $\alpha: G \curvearrowright X$ as a shorthand for the statement "$\alpha$ is an action of $G$ on $X.$" When the function $\alpha$ is clear from context, it is common to suppress it notationally by writing $g \cdot x$ or simply $gx$ instead of $\alpha(g, x).$ In this case, we say that $X$ is a _$G$-set_, and the preceding axioms take the following form:
+
+1. $g(hx) = (gh)x$ for all $g,h \in G$ and $x \in X.$
+2. $ex = x$ for all $x \in X,$ where $e$ denotes the identity element of $G.$
+
+Group actions arise whenever we want to think of a group $G$ as a collection of transformations acting on some set $X.$ For example, the special orthogonal group $\mathsf{SO}(n, \mathbb{R})$ (which consists of all real orthogonal $n \times n$ matrices with determinant $1$) is naturally viewed as a collection of rotations acting on $\mathbb{R}^n.$ In this case, we have an obvious action $\mathsf{SO}(n, \mathbb{R}) \curvearrowright \mathbb{R}^n$ given by the usual matrix-vector product.
+
+Given a group action $\alpha: G \curvearrowright X,$ we can consider for each $g \in G$ the function $\alpha_g: X \to X$ obtained by fixing the first argument of $\alpha$ and allowing the second to vary. Explicitly, we define
+~ Math
+\alpha_g(x) = \alpha(g, x)
+~
+for all $g \in G$ and $x \in X.$ Observe that each of the functions $\alpha_g$ is a bijection, since by axioms 1 and 2, the inverse of $\alpha_g$ is $\alpha_{g^{-1}}.$ This means that each $\alpha_g$ is a simply a permutation of the elements of $X.$ Indeed, the whole action $\alpha$ can equivalently be defined as an embedding of $G$ into the symmetric group $\operatorname{Sym}(X)$ of permutations of $X,$ i.e., a group homomorphism $G \to \operatorname{Sym}(X)$ given by $g \mapsto \alpha_g.$
+
+
+
+**Definition:** Let $F$ be a field. A _vector space over $F$_ consists of a group $(V, +)$ together with a binary operation $\mu: F \times V \to V$ called _scalar multiplication_, here written as $(f, \vv) \mapsto f \cdot \vv,$ that satisfies the following axioms:
+
+1. $1 \cdot \vv = \vv$ for all $\vv \in V,$ where $1$ denotes the multiplicative identity element of $F.$
+2. $(ab) \cdot \vv = a \cdot (b \cdot \vv)$ for all $a,b \in F$ and $\vv \in V.$
+3. $(a + b) \cdot \vv = (a \cdot \vv) + (b \cdot \vv)$ for all $a,b \in F$ and $\vv \in V.$
+4. $a \cdot (\vv + \vw) = (a \cdot \vv) + (a \cdot \vw)$ for all $a \in F$ and $\vv, \vw \in V.$
+
+Here, we have adopted the convention (common among physicists and engineers) that elements of $V,$ referred to as _vectors_, are denoted by upright bold lowercase letters, while elements of $F,$ referred to as _scalars_, are denoted by italic lowercase letters. Accordingly, we refer to the group operation $+$ of $V$ as _vector addition,_ and we will write $0$ and $\vo$ for the additive identity elements of $F$ and $V$ respectively.
+
+Observe that axioms 1 and 2 are precisely the conditions for $\mu$ to define a group action $\mu: F^* \curvearrowright V,$ where $F^*$ denotes the multiplicative group of nonzero elements of $F.$ Thus, the scalar multiplication $\mu$ can be thought of as a "multiplicative field action" of $F$ on $V,$ which is required to distribute over addition in $F$ and $V$ (as stipulated in axioms 3 and 4).
+
+Note that while we are writing the group operation of $V$ additively, we have *not* assumed that $V$ is abelian! Many textbook authors unnecessarily make this assumption, when in fact we can *prove* from axioms 1-4 that $V$ must be abelian.
+
+**Theorem:** Let $V$ be a vector space over a field $F.$ Then $(V, +)$ is an abelian group, where $+$ denotes vector addition.
+
+*Proof:* Let $\vv, \vw \in V.$ Observe that
+~ Math
+(\vv + \vw) + (\vv + \vw) = (\vv + \vv) + (\vw + \vw)
+~
+since by axioms 1, 3, and 4, both the LHS and RHS are equal to the vector $(1 + 1) \cdot (\vv + \vw).$ By associativity, this implies
+~ Math
+\vv + (\vw + \vv) + \vw = \vv + (\vv + \vw) + \vw
+~
+and by cancelling $\vv$ on the left and $\vw$ on the right, we obtain $\vw + \vv = \vv + \vw,$ as desired. **QED**
+
+----------
+<!-- begin misc theorems -->
+
+**Definition:** Let $V$ be a vector space over $F,$ and let $S$ be a subset of $V.$ A _linear combination_ of elements of $S$ is a vector of the form
+~ Math
+c_1 \cdot \vv_1 + c_2 \cdot \vv_2 + \cdots + c_n \cdot \vv_n
+~
+where $n$ is a natural number, $c_1, \dots, c_n \in F,$ and $\vv_1, \dots, \vv_n \in S.$ If $n = 0,$ then we define the _empty linear combination_ to have the value $\vo \in V.$ The _span_ of $S$ is the set of all linear combinations of elements of $S.$
+
+If we wish to be specific about the field $F$ from which the coefficients $c_i$ are drawn, we can refer to linear combinations as _$F$-linear combinations._ For example, we might wish to take $\R$-linear combinations in a vector space over $\C.$ Note that our convention for the empty linear combination implies that the span of the empty set is the singleton $\{\vo\}.$
+
+**Definition:** Let $V$ be a vector space over $F.$ A subset $S$ of $V$ is said to be _linearly independent_ if no linear combination of elements of $S$ equals $\vo$ except the trivial linear combination. In other words, for every $n \in \mathbb{N}$ and every pair of sequences $c_1, \dots, c_n \in F$ and $\vv_1, \dots, \vv_n \in S,$ we have
+~ Math
+c_1 \cdot \vv_1 + \cdots + c_n \cdot \vv_n = \vo
+~
+only when $c_1 = \cdots = c_n = 0.$ Otherwise, if some nontrivial linear combination gives $\vo,$ $S$ is said to be _linearly dependent._
+
+Note that any subset of $V$ containing $\vo$ is automatically linearly dependent. Moreover, the empty subset of any vector space is linearly independent, since the condition above is vacuously satisfied.
+
+**Definition:** Let $V$ be a vector space over $F.$ A _basis_ of $V$ is a subset $S$ of $V$ which is linearly independent and whose span is equal to $V.$
+
+**Lemma:** Let $V$ be a vector space over $F.$ If a subset $S$ of $V$ is linearly independent, then for any vector $\vv \in V$ lying outside the span of $S,$ $S \cup \{\vv\}$ is linearly independent.
+
+*Proof:* by contraposition. Suppose $S \cup \{\vv\}$ is linearly dependent. Then we can pick $n \in \mathbb{N},$ $c_1, \dots, c_n, c_{n+1} \in F,$ and $\vv_1, \dots, \vv_n \in V$ such that
+~ Math
+c_1 \cdot \vv_1 + \cdots + c_n \cdot \vv_n + c_{n+1} \vv = \vo.
+~
+If $c_{n+1} = 0,$ then we have
+~ Math
+c_1 \cdot \vv_1 + \cdots + c_n \cdot \vv_n + \vo = \vo
+~
+showing that $S$ is linearly dependent. Otherwise, if $c_{n+1} \ne 0,$ then we can write
+~ Math
+-\frac{c_1}{c_{n+1}} \cdot \vv_1 - \cdots - -\frac{c_n}{c_{n+1}} \cdot \vv_n = \vv
+~
+showing that $V$ lies in the span of $S.$ **QED**
+
+**Theorem:** Every vector space has a basis.
+
+*Proof:* Let $V$ be a vector space over a field $F,$ and consider the poset $P$ of linearly independent subsets of $V$ ordered by inclusion. We will proceed by applying Zorn's lemma to $P,$ so we first verify that the hypotheses of Zorn's lemma hold. $P$ is clearly nonempty, since the empty set is vacuously a linearly independent subset of $V.$
+
+Suppose that $\{C_i : i \in I\}$ is a chain in $P,$ indexed by some index set $I.$ Let $\mathscr{C} = \bigcup_{i \in I} C_i.$ Clearly, $\mathscr{C}$ is an upper bound of $\{C_i : i \in I\}$; we claim that it is also linearly independent. Indeed, if $\mathscr{C}$ were linearly dependent, then we could find a nontrivial linear combination of elements of $\mathscr{C}$ equal to zero. But the vectors $\vv_1, \dots, \vv_n \in \mathscr{C}$ involved in such a linear combination would all have to be present in some $C_i,$ since there are only a finite number of such vectors. Thus, $C_i$ would be linearly dependent, contradicting the assumption that $\{C_i : i \in I\}$ is a chain in $P.$
+
+Zorn's lemma now guarantees the existence of a maximal element $S$ of $P.$ We claim that $S$ must be a basis of $V.$ Indeed, if the span of $S$ were not equal to $V,$ then by the previous lemma, we could enlarge $S$ by adding a vector $\vv \in V$ lying outside of its span. This would contradict the maximality of $S$; hence, $S$ is a basis of $V.$ **QED**
+
+**Lemma:** If a vector space has a finite basis, then all of its bases are finite and have the same size.
+
+*Proof:* **TO BE WRITTEN**
+
+**Theorem:** All bases of a given vector space have the same cardinality.
+
+*Proof:* **TO BE WRITTEN**
+
+**Definition:** The _dimension_ of a vector space is the cardinality of one (and hence all) of its bases.
+
+**Definition:** Let $V$ and $W$ be vector spaces over a common field $F$. A function $f: V \to W$ is called a _linear transformation,_ _linear map,_ or _vector space homomorphism_ if it satisfies the following conditions:
+
+1. $f(\vv + \vw) = f(\vv) + f(\vw)$ for all $\vv, \vw \in V$.
+2. $f(c\vv) = cf(\vv)$ for all $\vv \in V$ and $c \in F$.
 
 [INCLUDE=../include/DZ_Footer]
 
