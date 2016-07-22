@@ -1,11 +1,13 @@
 Title: Representation Theory - David K. Zhang - Personal Website
 Package: physics
 Package: mathrsfs
+Package: mathtools
 
 [INCLUDE=../include/DZ_Bootstrap.mdk]
 [INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
 
 ~ Begin MathDefs
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
@@ -51,45 +53,108 @@ In this special case, we can identify $V$ with the vector space $\C^n$ of $n$-tu
 ~
 for all $g \in G.$ (Recall that the trace of the matrix representation of a linear transformation is independent of the choice of basis.)
 
------
+----------
 
-# Elementary Theory of Vector Spaces
+# Group Actions
 
-
+~ Begin Well {.well-sm}
 **Definition:** Let $G$ be a group, and let $X$ be an arbitrary set. An _action of $G$ on $X$_ is a function $\alpha: G \times X \to X$ satisfying the following axioms:
 
 1. $\alpha(g, \alpha(h, x)) = \alpha(gh, x)$ for all $g,h \in G$ and $x \in X.$
 2. $\alpha(e, x) = x$ for all $x \in X,$ where $e$ denotes the identity element of $G.$
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
-We write $\alpha: G \curvearrowright X$ as a shorthand for the statement "$\alpha$ is an action of $G$ on $X.$" When the function $\alpha$ is clear from context, it is common to suppress it notationally by writing $g \cdot x$ or simply $gx$ instead of $\alpha(g, x).$ In this case, we say that $X$ is a _$G$-set_, and the preceding axioms take the following form:
+~ Begin Well {.well-sm}
+**Notation:** We write $\alpha: G \curvearrowright X$ as a shorthand for the statement "$\alpha$ is an action of $G$ on $X.$" When the function $\alpha$ is clear from context, it is common to suppress it notationally by writing $g \cdot x$ or simply $gx$ instead of $\alpha(g, x).$ In this case, we say that $X$ is a _$G$-set_, and the preceding axioms take the following form:
 
 1. $g(hx) = (gh)x$ for all $g,h \in G$ and $x \in X.$
 2. $ex = x$ for all $x \in X,$ where $e$ denotes the identity element of $G.$
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 Group actions arise whenever we want to think of a group $G$ as a collection of transformations acting on some set $X.$ For example, the special orthogonal group $\mathsf{SO}(n, \mathbb{R})$ (which consists of all real orthogonal $n \times n$ matrices with determinant $1$) is naturally viewed as a collection of rotations acting on $\mathbb{R}^n.$ In this case, we have an obvious action $\mathsf{SO}(n, \mathbb{R}) \curvearrowright \mathbb{R}^n$ given by the usual matrix-vector product.
 
-Given a group action $\alpha: G \curvearrowright X,$ we can consider for each $g \in G$ the function $\alpha_g: X \to X$ obtained by fixing the first argument of $\alpha$ and allowing the second to vary. Explicitly, we define
+The pervasiveness of group actions in mathematics and mathematical physics is not to be understated. Indeed, the very notion of a group is essentially an algebraic formalization of the idea of a collection of invertible transformations which is closed under composition. Thus, it is common for a group to be understood and characterized in terms of its actions.
+
+This approach can provide significant conceptual advantages over attempting to understand a group through its internal algebraic structure. It is, for example, much easier to think of $\mathsf{SO}(n, \mathbb{R})$ as the group of rigid rotations of Euclidean $n$-space, as opposed to a collection of arrays of real numbers, constrained to satisfy certain algebraic identities and endowed with a mysterious rule of combination.
+
+Suppose now that we are given a group action $\alpha: G \curvearrowright X.$ We can consider, for each $g \in G$, the function $\alpha_g: X \to X$ obtained by fixing the first argument of $\alpha$ at $g$ and allowing the second to vary. Explicitly, we define
 ~ Math
 \alpha_g(x) = \alpha(g, x)
 ~
-for all $g \in G$ and $x \in X.$ Observe that each of the functions $\alpha_g$ is a bijection, since by axioms 1 and 2, the inverse of $\alpha_g$ is $\alpha_{g^{-1}}.$ This means that each $\alpha_g$ is a simply a permutation of the elements of $X.$ Indeed, the whole action $\alpha$ can equivalently be defined as an embedding of $G$ into the symmetric group $\operatorname{Sym}(X)$ of permutations of $X,$ i.e., a group homomorphism $G \to \operatorname{Sym}(X)$ given by $g \mapsto \alpha_g.$
+for all $g \in G$ and $x \in X.$ Observe that each of the functions $\alpha_g$ is a bijection, since by axioms 1 and 2, $\alpha_g$ has an inverse given by $\alpha_{g^{-1}}.$ This means that each $\alpha_g$ is a simply a permutation of the elements of $X.$ Indeed, we can equivalently think of the group action $\alpha$ as an embedding of $G$ into the symmetric group $\operatorname{Sym}(X)$ of permutations of $X,$ i.e., a group homomorphism $G \to \operatorname{Sym}(X)$ given by $g \mapsto \alpha_g.$
+
+## Orbits and Stabilizers
+
+At this point, there are two natural questions we may wish to ask regarding the behavior of the action of a group $G$ on a particular element $x \in X$.
+
+1. What elements of $X$ can $x$ be transformed into under the action of $G$?
+2. Which elements of $g$ effect a transformation that leaves $x$ unchanged?
+
+To explore these questions, we make the following definitions.
+
+~ Begin Well {.well-sm}
+**Definition:** If $X$ is a $G$-set and $x \in X$, then the _orbit_ of $x$ under $G$ is the set
+~ Math
+Gx \coloneqq \{ gx : g \in G \}.
+~
+The _stabilizer_ of $x$ under $G$ is the set
+~ Math {margin-bottom:0px; padding-bottom:0px}
+G_x \coloneqq \{ g \in G : gx = x \}.
+~
+~ End Well
+(These notations are unfortunately very similar, particularly in handwriting.)
+
+It is easy to see that the stabilizer $G_x$ of any element $x \in X$ is a subgroup of $G$. Indeed, if two permutations $\alpha_g$ and $\alpha_h$ leave $x$ unchanged, then clearly their composition $\alpha_g \circ \alpha_h = \alpha_{gh}$ also leaves $x$ unchanged, and the inverse $(\alpha_g)^{-1} = \alpha_{g^{-1}}$ also leaves $x$ unchanged. For this reason, $G_x$ is often called the _stabilizer subgroup_ or _isotropy subgroup_ of $G$ with respect to $x$.
+
+It is also easy to see that the orbits of any two elements $x,y \in X$ are either disjoint or identical; they cannot partially overlap. Indeed, if the intersection $Gx \cap Gy$ is nonempty, then there exist $h,k \in G$ such that $hx = ky$. It follows that we can write $x = h^{-1}ky$, and hence that
+~ Math
+Gx = \{ gx : g \in G \} = \{ gh^{-1}ky : g \in G \} = \{ gy : g \in G \} = Gy.
+~
+Thus, we see that the collection of all orbits of elements of $X$, denoted by
+~ Math
+X/G \coloneqq \{ Gx : x \in X \},
+~
+forms a partition of the set $X.$
+
+Having introduced orbits and stabilizers side-by-side, we hope that the reader is beginning to suspect some sort of connection between these two notions. Indeed, such connections are provided by the following two results:
+
+~ Begin Theorem {caption:Orbit-Stabilizer Theorem}
+**TODO: Write up the Orbit-Stabilizer Theorem and its proof.**
+~ End Theorem
+
+~ Begin Theorem {caption:"Burnside's Lemma"}
+**TODO: Write up Burnside's Lemma and its proof.**
+~ End Theorem
 
 
 
+# Vector Spaces
+
+~ Begin Well {.well-sm}
 **Definition:** Let $F$ be a field. A _vector space over $F$_ consists of a group $(V, +)$ together with a binary operation $\mu: F \times V \to V$ called _scalar multiplication_, here written as $(f, \vv) \mapsto f \cdot \vv,$ that satisfies the following axioms:
 
 1. $1 \cdot \vv = \vv$ for all $\vv \in V,$ where $1$ denotes the multiplicative identity element of $F.$
 2. $(ab) \cdot \vv = a \cdot (b \cdot \vv)$ for all $a,b \in F$ and $\vv \in V.$
 3. $(a + b) \cdot \vv = (a \cdot \vv) + (b \cdot \vv)$ for all $a,b \in F$ and $\vv \in V.$
 4. $a \cdot (\vv + \vw) = (a \cdot \vv) + (a \cdot \vw)$ for all $a \in F$ and $\vv, \vw \in V.$
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
-Here, we have adopted the convention (common among physicists and engineers) that elements of $V,$ referred to as _vectors_, are denoted by upright bold lowercase letters, while elements of $F,$ referred to as _scalars_, are denoted by italic lowercase letters. Accordingly, we refer to the group operation $+$ of $V$ as _vector addition,_ and we will write $0$ and $\vo$ for the additive identity elements of $F$ and $V$ respectively.
+~ Begin Well {.well-sm}
+**Notation:** Here, we adopt the convention (common among physicists and engineers) that elements of $V,$ referred to as _vectors_, are denoted by upright bold lowercase letters, while elements of $F,$ referred to as _scalars_, are denoted by italic lowercase letters. Accordingly, we refer to the group operation $+$ of $V$ as _vector addition,_ and we will write $0$ and $\vo$ for the additive identity elements of $F$ and $V$ respectively.
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 Observe that axioms 1 and 2 are precisely the conditions for $\mu$ to define a group action $\mu: F^* \curvearrowright V,$ where $F^*$ denotes the multiplicative group of nonzero elements of $F.$ Thus, the scalar multiplication $\mu$ can be thought of as a "multiplicative field action" of $F$ on $V,$ which is required to distribute over addition in $F$ and $V$ (as stipulated in axioms 3 and 4).
 
 Note that while we are writing the group operation of $V$ additively, we have *not* assumed that $V$ is abelian! Many textbook authors unnecessarily make this assumption, when in fact we can *prove* from axioms 1-4 that $V$ must be abelian.
 
+~ Begin Well {.well-sm}
 **Theorem:** Let $V$ be a vector space over a field $F.$ Then $(V, +)$ is an abelian group, where $+$ denotes vector addition.
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 *Proof:* Let $\vv, \vw \in V.$ Observe that
 ~ Math
@@ -101,28 +166,77 @@ since by axioms 1, 3, and 4, both the LHS and RHS are equal to the vector $(1 + 
 ~
 and by cancelling $\vv$ on the left and $\vw$ on the right, we obtain $\vw + \vv = \vv + \vw,$ as desired. **QED**
 
+This shows that the requirement of a "multiplicative field action" in the definition of a vector space is quite restrictive --- no non-abelian group admits one!
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+**Examples of vector spaces:**
+
+1. Any field $F$ is trivially a vector space over itself. Simply take vector addition and scalar multiplication to be field addition and multiplication in $F$. The vector space axioms then follow from the field axioms.
+
+2. More generally, for any $n \in \N$ there is a natural vector space structure on $F^n$, the set of all $n$-tuples of elements of $F$, with vector addition and scalar multiplication defined by
+~ Math
+\mqty[x_1 \\ \vdots \\ x_n] + \mqty[y_1 \\ \vdots \\ y_n]
+\coloneqq \mqty[x_1 + y_1 \\ \vdots \\ x_n + y_n]
+\qquad
+c \cdot \mqty[x_1 \\ \vdots \\ x_n]
+\coloneqq \mqty[cx_1 \\ \vdots \\ cx_n]_{\text{\normalsize .}}
+~
+We will later see that this is an example of a vector space of _dimension $n,$_ coinciding with the intuition that there are $n$ independent "degrees of freedom" given by modifying each component separately. The most familiar examples of vector spaces (as typically seen in undergraduate linear algebra) are obtained by taking $F = \R$ or $F = \C.$
+
+   Note that for $n = 0$, the vector space $F^0$ obtained from this construction is simply the singleton set $\{(\ )\}$, where $(\ )$ is the empty tuple. This is called the _trivial vector space_ over $F,$ and is the unique vector space having dimension $0$ and cardinality $1.$
+
+3. Even more generally, let $X$ be any set, and consider the set of all functions $\{f: X \to F\}$ endowed with pointwise addition and scalar multiplication. This is naturally a vector space in the same way as the previous example; indeed, the previous example is just the special case of a finite indexing set $X = \{1, \dots, n\}$.
+
+   Note that this vector space does *not,* in general, have dimension equal to the cardinality of $X!$ This may seem counterintuitive, since a function $f: X \to F$ has one "degree of freedom" for each element of $X$. This is a subtlety in the way that dimension is defined for vector spaces, which we will return to later.
+~ End Panel-Body
+~ End Panel
+
+**Definition:** Let $V$ and $W$ be vector spaces over a common field $F$. A function $f: V \to W$ is called a _linear transformation,_ _linear map,_ or _vector space homomorphism_ if it satisfies the following conditions:
+
+1. $f(\vv + \vw) = f(\vv) + f(\vw)$ for all $\vv, \vw \in V$.
+2. $f(c\vv) = cf(\vv)$ for all $\vv \in V$ and $c \in F$.
+
+
+
+## Vector Spaces over Subfields
+
+Suppose $V$ is a vector space over a field $F$, and let $K$ be a subfield of $F$. Then by restricting the scalar multiplication function $\mu: F \times V \to V$ to $\mu|_K: K \times V \to V$, we obtain a vector space structure of $V$ over the smaller field $K$.
+
 ----------
 <!-- begin misc theorems -->
 
+~ Begin Well {.well-sm}
 **Definition:** Let $V$ be a vector space over $F,$ and let $S$ be a subset of $V.$ A _linear combination_ of elements of $S$ is a vector of the form
 ~ Math
 c_1 \cdot \vv_1 + c_2 \cdot \vv_2 + \cdots + c_n \cdot \vv_n
 ~
 where $n$ is a natural number, $c_1, \dots, c_n \in F,$ and $\vv_1, \dots, \vv_n \in S.$ If $n = 0,$ then we define the _empty linear combination_ to have the value $\vo \in V.$ The _span_ of $S$ is the set of all linear combinations of elements of $S.$
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 If we wish to be specific about the field $F$ from which the coefficients $c_i$ are drawn, we can refer to linear combinations as _$F$-linear combinations._ For example, we might wish to take $\R$-linear combinations in a vector space over $\C.$ Note that our convention for the empty linear combination implies that the span of the empty set is the singleton $\{\vo\}.$
 
+~ Begin Well {.well-sm}
 **Definition:** Let $V$ be a vector space over $F.$ A subset $S$ of $V$ is said to be _linearly independent_ if no linear combination of elements of $S$ equals $\vo$ except the trivial linear combination. In other words, for every $n \in \mathbb{N}$ and every pair of sequences $c_1, \dots, c_n \in F$ and $\vv_1, \dots, \vv_n \in S,$ we have
 ~ Math
 c_1 \cdot \vv_1 + \cdots + c_n \cdot \vv_n = \vo
 ~
 only when $c_1 = \cdots = c_n = 0.$ Otherwise, if some nontrivial linear combination gives $\vo,$ $S$ is said to be _linearly dependent._
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 Note that any subset of $V$ containing $\vo$ is automatically linearly dependent. Moreover, the empty subset of any vector space is linearly independent, since the condition above is vacuously satisfied.
 
+~ Begin Well {.well-sm}
 **Definition:** Let $V$ be a vector space over $F.$ A _basis_ of $V$ is a subset $S$ of $V$ which is linearly independent and whose span is equal to $V.$
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
+~ Begin Well {.well-sm}
 **Lemma:** Let $V$ be a vector space over $F.$ If a subset $S$ of $V$ is linearly independent, then for any vector $\vv \in V$ lying outside the span of $S,$ $S \cup \{\vv\}$ is linearly independent.
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 *Proof:* by contraposition. Suppose $S \cup \{\vv\}$ is linearly dependent. Then we can pick $n \in \mathbb{N},$ $c_1, \dots, c_n, c_{n+1} \in F,$ and $\vv_1, \dots, \vv_n \in V$ such that
 ~ Math
@@ -138,13 +252,16 @@ showing that $S$ is linearly dependent. Otherwise, if $c_{n+1} \ne 0,$ then we c
 ~
 showing that $V$ lies in the span of $S.$ **QED**
 
+~ Begin Well {.well-sm}
 **Theorem:** Every vector space has a basis.
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
 
 *Proof:* Let $V$ be a vector space over a field $F,$ and consider the poset $P$ of linearly independent subsets of $V$ ordered by inclusion. We will proceed by applying Zorn's lemma to $P,$ so we first verify that the hypotheses of Zorn's lemma hold. $P$ is clearly nonempty, since the empty set is vacuously a linearly independent subset of $V.$
 
-Suppose that $\{C_i : i \in I\}$ is a chain in $P,$ indexed by some index set $I.$ Let $\mathscr{C} = \bigcup_{i \in I} C_i.$ Clearly, $\mathscr{C}$ is an upper bound of $\{C_i : i \in I\}$; we claim that it is also linearly independent. Indeed, if $\mathscr{C}$ were linearly dependent, then we could find a nontrivial linear combination of elements of $\mathscr{C}$ equal to zero. But the vectors $\vv_1, \dots, \vv_n \in \mathscr{C}$ involved in such a linear combination would all have to be present in some $C_i,$ since there are only a finite number of such vectors. Thus, $C_i$ would be linearly dependent, contradicting the assumption that $\{C_i : i \in I\}$ is a chain in $P.$
+Suppose that $\{C_i : i \in I\}$ is a chain in $P,$ indexed by some index set $I.$ Let $\mathscr{C} = \bigcup_{i \in I} C_i.$ Clearly, $\mathscr{C}$ is an upper bound of $\{C_i : i \in I\}$; we claim that it is also linearly independent. Indeed, if $\mathscr{C}$ were linearly dependent, then we could find a nontrivial linear combination of elements of $\mathscr{C}$ equal to zero. But the vectors $\vv_1, \dots, \vv_n \in \mathscr{C}$ involved in such a linear combination would all have to be present in $C_j$ for some $j \in I,$ since there are only a finite number of such vectors. Thus, $C_j$ would be linearly dependent, contradicting the assumption that $\{C_i : i \in I\}$ is a chain in $P.$
 
-Zorn's lemma now guarantees the existence of a maximal element $S$ of $P.$ We claim that $S$ must be a basis of $V.$ Indeed, if the span of $S$ were not equal to $V,$ then by the previous lemma, we could enlarge $S$ by adding a vector $\vv \in V$ lying outside of its span. This would contradict the maximality of $S$; hence, $S$ is a basis of $V.$ **QED**
+Zorn's lemma now guarantees the existence of a maximal element $B$ of $P.$ We claim that $B$ must be a basis of $V.$ Indeed, if the span of $B$ were not equal to $V,$ then by the previous lemma, we could enlarge $B$ by adding a vector $\vv \in V$ lying outside of its span. This would contradict the maximality of $B$; hence, $B$ is a basis of $V.$ **QED**
 
 **Lemma:** If a vector space has a finite basis, then all of its bases are finite and have the same size.
 
@@ -155,11 +272,6 @@ Zorn's lemma now guarantees the existence of a maximal element $S$ of $P.$ We cl
 *Proof:* **TO BE WRITTEN**
 
 **Definition:** The _dimension_ of a vector space is the cardinality of one (and hence all) of its bases.
-
-**Definition:** Let $V$ and $W$ be vector spaces over a common field $F$. A function $f: V \to W$ is called a _linear transformation,_ _linear map,_ or _vector space homomorphism_ if it satisfies the following conditions:
-
-1. $f(\vv + \vw) = f(\vv) + f(\vw)$ for all $\vv, \vw \in V$.
-2. $f(c\vv) = cf(\vv)$ for all $\vv \in V$ and $c \in F$.
 
 [INCLUDE=../include/DZ_Footer]
 
