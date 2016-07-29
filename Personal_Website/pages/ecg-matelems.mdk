@@ -1,0 +1,339 @@
+Title: ECG Matrix Elements - David K. Zhang - Personal Website
+
+Package       : mathtools
+Package       : physics
+
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ MathDefs
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\uvx}{\mathbf{\underline{x}}}
+\newcommand{\uvo}{\mathbf{\underline{0}}}
+\newcommand{\uvt}{\mathbf{\underline{t}}}
+\newcommand{\uvu}{\mathbf{\underline{u}}}
+\newcommand{\uvp}{\mathbf{\underline{p}}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vo}{\mathbf{0}}
+\newcommand{\vt}{\mathbf{t}}
+\newcommand{\pe}{\phantom{{}={}}}
+~
+
+~ Begin Container
+
+~ Begin Center
+# Matrix Elements of ECG Basis Functions {-}
+
+By David K. Zhang
+~ End Center
+
+&br;
+~ Begin Panel {.panel-info}
+~ Begin Panel-Heading
+#### Under Construction! {-; margin=0px; padding=0px}
+~ End Panel-Heading
+~ End Panel
+
+Consider a system of $N$ particles moving in $d$-dimensional space.
+
+- $p_1$ is an $N \times d$ matrix with nonnegative integer entries.
+- $p_2$ is an $N \times d$ matrix with nonnegative integer entries.
+- $A_1$ is a real symmetric $N \times N$ matrix.
+- $A_2$ is a real symmetric $N \times N$ matrix.
+- $\uvx$ is an $N$-dimensional vector whose components are $d$-dimensional real vectors.
+- $\uvt_1$ is an $N$-dimensional vector whose components are $d$-dimensional real vectors.
+- $\uvt_2$ is an $N$-dimensional vector whose components are $d$-dimensional real vectors.
+
+We define the following functions:
+
+~ Equation
+\begin{aligned}
+\Phi_1(\uvx) &\coloneqq \qty[
+  \prod_{i=1}^N \prod_{k=1}^d x_{ik}^{(p_1)_{ik}}
+] \exp(
+  -\frac{1}{2} \uvx^T \! A_1 \uvx
+) \\
+\Phi_2(\uvx) &\coloneqq \qty[
+  \prod_{i=1}^N \prod_{k=1}^d x_{ik}^{(p_2)_{ik}}
+] \exp(
+  -\frac{1}{2} \uvx^T \! A_2 \uvx
+)
+\end{aligned}
+~
+
+~ Equation
+\begin{aligned}
+G_1(\uvx) &\coloneqq \exp(
+  -\frac{1}{2} \uvx^T \! A_1 \uvx + \uvt_1^T \uvx
+) \\
+G_2(\uvx) &\coloneqq \exp(
+  -\frac{1}{2} \uvx^T \! A_2 \uvx + \uvt_2^T \uvx
+)
+\end{aligned}
+~
+
+We make the following definitions:
+
+~ Equation
+\begin{aligned}
+A &\coloneqq A_1 + A_2 \\
+\uvt &\coloneqq \uvt_1 + \uvt_2
+\end{aligned}
+~
+
+The overlap integral of the generating functions is then given by
+
+~ Equation
+\braket{G_1}{G_2} = \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \uvt^T \! A^{-1} \uvt)
+~
+
+We now define a $2N \times 2N$ real symmetric matrix $B$ and a $2N$-dimensional vector $\uvu$ whose entries are $d$-dimensional vectors.
+
+~ Equation
+B \coloneqq \mqty[
+  A^{-1} & A^{-1} \\
+  A^{-1} & A^{-1}
+]
+\qquad
+\uvu \coloneqq \mqty[
+  \uvt_1 \\
+  \uvt_2
+]
+~
+
+We now rewrite the overlap integral of the generating functions, as follows:
+
+~ Equation
+\begin{aligned}
+\braket{G_1}{G_2} &= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \uvu^T \! B \uvu) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \sum_{i=1}^{2N} \sum_{j=1}^{2N}
+    B_{ij} (\vec{u}_i \cdot \vec{u}_j)) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \sum_{i=1}^{2N} B_{ii} (\vec{u}_i \cdot \vec{u}_i)
+    + \sum_{i=1}^{2N} \sum_{j=i+1}^{2N} B_{ij} (\vec{u}_i \cdot \vec{u}_j)) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\frac{1}{2} \sum_{i=1}^{2N} \sum_{k=1}^d B_{ii} u_{ik}^2
+    + \sum_{i<j}^{2N} \sum_{k=1}^d B_{ij} u_{ik} u_{jk}) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\sum_{i \le j}^{2N} \sum_{k=1}^d C_{ij} u_{ik} u_{jk})
+\end{aligned}
+~
+
+Here, we have defined a new $2N \times 2N$ matrix $C$, which is an upper-triangular matrix whose diagonal is one-half times the diagonal of $B$, and whose strictly upper-triangular part is identical to that of $B$.
+
+~ Equation
+\begin{aligned}
+\braket{G_1}{G_2} &= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \exp(\sum_{i \le j}^{2N} \sum_{k=1}^d C_{ij} u_{ik} u_{jk}) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \prod_{i \le j}^{2N} \prod_{k=1}^d \exp(C_{ij} u_{ik} u_{jk}) \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \prod_{i \le j}^{2N} \prod_{k=1}^d \sum_{q_{kij}=0}^\infty
+    \frac{(C_{ij} u_{ik} u_{jk})^{q_{kij}}}{q_{kij}!} \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \sum_{q \in Q} \prod_{k=1}^d \prod_{i \le j}^{2N}
+    \frac{(C_{ij} u_{ik} u_{jk})^{q_{kij}}}{q_{kij}!} \\
+\end{aligned}
+~
+
+Here we have defined $Q$ as the set of all $d$-tuples of $2N \times 2N$ symmmetric matrices whose entries are nonnegative integers. Thus if $q \in Q$, then $q_{kij}$ denotes the $(i,j)$-entry of the symmetric matrix $q_k$.
+
+(Note that the preceding sum depends only on values of $q_{kij}$ for which $i \le j$; thus, only the upper-triangular part of each matrix $q_k$ is accessed, and we might as well define the lower-triangular part as the transpose of the upper-triangular part.)
+
+Suppose now that we are given an array $q \in Q$ and an integer $1 \le k \le d$. We wish to examine the term
+
+~ Equation
+\begin{aligned}
+\prod_{i \le j}^{2N}
+  \frac{(C_{ij} u_{ik} u_{jk})^{q_{kij}}}{q_{kij}!}
+&= \prod_{i \le j}^{2N}
+  \frac{C_{ij}^{q_{kij}}}{q_{kij}!} u_{ik}^{q_{kij}} u_{jk}^{q_{kij}} \\
+&= \qty[\prod_{i \le j}^{2N} \frac{C_{ij}^{q_{kij}}}{q_{kij}!}]
+   \qty[\prod_{i \le j}^{2N} u_{ik}^{q_{kij}} u_{jk}^{q_{kij}}].
+\end{aligned}
+~
+
+For each integer $1 \le b \le 2N$, we ask the following question: how many times does $u_{bk}$ appear in the preceding expression?
+
+- It appears in each term with $i < b$ and $j = b$, where its exponent is $q_{kib}$.
+- It appears in the $i = j = r$ term, with exponent $2q_{kbb}$.
+- It appears in each term with $i = b$ and $b < j \le 2N$, with exponent $q_{kbj}$.
+
+Thus, the exponent of $u_{bk}$ in the overall expression is
+
+~ Equation
+\epsilon_{bk} \coloneqq \sum_{i=1}^{b-1} q_{kib} + 2q_{kbb} + \sum_{j=b+1}^{2N} q_{kbj}
+~
+
+which, by using the symmetry of $q_k$, can be rewritten as
+
+~ Equation
+\epsilon_{bk} = q_{kbb} + \sum_{i=1}^{2N} q_{kib}
+~
+
+This shows that
+
+~ Equation
+\prod_{i \le j}^{2N}
+  \frac{(C_{ij} u_{ik} u_{jk})^{q_{kij}}}{q_{kij}!}
+= \qty[\prod_{i \le j}^{2N} \frac{C_{ij}^{q_{kij}}}{q_{kij}!}]
+   \qty[\prod_{b=1}^{2N} u_{bk}^{\epsilon_{bk}}]
+~
+
+and by generalizing to all values of $k$, we see that
+
+~ Equation
+\prod_{i \le j}^{2N} \prod_{k=1}^d
+  \frac{(C_{ij} u_{ik} u_{jk})^{q_{kij}}}{q_{kij}!}
+= \qty[\prod_{i \le j}^{2N} \prod_{k=1}^d \frac{C_{ij}^{q_{kij}}}{q_{kij}!}]
+   \qty[\prod_{i=1}^{2N} \prod_{k=1}^d u_{ik}^{\epsilon_{ik}}].
+~
+
+Now, we need to take derivatives with respect to the parameters $u_{ik}$.
+
+~ Equation {#u-derivs}
+\begin{aligned}
+\qty[\prod_{i=1}^{2N} \prod_{k=1}^d \pdv[p_{ik}]{u_{ik}}]
+  \qty[\prod_{i=1}^{2N} \prod_{k=1}^d u_{ik}^{\epsilon_{ik}}]
+&= \prod_{i=1}^{2N} \prod_{k=1}^d \pdv[p_{ik}]{u_{ik}}
+  u_{ik}^{\epsilon_{ik}} \\
+&= \prod_{i=1}^{2N} \prod_{k=1}^d \frac{\qty(\epsilon_{ik})!}
+  {\qty(\epsilon_{ik} - p_{ik})!} u_{ik}^{\epsilon_{ik} - p_{ik}}
+\end{aligned}
+~
+
+Finally, we need to set $\uvu = \uvo$. Observe that the preceding
+expression is nonzero only if $\epsilon_{ik} = p_{ik}$, that is, if
+
+~ Equation
+q_{kii} + \sum_{j=1}^{2N} q_{kij} = p_{ik}
+~
+
+for all $i = 1, \dots, 2N$ and $k = 1, \dots, d$. In this case, each
+factor in the product becomes $0^0 = 1$. Assuming that this condition
+is satisfied, the expression [#u-derivs] simply reduces to
+
+~ Equation
+\prod_{i=1}^{2N} \prod_{k=1}^d p_{ik}!
+~
+
+This leads us naturally to consider the following combinatorial problem:
+
+**Definition:** Let $p$ be a $2N \times d$ matrix with nonnegative integer entries. We denote by $\Omega(p)$ the set of all $d$-tuples of symmetric $2N \times 2N$, again having nonnegative integer entries, satisfying the condition
+
+~ Equation
+q_{kii} + \sum_{j=1}^{2N} q_{kij} = p_{ik}
+~
+
+for all $i = 1, \dots, 2N$ and $k = 1, \dots, d$.
+
+We will return to solving this problem later. For now, let us assume that we know how to compute the set $\Omega(p)$. The overlap matrix element of two ECG basis functions is then given by
+
+~ Equation
+\begin{aligned}
+\braket{\Phi_1}{\Phi_2} &= \qty[
+    \prod_{i=1}^N \prod_{k=1}^d \pdv[(p_1)_{ik}]{(t_1)_{ik}}
+  ] \qty[
+    \prod_{i=1}^N \prod_{k=1}^d \pdv[(p_2)_{ik}]{(t_2)_{ik}}
+  ] \eval{\braket{G_1}{G_2}}_{\uvt_1 = \uvt_2 = \uvo} \\
+&= \qty[\frac{(2\pi)^N}{\det A}]^{d/2}
+  \qty[\prod_{i=1}^{N} \prod_{k=1}^d (p_1)_{ik}!]
+  \qty[\prod_{i=1}^{N} \prod_{k=1}^d (p_2)_{ik}!] \times \\
+&\pe \sum_{q \in \Omega(\uvp_1, \uvp_2)} \qty[
+    \prod_{i=1}^{2N} \prod_{j=1}^{2N} \prod_{k=1}^d
+    \frac{1}{q_{ijk}!} \qty(\frac{1}{2} B_{ij})^{q_{ijk}}]
+\end{aligned}
+~
+
+
+
+~ Equation
+\begin{aligned}
+\pdv{x_{\iota\kappa}} G_2(\uvx)
+&= \pdv{x_{\iota\kappa}} \exp(
+  -\frac{1}{2} \uvx^T \! A_2 \uvx + \uvt_2^T \uvx) \\
+&= \pdv{x_{\iota\kappa}} \exp(
+  -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+  (A_2)_{ij} x_{ik} x_{jk}
+  + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} x_{ik}) \\
+&= G_2(\uvx) \pdv{x_{\iota\kappa}} \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+    (A_2)_{ij} x_{ik} x_{jk}
+    + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} x_{ik}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+    (A_2)_{ij} \pdv{(x_{ik} x_{jk})}{x_{\iota\kappa}}
+    + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} \pdv{x_{ik}}{x_{\iota\kappa}}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \sum_{k=1}^d
+    (A_2)_{ij} \qty(x_{ik} \delta_{j\iota} +
+      \delta_{i\iota} x_{jk}) \delta_{k\kappa}
+    + \sum_{i=1}^N \sum_{k=1}^d (t_2)_{ik} \delta_{i\iota} \delta_{k\kappa}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N
+    (A_2)_{i\iota} x_{i\kappa}
+    -\frac{1}{2} \sum_{j=1}^N
+    (A_2)_{\iota j} x_{j\kappa}
+    + (t_2)_{\iota\kappa}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\frac{1}{2} \sum_{i=1}^N
+    (A_2)_{i\iota} x_{i\kappa}
+    -\frac{1}{2} \sum_{j=1}^N
+    (A_2)_{\iota j} x_{j\kappa}
+    + (t_2)_{\iota\kappa}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa}
+    + (t_2)_{\iota\kappa}
+  ]
+\end{aligned}
+~
+
+
+
+~ Equation
+\begin{aligned}
+\pdv[2]{x_{\iota\kappa}} G_2(\uvx)
+&= \pdv{G_2}{x_{\iota\kappa}} \qty[
+    -\sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa}
+    + (t_2)_{\iota\kappa}
+  ] + G_2(\uvx) \qty[
+    -\sum_{i=1}^N (A_2^\text{sym})_{i\iota}
+      \pdv{x_{i\kappa}}{x_{\iota\kappa}}
+  ] \\
+&= G_2(\uvx) \qty[
+    -\sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa}
+    + (t_2)_{\iota\kappa}
+  ]^2 - (A_2)_{\iota\iota} G_2(\uvx) \\
+&= \qty[
+    \qty(\sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa})^2
+    - 2 (t_2)_{\iota\kappa}
+      \sum_{i=1}^N (A_2^\text{sym})_{i\iota} x_{i\kappa}
+    + (t_2)_{\iota\kappa}^2 - (A_2)_{\iota\iota}
+  ] G_2(\uvx) \\
+&= \Bigg[
+    \sum_{i=1}^N \sum_{j=1}^N
+      (A_2^\text{sym})_{i\iota} (A_2^\text{sym})_{j\iota}
+      \pdv{(t_2)_{i\kappa}} \pdv{(t_2)_{j\kappa}} \\
+&\pe \phantom{\Bigg[}
+    - 2 (t_2)_{\iota\kappa}
+      \sum_{i=1}^N (A_2^\text{sym})_{i\iota} \pdv{(t_2)_{i\kappa}}
+    + (t_2)_{\iota\kappa}^2 - (A_2)_{\iota\iota}
+  \Bigg] G_2(\uvx)
+\end{aligned}
+~
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

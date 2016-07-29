@@ -1,0 +1,78 @@
+Title: Combinatory Logic - David K. Zhang - Personal Website
+
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ Begin MathDefs
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\B}{\mathcal{B}}
+~ End MathDefs
+
+~ Begin Container
+
+~ Begin Center
+# Mathematical Birdwatching (and Combinatory Logic) {-}
+
+By David K. Zhang
+~ End Center
+
+&br;
+~ Begin Panel {.panel-info}
+~ Begin Panel-Heading
+#### Under Construction! {-; margin=0px; padding=0px}
+~ End Panel-Heading
+~ End Panel
+
+# The Enchanted Forest
+
+Imagine that you wake up one day in an enchanted forest populated by talking birds. The birds love talking about each other --- if you walk up to a bird $x$ and say the name of a bird $y,$ then $x$ will say the name of a bird in response, which we designate by $xy.$ If you instead approach $y$ and say $x$'s name, $y$ will respond with another name $yx,$ which is not necessarily the same as $xy.$
+
+The birds always behave in a consistent and predictable manner, in the sense that $x$'s response to hearing $y$ is always the same bird $xy$ regardless of the weather or time of day. This means that the operation $(x,y) \mapsto xy$ of saying $y$'s name to $x$ can be regarded as a mathematical function.
+
+~ Begin Well {.well-sm}
+**Definition:** A ***forest*** is a set $\F$ equipped with a binary operation $\F \times \F \to \F$, denoted by juxtaposition. The elements of $\F$ are called ***birds***. If $x,y \in \F$, then we interpret $xy$ as $x$'s ***response*** to hearing the name of $y$.
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+**Example:** Consider the set $\{\text{Parrot},\,\text{Cardinal}\}$ equipped with the following binary operation:
+~ Math
+\begin{aligned}
+\text{Parrot}   \cdot \text{Parrot}   &= \text{Parrot} &
+\text{Cardinal} \cdot \text{Parrot}    = \text{Cardinal} \\
+\text{Parrot}   \cdot \text{Cardinal} &= \text{Cardinal} &
+\text{Cardinal} \cdot \text{Cardinal}  = \text{Cardinal}
+\end{aligned}
+~
+(We use a dot to separate bird names when they are spelled out.) In this two-element forest, the parrot simply repeats back the name of whatever bird it hears, while the cardinal only talks about itself.
+{margin:0px; padding:0px}
+~ End Panel-Body
+~ End Panel
+
+Whenever we have three birds, $x,y,$ and $z,$ we must be careful to distinguish between the names $(xy)z$ and $x(yz).$ The first is $xy$'s response to $z$, while the second is $x$'s response to $yz;$ these are not necessarily the same! Thus, the operation of "multiplying" two birds is in general **neither commutative nor associative**. We will use parentheses throughout to indicate the order in which birds are spoken to.
+
+We will begin our study of ornithology by describing some special types of relationships between birds.
+
+~ Begin Well {.well-sm}
+**Definition:** Let $\F$ be a forest, and let $x, y, z \in \F$ be any three birds.
+
+- We say that $x$ is ***fond*** of $y$ if $x$ responds to $y$'s name by repeating it. In symbols, $x$ is fond of $y$ if $xy = y$.
+- We say that $x$ is ***normal*** if it is fond of some bird in $\F$ (including possibly itself). Otherwise, if $x$ is not fond of any bird in $\F$ (not even itself), it is ***abnormal***.
+- We say that $x$ ***composes*** $y$ with $z$ if for all birds $f \in \F$, we have that $xf = y(zf)$. This means that $x$'s response to $f$ is the same as $y$'s response to $z$'s response to $f$.
+{margin-bottom:0px; padding-bottom:0px}
+~ End Well
+
+
+Note that a given forest might not contain a composition for every pair of birds. Moreover, when a composition exists, it might not be unique! For this reason, composing birds is subtly different from composing mathematical functions.
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+[**Warning!**]{.text-danger} Note that $x = yz$ does **not** mean that $x$ composes $y$ with $z!$
+{margin:0px; padding:0px}
+~ End Panel-Body
+~ End Panel
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

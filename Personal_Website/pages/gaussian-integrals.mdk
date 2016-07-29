@@ -1,4 +1,4 @@
-Title: Lie Groups/Algebras - David K. Zhang - Personal Website
+Title: Gaussian Integrals - David K. Zhang - Personal Website
 
 [INCLUDE=../include/DZ_Bootstrap.mdk]
 [INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
@@ -13,7 +13,7 @@ Title: Lie Groups/Algebras - David K. Zhang - Personal Website
 ~ Begin Container
 
 ~ Begin Center
-# Notes on Lie Groups and Lie Algebras {-}
+# Gaussian Integrals and Beyond {-}
 
 By David K. Zhang
 ~ End Center
@@ -24,6 +24,8 @@ By David K. Zhang
 #### Under Construction! {-; margin=0px; padding=0px}
 ~ End Panel-Heading
 ~ End Panel
+
+<!-- content here! -->
 
 [INCLUDE=../include/DZ_Footer]
 

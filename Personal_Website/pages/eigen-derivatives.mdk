@@ -1,0 +1,295 @@
+Title: Eigen-Derivatives - David K. Zhang - Personal Website
+
+Package: physics
+Package: cancel
+
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ Begin MathDefs
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vo}{\mathbf{0}}
+\newcommand{\pe}{\phantom{{}={}}}
+~ End MathDefs
+
+~ Begin Container
+
+~ Begin Center
+# Derivatives of Generalized Eigenvalues and Eigenvectors {-}
+
+By David K. Zhang
+~ End Center
+
+&br;
+~ Begin Panel {.panel-info}
+~ Begin Panel-Heading
+#### Under Construction! {-; margin=0px; padding=0px}
+~ End Panel-Heading
+~ End Panel
+
+Consider the generalized eigenvalue problem 
+~ Equation {#gen-eig}
+H \vv = E O \vv
+~
+where $H$ and $O$ are $n \times n$ matrices, $E$ is an eigenvalue, and $\vv$ is the corresponding eigenvector. For simplicity, we will restrict our attention to the special case of a _symmetric-definite eigenvalue problem,_ in which $H$ and $O$ are real symmetric matrices and $O$ is positive-definite.
+
+<!-- The symmetric-definite case is both theoretically and numerically better-behaved than its non-symmetric-definite counterpart, and occurs most frequently in physical applications. Indeed, I am not aware of a single "naturally occurring" generalized eigenvalue problem that is not of the symmetric-definite (or Hermitian-definite) type. -->
+
+Suppose $H$ and $O$ depend smoothly upon a real parameter $\alpha$. That is to say, the entries $\{H_{ij}(\alpha)\}$ and $\{O_{ij}(\alpha)\}$ are smooth (infinitely differentiable) functions of $\alpha$. Suppose further that this dependence is explicitly known, in the sense that the derivatives $\pdv{H_{ij}}{\alpha}$ and $\pdv{O_{ij}}{\alpha}$ can be calculated by a known procedure. Then we can ask how the eigenvalues $E$ and eigenvectors $\vv$ vary in response to change in $\alpha$.
+
+By differentiating equation [#gen-eig] with respect to $\alpha$ and applying the product rule, we have
+~ Equation {#d1-gen-eig}
+\pdv{H}{\alpha} \vv + H \pdv{\vv}{\alpha} = \pdv{E}{\alpha} O \vv + E \pdv{O}{\alpha} \vv + EO \pdv{\vv}{\alpha}
+~
+
+which, after collecting and regrouping terms on the LHS, can be rewritten as
+
+~ Equation {#d1-grouped}
+\qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv + (H - EO) \pdv{\vv}{\alpha} = \vo.
+~
+
+Now, we take the inner product of both sides of this equation with the original eigenvector $\vv$.
+
+~ Equation {#d1-inner-prod}
+\vv^T \qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv + \vv^T (H - EO) \pdv{\vv}{\alpha} = 0
+~
+
+Observe that $\vv^T (H - EO) = \qty[(H - EO) \vv]^T = \vo^T$ by the original eigenvalue equation [#gen-eig]. Thus, $\vv^T (H - EO) \pdv{\vv}{\alpha} = \vo^T \pdv{\vv}{\alpha} = 0$, and only the first term of equation [#d1-inner-prod] remains.
+
+~ Equation
+\vv^T \qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv + \cancelto{0}{\vv^T (H - EO) \pdv{\vv}{\alpha}} = 0
+~
+
+~ Equation
+\vv^T \qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv = 0
+~
+
+Now, by solving for $\pdv{E}{\alpha}$, we obtain the result
+
+~ Equation {#eigval-d1}
+\boxed{\pdv{E}{\alpha} = \frac{\vv^T \pdv{H}{\alpha} \vv}{\vv^T O \vv} - E \frac{\vv^T \pdv{O}{\alpha} \vv}{\vv^T O \vv}.}
+~
+
+~ Begin Well {.well-sm}
+**Remark:** Many symmetric-definite eigen-solvers (for example, [xSYGVX in LAPACK](http://www.netlib.no/netlib/lapack/lug/node98.html)) follow the particularly convenient convention of returning eigenvectors $\vv$ normalized so that $\vv^T O \vv = 1$. In this case, a few CPU cycles can be saved by omitting division by $\vv^T O \vv$ from equation [#eigval-d1].
+{margin:0px; padding:0px}
+~ End Well
+
+To obtain the corresponding formula for $\pdv{\vv}{\alpha}$, we return to equation [#d1-grouped], which can be rewritten as
+
+~ Equation {#d1-regrouped}
+(H - EO) \pdv{\vv}{\alpha} = -\qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv.
+~
+
+It is tempting to multiply both sides of this equation by $(H - EO)^{-1}$, but the eigenvalue equation [#gen-eig] guarantees that $\vv \in \ker(H-EO)$. Thus, the matrix $H - EO$, having nontrivial kernel, is explicitly singular. This means that equation [#d1-regrouped] fails to uniquely specify the vector $\pdv{\vv}{\alpha}.$
+
+However, we can still derive a meaningful result if we multiply not by the inverse $(H - EO)^{-1}$, but by the _Moore-Penrose pseudoinverse_ $(H - EO)^+.$ In this case, we obtain the equation
+
+~ Equation {#d1-pseudoinverse}
+(H - EO)^+ (H - EO) \pdv{\vv}{\alpha} = -(H - EO)^+ \qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv
+~
+
+where $(H - EO)^+ (H - EO)$ is not the identity matrix, but the projection matrix onto the orthogonal complement of $\ker(H - EO).$
+
+This has a clear geometric interpretation if we recall that an eigenvector is never uniquely determined. In the non-degenerate case, an eigenvector is only determined up to a nonzero multiplicative constant, and in general, a set of $k$ degenerate eigenvectors is determined by any choice of basis in the eigenspace $\ker(H - EO).$ Thus, any change in $\vv$ occurring inside $\ker(H - EO)$ is geometrically inconsequential. The meaningful change is that which occurs orthogonal to $\ker(H - EO),$ and this is precisely what is computed by the Moore-Penrose pseudoinverse.
+
+We will therefore adopt the convention that the derivative $\pdv{\vv}{\alpha}$ should always be assumed orthogonal to the eigenspace $\ker(H - EO)$. With this convention in place, equation [#d1-pseudoinverse] reduces to the final result
+
+~ Equation {#eigvec-d1}
+\boxed{\pdv{\vv}{\alpha} = -(H - EO)^+ \qty(\pdv{H}{\alpha} - \pdv{E}{\alpha} O - E \pdv{O}{\alpha}) \vv.}
+~
+
+~ Begin Well {.well-sm}
+**Remark:** It is possible to evaluate the RHS of equation [#eigvec-d1] without directly computing the pseudoinverse of $H-EO,$ thanks to the following fact: if $A$ is a rank-deficient matrix, then $A^+ b$ is the unique minimum (Euclidean) norm solution of the underdetermined linear system $Ax = b$. Minimum-norm solvers for undetermined linear systems are widely available (for example, [xGELSD in LAPACK](http://www.netlib.org/lapack/lug/node27.html)) and may be preferable depending on the efficiency of the provided implementation.
+{margin:0px; padding:0px}
+~ End Well
+
+<!--
+~ Equation
+(H - EO)\vv = \vo
+~
+
+~ Equation
+\pdv{(H - EO)}{\alpha} \vv + (H - EO) \pdv{\vv}{\alpha} = \vo
+~
+
+~ Equation
+\pdv{(H - EO)}{\alpha}{\beta} \vv
++ \pdv{(H - EO)}{\alpha} \pdv{\vv}{\beta}
++ \pdv{(H - EO)}{\beta} \pdv{\vv}{\alpha}
++ (H - EO) \pdv{\vv}{\alpha}{\beta} = \vo
+~
+
+~ Equation
+\vv^T \pdv{(H - EO)}{\alpha}{\beta} \vv
++ \vv^T \pdv{(H - EO)}{\alpha} \pdv{\vv}{\beta}
++ \vv^T \pdv{(H - EO)}{\beta} \pdv{\vv}{\alpha} = \vo
+~
+
+~ Equation
+\pdv{\vv}{\alpha} = -(H - EO)^+ \pdv{(H - EO)}{\alpha} \vv
+~
+
+~ Equation
+(H - EO) \pdv{\vv}{\alpha} = -\pdv{(H - EO)}{\alpha} \vv
+~
+
+~ Equation
+\vv^T \pdv{(H - EO)}{\alpha}{\beta} \vv
+= \qty(\pdv{\vv}{\alpha})^T (H - EO) (H - EO)^+ (H - EO) \pdv{\vv}{\beta}
++ \qty(\pdv{\vv}{\beta})^T (H - EO) (H - EO)^+ (H - EO) \pdv{\vv}{\alpha}
+~
+
+~ Equation
+\vv^T \pdv{(H - EO)}{\alpha}{\beta} \vv
+= \qty(\pdv{\vv}{\alpha})^T (H - EO) \pdv{\vv}{\beta}
++ \qty(\pdv{\vv}{\beta})^T (H - EO) \pdv{\vv}{\alpha}
+~
+--------------------
+-->
+
+Suppose now that the matrices $H$ and $O$ depend smoothly upon two real parameters $\alpha$ and $\beta$. By differentiating equation [#d1-gen-eig] with respect to $\beta$, we see that
+
+~ Equation {#d2-gen-eig}
+\begin{aligned}
+\pdv{H}{\alpha}{\beta} & \vv
+  + \pdv{H}{\alpha} \pdv{\vv}{\beta}
+  + \pdv{H}{\beta} \pdv{\vv}{\alpha}
+  + H \pdv{\vv}{\alpha}{\beta} \\
+  &= \pdv{E}{\alpha}{\beta} O \vv
+    + \pdv{E}{\alpha} \pdv{O}{\beta} \vv
+    + \pdv{E}{\alpha} O \pdv{\vv}{\beta} \\
+  &\pe + \pdv{E}{\beta} \pdv{O}{\alpha} \vv
+    + E \pdv{O}{\alpha}{\beta} \vv
+    + E \pdv{O}{\alpha} \pdv{\vv}{\beta} \\
+  &\pe + \pdv{E}{\beta} O \pdv{\vv}{\alpha}
+    + E \pdv{O}{\beta} \pdv{\vv}{\alpha}
+    + EO \pdv{\vv}{\alpha}{\beta}.
+\end{aligned}
+~
+
+As before, we take the inner product of both sides with $\vv$ to obtain
+
+~ Equation {#d2-inner-prod}
+\begin{aligned}
+\vv^T \pdv{H}{\alpha}{\beta} & \vv
+  + \vv^T \pdv{H}{\alpha} \pdv{\vv}{\beta}
+  + \vv^T \pdv{H}{\beta} \pdv{\vv}{\alpha}
+  + \vv^T H \pdv{\vv}{\alpha}{\beta} \\
+  &= \pdv{E}{\alpha}{\beta} \vv^T O \vv
+    + \pdv{E}{\alpha} \vv^T \pdv{O}{\beta} \vv
+    + \pdv{E}{\alpha} \vv^T O \pdv{\vv}{\beta} \\
+  &\pe + \pdv{E}{\beta} \vv^T \pdv{O}{\alpha} \vv
+    + E \vv^T \pdv{O}{\alpha}{\beta} \vv
+    + E \vv^T \pdv{O}{\alpha} \pdv{\vv}{\beta} \\
+  &\pe + \pdv{E}{\beta} \vv^T O \pdv{\vv}{\alpha}
+    + E \vv^T \pdv{O}{\beta} \pdv{\vv}{\alpha}
+    + E \vv^T O \pdv{\vv}{\alpha}{\beta}
+\end{aligned}
+~
+
+and use the original eigenvalue equation to eliminate a pair of terms:
+
+~ Equation {#d2-inner-prod}
+\begin{aligned}
+\vv^T \pdv{H}{\alpha}{\beta} & \vv
+  + \vv^T \pdv{H}{\alpha} \pdv{\vv}{\beta}
+  + \vv^T \pdv{H}{\beta} \pdv{\vv}{\alpha}
+  + \cancel{\vv^T H \pdv{\vv}{\alpha}{\beta}} \\
+  &= \pdv{E}{\alpha}{\beta} \vv^T O \vv
+    + \pdv{E}{\alpha} \vv^T \pdv{O}{\beta} \vv
+    + \pdv{E}{\alpha} \vv^T O \pdv{\vv}{\beta} \\
+  &\pe + \pdv{E}{\beta} \vv^T \pdv{O}{\alpha} \vv
+    + E \vv^T \pdv{O}{\alpha}{\beta} \vv
+    + E \vv^T \pdv{O}{\alpha} \pdv{\vv}{\beta} \\
+  &\pe + \pdv{E}{\beta} \vv^T O \pdv{\vv}{\alpha}
+    + E \vv^T \pdv{O}{\beta} \pdv{\vv}{\alpha}
+    + \cancel{E \vv^T O \pdv{\vv}{\alpha}{\beta}}
+\end{aligned}
+~
+
+By solving for $\pdv{E}{\alpha}{\beta}$, we obtain the result
+
+~ Equation {#eigval-d2}
+\boxed{ \begin{aligned}
+\pdv{E}{\alpha}{\beta}
+&= \frac{1}{\vv^T O \vv} \bigg[ \vv^T \pdv{H}{\alpha}{\beta} \vv
+  + \vv^T \pdv{H}{\alpha} \pdv{\vv}{\beta}
+  + \vv^T \pdv{H}{\beta} \pdv{\vv}{\alpha} \\
+  &\pe - \pdv{E}{\alpha} \vv^T \pdv{O}{\beta} \vv
+    - \pdv{E}{\alpha} \vv^T O \pdv{\vv}{\beta}
+    - \pdv{E}{\beta} \vv^T \pdv{O}{\alpha} \vv
+    - \pdv{E}{\beta} \vv^T O \pdv{\vv}{\alpha} \\
+  &\pe - E \vv^T \pdv{O}{\alpha}{\beta} \vv
+    - E \vv^T \pdv{O}{\alpha} \pdv{\vv}{\beta}
+    - E \vv^T \pdv{O}{\beta} \pdv{\vv}{\alpha} \bigg].
+\end{aligned} }
+~
+
+With the second derivative of the eigenvalue in hand, we return to equation [#d2-gen-eig] and isolate terms containing $\pdv{\vv}{\alpha}{\beta}$ to obtain
+
+~ Equation
+\begin{aligned}
+(H - EO) \pdv{\vv}{\alpha}{\beta} &=
+  - \pdv{H}{\alpha}{\beta} \vv
+  - \pdv{H}{\alpha} \pdv{\vv}{\beta}
+  - \pdv{H}{\beta} \pdv{\vv}{\alpha} \\
+  &\pe + \pdv{E}{\alpha}{\beta} O \vv
+    + \pdv{E}{\alpha} \pdv{O}{\beta} \vv
+    + \pdv{E}{\alpha} O \pdv{\vv}{\beta}
+    + \pdv{E}{\beta} \pdv{O}{\alpha} \vv \\
+  &\pe + E \pdv{O}{\alpha}{\beta} \vv
+    + E \pdv{O}{\alpha} \pdv{\vv}{\beta}
+    + \pdv{E}{\beta} O \pdv{\vv}{\alpha}
+    + E \pdv{O}{\beta} \pdv{\vv}{\alpha}.
+\end{aligned}
+~
+
+Applying the same technique as before, we multiply both sides by the pseudoinverse $(H - EO)^+$ to obtain the result
+
+~ Equation {#eigvec-d2}
+\boxed{ \begin{aligned}
+\pdv{\vv}{\alpha}{\beta} &= (H - EO)^+ \bigg[
+  - \pdv{H}{\alpha}{\beta} \vv
+  - \pdv{H}{\alpha} \pdv{\vv}{\beta}
+  - \pdv{H}{\beta} \pdv{\vv}{\alpha} \\
+  &\pe + \pdv{E}{\alpha}{\beta} O \vv
+    + \pdv{E}{\alpha} \pdv{O}{\beta} \vv
+    + \pdv{E}{\alpha} O \pdv{\vv}{\beta}
+    + \pdv{E}{\beta} \pdv{O}{\alpha} \vv \\
+  &\pe + E \pdv{O}{\alpha}{\beta} \vv
+    + E \pdv{O}{\alpha} \pdv{\vv}{\beta}
+    + \pdv{E}{\beta} O \pdv{\vv}{\alpha}
+    + E \pdv{O}{\beta} \pdv{\vv}{\alpha} \bigg].
+\end{aligned} }
+~
+
+In the special case $\alpha = \beta,$ these results reduce to the following:
+
+~ Equation {#eigval-d2-onevar}
+\boxed{ \begin{aligned}
+\pdv[2]{E}{\alpha}
+&= \frac{1}{\vv^T O \vv} \bigg[ \vv^T \pdv[2]{H}{\alpha} \vv
+  + 2 \vv^T \pdv{H}{\alpha} \pdv{\vv}{\alpha}
+  - E \vv^T \pdv[2]{O}{\alpha} \vv \\
+  &\pe - 2 \pdv{E}{\alpha} \vv^T \pdv{O}{\alpha} \vv
+    - 2 \pdv{E}{\alpha} \vv^T O \pdv{\vv}{\alpha}
+    - 2 E \vv^T \pdv{O}{\alpha} \pdv{\vv}{\alpha} \bigg] \\
+\pdv[2]{\vv}{\alpha} &= (H - EO)^+ \bigg[
+  - \pdv[2]{H}{\alpha} \vv
+  - 2 \pdv{H}{\alpha} \pdv{\vv}{\alpha}
+  + \pdv[2]{E}{\alpha} O \vv \\
+  &\pe + E \pdv[2]{O}{\alpha} \vv
+    + 2 \pdv{E}{\alpha} \pdv{O}{\alpha} \vv
+    + 2 \pdv{E}{\alpha} O \pdv{\vv}{\alpha}
+    + 2 E \pdv{O}{\alpha} \pdv{\vv}{\alpha} \bigg]
+\end{aligned} }
+~
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container
