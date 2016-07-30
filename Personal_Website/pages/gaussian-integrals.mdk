@@ -1,13 +1,45 @@
 Title: Gaussian Integrals - David K. Zhang - Personal Website
 
+Package     : mathtools
+Package     : physics
+
+TeX Header  :
+    \DeclareMathOperator{\vvec}{vec}
+    \DeclareMathOperator{\mat}{mat}
+
 [INCLUDE=../include/DZ_Bootstrap.mdk]
 [INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
 
 ~ Begin MathDefs
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
+\newcommand{\T}{{{T\!}}}
+\newcommand{\h}{{{\dagger\!}}}
+\newcommand{\pe}{\phantom{{}={}}}
+
+\newcommand{\ve}{\mathbf{e}}
+\newcommand{\vvf}{\mathbf{f}}
+\newcommand{\vg}{\mathbf{g}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vk}{\mathbf{k}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vs}{\mathbf{s}}
+\newcommand{\vvu}{\mathbf{u}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+
+\newcommand{\uvo}{\underline{\mathbf{0}}}
+\newcommand{\uvs}{\underline{\mathbf{s}}}
+\newcommand{\uvp}{\underline{\mathbf{p}}}
+\newcommand{\uvu}{\underline{\mathbf{u}}}
+\newcommand{\uvv}{\underline{\mathbf{v}}}
+\newcommand{\uvw}{\underline{\mathbf{w}}}
+\newcommand{\uvx}{\underline{\mathbf{x}}}
+\newcommand{\uvy}{\underline{\mathbf{y}}}
 ~ End MathDefs
 
 ~ Begin Container
@@ -25,7 +57,682 @@ By David K. Zhang
 ~ End Panel-Heading
 ~ End Panel
 
-<!-- content here! -->
+# Introduction: The Gaussian Integral 
+
+Let $\alpha \in \C$, and consider the _Gaussian integral_
+
+~ Math
+I(\alpha) \coloneqq \int_{-\infty}^{\infty} e^{-\frac{1}{2} \alpha x^2} \dd{x}.
+~
+
+The indefinite integral (antiderivative) of $e^{-\frac{1}{2} \alpha x^2}$ cannot be expressed in terms of elementary functions. However, we can still evaluate the definite integral $I(\alpha)$ by means of a clever trick. Observe that
+
+~ Math 
+\begin{aligned}
+I(\alpha)^2 &=
+  \qty[\int_{-\infty}^{\infty} e^{-\frac{1}{2} \alpha x^2} \dd{x}]
+  \qty[\int_{-\infty}^{\infty} e^{-\frac{1}{2} \alpha y^2} \dd{y}] \\
+&= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+  e^{-\frac{1}{2} \alpha(x^2 + y^2)} \dd{x} \dd{y} \\
+&= \int_{0}^{2\pi} \int_{0}^{\infty}
+  e^{-\frac{1}{2} \alpha r^2} r \dd{r} \dd{\theta}
+  & \text{(polar coordinates)} \\
+&= 2\pi \int_{0}^{\infty} e^{-\alpha u} \dd{u}
+  & \text{(substitute $u = \tfrac{r^2}{2}$)} \\
+&= \frac{2\pi}{\alpha}.
+\end{aligned}
+~
+
+This shows[^fn-sqrt] that $I(\alpha) = \sqrt{2\pi/\alpha}$. Note that $\Re \alpha > 0$ is necessary to ensure convergence. (In fact, this integral converges absolutely if and only if $\Re \alpha > 0$.) In the following notes, we will explore a number of generalizations of this remarkable identity.
+
+[^fn-sqrt]:
+    In this document, $\sqrt{z}$ denotes the usual branch of the square root function, with a branch cut across the negative real axis. This ensures that $\sqrt{z}$ has nonnegative real part for any $z \in \C$.
+
+~ Begin Well {.well-sm}
+~ Equation {margin:0px; padding:0px}
+I(\alpha) \coloneqq \int_{-\infty}^{\infty} e^{-\frac{1}{2} \alpha x^2} \dd{x}
+  = \sqrt{\frac{2\pi}{\alpha}} \qquad \text{for $\Re \alpha > 0$}
+~
+~ End Well
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+**Exercise 1:** Let $\sigma \in \C$, and complete the square in the exponent to show that
+~ Equation
+I(\sigma, \alpha) \coloneqq \int_{-\infty}^{\infty}
+  \exp(-\frac{1}{2} \alpha x^2 + \sigma x) \dd{x}
+  = \exp(\frac{\sigma^2}{2\alpha}) \sqrt{\frac{2\pi}{\alpha}}.
+~
+Show that the integral converges absolutely for any value of $\sigma \in \C$, so long as $\Re \alpha > 0$.
+{margin:0px; padding:0px}
+~ End Panel-Body
+~ End Panel
+
+
+
+# Polynomial Prefactors 
+
+Observe that by differentiating under the integral sign, we obtain the following identities:
+
+~ Math
+I'(\alpha) = \int_{-\infty}^{\infty}
+  \pdv{\alpha} e^{-\frac{1}{2} \alpha x^2} \dd{x}
+  = -\frac{1}{2} \int_{-\infty}^{\infty}
+    x^2 e^{-\frac{1}{2} \alpha x^2} \dd{x}
+  = -\frac{1}{2} \sqrt{\frac{2\pi}{\alpha^3}}
+~
+~ Math
+I''(\alpha) = \int_{-\infty}^{\infty}
+  \pdv[2]{\alpha} e^{-\frac{1}{2} \alpha x^2} \dd{x}
+  = \frac{1}{4} \int_{-\infty}^{\infty}
+    x^4 e^{-\frac{1}{2} \alpha x^2} \dd{x}
+  = \frac{1}{2} \cdot \frac{3}{2} \sqrt{\frac{2\pi}{\alpha^5}}
+~
+~ Math
+\vdots
+~
+~ Math
+I^{(n)}(\alpha) = \qty(-\frac{1}{2})^n \int_{-\infty}^{\infty}
+  x^{2n} e^{-\frac{1}{2} \alpha x^2} \dd{x}
+  = \frac{(-1)^n (2n-1)!!}{2^n} \sqrt{\frac{2\pi}{\alpha^{2n+1}}}
+~
+
+Here, $n!!$ denotes the double factorial. This shows that
+
+~ Math
+\int_{-\infty}^{\infty} x^{n} e^{-\frac{1}{2} \alpha x^2} \dd{x} = (n-1)!! \sqrt{\frac{2\pi}{\alpha^{n+1}}}
+~
+
+for all *even* integers $n$. When $n$ is odd, we have $\int_{-\infty}^{\infty} x^n e^{-\frac{1}{2} \alpha x^2} \dd{x} = 0$ by symmetry (since we are integrating an odd function over a symmetric domain). Thus, for all nonnegative integers $n$, we have the following result:
+
+~ Begin Well {.well-sm}
+~ Equation {margin:0px; padding:0px}
+\int_{-\infty}^{\infty} x^n e^{-\frac{1}{2} \alpha x^2} \dd{x} = \begin{cases}
+   (n-1)!! \sqrt{\frac{2\pi}{\alpha^{n+1}}} & \text{ if $n$ is even} \\
+   0 & \text{ if $n$ is odd}
+   \end{cases}
+~
+~ End Well
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+**Exercise 2:** Using a similar technique to the one illustrated in this section, prove the identities
+~ Equation
+\int_{-\infty}^{\infty} x \exp(-\frac{1}{2} \alpha x^2 + \sigma x) \dd{x} = \frac{\sigma}{\alpha} \exp(\frac{\sigma^2}{2\alpha}) \sqrt{\frac{2\pi}{\alpha}}
+~
+and
+~ Equation
+\int_{-\infty}^{\infty} x^2 \exp(-\frac{1}{2} \alpha x^2 + \sigma x) \dd{x} = \qty[\frac{\alpha + \sigma^2}{\alpha^2}] \exp(\frac{\sigma^2}{2\alpha}) \sqrt{\frac{2\pi}{\alpha}}
+~
+for all $\alpha, \sigma \in \C$ with $\Re\alpha > 0$.
+{margin:0px; padding:0px}
+~ End Panel-Body
+~ End Panel
+
+
+
+# A Linear Algebra Detour 
+
+Our goal for the rest of these notes will be to study some multidimensional generalizations of the Gaussian integral introduced in sections [#sec-introduction--the-gaussian-integral] and [#sec-polynomial-prefactors]. We will take a short detour in this section to state and prove some useful linear algebra facts which will be needed later. We begin by specifying our notation.
+
+~ Begin Well
+**Notation:** We write $\R^{M \times N}$ and $\C^{M \times N}$ for the sets of real and complex $M \times N$ matrices, respectively. If $A \in \C^{M \times N}$, then we write
+
+* $A^\T$ for the transpose of $A$,
+
+* $A^*$ for the complex conjugate of $A$ (without transposition), and
+
+* $A^\h$ for the conjugate transpose of $A$.
+
+We also define these operations for vectors $\vz \in \C^N$ by regarding them as $N \times 1$ matrices. We will always treat vectors as column vectors, and indicate transposition explicitly if a row vector is desired.
+
+If $A \in \C^{N \times N}$ is a square matrix, then we write
+
+* $\det A$ for the determinant of $A$,
+
+* $A^{-1}$ for the inverse of $A$,
+
+* $A^{-\T}$ for the inverse of the transpose, or equivalently, the transpose of the inverse,
+
+* $A^{-*}$ for the inverse of the complex conjugate, or equivalently, the complex conjugate of the inverse, and
+
+* $A^{-\h}$ for the inverse of the conjugate transpose, or equivalently, the conjugate transpose of the inverse.
+
+These operations are also defined for $A \in \R^{N \times N}$ by regarding $\R^{N \times N}$ as a subset of $\C^{N \times N}$. In this case, complex conjugation is simply the 
+identity operation.
+{margin:0px; padding:0px}
+~ End Well
+
+## The Kronecker Product
+
+We now introduce a useful binary operation between matrices of arbitrary size.
+
+~ Begin Well
+**Definition:** Let $A \in \C^{M_1 \times N_1}$ and $B \in \C^{M_2 \times N_2}$. The ***Kronecker product*** of $A$ and $B$, denoted by $A \otimes B$, is the $M_1M_2 \times N_1N_2$ matrix given in block form by
+~ Math
+A \otimes B \coloneqq \mqty[
+   A_{11}B & A_{12}B & \cdots & A_{1N_1}B \\
+   A_{21}B & A_{22}B & \cdots & A_{2N_1}B \\
+   \vdots  & \vdots  & \ddots & \vdots \\
+   A_{M_11}B & A_{M_12}B & \cdots & A_{M_1N_1}B
+]
+~
+where $A_{ij} B$ denotes the product of the scalar $A_{ij}$ with the matrix $B$.
+{margin:0px; padding:0px}
+~ End Well
+
+For readers familiar with the notion of the _tensor product_ of two vector spaces, we note that the Kronecker product has a natural algebraic interpretation in terms of the tensor product. If $A$ is the matrix representation of a linear map $T_1: V_1 \to W_1$ with respect to a pair of ordered bases
+
+~ Math
+\begin{aligned}
+\{\ve_1, \dots, \ve_{N_1}\} &\subseteq V_1 \\
+\{\vvf_1, \dots, \vvf_{M_1}\} &\subseteq W_1
+\end{aligned}
+~
+
+and $B$ is the matrix representation of a linear map $T_2: V_2 \to W_2$ with respect to a pair of ordered bases
+
+~ Math
+\begin{aligned}
+\{\vg_1, \dots, \vg_{N_2}\} &\subseteq V_2 \\
+\{\vh_1, \dots, \vh_{M_2}\} &\subseteq W_2
+\end{aligned}
+~
+
+then the Kronecker product $A \otimes B$ is simply the matrix representation of the linear map $T_1 \otimes T_2: V_1 \otimes V_2 \to W_1 \otimes W_2$ with respect to the tensor product bases
+
+~ Math
+\begin{aligned}
+\{ \ve_i \otimes \vg_j \} &\subseteq V_1 \otimes V_2 \\
+\{ \vvf_i \otimes \vh_j \} &\subseteq W_1 \otimes W_2
+\end{aligned}
+~
+
+ordered lexicographically by $i$ and $j$. This interpretation makes a number of properties of the Kronecker product immediately clear:
+
+* The Kronecker product is bilinear and associative, but (in general) not commutative.
+
+* The Kronecker product commutes with inversion, transposition, complex conjugation, and conjugate transposition:
+~ Math
+\begin{aligned}
+(A \otimes B)^{-1} &= A^{-1} \otimes B^{-1} &
+(A \otimes B)^{\T} &= A^{\T} \otimes B^{\T} \\
+(A \otimes B)^{*} &= A^{*} \otimes B^{*} &
+(A \otimes B)^{\h} &= A^{\h} \otimes B^{\h}
+\end{aligned}
+~
+
+* The Kronecker product is compatible with the usual matrix product in the following sense:
+~ Math
+(A \otimes B)(C \otimes D) = (AB) \otimes (CD)
+~
+this is sometimes called the _mixed-product property_ of the Kronecker product.
+
+Readers who are _not_ familiar with tensor products can safely ignore the preceding discussion, provided they are willing to accept the preceding facts on faith.
+
+## Generalized Eigenvalues and Eigenvectors
+
+~ Begin Well
+**Definition:** Let $A, B \in \mathbb{C}^{N \times N}$. We call the equation
+~ Equation { #gen_eig }
+A\vv = \lambda B\vv   
+~
+a ***generalized eigenvalue problem***, or simply a ***generalized eigenproblem***. If $(\lambda, \vv)$ is a solution, then we call $\lambda$ a ***generalized eigenvalue of $A$ with respect to $B$***, and $\vv$ the corresponding ***generalized eigenvector***. In the special case where $A$ and $B$ are both Hermitian and $B$ is positive-definite, we call [#gen_eig] a ***Hermitian-definite eigenproblem***.
+{margin:0px; padding:0px}
+~ End Well
+
+Note that if $B = I_N$, the $N \times N$ identity matrix, then [#gen_eig] reduces to the standard eigenproblem for $A$. The Hermitian-definite case is particularly well-behaved, and occurs most frequently in applications.
+
+**Theorem:** Let $A,B \in \C^{N \times N}$ be Hermitian matrices, and suppose $B$ is positive-definite. Then the Hermitian-definite eigenproblem $A\vv = \lambda B\vv$ admits a family of solutions $(\lambda_1, \vv_1),$ $\dots,$ $(\lambda_n, \vv_n)$ having the following properties:
+
+1. The eigenvalues $\lambda_1, \dots, \lambda_n$ are all real.
+
+2. The eigenvectors $\vv_1, \dots, \vv_n$ form a basis of $\C^N$.
+
+3. If $i \ne j$, then $\vv_i^\h B \vv_j = 0$. (We say that $\vv_i$ and $\vv_j$ are _$B$-orthogonal._)
+
+_Proof:_ Recall that a positive-definite matrix has a unique positive-definite square root. Using this fact, we can reduce the generalized eigenvalue problem $A\vv = \lambda B\vv$ to a standard eigenvalue problem, as follows:
+
+~ Math 
+\begin{aligned}
+A\vv &= \lambda B\vv \\
+A(\sqrt{B})^{-1} \sqrt{B}\vv &= \lambda \sqrt{B} \sqrt{B}\vv \\
+\qty[(\sqrt{B})^{-1}A(\sqrt{B})^{-1}] \sqrt{B}\vv &= \lambda \sqrt{B}\vv
+\end{aligned}
+~
+
+Since $(\sqrt{B})^{-1}A(\sqrt{B})^{-1}$ is Hermitian, we now have a standard Hermitian eigenvalue problem in terms of $\sqrt{B}\vv$. The theorem now follows by applying the spectral theorem to this standard eigenvalue problem. **QED**
+
+Observe that by suitably normalizing the generalized eigenvectors $\{\vv_i\}$, we can arrange that $\vv_i^\h B \vv_j = 1$ when $i = j$ and $\vv_i^\h B \vv_j = 0$ when $i \ne j$. A set of vectors having this property is said to be _$B$-orthonormal_. Thus, we can summarize the preceding discussion as follows:
+
+~ Begin Well
+_All Hermitian-definite eigenproblems admit a $B$-orthonormal basis of eigenvectors with real eigenvalues._
+{margin:0px; padding:0px}
+~ End Well
+
+**Corollary:** Let $A,B \in \C^{N \times N}$ be Hermitian matrices, and suppose $B$ is positive-definite. Then $A$ and $B$ are simultaneously diagonalized by some invertible matrix $V \in \C^{N \times N}$ (i.e., both $V^\h AV$ and $V^\h BV$ are diagonal).
+
+_Proof:_ Let the columns of $V$ be a $B$-orthogonal basis of generalized eigenvectors of $A$ with respect to $B$. The preceding theorem guarantees the existence of such a basis. **QED**
+
+**Warning:** The phrase "the matrix $V$ diagonalizes the matrix $A$" means "$V^{-1}\!AV$ is diagonal" to some authors and "$V^{\h}AV$ is diagonal" to others. We will always use the second definition, which is more useful for our purposes, but we note that in other contexts the first is often more natural.
+
+
+
+# Multiple Dimensions 
+
+**Theorem:** Let $A \in \C^{N \times N}$ be a complex-symmetric matrix with positive-definite real part, and $\vs \in \C^N$ an arbitrary complex vector. Then
+
+~ Equation {#multidim-gauss}
+\int_{\R^N} \exp(-\frac{1}{2} \vx^\T A\vx + \vs^\T\vx) \dd{\vx}
+= \sqrt{\frac{(2\pi)^N}{\det A}} \exp(\frac{1}{2}\vs^\T A^{-1}\vs).
+~
+
+**Remark:** Note that the preceding formula contains only transposes, not conjugate-transposes. This is not a typo! In fact, when the transposes are replaced by conjugate-transposes, the formula becomes incorrect. Indeed, both sides of equation [#multidim-gauss] should be holomorphic functions of the entries of $A$ and $\vs$.
+
+_Proof:_ Let $A = B + iC$ with $B,C \in \R^{N \times N}$ symmetric and $B$ positive-definite. By section [#sec-generalized-eigenvalues-and-eigenvectors], there exists an invertible matrix $V \in \mathbb{R}^{N \times N}$ simultaneously diagonalizing $B$ and $C$. It follows that
+
+~ Math
+A = V^{-\T} V^\T (B + iC) V V^{-1} = V^{-\T} (V^\T B V + i V^\T C V) V^{-1} = V^{-\T} D V^{-1}
+~
+
+where $D \coloneqq V^\T B V + i V^\T C V$ is diagonal. Note that the positive definiteness of $B$ guarantees that the diagonal entries of $V^\T B V$ are positive. Thus, the diagonal entries $d_i$ of $D$ have positive real part.
+
+Now, let $\vvu \coloneqq V^\T \vs$. By performing a change of variable $\vy = V^{-1}\vx$, we can write
+
+~ Math 
+\begin{aligned}
+\int_{\R^N} \exp(-\frac{1}{2} \vx^\T A\vx + \vs^\T\vx) \dd{\vx} &= \int_{\R^N} \exp(-\frac{1}{2} \vx^\T V^{-\T} D V^{-1} \vx + \vs^\T\vx) \dd{\vx} \\
+&= \int_{\R^N} \exp(-\frac{1}{2} \vy^\T D \vy + \vvu^\T \vy) \det V \dd{\vy} \\
+&= \det V \int_{\R^N} \exp(-\frac{1}{2} \sum_{j=1}^N d_j y_j^2 + \sum_{j=1}^N u_jy_j) \dd{\vy} \\
+&= \det V \prod_{j=1}^N \int_{-\infty}^{\infty} \exp(-\frac{1}{2} d_j y_j^2 + u_jy_j) \dd{y_j} \\
+&= \det V \prod_{j=1}^N \sqrt{\frac{2\pi}{d_j}} \exp(\frac{u_j^2}{2d_j}) \\
+&= \det V \sqrt{\frac{(2\pi)^N}{\det D}} \exp(\frac{1}{2} \sum_{j=1}^N d_j^{-1}u_j^2) \\
+&= \sqrt{\frac{(2\pi)^N}{\det (V^{-\T} D V^{-1})}} \exp(\frac{1}{2} \vvu^\T D^{-1} \vvu) \\
+&= \sqrt{\frac{(2\pi)^N}{\det A}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs).
+\end{aligned}
+~
+
+This is the desired result. **QED**
+
+
+**Theorem:** Let $A \in \C^{N \times N}$ be a complex-symmetric matrix with positive-definite real part. Then for any $Q \in \C^{N \times N}$ and $\vs \in \C^N$,
+
+~ Math 
+\begin{aligned}
+& \int_{\R^N} \frac{1}{2} \vx^\T Q \vx \exp(-\frac{1}{2} \vx^\T A \vx + \vs^\T\vx) \dd{\vx} = \\
+&\hspace{1cm} \sqrt{\frac{(2\pi)^N}{\det A}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs) \qty[\frac{1}{2}\Tr(QA^{-1}) + \frac{1}{2}(A^{-1} \vs)^\T Q (A^{-1} \vs) ].   
+\end{aligned}
+~
+
+_Proof:_ As in the preceding proof, pick an invertible matrix $V \in \mathbb{R}^{N \times N}$ such that $D \coloneqq V^\T A V$ is diagonal, and let $R \coloneqq V^\T Q V$ and $\vvu \coloneqq V^\T \vs$. Then by performing a change of variable $\vy = V^{-1}\vx$, we can write
+~ Math 
+\begin{aligned}
+I &\coloneqq \int_{\R^N} \frac{1}{2} \vx^\T Q \vx \exp(-\frac{1}{2} \vx^\T A \vx + \vs^\T\vx) \dd{\vx} \\
+&= \int_{\R^N} \frac{1}{2} \vx^\T Q \vx \exp(-\frac{1}{2} \vx^\T V^{-\T} D V^{-1} \vx + \vs^\T\vx) \dd{\vx} \\
+&= \int_{\R^N} \frac{1}{2} \vy^\T V^\T Q V \vy \exp(-\frac{1}{2} \vy^\T D \vy + \vs^\T V\vy) \det V \dd{\vy} \\
+&= \frac{\det V}{2} \int_{\R^N} \vy^\T R \vy \exp(-\frac{1}{2} \vy^\T D \vy + \vvu^\T \vy) \dd{\vy} \\
+&= \frac{\det V}{2} \int_{\R^N} \sum_{j,k = 1}^N R_{jk}y_jy_k \exp(-\frac{1}{2} \sum_{\ell=1}^N d_\ell y_\ell^2 + \sum_{\ell=1}^N u_\ell y_\ell) \dd{\vy} \\
+&= \frac{\det V}{2} \sum_{j,k = 1}^N R_{jk} \int_{\R^N} y_jy_k \prod_{\ell=1}^N \exp(-\frac{1}{2} d_\ell y_\ell^2 + u_\ell y_\ell) \dd{\vy}.
+\end{aligned}
+~
+
+At this point, we consider separately the $j = k$ and $j \ne k$ terms.
+
+
+* When $j = k$, we want to evaluate the integral
+~ Math
+I_{j} \coloneqq \int_{\R^N} y_j^2 \prod_{\ell=1}^N \exp(-\frac{1}{2} d_\ell y_\ell^2 + u_\ell y_\ell) \dd{\vy}.
+~
+   Observe that each term with $\ell \ne j$ contributes a factor of
+~ Math
+\int_{-\infty}^{\infty} \exp(-\frac{1}{2} d_\ell y_\ell^2 + u_\ell y_\ell) \dd{y_\ell} = \sqrt{\frac{2\pi}{d_\ell}} \exp(\frac{u_\ell^2}{2d_\ell})
+~
+   while the $\ell = j$ term contributes a factor of
+~ Math
+\int_{-\infty}^{\infty} y_j^2 \exp(-\frac{1}{2} d_j y_j^2 + u_j y_j) \dd{y_j} = \qty[\frac{d_j + u_j^2}{d_j^2}] \sqrt{\frac{2\pi}{d_j}} \exp(\frac{u_j^2}{2d_j}).
+~
+   Multiplying these factors gives the result
+~ Math
+I_j = \qty[\frac{d_j + u_j^2}{d_j^2}] \prod_{\ell=1}^N \sqrt{\frac{2\pi}{d_\ell}} \exp(\frac{u_\ell^2}{2d_\ell}) = \qty[\frac{d_j + u_j^2}{d_j^2}] \sqrt{\frac{(2\pi)^N}{\det D}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs).
+~
+   (See the previous proof for the evaluation of the product.)
+
+* When $j \ne k$, we want to evaluate the integral
+~ Math
+I_{jk} \coloneqq \int_{\R^N} y_jy_k \prod_{\ell=1}^N \exp(-\frac{1}{2} d_\ell y_\ell^2 + u_\ell y_\ell) \dd{\vy}.
+~
+   Again, each term with $\ell \ne j,k$ contributes a factor of $\sqrt{\frac{2\pi}{d_\ell}} \exp(\frac{u_\ell^2}{2d_\ell})$, while the $\ell = j,k$ terms contribute a factor of
+~ Math
+\int_{-\infty}^{\infty} y_j \exp(-\frac{1}{2} d_j y_j^2 + u_j y_j) \dd{y_j} = \qty[\frac{u_j}{d_j}] \sqrt{\frac{2\pi}{d_j}} \exp(\frac{u_j^2}{2d_j}).
+~
+   Multiplying these factors gives the result
+~ Math
+I_{jk} = \qty[\frac{u_j u_k}{d_j d_k}] \prod_{\ell=1}^N \sqrt{\frac{2\pi}{d_\ell}} \exp(\frac{u_\ell^2}{2d_\ell}) = \qty[\frac{u_j u_k}{d_j d_k}] \sqrt{\frac{(2\pi)^N}{\det D}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs).
+~
+
+Returning to the original integral, we have
+~ Math 
+\begin{aligned}
+I &= \frac{\det V}{2}\qty[\sum_{j = 1}^N R_{jj} I_j + \sum_{j \ne k}^N R_{jk} I_{jk} ] \\
+&= \frac{\det V}{2} \sqrt{\frac{(2\pi)^N}{\det D}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs) \qty[\sum_{j = 1}^N R_{jj} \frac{d_j + u_j^2}{d_j^2} + \sum_{j \ne k}^N R_{jk} \frac{u_j u_k}{d_j d_k} ] \\
+&= \frac{1}{2} \sqrt{\frac{(2\pi)^N}{\det (V^{-\T} D V^{-1})}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs) \qty[\sum_{j = 1}^N \frac{R_{jj}}{d_j} + \sum_{j,k = 1}^N R_{jk} \frac{u_j u_k}{d_j d_k} ] \\
+&= \sqrt{\frac{(2\pi)^N}{\det A}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs) \qty[\frac{1}{2}\Tr(RD^{-1}) + \frac{1}{2}\vvu^\T D^{-\T} RD^{-1}\vvu ] \\
+&= \sqrt{\frac{(2\pi)^N}{\det A}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs)
+  \bigg[\frac{1}{2}\Tr((V^\T Q V) (V^\T A V)^{-1}) \\
+  &\pe \hspace{4cm} + \frac{1}{2}\vvu^\T (V^\T A V)^{-\T} (V^\T Q V) (V^\T A V)^{-1}\vvu \bigg] \\
+&= \sqrt{\frac{(2\pi)^N}{\det A}} \exp(\frac{1}{2} \vs^\T A^{-1} \vs) \qty[\frac{1}{2}\Tr(QA^{-1}) + \frac{1}{2}(A^{-1} \vs)^\T Q (A^{-1} \vs) ]
+\end{aligned}
+~
+
+which is the desired result. **QED**
+
+
+
+# Vector-of-vectors Formalism 
+
+Let $\vx_1, \dots, \vx_N \in \R^d$ be a collection of $d$-dimensional vectors. For reasons that will become clear later, we would like to think of these vectors as belonging to a single object $\underline{\vx}$, which we interpret as a "vector" whose components are themselves vectors. We denote such a vector-of-vectors by a boldface underlined letter $\underline{\vvu}, \underline{\vv}, \underline{\vw}$, and we write $(\R^d)^N$ to denote the set of $N$-dimensional vectors whose components are $d$-dimensional vectors.
+
+We define the following operations on $(\R^d)^N$:
+
+* scalar multiplication $\alpha \uvx$, defined for $\alpha \in \R$ and $\uvx \in (\R^d)^N$ by
+~ Math
+(\alpha \uvx)_i \coloneqq \alpha \vx_i \qquad \text{ for } i = 1, \dots, N
+~
+
+* scalar dot product $\uvx \cdot \uvy = \uvx^\T \uvy$, defined for $\uvx, \uvy \in (\R^d)^N$ by
+~ Math
+\uvx \cdot \uvy \coloneqq \sum_{i=1}^N \vx_i \cdot \vy_i
+~
+
+* vector dot product $\vvu \cdot \uvx = \vvu^\T \uvx$, defined for $\vvu \in \R^N$ and $\uvx \in (\R^d)^N$ by
+~ Math
+\vvu \cdot \uvx \coloneqq \sum_{i=1}^N u_i \vx_i
+~
+
+* linear transformation $A\uvx$, defined for $A \in \R^{M \times N}$ and $\uvx \in (\R^d)^N$ by
+~ Math
+(A\uvx)_i \coloneqq \sum_{j=1}^N A_{ij}\vx_j \qquad \text{ for } i = 1, \dots, M
+~
+
+* scalar quadratic form $\uvx^\T A\uvx$, defined for $A \in \R^{N \times N}$ and $\uvx \in (\R^d)^N$ by
+~ Math
+\uvx^\T A\uvx \coloneqq \sum_{i,j=1}^N A_{ij} \vx_i \cdot \vx_j
+~
+
+* vector quadratic form $\vvu^\T A\uvx$, defined for $A \in \R^{M \times N}$, $\vvu \in \R^M$, and $\uvx \in (\R^d)^N$ by
+~ Math
+\vvu^\T A\uvx \coloneqq \sum_{i=1}^M \sum_{j=1}^N A_{ij} u_i \vx_j
+~
+
+These operations have straightforward generalizations to $(\C^d)^N$, as long as we are careful to distinguish between the transpose $\uvx^\T$ and the conjugate transpose $\uvx^\h$.
+
+In some circumstances, it will be more convenient to think of a vector-of-vectors in $(\R^d)^N$ as an ordinary vector in $\R^{Nd}$. To make this correspondence explicit, we introduce the _vectorization operator_ $\vvec: (\R^d)^N \to \R^{Nd}$, which takes a vector-of-vectors $\uvx \in (\R^d)^N$ and returns an ordinary vector $\operatorname{vec}(\uvx) \in \R^{Nd}$ obtained by stacking the components of $\vx_1, \dots, \vx_N$ on top of each other, with $\vx_1$ on top and $\vx_N$ on the bottom.
+
+In other circumstances, it will be convenient to regard a vector-of-vectors in $(\R^d)^N$ as a matrix in $\R^{N \times d}$. To this end, we introduce the _matrization operator_ $\mat: (\R^d)^N \to \R^{N \times d}$, which transforms $\uvx \in (\R^d)^N$ into a matrix with $\vx_i$ as its $i$th row.
+
+Using $\vvec$ and $\mat$, we can state the following equivalents of the operations on $(\R^d)^N$ defined above. The equivalences are straightforward to verify, so detailed proofs will be omitted here.
+
+~ Equation
+\vvec(\alpha \uvx) = \alpha \vvec(\uvx) \qquad \mat(\alpha\uvx) = \alpha \mat(\uvx)
+~
+~ Equation
+\uvx^\T \uvy = \vvec(\uvx)^\T \vvec(\uvy) = \Tr(\mat(\uvx)^\T \mat(\uvy))
+~
+~ Equation
+\vvu^\T \uvx = (\vvu \otimes I_d)^\T \vvec(\uvx) = \mat(\uvx)^\T \vvu
+~
+~ Equation
+\vvec(A\uvx) = (A \otimes I_d) \vvec(\uvx) \qquad \mat(A\uvx) = A\mat(\uvx)
+~
+~ Equation
+\uvx^\T A\uvx = \vvec(\uvx)^\T (A \otimes I_d) \vvec(\uvx) = \Tr(\mat(\uvx)^\T A\mat(\uvx))
+~
+~ Equation
+\vvu^\T A\uvx = (\vvu^\T A \otimes I_d) \vvec(\uvx) = \mat(\uvx)^\T A^\T \vvu
+~
+
+
+
+# Explicitly Correlated Gaussians 
+
+Let $A_1, A_2 \in \C^{N \times N}$ be complex-symmetric matrices with positive-definite real parts, and let $\uvs_1, \uvs_2 \in (\C^d)^N$ be arbitrary complex vectors-of-vectors. Define
+~ Math 
+\begin{aligned}
+\Phi_1(\uvx) &\coloneqq \exp(-\frac{1}{2} \uvx^\T A_1 \uvx + \uvs_1^\T \uvx) & A &\coloneqq A_1^* + A_2 \\
+\Phi_2(\uvx) &\coloneqq \exp(-\frac{1}{2} \uvx^\T A_2 \uvx + \uvs_2^\T \uvx) & \uvs &\coloneqq \uvs_1^* + \uvs_2
+\end{aligned}
+~
+
+The functions $\Phi_1, \Phi_2: (\R^d)^N \to \C$ are called _explicitly correlated Gaussians_ (ECGs), and are extremely useful in variational calculations for quantum-mechanical few-body systems. The object of this section will be to evaluate the ECG matrix elements
+
+~ Math
+\mel{\Phi_1}{\hat{\mathcal{O}}}{\Phi_2} \coloneqq \int_{(\R^d)^N} \Phi_1(\uvx)^* \hat{\mathcal{O}}\,\Phi_2(\uvx) \dd{\uvx}
+~
+
+of various differential operators $\hat{\mathcal{O}}$. To do this, we will need to evaluate several integrals over $(\R^d)^N$. Our strategy will be to reduce these to equivalent integrals over $\R^{Nd}$ using the vectorization identities stated in the previous section. Then, we can apply standard formulas for multidimensional Gaussian integrals.
+
+## Overlap Matrix Element 
+
+We begin by evaluating the overlap matrix element $\mel{\Phi_1}{\hat{1}}{\Phi_2} = \braket{\Phi_1}{\Phi_2}$. This simply reduces to the multidimensional Gaussian integral after the application of a few vectorization identities. Using the substitution $\vv = \vvec(\uvx)$, we can write
+~ Math 
+\begin{aligned}
+\braket{\Phi_1}{\Phi_2} &= \int_{(\R^d)^N} \exp(-\frac{1}{2} \uvx^\T A_1^* \uvx + (\uvs_1^*)^\T \uvx) \exp(-\frac{1}{2} \uvx^\T A_2 \uvx + \uvs_2^\T \uvx) \dd{\uvx} \\
+&= \int_{(\R^d)^N} \exp(-\frac{1}{2} \uvx^\T A \uvx + \uvs^\T \uvx) \dd{\uvx} \\
+&= \int_{\R^{Nd}} \exp(-\frac{1}{2} \vv^\T (A \otimes I_d) \vv + \vvec(\uvs)^\T \vv) \dd{\vv} \\
+&= \sqrt{\frac{(2\pi)^{Nd}}{\det(A \otimes I_d)}} \exp(\frac{1}{2} \vvec(\uvs)^\T (A \otimes I_d)^{-1} \vvec(\uvs)) \\
+&= \sqrt{\frac{(2\pi)^{Nd}}{(\det A)^d}} \exp(\frac{1}{2} \vvec(\uvs)^\T (A^{-1} \otimes I_d) \vvec(\uvs)) \\
+&= \qty[\frac{(2\pi)^{N}}{\det A}]^{d/2} \exp(\frac{1}{2} \uvs^\T A^{-1} \uvs).
+\end{aligned}
+~
+
+## Quadratic Form Matrix Element 
+
+We now evaluate the matrix element $\mel{\Phi_1}{\frac{1}{2} \uvx^\T Q \uvx}{\Phi_2}$ of a quadratic form for an arbitrary matrix $Q \in \C^{N \times N}$. With an appropriate choice of $Q$, this can be used to evaluate the expectation values $\ev*{\vx_i^2}$ and $\ev*{(\vx_i - \vx_j)^2}$ of squared radial and interparticle distances, respectively.
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{\frac{1}{2} \uvx^\T Q \uvx}{\Phi_2} &= \int_{(\R^d)^N} \frac{1}{2} \uvx^\T Q \uvx \exp(-\frac{1}{2} \uvx^\T A \uvx + \uvs^\T \uvx) \dd{\uvx} \\
+&= \int_{\R^{Nd}} \frac{1}{2} \vv^\T (Q \otimes I_d) \vv \exp(-\frac{1}{2} \vv^\T (A \otimes I_d) \vv + \vvec(\uvs)^\T \vv) \dd{\vv} \\
+&= \sqrt{\frac{(2\pi)^{Nd}}{\det(A \otimes I_d)}} \exp(\frac{1}{2} \vvec(\uvs)^\T (A \otimes I_d)^{-1} \vvec(\uvs))\ \times \\
+&\phantom{{}={}} \qty[\frac{1}{2}\Tr((Q \otimes I_d)(A \otimes I_d)^{-1}) + \frac{1}{2}\qty((A \otimes I_d)^{-1} \vvec(\uvs))^\T (Q \otimes I_d) \qty((A \otimes I_d)^{-1} \vvec(\uvs)) ] \\
+&= \qty[\frac{(2\pi)^{N}}{\det A}]^{d/2} \exp(\frac{1}{2} \uvs^\T A^{-1} \uvs) \qty[\frac{d}{2}\Tr(QA^{-1}) + \frac{1}{2}(A^{-1} \uvs)^\T Q (A^{-1} \uvs) ] \\
+&= \braket{\Phi_1}{\Phi_2} \qty[\frac{d}{2} \Tr(QA^{-1}) + \frac{1}{2}(A^{-1} \uvs)^\T Q (A^{-1} \uvs)]
+\end{aligned}
+~
+
+## Kinetic Energy Matrix Element 
+
+By choosing an appropriate "mass matrix" $\Lambda \in \R^{N \times N}$, the kinetic energy operator can be written as a quadratic form $T = \frac{1}{2} \uvp^\T \Lambda \uvp$ in terms of the vector momentum operator
+
+~ Math
+\uvp = \mqty[-i\hbar\nabla_{\vx_1} \\ -i\hbar\nabla_{\vx_2} \\ \vdots \\ -i\hbar\nabla_{\vx_N}]
+~
+
+Since we already know how to evaluate the matrix element of a quadratic form in position space, our strategy will be to take the Fourier transform of $\Phi_1, \Phi_2$ so that we can evaluate the integral
+
+~ Math
+\mel{\Phi_1}{T}{\Phi_2} = \int_{(\R^d)^N} \frac{1}{2} \uvp^\T \Lambda \uvp\ \hat{\Phi}_1(\uvp)^*\,\hat{\Phi}_2(\uvp) \dd{\uvp}
+~
+
+in momentum space.
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+**Exercise 3:** Let $A \in \C^{N \times N}$ be a complex-symmetric matrix with positive-definite real part, and let $\uvs \in (\C^d)^N$ be arbitrary. Define $\Phi: (\R^d)^N \to \C$ by
+~ Math
+\Phi(\uvx) \coloneqq \exp(-\frac{1}{2} \uvx^\T A \uvx + \uvs^\T \uvx).
+~
+Show that the Fourier transform $\hat{\Phi}$ of $\Phi$ is given by
+~ Math
+\hat{\Phi}(\uvp) \coloneqq \frac{1}{(2\pi)^{Nd/2}} \int_{(\R^d)^N} \Phi(\uvx) e^{-i\uvp \cdot \uvx} \dd{\uvx} = \frac{1}{(\det A)^{d/2}} \exp(\frac{1}{2} (\uvs - i\uvp)^\T A^{-1} (\uvs - i\uvp)).
+~
+Show that this can also be written as
+~ Math
+\hat{\Phi}(\uvp) = \frac{\exp(\frac{1}{2} \uvs^\T A^{-1} \uvs)}{(\det A)^{d/2}} \exp(-\frac{1}{2} \uvp^\T A^{-1} \uvp - (iA^{-1}\uvs)^\T \uvp)
+~
+and hence that the Fourier transform of an ECG in position space is an ECG in momentum space.
+{margin:0px; padding:0px}
+~ End Panel-Body
+~ End Panel
+
+~ Begin Panel {.panel-default}
+~ Begin Panel-Body
+**Exercise 4:** Assuming the result of Exercise 3, verify that the inverse Fourier transform of $\hat{\Phi}$ gives back $\Phi$. That is,
+~ Math {margin-bottom:0px; padding-bottom:0px} 
+\frac{1}{(2\pi)^{Nd/2}} \int_{(\R^d)^N} \hat{\Phi}(\uvp) e^{i\uvp \cdot \uvx} \dd{\uvp} = \exp(-\frac{1}{2} \uvx^\T A \uvx + \uvs^\T \uvx).
+~
+~ End Panel-Body
+~ End Panel
+
+For simplicity of notation, we will assume in the following derivation that $A_1$ and $\uvs_1$ are complex-conjugated whenever they appear, suppressing the $*$ signs. Using the result of Exercise 3, we have
+
+~ Math
+\mel{\Phi_1}{T}{\Phi_2} = \frac{\exp(\frac{1}{2} \uvs_1^\T A_1^{-1} \uvs_1 + \frac{1}{2} \uvs_2^\T A_2^{-1} \uvs_2)}{(\det A_1)^{d/2}(\det A_2)^{d/2}} \int_{(\R^d)^N} \frac{1}{2} \uvp^\T \Lambda \uvp \exp(-\frac{1}{2} \uvp^\T A_0 \uvp + i\uvs_0^\T \uvp) \dd{\uvp}
+~
+
+where we have defined $A_0 \coloneqq A_1^{-1} + A_2^{-1}$ and $\uvs_0 \coloneqq A_1^{-1}\uvs_1 - A_2^{-1}\uvs_2$.
+We use the formula obtained in the previous section to integrate the quadratic form, giving
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{T}{\Phi_2} = \frac{\exp(\frac{1}{2} \uvs_1^\T A_1^{-1} \uvs_1 + \frac{1}{2} \uvs_2^\T A_2^{-1} \uvs_2)}{(\det A_1)^{d/2}(\det A_2)^{d/2}} \qty[\frac{(2\pi)^{N}}{\det A_0}]^{d/2} \times \\ \exp(-\frac{1}{2} \uvs_0^\T A_0^{-1} \uvs_0) \qty[\frac{d}{2}\Tr(\Lambda A_0^{-1}) - \frac{1}{2}(A_0^{-1} \uvs_0)^\T \Lambda (A_0^{-1} \uvs_0) ].
+\end{aligned}
+~
+
+Observe that $A_1 A_0 A_2 = A_2 A_0 A_1 = A$. This allows us to simplify the product of determinants:
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{T}{\Phi_2} = \qty[\frac{(2\pi)^{N}}{\det A}]^{d/2} \exp(\frac{1}{2} \uvs_1^\T A_1^{-1} \uvs_1 + \frac{1}{2} \uvs_2^\T A_2^{-1} \uvs_2 - \frac{1}{2} \uvs_0^\T A_0^{-1} \uvs_0)\ \times \\ \qty[\frac{d}{2}\Tr(\Lambda A_0^{-1}) - \frac{1}{2}(A_0^{-1} \uvs_0)^\T \Lambda (A_0^{-1} \uvs_0) ].
+\end{aligned}
+~
+
+The appearance of the $\qty[\frac{(2\pi)^{N}}{\det A}]^{d/2}$ term suggests that we might be able to factor out an overlap integral $\braket{\Phi_1}{\Phi_2}$. This turns out to be a great idea, because it sets the ball rolling for a _miraculous_ cancellation. We start by writing
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{T}{\Phi_2} = \braket{\Phi_1}{\Phi_2} \exp(\frac{1}{2} \uvs_1^\T A_1^{-1} \uvs_1 + \frac{1}{2} \uvs_2^\T A_2^{-1} \uvs_2 - \frac{1}{2} \uvs_0^\T A_0^{-1} \uvs_0 - \frac{1}{2}\uvs^\T A^{-1} \uvs)\ \times \\ \qty[\frac{d}{2}\Tr(\Lambda A_0^{-1}) - \frac{1}{2}(A_0^{-1} \uvs_0)^\T \Lambda (A_0^{-1} \uvs_0) ].
+\end{aligned}
+~
+
+Now, by expanding the $\uvs$ and $\uvs_0$ terms, it turns out that
+~ Math 
+\begin{aligned}
+\uvs_1^\T A_1^{-1} & \uvs_1 + \uvs_2^\T A_2^{-1} \uvs_2-\uvs_0^\T A_0^{-1} \uvs_0 - \uvs^\T A^{-1} \uvs \\
+&= \uvs_1^\T A_1^{-1} \uvs_1 + \uvs_2^\T A_2^{-1} \uvs_2 - (A_1^{-1}\uvs_1 - A_2^{-1}\uvs_2)^\T A_0^{-1} (A_1^{-1}\uvs_1 - A_2^{-1}\uvs_2) - (\uvs_1 + \uvs_2)^\T A^{-1} (\uvs_1 + \uvs_2) \\
+&= \uvs_1^\T A_1^{-1} \uvs_1 + \uvs_2^\T A_2^{-1} \uvs_2 - \uvs_1^\T A^{-1} \uvs_1 - \uvs_2^\T A^{-1} \uvs_2 -\uvs_1^\T A_1^{-1} A_0^{-1} A_1^{-1}\uvs_1 -\uvs_2^\T A_2^{-1} A_0^{-1} A_2^{-1}\uvs_2 \\
+&= \uvs_1^\T (A_1^{-1} - A^{-1} - A_1^{-1} A_0^{-1} A_1^{-1}) \uvs_1 + \uvs_2^\T (A_2^{-1} - A^{-1} - A_2^{-1} A_0^{-1} A_2^{-1}) \uvs_2.
+\end{aligned}
+~
+
+But observe that $A_1^{-1} - A^{-1} - A_1^{-1} A_0^{-1} A_1^{-1} = 0$, since
+~ Math 
+\begin{aligned}
+A_1^{-1} - A^{-1} - A_1^{-1} A_0^{-1} A_1^{-1} &= A_1^{-1} - A^{-1} - A_1^{-1} (A_1 A^{-1} A_2) A_1^{-1} & \text{(substitute for $A_0$)}\\
+&= A_1^{-1} - A^{-1} - A^{-1} A_2 A_1^{-1} & \text{(cancel $A_1^{-1} A_1$)}\\
+&= A_1^{-1} - A^{-1}(I + A_2 A_1^{-1}) & \text{(factor out $A^{-1}$ on left)}\\
+&= (I - A^{-1}(I + A_2 A_1^{-1})A_1) A_1^{-1} & \text{(factor out $A_1^{-1}$ on right)}\\
+&= (I - A^{-1}(A_1 + A_2)) A_1^{-1} & \text{(distribute $A_1$ inside)}\\
+&= (I - I) A_1^{-1} = 0.
+\end{aligned}
+~
+
+A similar argument shows that $A_2^{-1} - A^{-1} - A_2^{-1} A_0^{-1} A_2^{-1} = 0$. This means that the entire exponential term vanishes!
+
+~ Math
+\exp(\frac{1}{2} \uvs_1^\T A_1^{-1} \uvs_1 + \frac{1}{2} \uvs_2^\T A_2^{-1} \uvs_2 - \frac{1}{2} \uvs_0^\T A_0^{-1} \uvs_0 - \frac{1}{2}\uvs^\T A^{-1} \uvs) = \exp(0) = 1
+~
+
+At this point, we are only left with
+
+~ Math
+\mel{\Phi_1}{T}{\Phi_2} = \braket{\Phi_1}{\Phi_2} \qty[\frac{d}{2}\Tr(\Lambda A_0^{-1}) - \frac{1}{2}(A_0^{-1} \uvs_0)^\T \Lambda (A_0^{-1} \uvs_0) ]
+~
+
+which, by eliminating $A_0$ and $\uvs_0$, can equivalently be written as
+
+~ Math
+\mel{\Phi_1}{T}{\Phi_2} = \braket{\Phi_1}{\Phi_2} \qty[\frac{d}{2}\Tr(\Lambda A_1 A^{-1} A_2) - \frac{1}{2}\uvy^\T \Lambda \uvy ] \qquad \uvy \coloneqq A_2 A^{-1} \uvs_1 - A_1 A^{-1} \uvs_2.
+~
+
+
+## Single-particle Density Matrix Element 
+
+The single-particle density operator $\delta(\vw^\T\uvx - \vr)$ determines the probability density (as a function of $\vr$) for the position of the particle with coordinates $\vw^\T\uvx$.
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{e^{-i\vk\cdot(\vw^\T\uvx)}}{\Phi_2} &= \int_{(\R^d)^N} \exp(-\frac{1}{2} \uvx^\T A \uvx + \uvs^\T \uvx - i\vk\cdot(\vw^\T\uvx)) \dd{\uvx} \\
+&= \int_{\R^{Nd}} \exp(-\frac{1}{2} \vv^\T (A \otimes I_d) \vv + \vvec(\uvs)^\T \vv - i\vk^\T(\vw \otimes I_d)^\T\vv) \dd{\vv} \\
+&= \int_{\R^{Nd}} \exp(-\frac{1}{2} \vv^\T (A \otimes I_d) \vv + \qty[\vvec(\uvs) - i(\vw \otimes I_d)\vk]^\T\vv) \dd{\vv} \\
+&= \qty[\frac{(2\pi)^{N}}{\det(A)}]^{d/2} \exp(\frac{1}{2}\qty[\vvec(\uvs) - i(\vw \otimes I_d)\vk]^\T (A \otimes I_d)^{-1} \qty[\vvec(\uvs) - i(\vw \otimes I_d)\vk]) \\
+&= \qty[\frac{(2\pi)^{N}}{\det(A)}]^{d/2} \exp(\frac{1}{2}\uvs^\T A^{-1} \uvs - \qty(\frac{1}{2}\vw^\T A^{-1} \vw) (\vk^\T \vk) - i\vk^\T((A^{-1}\vw)^\T\uvs)).
+\end{aligned}
+~
+
+In the next-to-last step, we use the following computation to simplify the argument of the exponential. Let $\xi \coloneqq \qty[\vvec(\uvs) - i(\vw \otimes I_d)\vk]^\T (A \otimes I_d)^{-1} \qty[\vvec(\uvs) - i(\vw \otimes I_d)\vk]$. Then by applying the mixed-product property of the Kronecker product, we have
+~ Math 
+\begin{aligned}
+\xi &= \qty[\vvec(\uvs)^\T - i\vk^\T(\vw \otimes I_d)^\T]  (A^{-1} \otimes I_d) \qty[\vvec(\uvs) - i(\vw \otimes I_d)\vk] \\
+&= \vvec(\uvs)^\T(A^{-1} \otimes I_d)\vvec(\uvs) -i \vvec(\uvs)^\T(A^{-1}\vw \otimes I_d)\vk \\
+&\phantom{{}={}} - i\vk^\T(\vw^\T A^{-1} \otimes I_d)\vvec(\uvs) - \vk^\T(\vw^\T A^{-1} \vw \otimes I_d)\vk\\
+&= \uvs^\T A^{-1} \uvs - 2i\vk^\T((A^{-1}\vw)^\T\uvs) - (\vw^\T A^{-1} \vw) (\vk^\T \vk).
+\end{aligned}
+~
+
+Let $\alpha \coloneqq \vw^\T A^{-1} \vw$.
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{\delta(\vw^\T\uvx - \vr)}{\Phi_2} &= \frac{1}{(2\pi)^d} \int_{\R^d} \mel{\Phi_1}{e^{i\vk\cdot(\vr-\vw^\T\uvx)}}{\Phi_2} \dd{\vk} \\
+&= \frac{\braket{\Phi_1}{\Phi_2}}{(2\pi)^d} \int_{\R^d} \exp(-\frac{1}{2} \vk^\T (\alpha I_d) \vk + \qty[i\vr - i(A^{-1}\vw)^\T\uvs]^\T \vk ) \dd{\vk} \\
+&= \frac{\braket{\Phi_1}{\Phi_2}}{(2\pi\alpha)^{d/2}} \exp(-\frac{1}{2\alpha} \qty[\vr - \vw^\T A^{-1}\uvs]^2).
+\end{aligned}
+~
+
+
+## Potential Energy Matrix Element 
+
+Suppose we can write the potential energy $V(\uvx)$ as a sum of terms of the form $f(\vw^\T \uvx)$. By an appropriate choice of $\vw$, this form can represent most potentials of practical interest, including central-force potentials and a two-body interactions. Recall that
+
+~ Math
+f(\vw^\T \uvx) = \int_{\R^d} f(\vr) \delta(\vw^\T \uvx - \vr) \dd{\vr}.
+~
+
+This allows us to write
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{V(\uvx)}{\Phi_2} &= \mel{\Phi_1}{f(\vw^\T \uvx)}{\Phi_2} \\
+&= \mel**{\Phi_1}{\int_{\R^d} f(\vr) \delta(\vw^\T \uvx - \vr) \dd{\vr}}{\Phi_2} \\
+&= \int_{\R^d} f(\vr) \mel{\Phi_1}{\delta(\vw^\T \uvx - \vr)}{\Phi_2} \dd{\vr} \\
+&= \frac{\braket{\Phi_1}{\Phi_2}}{(2\pi\alpha)^{d/2}} \int_{\R^d} f(\vr) \exp(-\frac{1}{2\alpha} \qty[\vr - \vw^\T A^{-1}\uvs]^2) \dd{\vr}
+\end{aligned}
+~
+
+where $\alpha \coloneqq \vw^\T A^{-1} \vw$ as in the previous section. In general, this can be a difficult integral to evaluate. However, if $f$, $\Phi_1$, and $\Phi_2$ are assumed to be spherically symmetric (so that $f(\vr)$ depends only on the magnitude of $\vr$, and $\uvs_1 = \uvs_2 = \underline{\vb{0}}$), then the integral reduces to
+~ Math 
+\begin{aligned}
+\mel{\Phi_1}{V(\uvx)}{\Phi_2} &= \frac{\braket{\Phi_1}{\Phi_2}}{(2\pi\alpha)^{d/2}} \int_{\R^d} f(\vr) \exp(-\frac{1}{2\alpha} \qty[\vr - \vw^\T A^{-1}\uvo]^2) \dd{\vr} \\
+&= \frac{\braket{\Phi_1}{\Phi_2}}{(2\pi\alpha)^{d/2}} \int_0^\infty f(r) \exp(-\frac{r^2}{2\alpha}) \frac{2\pi^{d/2} r^{d-1}}{\Gamma(d/2)} \dd{r} \\
+&= \frac{2\braket{\Phi_1}{\Phi_2}}{(2\alpha)^{d/2}\Gamma(d/2)} \int_0^\infty r^{d-1} f(r) \exp(-\frac{r^2}{2\alpha}) \dd{r}.
+\end{aligned}
+~
+
+Here, $\frac{2\pi^{d/2} r^{d-1}}{\Gamma(d/2)}$ is the surface area of a sphere in $\R^d$ with radius $r$.
+
+
+
+# Summary of Results 
+
+For spherically symmetric ($\uvs = \underline{\mathbf{0}}$, $L = 0$) ECGs:
+
+~ Math
+\braket{\Phi_1}{\Phi_2} = \qty[\frac{(2\pi)^{N}}{\det A}]^{d/2} \qquad
+\mel{\Phi_1}{\frac{1}{2} \uvx^\T Q \uvx}{\Phi_2} = \braket{\Phi_1}{\Phi_2} \frac{d}{2} \Tr(QA^{-1})
+~
+~ Math
+\mel{\Phi_1}{T}{\Phi_2} = \braket{\Phi_1}{\Phi_2} \frac{d}{2}\Tr(\Lambda A_1 A^{-1} A_2)
+~
+~ Math
+\mel{\Phi_1}{\delta(\vw^\T\uvx - \vr)}{\Phi_2} = \frac{\braket{\Phi_1}{\Phi_2}}{(2\pi\alpha)^{d/2}} \exp(-\frac{1}{2\alpha} \qty[\vr - \vw^\T A^{-1}\uvs]^2) \qquad \alpha \coloneqq \vw^\T A^{-1} \vw
+~
+~ Math
+\mel{\Phi_1}{V(\uvx)}{\Phi_2} = \frac{2\braket{\Phi_1}{\Phi_2}}{(2\alpha)^{d/2}\Gamma(d/2)} \int_0^\infty r^{d-1} f(r) \exp(-\frac{r^2}{2\alpha}) \dd{r}
+~
 
 [INCLUDE=../include/DZ_Footer]
 
