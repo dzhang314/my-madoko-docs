@@ -1,0 +1,57 @@
+Title:
+    MATH 7200 Notes<br>
+    Algebraic Topology
+Subtitle:
+    as taught by Prof. Anna-Marie Bohmann<br>
+    Vanderbilt University<br>
+    Fall Semester 2016
+Author:
+    Transcribed by David K. Zhang
+
+Package: bm
+Package: physics
+Package: mathtools
+
+~ MathDefs
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\pt}{\operatorname{pt}}
+~
+
+[TITLE]
+
+# Lecture 1 (2016-08-25)
+
+_(Discussion of syllabus omitted.)_
+
+The goal of algebraic topology is to study topological spaces via their algebraic invariants. A familiar example from previous courses is the fundamental group, which associates to each topological space $X$ and point $x_0 \in X$ a group $\pi_1(X, x_0).$
+
+In this course, we will also study homology and cohomology groups  (chapters 2-3 of Hatcher's text), which are relatively easy to compute, in addition to higher homotopy groups (chapter 4), which are more powerful but harder to compute.
+
+## Review of Essential Concepts
+
+We want to study topological spaces up to homotopy. (Henceforth all spaces will be assumed topological, and all maps assumed continuous.) We say that two maps $f_0, f_1: X \to Y$ are ___homotopic___, written $f_0 \simeq f_1,$ if there exists a map $H: X \times I \to Y$ such that $H(x,i) = f_i(x)$ for $i = 0,1.$
+
+A map $f: X \to Y$ is a ___homotopy equivalence___ if there exists a map $g: Y \to X$ such that $fg = \id_Y$ and $gf = \id_X.$ If this occurs, we say that $X$ and $Y$ are ___homotopy equivalent___, or simply ___equivalent___ if no confusion can arise. For example, the letters A and D are homotopy equivalent, but A and B are not. Homotopy equivalence is indeed an equivalence relation --- the meaning of studying a space "up to homotopy" is to study its equivalence class under homotopy equivalence.
+
+A space with the homotopy equivalence type of a point is called ___contractible___. For example, $\R^n$ is contractible. (The homotopy is given by multiplication by $t.$) In general, we won't necessarily write down our homotopies explicitly, as long as we can describe them sufficiently clearly.
+
+A map which is homotopic to the "squish everything to a point" map is called ___nullhomotopic___. Occasionally the word ___essential___ is used to mean "not nullhomotopic."
+
+For the purposes of this class, we will restrict our attention to "nice" spaces, where the word "nice" means "sufficiently well-behaved to make our theorems work." (This typically includes, for example, the Hausdorff property.) Examples include ___manifolds___ and ___CW-complexes___.
+
+A CW-complex is a space that is "inductively constructed" by attaching cells (i.e. disks of various dimensions). For example, by gluing together two points, two segments, and a disk, we obtain a (closed) filled circle. In general, we start with a discrete space (collection of points) $X^0$ and inductively form a space $X^n,$ called the ___$\bm{n}$-skeleton___, from $X^{n-1}$ by attaching $n$-cells $\{e_\alpha^n\}_{\alpha \in A}$ along maps $\phi_\alpha: S_\alpha^{n-1} \to X^{n-1}.$ Explicitly, $X^n$ is the quotient space
+~ Math
+\frac{\qty(\bigsqcup_{\alpha \in A} e_\alpha^n) \sqcup X^{n-1}}{x \sim \phi_\alpha(x)}
+~
+where the denominator indicates that $x$ is identified with $\phi_\alpha(x)$ for all $x \in \partial e_\alpha^n.$
+
+_(Some examples of CW-complexes omitted.)_
+
+## Operations on Spaces
+
+The product or disjoint union of two CW-complexes is another CW-complex. Moreover, if $X$ is a CW-complex, and $A \subseteq X$ is a ___subcomplex___ (closed subspace which is a union of cells), then we can construct the ___quotient space___ $X/A$ which bears an induced CW-structure. (Everything in $A$ gets crushed to a point, and cells attached to $A$ become attached to that point.)
+
+A less familiar operation is that of ___suspension___. If $X$ is a space, the ___cone on $\bm{X}$___ is the space $CX$ given by $(X \times I) / (X \times \{0\} \sim \pt).$ (Imagine constructing a "cylinder" $X \times I$ and crushing the bottom face to a point.) The suspension $SX$ is given by $(X \times I) / (X \times \{0\} \sim \pt_1,\ X \times \{1\} \sim \pt_2)$ with both faces crushed in. If $f: X \to Y$ is a map, its ___mapping cone___ $M_f$ is $(CX \sqcup Y) / ((x,1) \sim f(x)).$ Think of a witch's hat with the "brim" as $Y$ and the "cone" as $CX,$ with the cone attached to the brim via $f.$
