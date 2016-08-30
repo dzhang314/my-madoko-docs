@@ -1,0 +1,108 @@
+Title:
+    MATH 6300 Notes<br>
+    Modern Algebra
+Subtitle:
+    as taught by Prof. Denis Osin<br>
+    Vanderbilt University<br>
+    Fall Semester 2016
+Author:
+    Transcribed by David K. Zhang
+
+Package: bm
+Package: physics
+Package: mathtools
+
+~ MathDefs
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+~
+
+[TITLE]
+
+# Lecture 1 (2016-08-25)
+
+_(No class. Instructor out of town at conference.)_
+
+
+
+# Lecture 2 (2016-08-30)
+
+_(Discussion of syllabus omitted.)_
+
+## Binary relations
+
+**Definition:** A ___binary relation___ on a set $X$ is a subset $R \subseteq X^2$ of the Cartesian square of $X.$ If $(x,y) \in R,$ we write $x \mathrel{R} y$ and say that $x$ is $R$-related to $y.$
+
+**Examples:**
+
+1. Divisibility is a relation on $\N = \{1, 2, 3, \dots\}.$ (For the purposes of this course, $0$ is not a natural number.) Here, $x \mathrel{R} y$ iff $x$ is divisible by $y.$
+
+2. $\le$ is a relation on $\R$
+
+3. $=$ is a relation on any set $X.$
+
+4. Love on $X = \{\text{all people}\}.$
+
+## Representing relations by graphs
+
+If we think of $X$ as a set of vertices and $R$ as a set of directed edges, a relation becomes a directed graph.
+
+_(Example of graph for divisibility relation on $X = \{1, 2, 3, 4, 5, 6\}$ omitted. Each vertex has a self-loop, and an edge going to each of its proper divisors.)_
+
+## Properties of relations
+
+**Definition:** A relation $R$ on a set $X$ is called
+
+1. ___reflexive___ if $\forall x \in X,\ x \mathrel{R} x.$
+2. ___symmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \implies y \mathrel{R} x.$
+3. ___antisymmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} x \implies x = y.$
+4. ___transitive___ if $\forall x,y,z \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} z \implies x \mathrel{R} z.$
+
+_(Checking these conditions on the four previous examples omitted.)_
+
+**Definition:** A relation $R$ on a set $X$ is called an ___order___ (or ___partial order___) if it is reflexive, antisymmetric, and transitive.
+
+A standard notation for order relations is $\precsim.$ We write $x \prec y$ if $x \precsim y$ but $x \ne y.$
+
+**Examples:** Divisibility, $\le,$ and $=$ on $\N.$
+
+Note that when representing an order relation as a graph, we can omit self-loops and edges which are implied by transitivity. Moreover, if we arrange the vertices so that all edges are oriented upwards, we can omit explicit arrows. The resulting diagram is called a ___Hasse diagram___.
+
+_(Example of Hasse diagram for divisibility on $\{1, \dots, 9\}$ omitted. See camera roll.)_
+
+**Definition:** A ___Hasse diagram___ of an order ${\precsim} \subseteq X \times X$ is a graph with vertex set $X$ and an edge connecting $x$ up to $y$ if "$y$ is next to $x$," i.e., if $x \prec y$ and there exists no $z$ such that $x \prec z \prec y.$
+
+Now let $X$ be a ___poset___ (i.e. ___partially ordered set___, a set equipped with an order relation).
+
+**Definition:** Elements $x,y \in X$ are called ___comparable___ if $x \precsim y$ or $y \precsim x.$ Otherwise, they are ___incomparable___.
+
+**Definition:** $\precsim$ is called a ___total order___ (or ___linear order___) if any two elements of $X$ are comparable.
+
+Note that Hasse diagrams of linear orders are simply lines.
+
+**Definition:** An element $a \in X$ is called
+
+1. ___minimal___ if there is no $x \in X$ such that $x \prec a.$
+2. ___maximal___ if there is no $x \in X$ such that $a \prec x.$
+3. ___greatest___ (or ___largest___) if $\forall x \in X,\ x \precsim a.$
+3. ___least___ (or ___smallest___) if $\forall x \in X,\ a \precsim x.$
+
+**Homework #1.** Prove that the greatest (and least) element is always unique (if it exists).
+
+**Definition:** Given a subset $Y \subseteq X,$ an element $a \in X$ is called
+
+1. a ___lower bound___ for $Y$ if $\forall y \in Y,\ a \precsim y.$
+2. an ___upper bound___ for $Y$ if $\forall y \in Y,\ y \precsim a.$
+
+A ___chain___ in $X$ is a subset where any two elements are comparable.
+
+_(Examples of lower bounds, upper bounds, and chains omitted.)_
+
+**Zorn's Lemma:** If every chain in a partially ordered set $X$ has an upper (resp. lower) bound, then $X$ has a maximal (resp. minimal) element.
+
+**Theorem:** Every vector space has a basis.
+
+*Proof:* Take $X = \{\text{all linearly independent subsets of }V\}$ ordered by inclusion. Checking the hypothesis of Zorn's lemma is easy, and we obtain a maximal linearly independent subset. This is clearly a basis. **QED**
+
+**Homework #2.** Which combinations of the properties \{reflexive, symmmetric, antisymmetric, transitive\} are possible? In principle there are 16 combinations, but not all of these are possible.

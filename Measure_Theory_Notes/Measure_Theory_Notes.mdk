@@ -1,0 +1,41 @@
+Title         : Notes on Measure Theory
+Author        : David K. Zhang
+
+Package: bm
+Package: physics
+
+~ MathDefs
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rext}{{\R \cup \{\infty\}}}
+\newcommand{\RExt}{{\R \cup \{-\infty, \infty\}}}
+~
+
+[TITLE]
+
+A ___measurable space___ is an ordered pair $(X, \Sigma)$ consisting of a set $X$ and a collection $\Sigma$ of subsets of $X,$ satisfying the following axioms:
+
+1. $\varnothing \in \Sigma.$
+2. $\Sigma$ is closed under taking complements.
+3. $\Sigma$ is closed under countable union and countable intersection.
+
+A collection $\Sigma$ satisfying these properties is called a ___$\bm{\sigma}$-algebra___ on $X.$ The members of $\Sigma$ are called ___measurable sets___. (This terminology is completely analogous to "topological space," "topology," and "open sets." Like in point-set topology, we will often notationally suppress the $\sigma$-algebra $\Sigma$ when it is clear from context.)
+
+A function $f: X \to Y$ between two measurable spaces is ___measurable___ if the inverse image of every measurable set is measurable. Clearly, the identity function on any measurable space is measurable, and by the same argument as for continuous functions, the composition of two measurable functions is measurable. Thus, the collection of all measurable spaces forms a category, with measurable functions as morphisms.
+
+A ___measure___ on a measure space $(X, \Sigma)$ is a function $\mu: \Sigma \to [0, \infty]$ satisfying the following axioms:
+
+1. $\mu(\varnothing) = 0.$
+2. If $\{A_i\}_{i=1}^\infty$ is a sequence of pairwise disjoint members of $\Sigma$, then
+  ~ Math
+  \mu\qty(\bigcup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i).
+  ~
+
+If $\mu$ also satisfies the additional axiom
+
+3. $\mu(X) = 1,$
+
+Then we say that $\mu$ is a ___probability measure___. The triple $(X, \Sigma, \mu)$ is called a ___measure space___, or if $\mu$ is a probability measure, a ___probability space___.
+
+--------------------------------------------------------------------------------
+
+

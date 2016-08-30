@@ -21,3 +21,76 @@ _(Discussion of syllabus and class structure omitted.)_
 
 ## What is an Algorithm?
 
+_(Some examples of algorithms and philosophical discussion omitted.)_
+
+
+
+# Lecture 2 (2016-08-26)
+
+## Order Notation and its Use
+
+In this course, we will use order notation to describe running times of algorithms in terms of input sizes. These things are obviously always nonnegative, so we will assume all of our functions $f(n)$ are nonnegative.
+
+We will use the following symbols, which intuitively correspond to asymptotic comparison operators as follows:
+~ Math
+\begin{aligned}
+O &\sim {\le} & o &\sim {<} \\
+\Omega &\sim {\ge} & \omega &\sim {>} \\
+\Theta &\sim {=}
+\end{aligned}
+~
+
+~ Definition
+We say that $f(n)$ is $O(g(n))$ if there exist constants $c, n_0$ such that $f(n) \le cg(n)$ for all $n \ge n_0.$
+~
+
+Unfortunately, there are two inequivalent definitions of $\Omega.$
+
+~ Definition
+We say that $f(n)$ is $\Omega(g(n))$ if there exist constants $c, n_0$ such that $f(n) \ge cg(n)$ for all $n \ge n_0.$
+~
+
+~ Definition
+We say that $f(n)$ is $\Omega(g(n))$ if there exists a constant $c$ such that $f(n) \ge cg(n)$ infinitely often.
+~
+
+Prof. Spinrad prefers the second definition, which is slightly more general. It allows for functions with alternating behavior, like
+~ Math
+f(n) = \begin{cases}
+1 &\text{if $n$ is even} \\
+n &\text{if $n$ is odd} \\
+\end{cases}
+~
+to be $\Omega(n).$
+
+~ Definition
+We say that $f(n)$ is $\Theta(g(n))$ if $f(n)$ is $O(g(n))$ and $g(n)$ is $O(f(n)).$
+~
+
+In order to establish a $\Theta$ bound on an algorithm, we need to prove an $O$ bound (typically by looking at the _structure_ of the algorithm) and an $\Omega$ bound (typically via a _generalized example_). When giving a worst-case generalized example, always remember to prove that it is indeed a worst-case!
+
+
+
+# Lecture 3 (2016-08-29)
+
+_(Discussion of Gauss's trick for summing $n + (n-1) + \cdots + 2 + 1$ omitted. An easy estimate suffices to show that this is $\Theta(n^2).$)_
+
+Limits can be used to establish asymptotic bounds in the following way:
+
+~ Math
+\lim_{n \to \infty} \frac{f(n)}{g(n)} = \begin{cases}
+\infty &\text{if $g(n)$ is $O(f(n))$, but not vice-versa} \\
+0<c<\infty &\text{if $f(n)$ is $\Theta(g(n))$} \\
+0 &\text{if $f(n)$ is $O(g(n))$, but not vice-versa}
+\end{cases}
+~
+
+_(Example omitted. Note that $\log$ doesn't mean "natural logarithm" in computer science!)_
+
+This course will examine three aspects of algorithms:
+
+1. Design of Algorithms
+2. Analysis of Algorithms
+3. Complexity of Problems (Difficult!)
+
+_(Discussion of these aspects omitted. Discussion of complexity of songs omitted.)_

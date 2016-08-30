@@ -55,3 +55,55 @@ _(Some examples of CW-complexes omitted.)_
 The product or disjoint union of two CW-complexes is another CW-complex. Moreover, if $X$ is a CW-complex, and $A \subseteq X$ is a ___subcomplex___ (closed subspace which is a union of cells), then we can construct the ___quotient space___ $X/A$ which bears an induced CW-structure. (Everything in $A$ gets crushed to a point, and cells attached to $A$ become attached to that point.)
 
 A less familiar operation is that of ___suspension___. If $X$ is a space, the ___cone on $\bm{X}$___ is the space $CX$ given by $(X \times I) / (X \times \{0\} \sim \pt).$ (Imagine constructing a "cylinder" $X \times I$ and crushing the bottom face to a point.) The suspension $SX$ is given by $(X \times I) / (X \times \{0\} \sim \pt_1,\ X \times \{1\} \sim \pt_2)$ with both faces crushed in. If $f: X \to Y$ is a map, its ___mapping cone___ $M_f$ is $(CX \sqcup Y) / ((x,1) \sim f(x)).$ Think of a witch's hat with the "brim" as $Y$ and the "cone" as $CX,$ with the cone attached to the brim via $f.$
+
+
+
+# Lecture 2 (2016-08-30)
+
+Recall that the fundamental group $\pi_1(X)$ depends only on low-dimensional information. In fact, for CW-complexes, it is uniquely determined by the 0, 1, and 2-skeleta. (We won't prove this, but it isn't hard to see intuitively.) This means that $\pi_1$ cannot distinguish between, say, $S^3$ and $S^{1,000,000}.$
+
+We would obviously like to study algebraic invariants of topological spaces that take higher-dimensional information into account. One obvious generalization is the ___higher homotopy groups___, where instead of considering homotopy classes of maps $S^1 \to X,$ we instead look at homotopy classes of maps $S^n \to X.$ This is a fine idea, but these groups turn out to be _very_ difficult to compute.
+
+Another solution is ___homology___. _(Motivating example from Hatcher's text omitted. See pg. 99.)_
+
+We first study ___simplicial homology___. Our building blocks in this context are the ___$\bm{n}$-simplices___ $\Delta^n,$ the $n$-dimensional analogues of the tetrahedron. We can regard $\Delta^n$ as the smallest convex set in $\R^m$ (for some $m$) containing $n+1$ affinely independent points. In particular, we have the ___standard $\bm{n}$-simplex___
+~ Math
+\Delta^n = \qty{(t_0, t_1, \dots, t_n) \in \R^{n+1} :
+  t_i \ge 0\ \forall i \text{ and } \sum_{i=0}^n t_i = 1}.
+~
+We will include an ordering on the vertices as part of the information encoded by a simplex. Given an $n$-simplex $\Delta^n,$ we can throw out the $i$th vertex to obtain an $(n-1)$-simplex, called the ___$\bm{i}$th face___ of $\Delta^n.$ An ordering of vertices on the face is inherited from the ordering on $\Delta^n.$ The union of all faces of $\Delta^n$ is the ___boundary___ $\partial \Delta^n.$
+
+Given a space $X,$ a ___$\bm{\Delta}$-complex structure___ on $X$ is a collection of maps $\{\sigma_\alpha: \Delta^n \to X\}$ (where $n$ depends on $\alpha$) such that
+
+1. The restriction of each $\sigma_\alpha$ to $\operatorname{int}(\Delta^n) = \Delta^n \setminus \partial \Delta^n$ is injective, and each point $x \in X$ is in the image of exactly one such restriction.
+
+2. The restriction of each $\sigma_\alpha$ to a face of $\Delta^n$ is another map $\sigma_\beta: \Delta^{n-1} \to X$ in our collection.
+
+3. $A \subseteq X$ is open iff $\sigma_\alpha^{-1}(A)$ is open in $\Delta^n$ for each $\alpha.$
+
+This essentially amounts to saying that $X$ is a bunch of simplices glued together along faces. $\Delta$-complex structures are precisely what we need to define simplicial homology.
+
+__Definition:__ Given a space $X$ and a $\Delta$-complex structure on $X,$ let $\Delta_n(X)$ be the free abelian group on the set $\{\sigma_\alpha: \Delta^n \to X\}$ of $n$-simplices of $X.$ This is the group of finite formal linear combinations of the maps $\sigma_\alpha,$ thought of as formal symbols. We then define the boundary homomorphisms $\partial_n: \Delta_n(X) \to \Delta_{n-1}(X)$ as follows:
+~ Math
+\partial_n(\sigma_\alpha) = \sum_{i=0}^n (-1)^i
+  \eval{\sigma_\alpha}_{[v_0, \dots, \hat{v}_i, \dots, v_n]}
+~
+Here, the hat means that $v_i$ is omitted. This means that we have a sequence
+~ Math
+\Delta_{n+1}(X) \overset{\partial_{n+1}}{\longrightarrow}
+\Delta_{n}(X) \overset{\partial_{n}}{\longrightarrow}
+\Delta_{n-1}(X) \overset{\partial_{n+1}}{\longrightarrow}
+\cdots \overset{\partial_{1}}{\longrightarrow} \Delta_0(X).
+~
+
+__Algebraic Interlude:__ A ___chain complex___ $A_*$ is a sequence of (free) Abelian groups linked by homomorphisms $d_n: A_n \to A_{n-1}$ such that $d^2 = 0.$ That is, $d_n \circ d_{n+1} = 0$ for all $n.$ Given a chain complex $A_*,$ its ___homology___ is a graded abelian group $H_*(A)$ such that $H_n(A) = \ker d_n / \operatorname{im} d_{n+1}.$ We call elements of $A_*$ ___chains___, elements of $\ker d_n$ ___cycles___, and elements of $\operatorname{im} d_{n+1}$ ___boundaries___. Elements of $H_*(A)$ are called ___homology classes___.
+
+_(Standard proof of $\partial^2 = 0$ omitted.)_
+
+This shows that $\Delta_*(X)$ is a chain complex. Its homology $H_*(\Delta_*(X))$ is the ___simplicial homology___ of $X.$ We denote the groups of this homology by $H_n^\Delta(X).$ At this point, we make some observations:
+
+1. It is not at all clear that the simplicial homology groups are invariants of the underlying space $X.$ A priori, it's perfectly possible that two different $\Delta$-complex structures on $X$ might give different simplicial homologies.
+
+2. If $X$ has finitely many $n$-simplices in its $\Delta$-complex structure, then $H_n^\Delta(X)$ is finitely generated.
+
+3. If $X$ is finite-dimensional, then $H_k^\Delta(X) = 0$ for $k > n.$
