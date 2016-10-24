@@ -11,12 +11,15 @@ Author:
 Package: bm
 Package: physics
 Package: mathtools
+Package: parskip
+Package: tikz-cd
 
 ~ MathDefs
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
-\newcommand{\K}{\mathbb{K}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\id}{\operatorname{id}}
+\newcommand{\im}{\operatorname{im}}
 \newcommand{\pt}{\operatorname{pt}}
 ~
 
@@ -96,7 +99,7 @@ Here, the hat means that $v_i$ is omitted. This means that we have a sequence
 \cdots \overset{\partial_{1}}{\longrightarrow} \Delta_0(X).
 ~
 
-__Algebraic Interlude:__ A ___chain complex___ $A_*$ is a sequence of (free) Abelian groups linked by homomorphisms $d_n: A_n \to A_{n-1}$ such that $d^2 = 0.$ That is, $d_n \circ d_{n+1} = 0$ for all $n.$ Given a chain complex $A_*,$ its ___homology___ is a graded abelian group $H_*(A)$ such that $H_n(A) = \ker d_n / \operatorname{im} d_{n+1}.$ We call elements of $A_*$ ___chains___, elements of $\ker d_n$ ___cycles___, and elements of $\operatorname{im} d_{n+1}$ ___boundaries___. Elements of $H_*(A)$ are called ___homology classes___.
+__Algebraic Interlude:__ A ___chain complex___ $A_*$ is a sequence of (free) Abelian groups linked by homomorphisms $d_n: A_n \to A_{n-1}$ such that $d^2 = 0.$ That is, $d_n \circ d_{n+1} = 0$ for all $n.$ Given a chain complex $A_*,$ its ___homology___ is a graded abelian group $H_*(A)$ such that $H_n(A) = \ker d_n / \im d_{n+1}.$ We call elements of $A_*$ ___chains___, elements of $\ker d_n$ ___cycles___, and elements of $\im d_{n+1}$ ___boundaries___. Elements of $H_*(A)$ are called ___homology classes___.
 
 _(Standard proof of $\partial^2 = 0$ omitted.)_
 
@@ -107,3 +110,475 @@ This shows that $\Delta_*(X)$ is a chain complex. Its homology $H_*(\Delta_*(X))
 2. If $X$ has finitely many $n$-simplices in its $\Delta$-complex structure, then $H_n^\Delta(X)$ is finitely generated.
 
 3. If $X$ is finite-dimensional, then $H_k^\Delta(X) = 0$ for $k > n.$
+
+
+
+# Lecture 3 (2016-09-01)
+
+## Singular Homology
+
+A ___singular $\bm{n}$-simplex___ in a space $X$ is a map $\sigma: \Delta^n \to X.$ Let $C_n(X)$ be the free abelian group on the set of singular $n$-simplices in $X.$ We get a chain complex
+~ Math
+\cdots \longrightarrow C_{n+1}(X)
+\overset{\partial_{n+1}}{\longrightarrow} C_n(X)
+\overset{\partial_{n}}{\longrightarrow} C_{n-1}(X)
+\longrightarrow \cdots
+~
+with boundary maps
+~ Math
+\partial_n(\sigma) = \sum_{i=0}^n (-1)^i
+\eval{\sigma}_{[v_0, \dots, \hat{v}_i, \dots, v_n]}.
+~
+Note that $\eval{\sigma}_{[v_0, \dots, \hat{v}_i, \dots, v_n]}$ is a map from $\Delta^{n-1}$ to $X.$ The same proof as before gives $\partial^2 = 0.$
+
+**Definition:** The ___$\bm{n}$th singular homology group___ of $X,$ denoted by $H_n(X),$ is the $n$th homology group of this chain complex.
+~ Math
+H_n(X) = \ker \partial_n / \im \partial_{n+1}.
+~
+
+One immediately observes that if $X$ is homeomorphic than $X',$ then $H_n(X) \equiv H_n(X').$ However, it's unclear that these groups would ever be finitely generated.
+
+**Remark:** We can, in fact, regard singular homology as a special case of simplicial homology by building $S(X)$ as a $\Delta$-complex with one $n$-simplex for each singular $n$-simplex in $X,$ with each $n$-simplex attached to its faces as $(n-1)$-simplices in the natural way. This gives a giant $\Delta$-complex $S(X)$ which clearly satisfies $H_n^\Delta(S(X)) = H_n(X).$
+
+## Geometric interpretation of singular homology
+
+In general, a singular $n$-chain $\xi$ can be written as a sum $\xi = \sum_i \epsilon_i \sigma_i$ with $\epsilon_i = \pm 1$ (and some simplices $\sigma_i$ possibly repeated.) $\partial\xi$ is then a linear combination of $(n-1)$-simplices with sign $\pm 1.$
+
+*(Some things happened here that I don't really understand. See pgs. 108-109 of Hatcher's text. The upshot is that $H_1(X)$ is represented by maps $S^1 \to X,$ and $H_2(X)$ is represented by maps of oriented surfaces into $X.$)*
+
+## Properties of singular homology
+
+**Proposition:** If $X$ decomposes into path components as $X = \bigsqcup_\alpha X_\alpha,$ then $H_n(X) = \bigoplus_\alpha H_n(X_\alpha).$
+
+*Proof:* Since $\Delta^n$ is path-connected, its continuous image is path-connected in $X,$ and hence lies in some $X_\alpha.$ This means that the chain groups decompose as $C_n(X) = \bigoplus_\alpha C_n(X_\alpha).$ The boundary maps respect this decomposition, and hence the homology groups split as desired. **QED**
+
+**Proposition:** If $X$ is nonempty and path-connected, then $H_0(X) = \mathbb{Z}.$ For any nonempty $X,$ $H_0(X)$ is a direct sum of copies of $\mathbb{Z},$ one for each path component.
+
+*Proof:* By definition, $H_0(X) = C_0(X) / \im \partial_1.$ Define a map $\epsilon: C_0(X) \to \mathbb{Z}$ which sends a linear combination of $0$-simplices (i.e. points of $X$) to the sum of its coefficients. This is indeed an abelian group homomorphism, and if $X$ is nonempty, then $\epsilon$ is surjective.
+
+We claim that $\ker \epsilon = \im \partial_1$ if $X$ is path-connected. The inclusion $\im \partial_1 \subseteq \ker \epsilon$ is clear from the definition of $\partial_1.$ For the reverse inclusion, suppose we have a $0$-chain $\sum_i n_i \sigma_i$ such that $\sum_i n_i = 0.$ Pick some basepoint $x_0 \in X,$ and for each $i,$ pick a path $\tau_i$ from $x_0$ to $x_i.$ Each $\tau_i$ is a singular $1$-simplex, whose 0th face is $\sigma_i$ and whose 1st face is $\sigma_0.$ It follows that $\partial \tau_i = \sigma_i - \sigma_0,$ and hence that $\partial\qty(\sum_i n_i \tau_i) = \sum_i n_i \sigma_i - \sum_i n_i \sigma_0 = \sum_i n_i \sigma_i.$ **QED**
+
+**Proposition:** If $X$ is a point, then $H_n(X) = 0$ for $n > 0$ and $H_0(X) = \Z.$
+
+*Proof:* For each $n,$ there is exactly one singular $n$-simplex in $X.$ This means that all the chain groups are $\Z,$ and the boundary maps are given by $\partial_n = 0$ for $n$ odd and $\partial_n = \id$ for $n$ even. **QED**
+
+## Reduced homology groups
+
+**Definition:** The ___reduced homology groups___ $\tilde{H}_n(X)$ of a nonempty space $X$ are the homology groups of the augmented chain complex
+~ Math
+\cdots \longrightarrow C_2(X)
+\overset{\partial_2}{\longrightarrow} C_1(X)
+\overset{\partial_1}{\longrightarrow} C_0(X)
+\overset{\epsilon}{\longrightarrow} \Z
+\longrightarrow 0.
+~
+(Check that this is indeed a chain complex!) Here we have $\tilde{H}_n(X) = H_n(X)$ for $n > 0,$ and $H_0(X) \equiv \tilde{H}_0(X) \oplus \Z$ splits, with $\Z$ coming from the path component of the basepoint. One can imagine that the extra $\Z$ in the chain complex comes from the unique map of the $(-1)$-simplex (i.e. the empty set) into $X.$
+
+**Theorem:** If $X$ is path-connected, then there is a map $\pi_1(X) \to H_1(X)$ that realizes $H_1(X)$ as the abelianization of $\pi_1(X).$
+
+We won't prove this for now, since it would be too much of a detour into homotopy.
+
+
+
+# Lecture 4 (2016-09-06)
+
+## Homotopy invariance of singular homology
+
+**Proposition:** $f: X \to Y$ (a continuous map) induces $f_*: H_n(X) \to H_n(Y)$ (a homomorphism).
+
+*Proof:* Define $f_\#: C_n(X) \to C_n(Y)$ to send a singular $n$-simplex $\sigma$ in $X$ to the singular $n$-simplex $f \circ \sigma$ in $Y,$ extending by linearity. We need to show that $f_\#$ is a ___chain map___, that is, $f_\# \partial = \partial f_\#.$ (This is equivalent to requiring that a ladder diagram commute.)
+
+_(Straightforward verification omitted.)_ **QED**
+
+**Lemma:** A chain map between chain complexes induces a homomorphism on homology.
+
+*Proof:* $f_\#$ takes cycles to cycles. Indeed, if $\partial\alpha = 0,$ then $\partial f_\# \alpha = f_\# \partial \alpha = f_\# 0 = 0.$ Moreover, $f_\#$ takes boundaries to boundaries, since $f_\#\partial\beta = \partial f_\# \beta.$ **QED**
+
+**Properties:**
+
+1. $(f \circ g)_* = f_* \circ g_*$
+2. $(\id_X)_* = \id_{H_n(X)}$
+
+This shows singular homology is a functor.
+
+**Theorem:** If $f,g: X \to Y$ are homotopic, then they induce the same homomorphism on homology.
+
+*Corollary:* If $f: X \to Y$ is a homotopy equivalence, then $f_*: H_n(X) \to H_n(Y)$ is an isomorphism for all $n.$
+
+*Proof of Theorem:* We first need to understand how to decompose $\Delta^n \times I$ into $(n+1)$-simplices. We will omit some combinatorial details (see Hatcher for more), but if we regard $\Delta^n \times I$ as having $[v_0, \dots, v_n]$ on its bottom and $[w_0, \dots, w_n]$ on top, then
+~ Math
+[v_0, \dots, v_i, w_i, \dots, w_n]
+~
+is an $(n+1)$-simplex. The collection of these simplices for all $i$ gives a decomposition of $\Delta^n \times I$ into $(n+1)$-simplices.
+
+Now, given a homotopy $F: X \times I \to Y$ between $f = F_0$ and $g = F_1,$ we define "prism operators" $P: C_n(X) \to C_{n+1}(Y)$ as follows:
+~ Math
+P(\sigma) = \sum_{i=0}^n (-1)^i \eval{\qty[F \circ (\sigma \times \id_I)]}_{[v_0, \dots, v_i, w_i, \dots, w_n]}
+~
+
+We claim that $\partial P = g_\# - f_\# - P\partial.$ Intuitively, we're just saying that "the boundary of a prism consists of the top plus the bottom plus the sides," with some signs thrown in for good measure. Checking this is a straightforward calculation:
+~ Math
+\begin{aligned}
+\partial P(\sigma) &= \sum_{j \le i} (-1)^i (-1)^j
+\eval{[F \circ (\sigma \times \id_I)]}_{
+  [v_0, \dots, \hat{v}_j, \dots, v_i, w_i, \dots, w_n]} \\
+&\phantom{{}={}} + \sum_{j \ge i} (-1)^i (-1)^{j+1}
+\eval{[F \circ (\sigma \times \id_I)]}_{
+  [v_0, \dots, v_i, w_i, \dots, \hat{w}_j, \dots, w_n]}
+\end{aligned}
+~
+All of the $i=j$ terms cancel, except for two: for $i=j=0,$ we get
+~ Math
+\eval{[F \circ (\sigma \times \id_I)]}_{
+  [\hat{v}_0, w_0, \dots, w_n]} = g_\#(\sigma),
+~
+and for $i=j=n,$ we get
+~ Math
+-\eval{[F \circ (\sigma \times \id_I)]}_{
+  [v_0, \dots, v_n, \hat{w}_n]} = -f_\#(\sigma).
+~
+The rest of the terms give precisely $P(\partial\sigma).$
+
+We now claim that this proves the theorem! If $\alpha \in C_n(X)$ is a cycle, then
+~ Math
+g_\#(\alpha) - f_\#(\alpha) = \partial P(\alpha).
+~
+Since $g_\#(\alpha)$ and $f_\#(\alpha)$ differ by a boundary, they represent the same homology class.
+
+**Remark:** The identity $\partial P + P \partial = g_\# - f_\#$ says that $P$ is a "chain homotopy" between $g_\#$ and $f_\#.$
+
+**Remark:** The exact same proof can be applied to reduced homologies, giving the same result.
+
+## Excision
+
+When $A$ is a subspace of $X,$ the homologies $H_*(X),$ $H_*(A),$ and $H_*(X/A)$ are related by _exact sequences_. A sequence of Abelian groups
+~ Math
+\cdots \longrightarrow A_{n+1}
+\overset{\alpha_{n+1}}{\longrightarrow} A_n
+\overset{\alpha_{n}}{\longrightarrow} A_{n-1}
+\longrightarrow \cdots
+~
+is said to be ___exact___ if $\ker\alpha_n = \im\alpha_{n+1}$ for all $n.$ This means that the chain complex has trivial homology. For example,
+
+- If $0 \longrightarrow A \overset{\alpha}{\longrightarrow} B$ is exact, then $\alpha$ is injective.
+- If $A \overset{\alpha}{\longrightarrow} B \longrightarrow 0$ is exact, then $\alpha$ is surjective.
+- If $0 \longrightarrow A \overset{\alpha}{\longrightarrow} B \longrightarrow 0$ is exact, then $\alpha$ is an isomorphism.
+- If $0 \longrightarrow A \overset{\alpha}{\longrightarrow} B \overset{\beta}{\longrightarrow} C \longrightarrow 0$ is exact, then $\alpha$ is injective, $\beta$ is surjective, and $\ker\beta = \im\alpha,$ so $C = B/\im\alpha$. Sequences of this form are called ___short exact sequences___.
+
+**Theorem:** If $X$ is a space and $A$ is a nonempty closed subspace that is a deformation retract of some neighborhood in $X,$ then there is an exact sequence
+~ Math
+\cdots \to \widetilde{H}_n(A)
+\to \widetilde{H}_n(X)
+\to \widetilde{H}_n(X/A)
+\to \widetilde{H}_{n-1}(A)
+\to \widetilde{H}_{n-1}(X)
+\to \cdots
+\to \widetilde{H}_0(X/A)
+\to 0.
+~
+Here, the maps $\widetilde{H}_n(A) \to \widetilde{H}_n(X)$ are induced by the inclusion map, and the maps $\widetilde{H}_n(X) \to \widetilde{H}_n(X/A)$ are induced by the quotient map. The maps $\widetilde{H}_n(X/A) \to \widetilde{H}_{n-1}(A)$ are non-obvious and will be constructed during the proof.
+
+**Remark:** Pairs of spaces $(X,A)$ satisfying these hypotheses are called "good pairs." (Really!)
+
+This theorem can be used to find, for example, the homology groups of $S^n.$
+
+
+
+# Lecture 05 (2016-09-08)
+
+_(Missed some material on relative homology and the long exact homology sequence.)_
+
+## Excision
+
+**Theorem:** Given subspaces $Z \subseteq A \subseteq X$ such that the closure of $Z$ is contained in the interior of $A,$ the inclusion of pairs $(X-Z, A-Z) \hookrightarrow (X,A)$ induces isomorphisms $H_n(X-Z, A-Z) \cong H_n(X,A)$ for all $n.$
+
+Equivalently, for subspaces $A,B \subseteq X$ whose interiors cover $X,$ then $(B, A \cap B) \hookrightarrow (X,A)$ induces isomorphisms $H_n(B, A \cap B) \cong H_n(X,A)$ for all $n.$ To translate between these formulations, set $B = X - Z$ or $Z = X - B.$
+
+*Proof idea:* Show that $H_n(X)$ is actually giben by chains with "small images" in $X.$
+
+Let $\mathcal{U} = \{U_j\}$ be a collection of sets whose interiors cover $X.$ Let $C_n^\mathcal{U}(X)$ be the subgroup of $C_n(X)$ consisting of chains $\sum n_i \sigma_i$ such that the image of each $\sigma_i$ is contained in one of the sets $U_j \in \mathcal{U}.$ Note that the boundary maps $\partial_n: C_n(X) \to C_{n-1}(X)$ take $C_n^\mathcal{U}(X)$ to $C_{n-1}^\mathcal{U}(X),$ so we can consider the homology $H_n^\mathcal{U}(X)$ of this chain complex.
+
+**Proposition:** The inclusion $i: C_n^\mathcal{U}(X) \to C_n(X)$ is a chain homotopy equivalence. That is, there is a map $p: C_n(X) \to C_n^\mathcal{U}(X)$ such that $ip$ and $pi$ are chain-homotopic to the identity. Hence, $H_n^\mathcal{U}(X) \cong H_n(X).$
+
+**Summary of Proof:**
+
+1. We first need to define _barycentric subdivision_, a method of dividing simplices into smaller simplices.
+
+2. We then create a subdivision operator on _linear chains_, a restricted type of chain. We omit some details for now, but if $Y \subseteq \R^m$ is a subset of Euclidean space, we want to consider the collection $LC_n(Y)$ of linear maps $\Delta^n \to Y.$ The subdivision operator $S: LC_n(Y) \to LC_n(Y)$ should then break linear chains into smaller linear chains in such a way that $\partial S = S \partial,$ i.e., such that $S$ is a chain map. We also need to show that there's a chain homotopy $T: LC_n(Y) \to LC_{n+1}(Y)$ with $\partial T + T \partial = \id - S.$
+
+3. We now pass to general chains. If $\sigma \in C_n(X),$ define $S(\sigma) = \sigma_\# S(\Delta^n),$ where if $\sigma: \Delta^n \to X,$ then $\sigma_\#: C_n(\Delta^n) \to C_n(X).$ We then define $T: C_n(X) \to C_{n+1}(X)$ by $T(\sigma) = \sigma_\# T(\Delta^n).$
+
+4. Iterate this construction. The amount of subdividing we need depends on the chain we started with.
+
+
+
+# Lecture 06 (2016-09-13)
+
+## Barycentric Subdivision
+
+**Definition:** The barycentric subdivision of $\Delta^0$ (a point) is simply $\Delta^0$. The barycentric subdivision of $\Delta^1$ (a line segment) is two line segments (drop a vertex in the middle). To subdivide $\Delta^n$, subdivide each of its faces $\Delta^{n-1}$ inductively, and drop a new vertex in its barycenter. Then connect each division of each face to the new vertex to subdivide $\Delta^n$ into $(n+1)!$ pieces.
+
+_(This is difficult to describe textually. See Hatcher's text for pictures.)_
+
+**Fact:** The diameter of each simplex in the barycentric subdivision of $[v_0, \dots, v_n]$ is at most $\frac{n}{n-1} \operatorname{diam}([v_0, \dots, v_n])$. Thus, by repeatedly subdividing, we can make these diameters arbitrarily small.
+
+## Linear Chains
+
+**Definition:** Let $Y$ be a subset of Euclidean space. We define $LC_n(Y)$ as the free Abelian group generated by all linear maps $\Delta^n \to Y$.
+
+We now obtain a chain complex
+~ Math
+\cdots \longrightarrow LC_n(Y)
+\longrightarrow LC_{n-1}(Y)
+\longrightarrow \cdots
+\longrightarrow LC_{1}(Y)
+\longrightarrow LC_{0}(Y)
+\longrightarrow LC_{-1}(Y)
+~
+where, as before, $LC_{-1}(Y)$ consists of linear maps from the empty simplex (i.e. $[\varnothing]$) to $Y$.
+
+**Definition:** Given $b \in Y$, define $b: LC_n(Y) \to LC_{n+1}(Y)$ by
+~ Math
+b([w_0, \dots, w_n]) = [b, w_0, \dots, w_n]
+~
+where the RHS is obtained from the LHS by linear interpolation. (This is why we work with $LC_n(Y)$ instead of $C_n(Y)$; linearity of the simplices guarantees that this interpolation can be done uniquely.) We call these maps ___cone operators___ because they construct the "cone" connecting the given simplex $[w_0, \dots, w_n]$ to the new point $b$.
+
+It is a simple computation to check that
+~ Math
+\partial b [w_0, \dots, w_n] = [w_0, \dots, w_n] - b \partial [w_0, \dots, w_n].
+~
+This means that $b$ is a chain homotopy from $\id$ to the zero map, since $\partial b + b \partial = \id - 0$.
+
+We now define ___subdivision homomorphisms___ $S: LC_n(Y) \to LC_n(Y)$ by induction. If $\lambda: \Delta^n \to Y$, and $b_\lambda$ is the image of the barycenter of $\Delta^n$ in $Y$, then
+~ Math
+S(\lambda) = b_\lambda S(\partial \lambda).
+~
+We start this induction with $S[\varnothing] = [\varnothing]$, so that $S = \id$ on $n=-1$ and $n=0$.
+
+Observe that
+~ Math
+\begin{aligned}
+\partial S \lambda &= \partial b_\lambda (S \partial \lambda) \\
+&= S \partial \lambda - b_\lambda \partial (S \partial \lambda) \\
+&= S \partial \lambda - b_\lambda S \partial \partial \lambda.
+\end{aligned}
+~
+This shows that $\partial S = S \partial$. We now want to build a chain homotopy $T: LC_n(Y) \to LC_{n+1}(Y)$ between $S$ and $\id$. Again, we work inductively: define $T = 0$ for $n=-1$, and
+~ Math
+T\lambda = b_\lambda(\lambda - T\partial\lambda)
+~
+for $n \ge 0$. We want to check that $\partial T + T \partial = \id - S$ inductively.
+~ Math
+\begin{aligned}
+\partial T \lambda &= \partial b_\lambda (\lambda - T \partial \lambda) \\
+&= \lambda - T\partial\lambda - b_\lambda \partial(\lambda - T\partial\lambda) \\
+&= \lambda - T\partial\lambda - b_\lambda (S\partial\lambda + T\partial\partial\lambda) \\
+&= \lambda - T\partial\lambda - S\lambda 
+\end{aligned}
+~
+This is the desired result.
+
+## General Chains
+
+Now, we want to generalize to spaces $X$ which are not subsets of Euclidean space. The key observation here is that $\Delta^n$ is a subset of Euclidean space, so if we have a map $\Delta^n \to X$, we can subdivide $\Delta^n$ and take compositions to obtain a subdivision of a singular $n$-simplex in $X$. We define $S: C_n(X) \to C_n(X)$ by
+~ Math
+S\sigma = \sigma_\# S(\Delta^n).
+~
+(Technically, we should write $S(\id_{\Delta^n})$ instead of $S(\Delta^n)$, but this abuse of notation should not cause any confusion.) This means that $S\sigma$ is a signed sum of restrictions of $\sigma$ to $n$-simplices in the subdivision of $\Delta^n$. It is not hard to see that $S$ is a chain map:
+~ Math
+\begin{aligned}
+\partial S \sigma &= \partial \sigma_\# S \Delta^n \\
+&= \sigma_\# \partial S \Delta^n \\
+&= \sigma_\# S \partial \Delta^n \\
+&= \sigma_\# S \sum_{i=0}^n (-1)^i \Delta_i^n \\
+&= \sum_{i=0}^n (-1)^i \sigma_\# S \Delta_i^n \\
+&= \sum_{i=0}^n (-1)^i S\qty(\eval{\sigma}_{\Delta_i^n}) \\
+&= S\qty(\sum_{i=0}^n (-1)^i \eval{\sigma}_{\Delta_i^n}) \\
+&= S \partial \sigma
+\end{aligned}
+~
+where we have written $\Delta_i^n$ for the $i$th face of $\Delta^n$. We do the same thing with $T$, defining $T: C_n(X) \to C_{n+1}(X)$ by
+~ Math
+T\sigma = \sigma_\# T(\Delta^n).
+~
+A similar computation shows that $\partial T + T \partial = \id - S$.
+
+## Iteration
+
+We now define
+~ Math
+D_m = \sum_{i=0}^{m-1} TS^i
+~
+where $S^i$ is the $i$-fold composition of $S$. We claim that $D_m$ is a chain homotopy between $\id$ and $S^m$, since
+~ Math
+\begin{aligned}
+\partial D_m + D_m \partial &= \sum_{i=0}^{m-1} \partial TS^i + TS^i \partial \\
+&= \sum_{i=0}^{m-1} \partial TS^i + T\partial S^i \\
+&= \sum_{i=0}^{m-1} (\partial T + T\partial) S^i \\
+&= \sum_{i=0}^{m-1} (\id - S) S^i \\
+&= \sum_{i=0}^{m-1} S^i - S^{i+1} \\
+&= S^0 - S^m = \id - S^m.
+\end{aligned}
+~
+
+We now claim that for any $n$-simplex $\sigma: \Delta^n \to X$, there exists $m$ such that $S^m(\sigma)$ lies in $C_n^\mathcal{U}(X)$. Indeed, we can always force the diameter of simplices in $S^m(\Delta^n)$ smaller than the Lebesgue number of the cover $\sigma^{-1}(\mathcal{U})$ by taking $m$ sufficiently large. Henceforth, we will write $m(\sigma)$ to denote the smallest $m$ for which this holds.
+
+Define $D: C_n(X) \to C_{n+1}(X)$ by $D\sigma = D_{m(\sigma)}\sigma$. We want a chain map $\rho: C_n(X) \to C_n(X)$ whose image lies in $C_n^\mathcal{U}(X)$ satisfying $\partial D + D \partial = \id - \rho$. Well, simply define $\rho = \id - \partial D - D \partial$. A simple computation shows that $\partial \rho = \rho \partial$. We need only check that $\rho\sigma$ lies in $C_n^\mathcal{U}(X)$:
+~ Math
+\begin{aligned}
+\rho(\sigma) &= \sigma - \partial D \sigma - D \partial \sigma \\
+&= \sigma - \partial D_{m(\sigma)} \sigma - D \partial \sigma \\
+&= S^{m(\sigma)} \sigma  + D_{m(\sigma)} \partial \sigma - D \partial \sigma
+\end{aligned}
+~
+Now, $S^{m(\sigma)} \sigma$ definitely lies in $C_n^\mathcal{U}(X)$. Moreover, $D_{m(\sigma)} \partial \sigma - D \partial \sigma$ is a linear combination of terms of the form $D_{m(\sigma)} (\sigma_j) - D_{m(\sigma_j)} (\sigma_j)$ where $\sigma_j$ is the $j$th face of $\sigma$. Since $m(\sigma_j) \le m(\sigma)$, we see that all these terms lie in $C_n^\mathcal{U}(X)$.
+
+Thus, we can view $\rho$ as a map $\rho: C_n(X) \to C_n^\mathcal{U}(X)$. We see that $\partial D + D \partial = \id - i\rho$ and $\rho i = \id$, as desired. **QED**
+
+## Back to Excision
+
+*Proof of Excision:* Use the preceding proposition with $\mathcal{U} = \{A, B\}$. (All that work, and we're only using a two-element cover!) Abusing notation, we denote $C_n^\mathcal{U}(X) = C_n(A+B)$. Observe that $D$ and $\rho$ take chains in $A$ to chains in $A$. Thus, we obtain maps
+~ Math
+C_n(A+B) / C_n(A) \overset{\rho}{\longrightarrow} C_n(X) / C_n(A)
+~
+satisfying some properties. (In particular, $D$ is still a chain homotopy equivalence.) Now, $H_n(B, A \cap B)$ is the homology of $C_n(B) / C_n(A \cap B) = C_n(A+B) / C_n(A)$. But the homology of $C_n(X) / C_n(A)$ is precisely $H_n(X, A)$. Hence, $H_n(B, A \cap B) \cong H_n(X, A)$. **QED**
+
+
+
+# Lecture 07 (2016-09-15)
+
+## Naturality
+
+Suppose we have a map $f: (X,A) \to (Y,B)$ of pairs of spaces. Then $f$ induces maps
+~ Math
+f_*: H_n(X) \to H_n(Y) \qquad
+f_*: H_n(A) \to H_n(B) \qquad
+f_*: H_n(X,A) \to H_n(Y,B)
+~
+such that the following diagram commutes:
+
+    ... --> H_n(A) --> H_n(X) --> H_n(X,A) --> H_{n-1}(A) --> ...
+              |          |           |             |
+              | f_*      | f_*       | f_*         | f_*
+              V          V           V             V
+    ... --> H_n(B) --> H_n(Y) --> H_n(Y,B) --> H_{n-1}(B) --> ...
+
+## Equivalence of Simplicial and Singular Homology
+
+Let $X$ be a $\Delta$-complex, and $A$ a subcomplex of $X$. We can define simplicial homology of the pair $(X,A)$ by $\Delta_n(X,A) = \Delta_n(X) / \Delta_n(A)$. Just as in singular homology, we obtain relative simplicial homology groups $H_n^\Delta(X,A)$ and the long exact sequence of a pair.
+
+Moreover, we have a homomorphism $H_n^\Delta(X) \to H_n(X)$ given by taking a simplex to its characteristic map. This homomorphism extends to the relative case, giving maps $H_n^\Delta(X,A) \to H_n(X,A)$.
+
+Note that if $A = \varnothing$, then the relative homology groups become absolute homology groups.
+
+**Theorem:** The natural homomorphism $H_n^\Delta(X,A) \to H_n(X,A)$, given by taking each simplex to its characteristic map, is an isomorphism for all $n$ and for all $\Delta$-complex pairs $(X,A)$.
+
+*Proof:* We first prove this theorem in the special case where $X$ is finite-dimensional and $A = \varnothing$. Let $X^k$ be the $k$-skeleton of $X$. Then the following diagram commutes:
+
+~ Math
+\begin{tikzcd}
+  H_{n+1}^\Delta(X^k, X^{k-1}) \arrow[r] \arrow[d] &
+  H_n^\Delta(X^{k-1}) \arrow[r] \arrow[d] &
+  H_n^\Delta(X^k) \arrow[r] \arrow[d] &
+  H_n^\Delta(X^k, X^{k-1}) \arrow[r] \arrow[d] &
+  H_{n-1}^\Delta(X^{k-1}) \arrow[d] \\
+  H_{n+1}(X^k, X^{k-1}) \arrow[r] &
+  H_n(X^{k-1}) \arrow[r] &
+  H_n(X^k) \arrow[r] &
+  H_n(X^k, X^{k-1}) \arrow[r] &
+  H_{n-1}(X^{k-1})
+\end{tikzcd}
+~
+
+By induction over $k$, we can assume that the 2nd and 5th vertical maps above are isomorphisms. Moreover, we can observe that the 1st and 4th vertical maps are isomorphisms. Indeed, $\Delta_n(X^k, X^{k-1}) = 0$ whenever $n \ne k$, and $\Delta_n(X^n, X^{n-1}) = 0$ is free abelian on $n$-simplices. Hence, the same is true of the simplicial homology groups:
+~ Math
+H_n^\Delta(X^k, X^{k-1}) = \begin{cases}
+  0 & \text{if } n \ne k \\
+  \text{free abelian on $k$-simplices} & \text{if } n = k
+\end{cases}
+~
+For the singular homology groups, observe that we have a map of pairs $(\bigsqcup_\alpha \Delta_\alpha^k, \bigsqcup_\alpha \partial \Delta_\alpha^k) \to (X^k, X^{k-1})$ where $\alpha$ runs over all $k$-simplices of $X$. This map induces a homoemorphism on quotients, so it induces an isomorphism on singular homology. Thus, we have
+~ Math
+H_n(X^k, X^{k-1}) = \begin{cases}
+  0 & \text{if } n \ne k \\
+  \text{free abelian on characteristic maps of $k$-simplices} & \text{if } n = k
+\end{cases}
+~
+Hence, $H_n^\Delta(X^k, X^{k-1}) \cong H_n(X^k, X^{k-1})$. The five lemma now produces the desired isomorphism $H_n^\Delta(X^k) \to H_n(X^k)$.
+
+We now extend to the case of infinite-dimensional $X$. Observe that a compact subset of $X$ can only meet finitely many open simplices of $X$. (Here, an open simplex is a simplex with its proper faces removed). We won't prove this fact here; see an appendix in Hatcher for details.
+
+We want to show that the natural inclusion $H_n^\Delta(X) \to H_n(X)$ is surjective. Let $z$ represent a singular $n$-cycle. Then $z$ is a finite linear combination of singular $n$-simplices with compact images. Hence, the images of these singular $n$-simplices are contained in a finite-dimensional subcomplex of $X$. Since we are now in a finite-dimensional subcomplex, we can lift such a chain to a simplicial chain.
+
+We also want to show that the natural inclusion $H_n^\Delta(X) \to H_n(X)$ is surjective. Suppose $z$ is in the kernel of the inclusion. That means $z$ is a boundary of some singular $(n+1)$-chain in $X$. But again, this singular $(n+1)$-chain must live in a finite-dimensional subcomplex of $X$, and hence lifts to a simplicial $(n+1)$-chain in $X$. Again, we use injectivity from the finite-dimensional case to conclude $z=0$.
+
+This completes the proof of the theorem for $A = \varnothing$. For $A$ nonempty, we simply apply the five lemma to the long exact homology sequence. **QED**
+
+## Computations: Degree
+
+Suppose we have a map $f: S^n \to S^n$. Then we have an induced map $f_*: H_n(S^n) \to H_n(S^n)$. But $H_n(S^n) = \Z$, and a map $f_*: \Z \to \Z$ is uniquely defined by the integer $f_*(1)$. We call this number the ___degree___ of the map $f$. This number has some nice properties:
+
+1. $\deg \id = 1$.
+2. $\deg f = 0$ if $f$ is not surjective. Indeed, let $x_0 \in S^n$ lie outside the range of $f$, and consider $S^n \overset{f}{\longrightarrow} S^n \setminus \{x_0\} \overset{\iota}{\longrightarrow} S^n$. Since $S^n$ minus a point is contractible, $f_*$ factors through the trivial group, and hence must be the trivial homomorphism.
+3. If $f \simeq g$, then $\deg f = \deg g$. __The converse is also true!__ This is a theorem of Hopf, which we will hopefully be able to prove later.
+4. $\deg f = -1$ if $f$ is a reflection through a hyperplane. Indeed, take the $\Delta$-complex structure on $S^n$ with two $n$-simplices $\Delta_1^n$, $\Delta_2^n$ representing the hemispheres which $f$ reflects into each other. Then $\Delta_1^n - \Delta_2^n$ generates $H_n(S^n)$, and $f$ takes this to its negative.
+5. The antipodal map $x \mapsto -x$ has degree $(-1)^{n+1}$, since it is the composition of $n+1$ reflections about each of the coordinate hyperplanes.
+6. If $f: S^n \to S^n$ has no fixed points, then $\deg f = (-1)^{n+1}$ because it is homotopic to the antipodal map. Indeed, if $f(x) \ne x$, then the segment connecting $f(x)$ to $-x$ cannot pass through the origin. Normalize the segment and slide points along it to obtain the homotopy
+~ Math
+f_t(x) = \frac{(1-t)f(x) - tx}{\norm{(1-t)f(x) - tx}}.
+~
+
+## Applications of Degree
+
+**Theorem:** $S^n$ has a continuous field of nonvanishing tangent vectors iff $n$ is odd.
+
+*Proof:* Let $x \mapsto v(x)$ denote the tangent vector at $x \in S^n$, and suppose without loss of generality that $v(x)$ is normalized. At each point, $x$ and $v(x)$ are orthogonal, and hence determine a plane. The vectors $(\cos t)x + (\sin t)v(x)$ lie on a circle in this plane. Hence, we obtain a homotopy
+~ Math
+f_t(x) = (\cos t)x + (\sin t)v(x) \qquad 0 \le t \le \pi
+~
+between the identity map and the antipodal map through $v(x)$. This implies that the identity map and antipodal map have equal degree, which only occurs if $n$ is odd.
+
+For the other direction, we can explicitly construct a nonvanishing tangent vector field. If $n = 2k+1$, consider
+~ Math
+(x_1, x_2, \dots, x_{2k}, x_{2k+1}, x_{2k+2}) \mapsto (-x_2, x_1, -x_4, x_3, \dots, -x_{2k+2}, x_{2k+1}).
+~
+This is clearly nonvanishing and orthogonal. **QED**
+
+**Proposition:** $\Z / 2\Z$ is the only nontrivial group that acts freely on $S^n$ if $n$ is even.
+
+
+
+# Lecture 08 (2016-09-20)
+
+Suppose $f: S^n \to S^n$ (for $n > 0$) has the property that for some $y \in S^n$, the inverse image of $y$ under $f$ is finite. Say $f^{-1}(y) = \{x_1, \dots, x_n\}$. Take disjoint neighborhoods $U_i$ around each $x_i$ such that each $U_i$ is mapped by $f$ into a neighborhood $V$ of $y$. Observe that $f(U_i - \{x_i\}) \subseteq V - \{y\}$. We obtain a commutative diagram
+
+_(Diagram and definition of local degree omitted. See page 136 of Hatcher's text.)_
+
+We define the ___local degree___ of $f$ at $x_i$, denoted by $\deg f |_{x_i}$, as the degree of the map $\Z \to \Z$ given by $f_*: H_n(U_i, U_i - \{x_i\}) \to H_n(V, V - \{y\})$.
+
+**Proposition:** In this situation, $\deg f = \sum_{i=1}^m \deg f |_{x_i}$.
+
+**Remark:** The suspension of $S^n$ is $S^{n+1}$.
+
+## Cellular Homology
+
+Let $X$ be a CW-complex.
+
+**Lemma:**
+
+1. $H_k(X^n, X^{n-1}) = 0$ if $k \ne n$, and $H_n(X^n, X^{n-1})$ is free abelian on the $n$-cells of $X$.
+2. $H_k(X^n) = 0$ if $k > n$. Hence, $H_k(X) = 0$ if $k > \dim X$.
+3. $\iota: X^n \to X$ induces an isomorphism $\iota_*: H_k(X^n) \to H_k(X)$ for $k < n$.
+
+*Proof idea for part 3:* If $X$ is finite-dimensional, then proving (3) is easy. Otherwise, use a compactness argument (or a mapping telescope argument).
+
+_(We omit details of the proof, which can be found in Hatcher.)_
+
+To construct the cellular homology groups, we splice the long exact sequences of pairs coming from $(X^{n+1}, X^n)$, $(X^n, X^{n-1})$, $(X^{n-1}, X^{n-2})$, $\dots$ to obtain a diagram
+
+_(Diagram and definition of cellular homology omitted. See page 139 of Hatcher's text.)_
+
+**Theorem:** $H_n^{CW}(X) \cong H_n(X)$.
+
+_(Proof omitted. See Hatcher.)_
+

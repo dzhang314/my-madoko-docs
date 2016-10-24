@@ -1,0 +1,1154 @@
+Title: MATH 6300 Notes - David K. Zhang - Personal Website
+
+Package: bm
+Package: physics
+Package: mathtools
+
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ Begin MathDefs
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\acts}{\curvearrowright}
+~ End MathDefs
+
+~ Begin Container
+
+~ Begin Center
+# Notes on Modern Algebra {-}
+
+By David K. Zhang
+~ End Center
+
+
+
+# Lecture 1 (2016-08-25)
+
+_(No class. Instructor out of town at conference.)_
+
+
+
+# Lecture 2 (2016-08-30)
+
+_(Discussion of syllabus omitted.)_
+
+## Binary relations
+
+**Definition:** A ___binary relation___ on a set $X$ is a subset $R \subseteq X^2$ of the Cartesian square of $X$. If $(x,y) \in R$, we write $x \mathrel{R} y$ and say that $x$ is $R$-related to $y$.
+
+**Examples:**
+
+1. Divisibility is a relation on $\N = \{1, 2, 3, \dots\}$. (For the purposes of this course, $0$ is not a natural number.) Here, $x \mathrel{R} y$ iff $x$ is divisible by $y$.
+
+2. $\le$ is a relation on $\R$
+
+3. $=$ is a relation on any set $X$.
+
+## Representing relations by graphs
+
+If we think of $X$ as a set of vertices and $R$ as a set of directed edges, a relation becomes a directed graph.
+
+_(Example of graph for divisibility relation on $X = \{1, 2, 3, 4, 5, 6\}$ omitted. Each vertex has a self-loop, and an edge going to each of its proper divisors.)_
+
+## Properties of relations
+
+**Definition:** A relation $R$ on a set $X$ is called
+
+- ___reflexive___ if $\forall x \in X,\ x \mathrel{R} x$.
+- ___symmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \implies y \mathrel{R} x$.
+- ___antisymmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} x \implies x = y$.
+- ___transitive___ if $\forall x,y,z \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} z \implies x \mathrel{R} z$.
+
+_(Checking these conditions on the four previous examples omitted.)_
+
+**Definition:** A relation $R$ on a set $X$ is called an ___order___ (or ___partial order___) if it is reflexive, antisymmetric, and transitive.
+
+A standard notation for order relations is $\precsim$. We write $x \prec y$ if $x \precsim y$ but $x \ne y$.
+
+**Examples:** Divisibility, $\le$, and $=$ on $\N$.
+
+Note that when representing an order relation as a graph, we can omit self-loops and edges which are implied by transitivity. Moreover, if we arrange the vertices so that all edges are oriented upwards, we can omit explicit arrows. The resulting diagram is called a ___Hasse diagram___.
+
+_(Example of Hasse diagram for divisibility on $\{1, \dots, 9\}$ omitted. See camera roll.)_
+
+**Definition:** A ___Hasse diagram___ of an order ${\precsim} \subseteq X \times X$ is a graph with vertex set $X$ and an edge connecting $x$ up to $y$ if "$y$ is next to $x$," i.e., if $x \prec y$ and there exists no $z$ such that $x \prec z \prec y$.
+
+Now let $X$ be a ___poset___ (i.e. ___partially ordered set___, a set equipped with an order relation).
+
+**Definition:** Elements $x,y \in X$ are called ___comparable___ if $x \precsim y$ or $y \precsim x$. Otherwise, they are ___incomparable___.
+
+**Definition:** $\precsim$ is called a ___total order___ (or ___linear order___) if any two elements of $X$ are comparable.
+
+Note that Hasse diagrams of linear orders are simply lines.
+
+**Definition:** An element $a \in X$ is called
+
+- ___minimal___ if there is no $x \in X$ such that $x \prec a$.
+- ___maximal___ if there is no $x \in X$ such that $a \prec x$.
+- ___greatest___ (or ___largest___) if $\forall x \in X,\ x \precsim a$.
+- ___least___ (or ___smallest___) if $\forall x \in X,\ a \precsim x$.
+
+**Homework #1.** Prove that the greatest (and least) element is always unique (if it exists).
+
+**Definition:** Given a subset $Y \subseteq X$, an element $a \in X$ is called
+
+- a ___lower bound___ for $Y$ if $\forall y \in Y,\ a \precsim y$.
+- an ___upper bound___ for $Y$ if $\forall y \in Y,\ y \precsim a$.
+
+A ___chain___ in $X$ is a subset where any two elements are comparable.
+
+_(Examples of lower bounds, upper bounds, and chains omitted.)_
+
+**Zorn's Lemma:** If every chain in a partially ordered set $X$ has an upper (resp. lower) bound, then $X$ has a maximal (resp. minimal) element.
+
+**Theorem:** Every vector space has a basis.
+
+*Proof:* Take $X = \{\text{all linearly independent subsets of }V\}$ ordered by inclusion. Checking the hypothesis of Zorn's lemma is easy, and we obtain a maximal linearly independent subset. This is clearly a basis. **QED**
+
+**Homework #2.** Which combinations of the properties \{reflexive, symmmetric, antisymmetric, transitive\} are possible? In principle there are 16 combinations, but not all of these are possible.
+
+
+
+# Lecture 3 (2016-09-01)
+
+## Equivalence relations and partitions
+
+**Definition:** A relation $R$ on a set $X$ is called an ___equivalence___ (or ___equivalence relation___) if it is symmetric, reflexive, and transitive.
+
+**Examples:** 
+
+0. Equality on any set.
+1. Congruence modulo $5$ on $\Z$.
+2. Take $X = \N$, and let $x \mathrel{R} y$ if $x$ and $y$ have the same number of digits.
+
+Let $\sim$ be an equivalence relation on $X$. For every $x \in X$, we define the ___equivalence class of $\bm{x}$___, denoted by $[x]$, as the set
+~ Math
+[x] = \{y \in X : x \sim y \}.
+~
+
+**Definition:** A collection of subsets $\{X_i\}_{i \in I}$ are said to form a ___partition___ of $X$ (or alternatively, $X$ is said to be the ___disjoint union___ of the subsets $X_i$, symbolized $X = \bigsqcup_{i \in I} X_i$) if $X = \bigcup_{i \in I} X_i$ and for all $i,j \in I$, if $i \ne j$, then $X_i \cap X_j = \varnothing$.
+
+**Proposition:** Let $\sim$ be an equivalence relation on a set $X$. Then the corresponding equivalence classes form a partition of $X$.
+
+*Proof:* It is immediate to see that $X = \bigcup_{a \in X} [a]$, since each $a \in X$ is always a member of its own equivalence class by reflexivity. Hence it suffices to show that if $[a] \ne [b]$, then $[a] \cap [b] = \varnothing$. Suppose, for contradiction, that there exists some $c \in [a] \cap [b]$. Then $a \sim c$ and $b \sim c$. Since $\sim$ is symmetric, we have $c \sim b$, and by transitivity, we have $a \sim b$. Now observe that if $x \in [b]$, then we have $a \sim b \sim x$, hence $a \sim x$, and $x \in [a]$. This shows that $[b] \subseteq [a]$. By reversing $a$ and $b$, this argument shows just as well that $[a] \subseteq [b]$, hence $[a] = [b]$. This is the desired contradiction. **QED**
+
+**Examples** (corresponding to example relations above):
+
+0. $[x] = \{x\}$.
+1. $\{5n : n \in \Z\}$, $\{5n+1 : n \in \Z\}$, $\dots$, $\{5n+4 : n \in \Z\}$.
+
+## Operations on sets
+
+**Definition:** An ___$\bm{n}$-ary operation___ on a set $X$ is a function $f: X^n \to X$. The number $n$ is called the ___arity___ of $f$.
+
+**Examples:**
+
+1. 1-ary (unary): taking additive inverse in $\R$. This is the function $f(x) = -x$. Similarly, taking multiplicative inverse in $\R \setminus \{0\}$.
+2. 2-ary (binary): addition, subtraction, multiplication on $\R$. Division on $\R$ is _not_ an operation. Note that for binary operations, instead of writing ${+}(1,2)$, we instead write $1+2$.
+3. 3-ary (ternary): vector triple product of vectors in $\R^3$.
+
+Henceforth, the word "operation" will refer exclusively to binary operations.
+
+**Definition:** An operation $*$ on $X$ is called
+
+- ___commutative___ if for all $x,y \in X$ we have $x * y = y * x$.
+- ___associative___ if for all $x,y,z \in X$ we have $x * (y * z) = (x * y) * z$.
+
+**Proposition:** If an operation $*$ on a set $X$ is associative, then for any sequence $x_1, \dots, x_n \in X$, the product $x_1 * x_2 * \cdots * x_n$ is independent of the arrangement of parentheses.
+
+*Proof:* Induction.
+
+## Preorders (for homework)
+
+**Definition:** A ___preorder___ relation on a set $X$ is any reflexive and transitive relation.
+
+**Example:** Take $X = \N$, and define $x \mathrel{R} y$ iff the number of digits of $x$ is less than or equal to (in the standard sense) the number of digits of $y$.
+
+Given a preorder $R$ on $X$, define a relation $\sim$ on $X$ by the rule $x \sim y$ iff $x \mathrel{R} y$ and $y \mathrel{R} x$.
+
+**Homework #1.** Prove that $\sim$ is an equivalence relation on $X$.
+
+Let $Y$ be the set of equivalence of classes (written $Y = X / {\sim}$). Define a relation $\precsim$ on $Y$ by $[x] \precsim [y]$ if $x \mathrel{R} y$.
+
+**Homework #2.** Prove that $\precsim$ is well-defined. That is, if we have $[x'] = [x]$ and $[y'] = [y]$, then $[x] \precsim [y]$ iff $[x'] \precsim [y']$. This is necessary to show that the definition of $\precsim$ is independent of the choice of representatives in equivalence classes.
+
+**Homework #3.** Prove that $\precsim$ is an order relation on $Y$.
+
+## Elementary group theory
+
+**Definition:** A ___group___ is a set $G$ with a binary operation $*$ such that
+
+- $*$ is associative: $(a*b)*c = a*(b*c)$ for all $a,b,c \in G$.
+- There exists a special element $e \in G$ such that $a * e = e * a = a$ for all $a \in G$.
+- For every $a \in G$ there exists $b \in G$ such that $a * b = b * a = e$.
+
+The operation $*$ is often denoted by $+$ (if it is commutative) or by $\cdot$ (in the general case). We often omit the dot and write $ab$ for $a \cdot b$. The element $e$ is usually denoted by $0$ or $1$ accordingly, and is called the ___identity___ (or ___unit___) of $G$. The inverse element $b$ of $a$ is usually denoted by $-a$ (if $+$ is used) or $a^{-1}$ (if $\cdot$ is used).
+
+**Examples:**
+
+- $\Z$ with the usual addition.
+- $\Q \setminus \{0\}$ with the usual multiplication.
+- $\Z$ with subtraction is ___not___ a group, since subtraction is not associative.
+- $\R^{n \times n} = M_n(\R)$ is a group under matrix addition, but not matrix multiplication. $GL_n(\R)$ is a group under matrix multiplication, but not matrix addition. Same with $SL_n(\R)$.
+
+
+
+# Lecture 04 (2016-09-06)
+
+## Further examples of groups
+
+- $\Z_n = \Z / n\Z = \{0, 1, \dots, n-1\}$, the group of integers modulo $n$, with operation $a \oplus b$ given by the remainder of $a+b$ when divided by $n$. (Henceforth we denote $\oplus$ by $+$ when there is no confusion.)
+
+- The dihedral group $D_{2n}$, sometimes denoted $D_n$, given by the symmetries of a regular $n$-gon ($n$ rotations and $n$ reflections).
+
+- The infinite dihedral group $D_\infty$ of all isometries of $\R$ that preserve $\Z$ setwise. Elements of $D_\infty$ include translations by an integer, reflections through an integer, and reflections through half-integers.
+
+- The symmetric group $S_n$ of all bijections from $\{1, \dots, n\}$ to itself. Recall that elements of $S_n$ can be written in the 2-line notation
+~ Math
+\mqty(
+    1 & 2 & \cdots & n-1 & n \\
+    f(1) & f(2) & \cdots &  f(n-1) & f(n)
+)
+~
+or the 1-line notation $(f(1), f(2), \dots, f(n-1), f(n))$. We will use the convention that $(f \circ g)(x) = f(g(x))$. Recall that $\abs{S_n} = n!$.
+
+## Elementary Properties of Groups
+
+**Theorem:** Let $G$ be a group. Then
+
+1. The neutral element of $G$ is unique.
+2. Every element of $G$ has a unique inverse.
+
+Henceforth we will denote the inverse of $g \in G$ by $g^{-1}$.
+
+3. For all $g \in G$, $(g^{-1})^{-1} = g$.
+4. For all $f,g \in G$, $(fg)^{-1} = g^{-1} f^{-1}$.
+
+We now define $g^n = \underbrace{gg\cdots g}_{n \text{ times}}$, and $g^{-n} = (g^n)^{-1}$.
+
+5. For all $g \in G$ and $m,n \in \Z$, $(g^m)^n = g^{mn}$.
+6. For all $g \in G$ and $m,n \in \Z$, $g^m g^n = g^{m+n}$.
+7. _(Cancellation Law)_ For every $a,b,c \in G$, if $ac = bc$, then $a = b$. Similarly, if $ca = cb$, then $a = b$.
+
+*Proof:*
+
+1. Suppose $e_1, e_2 \in G$ both satisfy $ge_1 = e_1g = ge_2 = e_2g = g$ for all $g \in G$. Then in particular, $e_1e_2 = e_1 = e_2$.
+2. Suppose that for some $g \in G$, there exist $a,b \in G$ such that $ga = ag = gb = bg = 1$. Then $agb = a = b$.
+3. Immediate.
+
+*Remark:* If $G$ is a group and we have $a,b \in G$ such that $ab = 1$, then $a = b^{-1}$ and $b = a^{-1}$. This is easy to show by considering $bab$.
+
+4. $fgg^{-1}f^{-1} = ff^{-1} = 1$.
+5. Use the same proof as for integers.
+6. Use the same proof as for integers.
+7. Multiply both sides by $c^{-1}$. **QED**
+
+## Group Terminology
+
+- The ___order___ $\abs{G}$ of a group $G$ is the number of elements of $G$.
+- The ___order___ of an element $g \in G$ is the minimal natural number $n$ such that $g^n = 1$. If such a number does not exist, the order of $g$ is $\infty$. We denote the order of $g$ by $\abs{g}$. Note that $\abs{1} = 1$.
+- A group $G$ is called ___Abelian___ if its operation is commutative. That is, for all $a,b \in G$, we have $ab = ba$.
+
+**Examples:**
+
+1. $(\R, +)$, $(\Z, +)$, and $(\Q, +)$, are Abelian groups of infinite order.
+2. $GL_n(\R)$ is Abelian iff $n=1$, and has infinite order. Unlike the preceding example, it has elements of finite order.
+3. The orders of the elements of $\Z_6$ are $\abs{0} = 1$, $\abs{1} = \abs{5} = 6$, $\abs{2} = \abs{4} = 3$, and $\abs{3} = 2$.
+
+**Homework:**
+
+1. Find orders of all elements in $S_3$.
+2. When is $S_n$ abelian?
+
+
+**Theorem:** Let $G$ be a group, and $g \in G$. Suppose $g^k = 1$ for some $k \in \N$. Then $k$ is divisible by $\abs{g}$.
+
+*Proof:* Let $n = \abs{g}$, and let $d = \gcd(n,k)$. By elementary number theory, there exist $a,b \in \Z$ such that $d = an+bk$. It follows that $g^d = g^{an+bk} = (g^n)^a (g^k)^b = 1$. By the definition of $\abs{g}$, we must have $d = n$. Thus $k$ is divisible by $n$. **QED**
+
+**Question:** Can we find an example of a group $G$ with elements $a,b \in G$ such that $\abs{a}, \abs{b} < \infty$ but $\abs{ab} = \infty$?
+
+One immediately observes that this is impossible if $G$ is abelian. For an easy example, take $G = D_\infty$.
+
+
+
+# Lecture 05 (2016-09-08)
+
+Let $G$ be a group throughout.
+
+## Conjugation and Conjugacy Classes
+
+**Definition:** Elements $a,b \in G$ are said to be ___conjugate___ if there exists $t \in G$ such that $t^{-1}at = b$. When this occurs, we write $a \sim b$.
+
+**Proposition:** $\sim$ is an equivalence relation.
+
+*Proof:*
+
+1. $a \sim a$ since $a = 1^{-1} a 1$.
+2. $a \sim b$ means there exists $t \in G$ such that $t^{-1}at = b$. It follows that $a = tbt^{-1} = (t^{-1})^{-1} b t^{-1}$, so $b \sim a$.
+3. $a \sim b$ and $b \sim c$ means there exists $s,t \in G$ such that $s^{-1}as = b$ and $t^{-1}bt = c$. It follows that $u^{-1}au = c$ for $u = st$, since
+~ Math
+(st)^{-1}ast = t^{-1}(s^{-1}as)t = t^{-1}bt = c.
+~
+
+**QED**
+
+**Definition:** Equivalence classes with respect to $\sim$ are called conjugacy classes.
+
+**Example:** Matrices in $GL_n(\C)$ are conjugate iff their Jordan normal forms are the same (up to permutation of the Jordan blocks).
+
+## Subgroups
+
+**Definition:** A subset $S \subseteq G$ is a ___subgroup___ if it is itself a group with respect to the operation in $G$. Equivalently, it is a subset $S \subseteq G$ such that
+
+1. For all $x,y \in S$, we have $xy \in S$.
+2. $1 \in S$.
+3. For all $x \in S$, we have $x^{-1} \in S$.
+
+**Notation:** We write $S \le G$ to indicate that $S$ is a subgroup of $G$. This should not be confused with $S \subseteq G$, which indicates inclusion of the sets $S$ and $G$.
+
+**Examples:**
+
+1. $\Z \le \Q \le \R \le \C$.
+2. $SL_n(\Q) \le GL_n(\Q) \le GL_n(\R) \le GL_n(\C)$.
+3. $\N \subseteq \Z$ is NOT a subgroup.
+
+**Definition:** Let $X \subseteq G$. The ___normalizer___ of $X$ in $G$ is
+~ Math
+N_G(X) = \{g \in G : \forall x \in X,\
+g^{-1}xg \in X \text{ and } gxg^{-1} \in X \}.
+~
+The ___centralizer___ of $X$ in $G$ is
+~ Math
+C_G(X) = \{ g \in G : \forall x \in X,\
+g^{-1}xg = x \}.
+~
+If $X = \{a\}$ is a singleton, then we write $N_G(a)$ instead of $N_G(\{a\})$, and similarly $C_G(a)$ instead of $C_G(\{a\})$.
+
+**Theorem:** For every $X \subseteq G$, the normalizer $N_G(X)$ and the centralizer $C_G(X)$ are subgroups of $G$.
+
+*Proof:*
+
+1. If $a,b \in N_G(X)$, then for all $x \in X$, we have
+~ Math
+  a^{-1}xa \in X \qquad axa^{-1} \in X \qquad b^{-1}xb \in X \qquad bxb^{-1} \in X.
+~
+It follows that $(ab)^{-1}x(ab) = b^{-1}(a^{-1}xa)b = b^{-1}x'b \in X$ where $x' = a^{-1}xa \in X$. By a similar calculation, $(ab)x(ab)^{-1} \in G$. Thus, $N_G(X)$ is closed under taking products.
+
+2. $1 \in N_G(X)$ is obvious.
+
+3. If $a \in N_G(X)$, then $a^{-1} \in N_G(X)$ is clear.
+
+**Homework #1.** Complete the proof of this theorem for $C_G(X)$. **QED**
+
+**Definition:** The ___center___ of a group is
+~ Math
+Z(G) = C_G(G) = \{ g \in G : \forall a \in G, [g,a] = 1 \}
+~
+where we have defined the ___commutator___ $[x,g] = x^{-1}g^{-1}xg$ of elements of $G$.
+
+**Example:** If $G$ is abelian, then for all $X \subseteq G$ we have $N_G(X) = C_G(X) = Z(G) = G$.
+
+**Definition:** We say that a subgroup $S \le G$ is ___generated___ by a subset $X \subseteq G$ (or that $X$ is a ___generating set___ of $S$) if every element of $S$ can be expressed as a product of elements of $X$ and their inverses.
+
+**Definition:** Let $X \subseteq G$. Define
+~ Math
+\ev{X} = \{x_1 \cdots x_k : k \in \N,\ x_i \in X \text{ or } x_i^{-1} \in X,\ i = 1,\dots,k\}.
+~
+
+**Proposition:** $\ev{X}$ is a subgroup for all nonempty $X \subseteq G$. Moreover, $S$ is generated by $X \subseteq S$ iff $S = \ev{X}$.
+
+**Example:** $\Z$ is generated by $\{1\}$ and $\{2,2017\}$, but not $\{2,2016\}$.
+
+**Homework #2.** Show that $GL_n(\R)$ is generated by elementary matrices of the form
+
+- $E_{ij}$, the matrix obtained from $I_n$ by swapping row $i$ and row $j$
+- $D_i(r)$, the diagonal matrix with $r \ne 0$ in the $i$th place and ones elsewhere
+- $A_{ij}$, the identity matrix with an extra one added in its $(i,j)$ entry
+
+_Hint:_ Recall that all nonsingular matrices can be reduced to the identity matrix via elementary row operations. Use the fact that there is a 1-1 correspondence between elementary row operations and left multiplication by an elementary matrix of the above form.
+
+**Definition:** We say that a group $G$ is ___finitely generated___ if there exists a finite $X \subseteq G$ such that $G = \ev{X}$.
+
+**Examples:**
+
+1. $\Z$ is finitely generated.
+2. Any finite group is finitely generated.
+3. $\R$ is not finitely generated (by cardinality).
+4. $\Q$ is not finitely generated.
+
+**Homework #3.** Prove that $\Q$ is not finitely generated.
+
+**Definition:** A subgroup $S \le G$ is called ___normal___ if for every $a \in S$ and $g \in G$, we have $g^{-1}ag \in S$. If this is the case, we write $S \triangleleft G$.
+
+**Examples:**
+
+1. If $G$ is abelian, then every subgroup is normal.
+2. $SL_n(\R) \triangleleft GL_n(\R)$.
+3. $T_n(\R)$, the group of all invertible upper-triangular matrices, is a non-normal subgroup of $GL_n(\R)$ (for $n > 1$).
+
+**Homework #4.**
+
+1. Let $G$ be a group, and define $G' = \ev{[x,y] : x,y \in G}$. Prove that $G'$ is always a normal subgroup of $G$.
+2. Prove that $Z(G)$ is a normal subgroup of $G$.
+3. Let $S \le G$. Prove that $S$ is always a normal subgroup in the normalizer $N_G(S)$.
+
+
+
+# Lecture 06 (2016-09-13)
+
+## Group Homomorphisms
+
+**Definition:** Let $\phi: G \to H$ be a map from a group $G$ to a group $H$. $\phi$ is called a ___homomorphism___  if for all $x,y \in G$, we have $\phi(xy) = \phi(x) \phi(y)$.
+
+A homomorphism is called
+
+- an ___epimorphism___ if it is surjective,
+- a ___monomorphism___ if it is injective, and
+- an ___isomorphism___ if it is bijective.
+
+**Examples:**
+
+0. Let $\phi: S_n \to \Z_n$ be defined by $\phi(f) = f(1) - 1$. This is ___not___ a homomorphism for $n \ge 3$.
+1. Let $\phi: \Z \to \Z$ be the function $\phi(z) = nz$. This is a homomorphism.
+2. Let $\phi: \Z \to \Z_n$ be defined by $\phi(z) =$ the remainder of $z$ when dividied by $n$. This is a homomorphism.
+3. $\det: GL_n(\R) \to (\R \setminus \{0\}, \times)$ is a homomorphism.
+4. $\log: ((0, \infty), \times) \to \R$ is a homomorphism.
+5. $\phi: \R \to (\C \setminus \{0\}, \times)$ defined by $\phi(x) = e^{ix}$ is a homomorphism.
+
+_(Classification of preceding examples as epi/mono/iso omitted.)_
+
+## Properties of Homomorphisms
+
+**Proposition:** Let $\phi: G \to H$ be a homomorphism. Then:
+
+1. $\phi(1) = 1$.
+2. For every $g \in G$, $\phi(g^{-1}) = \phi(g)^{-1}$.
+3. If $g \in G$ and $\abs{g}$ is finite, then $\abs{\phi(g)}$ divides $\abs{g}$.
+
+**Homework #1.** Prove statement (3) above.
+
+*Proof:* For (1), observe that
+~ Math
+\phi(1) = \phi(1 \cdot 1) = \phi(1) \cdot \phi(1).
+~
+Canceling $\phi(1)$, we obtain $\phi(1) = 1$. For (2), we have
+~ Math
+\phi(g^{-1}) \cdot \phi(g) = \phi(g^{-1} g) = \phi(1) = 1
+~
+showing that $\phi(g^{-1})$ is the inverse of $\phi(g)$. **QED**
+
+**Proposition:** Isomorphism is an equivalence relation on the class of all groups. For reflexivity, take the identity map, and for transitivity, use compositions.
+
+**Homework #2.** Prove that if $\phi: G \to H$ is an isomorphism, then $\phi^{-1}: H \to G$ is also an isomorphism.
+
+**Definition:** A group $G$ is called ___cyclic___ if there exists an element $g \in G$ such that $G = \ev{g}$.
+
+**Theorem:** Every cyclic group is isomorphic to $\Z$ or $\Z_n$ for some $n$.
+
+*Proof:* Let $G = \ev{x}$. Then $G = \{x^k: k \in \Z\}$.
+
+- Case 1: $\abs{x} = \infty$. Then $\phi: x^k \mapsto k$ is an isomorphism $G \to \Z$. To see that $\phi$ is well-defined, suppose $x^k = x^m$. Then $x^{k-m} = 1$, so $k-m = 0$. $\phi$ is then clearly surjective and injective.
+
+- Case 2: $\abs{x} = n \in \Z$. Then $x^n = 1$, so $\phi: x^k \mapsto k \mathrel{\operatorname{mod}} n$ is an isomorphism $G \to \Z_n$.
+
+**QED**
+
+## Kernels and Cosets
+
+**Definition:** Let $\phi: G \to H$ be a homomorphism. The ___kernel___ of $\phi$ is
+~ Math
+\ker \phi = \{g \in G : \phi(g) = 1\}.
+~
+
+**Lemma:**
+
+1. $\ker \phi \triangleleft G$.
+2. $\phi(G) \le H$.
+
+*Proof:*
+
+1. We first show that $\ker \phi \le G$. If $g,h \in \ker \phi$, then $\phi(gh) = \phi(g)\phi(h) = 1 \cdot 1 = 1$. Hence, $gh \in \ker \phi$. Clearly $1 \in \ker \phi$. Finally, if $g \in \ker \phi$, then $\phi(g^{-1}) = \phi(g)^{-1} = 1^{-1} = 1$. Thus, $g^{-1} \in \ker \phi$.
+
+  To see that $\ker \phi \triangleleft G$, let $f \in G$ and $g \in \ker \phi$ be arbitrary. Then
+~ Math
+\phi(f^{-1}gf) = \phi(f^{-1}) \phi(g) \phi(f) = \phi(f^{-1}) \phi(f) = 1.
+~
+  Thus, $f^{-1}gf \in \ker \phi$.
+
+**Homework #3.** Prove statement (2) of this lemma. **QED**
+
+**Definition:** Let $H \le G$. Given $g \in G$, the set
+~ Math
+gH = \{gh : h \in H\}
+~
+is called a ___left coset___ of $H$ in $G$. Similarly, the set
+~ Math
+Hg = \{hg : h \in H\}
+~
+is called a ___right coset___ of $H$ in $G$.
+
+Define a relation $\sim$ on $G$ by $x \sim y$ iff $x^{-1}y \in H$.
+
+**Lemma:** $\sim$ is an equivalence relation on $G$. Moreover, the equivalence classes of $\sim$ are precisely the left cosets of $H$ in $G$, with $[g] = gH$.
+
+**Corollary:** Left cosets form a partition of $G$.
+
+**Remark:** The corresponding statements for right cosets are true, with completely symmetric proofs. Simply replace $x^{-1}y \in H$ by $xy^{-1} \in H$.
+
+*Proof:* _(Omitted straightforward verification that $\sim$ is an equivalence relation.)_
+
+For (2), first observe that $[x] \subseteq xH$. Indeed, if $x \sim y$, then $x^{-1}y = h$ for some $h \in H$. It follows that $y = xh \in xH$. Next, observe that $xH \subseteq [x]$. Indeed, if $f \in xH$, then $f = xh$ for some $h \in H$. Then $f^{-1}x = h^{-1}x^{-1}x = h^{-1} \in H$. **QED**
+
+
+
+# Lecture 07 (2016-09-15)
+
+_(Examples of kernels of homomorphisms omitted.)_
+
+~ Begin Well {.well-sm}
+**Proposition:** If $\phi: G \to H$ is a homomorphism, then $\phi$ is a monomorphism iff $\ker \phi = \{1\}$.
+{margin:0px; padding:0px}
+~ End Well
+
+_(Straightforward proof omitted.)_
+
+## Quotient Groups
+
+Let $N \triangleleft G$. Note that for every $g \in G$, we have $gN = Ng$. Indeed, if $n \in N$, then $gn = (gng^{-1})g = n'g \in Ng$ where $n' = gng^{-1} \in N$. The reverse inclusion can be proven symmetrically.
+
+~ Begin Well {.well-sm}
+**Definition:** The ___quotient group of $\bm{G}$ modulo $\bm{N}$___ is
+~ Math
+G/N = \{gN : g \in G\}.
+~
+We define for all cosets $fN$, $gN$ of $N$ the operation
+~ Math
+fN \cdot gN = fgN.
+~
+**Lemma:** This operation is well-defined, and $G/N$ is a group under this operation.
+{margin:0px; padding:0px}
+~ End Well
+
+*Proof:*
+
+1. *Well-definedness.* Suppose $fN = f'N$ and $gN = g'N$. Recall that $aN = bN$ iff $a^{-1}b \in N$. We want to show that $f'g'N = fgN$. We have that $f' = fm$ and $g' = gn$ for some $m,n \in N$. It follows that
+~ Math
+(fg)^{-1}(f'g') = g^{-1} f^{-1} fm gn = g^{-1} mgn = m'n
+~
+where $m' = g^{-1} mg \in N$. Hence, $f'g'N = fgN$.
+
+2. *Associativity.*
+~ Math
+\begin{aligned}
+(fN \cdot gN) \cdot hN &= fN \cdot (gN \cdot hN) \\
+(fgN) \cdot hN &= fN \cdot (ghN) \\
+(fg)hN &= f(gh)N
+\end{aligned}
+~
+
+3. *Existence of identity.* $1_{G/N} = 1_G N$.
+
+4. *Existence of inverses.* $(gN)^{-1} = g^{-1}N$.
+
+**QED**
+
+**Examples:**
+
+0. If $N = \{1\}$, then $G/N \cong G$ for all $G$.
+1. If $N = G$, then $G/N \cong \{1\}$ for all $G$.
+2. $\Z / n\Z = \Z_n$.
+
+~ Begin Well {.well-sm}
+**Theorem** (First Isomorphism Theorem): Let $\phi: G \to H$ be a homomorphism. Then $\phi(G) \cong G / \ker \phi$.
+{margin:0px; padding:0px}
+~ End Well
+
+*Proof:* Let $N = \ker \phi$. Define $\alpha: G/N \to \phi(G)$ by $\alpha(gN) = \phi(g)$.
+
+1. *Well-definedness.* Suppose $gN = fN$. Then $g^{-1}f \in N$, so $\phi(g^{-1}f) = 1$, and hence $\phi(g) = \phi(f)$. This shows that $\alpha(gN) = \alpha(fN)$.
+
+2. *Homomorphism.* $\alpha(fN \cdot gN) = \alpha(fg N) = \phi(fg) = \phi(f)\phi(g) = \alpha(fN)\alpha(gN)$
+
+3. *Surjectivity.* Obvious.
+
+4. *Injectivity.* $\ker\alpha = \{gN : \alpha(gN) = 1\} = \{N\} = \{1_{G/N}\}$.
+
+**QED**
+
+**Problem:** Compute the quotient group $GL_n(\R) / SL_n(\R)$.
+
+*Solution:* $\det: GL_n(\R) \to \R^\times$ is a homomorphism with kernel $SL_n(\R)$. By the first isomorphism theorem, we have $GL_n(\R) / SL_n(\R) \cong \R^\times$.
+
+Here, $\R^\times$ refers to the group $(\R \setminus \{0\}, \times)$. Henceforth, we will denote multiplicative groups of fields (e.g. $\C^\times$, $\Q^\times$) in this fashion.
+
+**Problem:** Compute the quotient group $T_2(\R) / UT_2(\R)$.
+
+Here, $T_n(\R)$ is the group of invertible upper-triangular matrices with entries in $\R$, and $UT_n(\R)$ is the normal subgroup of unit upper-triangular matrices (i.e., those with ones on the diagonal. This is normal because the diagonal of a product of triangular matrices is the product of the diagonals.)
+
+*Solution:* $T_2(\R) / UT_2(\R) \cong \R^\times \times \R^\times$ by the homomorphism
+~ Math
+\phi\mqty(a&b \\ 0&c) = (a,c).
+~
+
+~ Begin Well {.well-sm}
+**Theorem** (Second Isomorphism Theorem): Suppose $H \le G$ and $N \triangleleft G$. Then:
+
+1. $HN = \{hn : h \in H, n \in N\}$ is a subgroup of $G$.
+2. $H \cap N \triangleleft H$.
+3. $HN / N \cong H / (H \cap N)$.
+~ End Well
+
+~ Begin Well {.well-sm}
+**Theorem** (Third Isomorphism Theorem): Suppose $K,N \triangleleft G$ and $N \le K$. Then:
+
+1. $K / N \triangleleft G / N$.
+2. $(G/N) / (K/N) = G/K$.
+~ End Well
+
+**Homework.** Prove the two preceding isomorphism theorems.
+
+
+# Lecture 08 (2016-09-20)
+
+**Definition:** Let $H \le G$. Then the ___index___ of $H$ in $G$ is
+~ Math
+\abs{G:H} = \#\{gH : g \in G\} \in \N \cup \{\infty\}.
+~
+
+**Theorem** (*Lagrange Theorem*): For all finite groups $G$ and all subgroups $H \le G$, we have $\abs{G:H} = \frac{\abs{G}}{\abs{H}}$. In particular, $\abs{H}$ always divides $\abs{G}$.
+
+*Proof:* First observe that $\abs{gH} = \abs{H}$ for all $g \in G$. Indeed, it is easily seen that the map $f_g: H \to gH$ defined by $f_g(h) = gh$ is a bijection.
+
+Now, let $g_1H$, $g_2H$, $\dots$, $g_nH$ be all (pairwise disjoint) cosets of $H$. Then
+~ Math
+G = g_1H \sqcup g_2H \sqcup \dots \sqcup g_nH
+~
+and so
+~ Math
+\abs{G} = \sum_{i=1}^n \abs{g_i H} = n\abs{H} = \abs{G:H} \abs{H}.
+~
+**QED**
+
+**Definition:** We write $\Z_n^\times$ to denote the group of integers $\{1, 2, \dots, n-1\}$ which are coprime to $n$, with group operation given by multiplication mod $n$. (That this defines a group structure follows easily from elementary number theory. Note that $\abs{\Z_n^\times} = \varphi(n)$, where $\varphi$ denotes the Euler totient function.)
+
+**Homework 1.** Compute $\varphi(2016)$.
+
+**Theorem** (*Fermat's Little Theorem*): For every positive integer $a$ and every prime $p$, we have $a^p \equiv a \mod p$. Equivalently, if $a$ is not divisible by $p$, then $a^{p-1} \equiv 1 \mod p$.
+
+*Proof:* Observe that $\Z_p^\times$ has order $\phi(p) = p-1$. **FINISH THIS PROOF LATER**
+
+**Corollary:** For all finite groups $G$ and all $a \in G$, we have that $\abs{a} = \abs{\ev{a}}$ divides $\abs{G}$. In particular, $a^{\abs{G}} = 1$.
+
+**Euler's Theorem:** If $(a,n) = 1$ for some $a,n \in \N$,  then $a^{\varphi(n)} \equiv 1 \mod n$.
+
+*Proof:* Again, observe that $\abs{\Z_n^\times} = \varphi(n)$. For all $a \in \Z_n^\times$, we have $a^{\varphi(n)} \equiv 1 \mod n$ by the preceding corollary.
+
+**Corollary:** The only subgroups of $\Z_p$ for $p$ prime are $\{0\}$ and $\Z_p$.
+
+**Corollary:** There is only one (up to isomorphism) group of order $p$ for each prime $p$. (This is $\Z_p$.)
+
+*Proof:* If $\abs{G} = p$, then any non-identity element of $G$ must have order $p$, and hence must generate $G$. **QED**
+
+## Cycle Decomposition of Permutations
+
+We write $(132)$ to denote the cyclic permutation which sends $1$ to $3$, $3$ to $2$, and $2$ to $1$. In two-line notation, this is the permutation
+~ Math
+\mqty(
+    1 & 2 & 3 \\
+    3 & 1 & 2
+)
+~
+All permutations can be decomposed into disjoint cycles of this form. For example,
+~ Math
+\mqty(
+    1 & 2 & 3 & 4 & 5 & 6 \\
+    2 & 1 & 3 & 5 & 6 & 4
+) = (12)(3)(456).
+~
+Note that cycles with disjoint supports commute, so we could just as well have written $(456)(12)(3)$. We typically omit all cycles of length 1. A cycle of length 2 is called a ___transposition___.
+
+**Lemma:** Every permutation can be decomposed into a product of (not necessarily disjoint) transpositions.
+
+**Homework:** Decompose
+~ Math
+\mqty(
+    1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+    2 & 3 & 1 & 5 & 4 & 7 & 6
+)
+~
+into a product of (1) disjoint cycles and (2) transpositions.
+
+
+
+# Lecture 09 (2016-09-22)
+
+**Definition:** Let $\sigma \in S_n$. Define $\sgn(\sigma) = (-1)^{N(\sigma)}$, where $N(\sigma)$ is the number of inversions in $\sigma$. Here, an ___inversion___ is a pair $(\sigma(i), \sigma(j))$ such that $i < j$ and $\sigma(i) > \sigma(j)$.
+
+**Example:** The permutation
+~ Math
+\sigma = \mqty(
+    1 & 2 & 3 & 4 & 5 \\
+    3 & 4 & 5 & 1 & 2
+)
+~
+has six inversions, and hence $\sgn(\sigma) = 1$.
+
+A permutation $\sigma$ is called ___even___ if $\sgn(\sigma) = 1$, and ___odd___ if $\sgn(\sigma) = -1$.
+
+**Proposition:** $\sigma$ is even (resp. odd) iff it decomposes into an even (resp. odd) number of transpositions.
+
+*Proof:* First observe that every transposition is odd. (This is easy to see by counting the inversions explicitly.) Then observe that when a permutation is multiplied by a transposition, its sign changes. **QED**
+
+**Definition:** $A_n$ is the subgroup of $S_n$ consisting of even permutations. Note that $\abs{S_n : A_n} = 2$ and $\abs{A_n} = n!/2$ for $n > 1$.
+
+We will now demonstrate that the converse of Lagrange's theorem does not hold. Indeed, $A_4$ has no subgroups of order 6.
+
+**Lemma:** If $\sigma = \alpha_1 \cdots \alpha_k \in S^n$ is a decomposition of $\sigma$ into disjoint cycles of length $\ell_1, \dots, \ell_k$. Then $\sgn(\sigma) = (-1)^{\sum_{i=1}^k (\ell_i - 1)} = (-1)^{n-k}$. (Note that cycles of length 1 must be included for this theorem to hold.)
+
+*Proof:* Any cycle of length $\ell$ is conjugate to the cycle $(1 \cdots \ell)$, which contains $\ell-1$ inversions. **QED**
+
+**Proposition:** $A_4$ has no subgroups of order 6.
+
+*Proof:* Suppose $H \le A_4$ has order 6, and let $a \in A_4$ be a cycle of length 3. Then at least two of the cosets $H$, $aH$, and $a^2H$ must coincide. But in any case, this implies $a \in H$, and since $A_4$ contains 8 cycles of length 3, we have that $H$ must contain all 8 such elements. Contradiction. **QED**
+
+**Definition:** An ___action___ of a group $G$ on a set $X$ is a map $f: G \times X \to X$ satisfying
+
+1. $f(gh, x) = f(g, f(h, x))$ for all $g,h \in G$ and $x \in X$.
+2. $f(1, x) = x$ for all $x \in X$.
+
+We often omit the map $f$ and write $f(g, x)$ as $gx$. This is called the ___image___ of $x$ under the action of $g$. We say that $G$ acts on $X$, and write $G \acts X$.
+
+**Examples:**
+
+1. $S_n$ naturally acts on $\{1, \dots, n\}$.
+2. Every group $G$ has a trivial action on every set $X$ defined by $gx = x$ for all $g \in G$ and $x \in X$.
+3. Every group acts on itself via left multiplication.
+4. If $H \le G$, then $G \acts \{gH : g \in G\}$ by $g(aH) = (ga)H$.
+
+**Lemma:** Given an action $G \acts X$ and $g \in G$, define $f_g: X \to X$ by $f_g(x) = gx$. Then $f_g$ is a bijection, and $\alpha: g \mapsto f_g$ defines a homomorphism from $G$ to the group $S(X)$ of bijections $X \to X$.
+
+_(Straightforward proof omitted. Simply check the definitions.)_
+
+**Theorem** (Cayley's Theorem): Every group is a subgroup of a (possibly infinite) permutation group $S(X)$ for some $X$. Moreover, every finite group is a subgroup of $S_n$ for some $n$.
+
+*Proof:* Let $G$ act on itself by left multiplication. **QED**
+
+
+
+# Lecture 10 (2016-09-27)
+
+Following Cayley's theorem, we can equivalently define a group action as follows:
+
+**Definition:** An ___action___ $G \acts X$ is a homomorphism (embedding) $\alpha: G \to S(X)$, where $S(X)$ is the group of bijections from $X$ to itself. In this case, we denote $\alpha(g)(x)$ by $g(x)$ or $gx$.
+
+For every $x \in X$, we define the ___stabilizer___ of $x$ to be the set
+~ Math
+G_x = \operatorname{Stab}_G(x) = \{ g \in G : gx = x \}.
+~
+
+**Lemma:** For all $x \in X$ and $g \in G$,
+
+1. $G_x \le G$.
+2. $G_{gx} = gG_xg^{-1}$.
+
+_(Proof of (1) trivial and omitted.)_
+
+**Homework #1.** Prove statement (2) of the lemma above.
+
+**Definition:** An action $G \acts X$ is called ___transitive___ if for all $x,y \in X$ there exists $g \in G$ such that $gx = y$.
+
+**Corollary:** If $G$ acts transitively on $X$, then all stabilizers of all elements of $X$ are isomorphic. In particular, they have the same size.
+
+*Proof:* Let $x,y \in X$ be given. By transitivity, there exists $g \in G$ such that $gx = y$. It follows that conjugation by $g$ is an isomorphism $G_x \to G_y$. Indeed, the map $\alpha: f \mapsto gfg^{-1}$ is easily verified to be a homomorphism with trivial kernel. By the preceding lemma, $\alpha$ is surjective. **QED**
+
+**Definition:** Two actions $G \acts X$ and $G \acts Y$ are called ___isomorphic___ if there exists a $G$-equivariant bijection $\alpha: X \to Y$. Here, $G$-equivariant means that we require $g\alpha(x) = \alpha(gx)$ for all $g \in G$ and $x \in X$.
+
+**Theorem:** Every transitive action $G \acts X$ is isomorphic to an action $G \acts G/H$ for some subgroup $H$ of $G$. (Recall that $G$ acts on a set of cosets $G/H$ by $g(fH) = (gf)H$.)
+
+*Proof:* Take any $x \in X$ and let $H = G_x$. Given any $y \in X$, there exists $g \in G$ such that $gx = y$. We define $\alpha(y) = gG_x$. This gives a well-defined map $\alpha: X \to G/G_x$. Indeed, if we have $fx = y$ and $gx = y$, then $fG_x = gG_x$, since $g^{-1}f \in G_x$.
+
+It is clear that $\alpha$ is surjective, since given any coset $gG_x \in G/G_x$, we have that $\alpha(gx) = gG_x$. To see that $\alpha$ is injective, suppose $\alpha(gx) = \alpha(fx)$. Then $gG_x = fG_x$, and so $g = fh$ for some $h \in G_x$. It follows that $gx = fhx = fx$.
+
+Finally, to see that $\alpha$ is $G$-equivariant, let $y \in X$ and $g \in G$ be given. We must show that $\alpha(gy) = g\alpha(y)$. By transitivity, there exists $f \in G$ such that $y = fx$. Then
+~ Math
+\alpha(gfx) = gfG_x = g(fG_x) = g\alpha(fx).
+~
+This completes the proof. **QED**
+
+**Definition:** Given an action $G \acts X$, the ___orbit___ of an element $x \in X$ is the set
+~ Math
+Gx = \operatorname{Orb}_G(x) = \{ gx : g \in G \}.
+~
+
+**Example:** Let $G = \ev{(126)(3)(4578)}$ be a cyclic subgroup of $S_8$ of order 12. Then $G$ naturally acts on $\{1, \dots, 8\}$, and $G1 = \{1,2,6\}$.
+
+**Homework #2.** Let $\sigma \in S_n$ decompose into a product of disjoint cycles of lengths $\ell_1, \dots, \ell_k$. Then $\abs{\sigma} = \operatorname{lcm}(\ell_1, \dots, \ell_k)$.
+
+Note that every action $G \acts X$ is transitive when restricted to an orbit $G \acts Gx$. Moreover, the action $G \acts X$ is itself transitive iff it has a single orbit, i.e., $Gx = X$ for all $x \in X$. In general, orbits give a partition
+
+**Definition:** An action $G \acts X$ is called
+
+* ___faithful___ if for all $g \in G \setminus \{1\}$, there exists $x \in X$ such that $gx \ne x$. (In terms of stabilizers, this means $\bigcap_{x \in X} G_x = \{1\}$.)
+* ___free___ if for all $g \in G \setminus \{1\}$ and all $x \in X$, we have $gx \ne x$. (In terms of stabilizers, this means $G_x = \{1\}$ for all $x \in X$.)
+* ___regular___ if it is free and transitive.
+
+**Homework #3.** Show that $G \acts G/H$ is faithful iff $\bigcap_{g \in G} gHg^{-1} = \{1\}$.
+
+Observe also that $G \acts G/H$ is free iff $H = \{1\}$, and $G \acts G$ (by left multiplication) is always regular. In fact, all regular actions are of this form.
+
+**Theorem:** Every regular action $G \acts X$ is isomorphic to the action $G \acts G$ by left multiplication.
+
+*Proof:* By the previous theorem, $G \acts X$ is isomorphic to $G \acts G/H$, where $H = G_x$ for some $x \in X$. But since $G \acts X$ is free, $G_x = \{1\}$, so $G \acts X$ is isomorphic to $G \acts G / \{1\}$, which is isomorphic to $G \acts G$. **QED**
+
+
+
+# Lecture 11 (2016-09-29)
+
+**Theorem** (Orbit-Stabilizer Theorem): Suppose that a finite group $G$ acts on a set $X$. Then for all $x \in X$, we have $\abs{Gx} = \frac{\abs{G}}{\abs{G_x}}$.
+
+**Lemma 1:** For any group $G$, $G/Z(G)$ is cyclic iff $G = Z(G)$ (i.e. $G$ is abelian).
+
+**Lemma 2:** Every finite $p$-group has a non-trivial center.
+
+**Theorem:** If $\abs{G} = p^2$ for $p$ prime, then $G$ is abelian.
+
+*Proof:* By lemma 2, $\abs{Z(G)} \ne 1$, so either $\abs{Z(G)} = p$ or $\abs{Z(G)} = p^2$. If $\abs{Z(G)} = p^2$, then $Z(G) = G$, and we are done. Otherwise, we have that $G/Z(G) = \Z_p$, and by lemma 1, $G$ must be abelian. **QED**
+
+--------------------------------------------------------------------------------
+
+**Definition:** Let $A,B$ be groups. The ___direct (Cartesian) product___ of $A$ and $B$ is the group whose underlying set is $A \times B$, and whose group operation is
+~ Math
+(a_1, b_1) \cdot (a_2, b_2) = (a_1 \cdot a_2, b_1 \cdot b_2).
+~
+
+**Example:** $\Z_p \times \Z_p$ is not isomorphic to $\Z_{p^2}$, since only the latter contains an element of order $p^2$.
+
+**Homework #1.** If $a \in A$, $b \in B$, and both $\abs{a}$ and $\abs{b}$ are finite, then $(a,b)$ also has finite order. In particular, $\abs{(a,b)} = \operatorname{lcm}(\abs{a}, \abs{b})$.
+
+**Proposition:** Suppose that $A,B \le G$ such that:
+
+1. Both $A$ and $B$ are normal in $G$.
+2. $A \cap B = \{1\}$.
+3. $G = AB \coloneqq \{ab : a \in A \text{ and } b \in B\}$.
+
+*Proof:* Define $\alpha: A \times B \to G$ by $\alpha(a,b) = ab$. We first check that $\alpha$ is a homomorphism. If $a_1, a_2 \in A$ and $b_1, b_2 \in B$, then
+~ Math
+\alpha((a_1, b_1) \cdot (a_2, b_2)) = a_1a_2b_1b_2
+~
+and
+~ Math
+\alpha(a_1, b_1) \cdot \alpha(a_2, b_2) = a_1b_1a_2b_2.
+~
+We claim that $a_2b_1 = b_1a_2$. Indeed, consider the element $b_1^{-1}a_2b_1a_2^{-1}$. Since $A$ is normal in $G$, we have that $b_1^{-1}a_2b_1 \in A$, and then $b_1^{-1}a_2b_1a_2^{-1} \in A$ since it is a product of two elements of $A$. By the symmetric argument, it is also an element of $B$. But this is only possible if $b_1^{-1}a_2b_1a_2^{-1} = 1$, as desired.
+
+Now it is clear by condition (3) that $\alpha$ is surjective. It is also clear that $\alpha$ has trivial kernel, since if $\alpha(a,b) = ab = 1$, then $a$ and $b$ are inverses of each other, and hence must both belong to $A \cap B$. Hence $a = b = 1$. Thus, $\alpha$ is an isomorphism. **QED**
+
+**Homework #2.** Prove that every group $G$ of order $p^2$ is isomorphic to $\Z_{p^2}$ or $\Z_p \times \Z_p$.
+
+**Hint:** Assume $G \not\cong \Z_{p^2}$. Then prove that there exists an element $g \in G$ of order $p$, and let $A = \ev{g}$. Then, take $h \in G \setminus A$, and let $B = \ev{h}$. Now use the preceding proposition.
+
+
+
+# Lecture 12 (2016-10-04)
+
+## Direct Products and Sums
+
+**Some notes are missing here! Add the definitions of direct sums and direct products of groups.**
+
+**Properties:**
+
+1. If $\abs{I} < \infty$, then $\prod_{i \in I} G_i = \bigoplus_{i \in I} G_i$.
+2. In general, $\prod_{i \in I} G_i \not\cong \bigoplus_{i \in I} G_i$. For example, take $I = \N$ and $G_i = \Z_2$ for all $i$. Then elements of $\prod_{i \in I} G_i$ correspond to arbitrary subsets of $\N$, while elements of $\bigoplus_{i \in I} G_i$ correspond to finite subsets. There are uncountably many of the first but only finitely many of the second, so these groups cannot be isomorphic.
+3. For all $i \in I$, there is a natural embedding (i.e. monomorphism) $G_i \to \bigoplus_{j \in I} G_j \le \prod_{j \in I} G_j$.
+
+**Proposition:** Let $G_i \le G$ for all $i \in I$. Assume that
+
+1. $G_i \triangleleft G$ for all $i \in I$.
+2. For all $i \in I$, $\ev{\bigcup_{j \ne i}G_j} \cap G_i = \{1\}$.
+3. $G = \ev{\bigcup_{j \in I} G_j}$.
+
+Then $G \cong \bigoplus_{i \in I} G_i$.
+
+*(We omit details of the proof, which is essentially identical to that of the simpler case of two factors, modulo some technical details regarding infinite index sets.)*
+
+**Example:** The groups $\prod_{i \in \N} \Z_i$ and $\bigoplus_{i \in \N} \Z_i$ can be distinguished by the observation that the first has elements of infinite order, while the second does not. We call $\bigoplus_{i \in \N} \Z_i$ a ___torsion group___, meaning that every element has finite order.
+
+**First Burnside Problem:** Is every finitely generated torsion group finite?
+
+**Answer:** No.
+
+**Second Burnside Problem:** Is every finitely generated group with all elements of order $\le N$ finite? (Here we have a uniform bound on orders of elements, unlike the previous problem.)
+
+**Answer:** No.
+
+## Sylow Theorems
+
+Let $G$ be a finite group and $p$ a prime. Write $\abs{G} = p^k \cdot \ell$, where $k$ is chosen to be maximal (so that $p$ and $\ell$ are coprime).
+
+**Theorems:**
+
+1. For all $n \le k$, there exists a subgroup $H \le G$ such that $\abs{H} = p^n$. Every such subgroup is contained in a maximal $p$-subgroup of $G$ (i.e. a subgroup of order $p^k$) which is called a ___Sylow $\bm{p}$-subgroup___ of $G$.
+
+2. For every prime $p$, all Sylow $p$-subgroups of $G$ are conjugate.
+
+3. Let $N_p$ be the number of Sylow $p$-subgroups of $G$. Then $N_p$ divides $G$, and $N_p$ is congruent to 1 modulo $p$. (Equivalently, $N_p$ divides $\ell$ and is congruent to 1 modulo $p$.)
+
+**Example:** Prove that every group of order 35 is isomorphic to $\Z_5 \times \Z_7$.
+
+*Solution:* Let $A$ and $B$ be Sylow 5- and 7-subgroups of $G$. Since $N_5$ divides 35 and is congruent to 1 modulo 5, we must have $N_5 = 1$. Observe that for all $g \in G$, $g^{-1}Ag$ is also a Sylow 5-subgroup of $G$. Since this subgroup is unique, we must have $g^{-1}Ag = A$ for all $g \in G$, and hence $A \triangleleft G$. The same argument applies with 5 replaced by 7, hence $B \triangleleft G$. Moreover, $A \cap B = \{1\}$, since $\abs{A \cap B}$ must divide both $\abs{A} = 5$ and $\abs{B} = 7$. It follows that $G = AB$, and hence that $G \cong A \times B \cong \Z_5 \times \Z_7$.
+
+
+
+# Lecture 13 (2016-10-06)
+
+## Proofs of the Sylow Theorems
+
+Let $G$ be a finite group with $\abs{G} = p^\alpha \cdot n$, $p$ prime, $n, \alpha, \in \N$, and $(p,n) = 1$.
+
+**Theorem:** For all positive integers $\beta \le \alpha$ there exists a subgroup $H \le G$ having order $p^\beta$.
+
+*Proof:* Let $\Omega = \{ S \subseteq G : \abs{S} = p^\beta \}$. Then $G$ acts on $\Omega$ by left multiplication. Fix any $S \in \Omega$ and $t \in S$. Then the  map $G_S \to S$ given by $g \mapsto gt$ is injective. Thus, for every $S \in \Omega$, we have $\abs{G_S} \le \abs{S} = p^\beta$.
+
+Now observe that
+~ Math
+\abs{\Omega} = \binom{p^\alpha n}{p^\beta} = \frac{p^\alpha n(p^\alpha n-1) \cdots (p^\alpha n - p^\beta + 1)}{p^\beta(p^\beta-1)\cdots1} = p^{\alpha-\beta}n \underbrace{\prod_{i=1}^{p^\beta-1} \frac{p^\alpha n-i}{i}}_q
+~
+where $p$ and $q$ are relatively prime. Hence, the multiplicity of $p$ in $\abs{\Omega}$ is $\alpha-\beta$.
+
+Let $O_1, \dots, O_k$ be the orbits of $G \acts \Omega$. Then $\abs{\Omega} = \abs{O_1} + \cdots + \abs{O_k}$, and there exists $i$ such that the multiplicity of $p$ in $\abs{O_i}$ is at most $\alpha-\beta$. Clearly $O_i = GS$ for some $S \in \Omega$. Now by the orbit-stabilizer theorem,
+~ Math
+\abs{G} = \abs{G_S}\abs{GS}
+~
+which implies that $\abs{G_S}$ is divisible by $p^\beta$, so in particular, $\abs{G_S} \ge p^\beta$. But we already know $\abs{G_S} \le \abs{S} = p^\beta$, so $\abs{G_S} = p^\beta$. Thus $G_S$ is a subgroup of the desired order. **QED**
+
+**Lemma:** Let $H$ be a finite $p$-group acting on a set $X$. Define $\operatorname{Fix}_H(X) \coloneqq \{x \in X : hx = x\ \forall h \in H\}$. Then $\abs{X} \equiv \abs{\operatorname{Fix}_H(X)} \mod p$.
+
+*Proof:* $X = \operatorname{Fix}_H(X) \sqcup O_1 \sqcup \cdots \sqcup O_k$, where $O_1, \dots, O_k$ denote orbits with more than one element. Then $p$ divides $\abs{O_i}$ for all $i$, giving the desired congruence. **QED**
+
+**Theorem:** Let $H \le G$ with $\abs{H} = p^\beta$ for some positive integer $\beta \le \alpha$. Let $P$ denote a Sylow $p$-subgroup of $G$. Then there exists $g \in G$ such that $g^{-1}Hg \le P$. In particular,
+
+1. $H$ belongs to a Sylow $p$-subgroup of $G$ ($gPg^{-1}$).
+2. All Sylow $p$-subgroups of $G$ are conjugate.
+
+*Proof:* Consider the set of cosets $G/P = \{gP : g \in G\}$. $G$ acts naturally on $G/P$ by left multiplication, so $H$ also acts on $G/P$ in the same way. By the preceding lemma, $n = \abs{G/P} \equiv \abs{\operatorname{Fix}_H(G/P)} \mod p$. Since $n$ is coprime to $p$, we have that $\operatorname{Fix}_H(G/P)$ is nonempty. Thus there exists $gP \in \operatorname{Fix}_H(G/P)$, so $hgP = gP$ for all $h \in H$, and $g^{-1}Hg \le P$. **QED**
+
+**Theorem:** Let $N_p$ denote the number of Sylow $p$-subgroups of $G$. Then $N_p$ divides $\abs{G}$ and $N_p \equiv 1 \mod p$.
+
+*Proof:* Let $S$ denote the set of all Sylow $p$-subgroups of $G$. Then $G$ acts on $S$ by conjugation: $(g,P) \mapsto gPg^{-1}$. This action is transitive by the preceding theorem. Observe that for all $P \in S$, the stabilizer subgroup $G_P$ is precisely the normalizer $N_G(P)$. Thus, by the orbit-stabilizer theorem, $\abs{S} \cdot \abs{N_G(P)} = \abs{G}$, so $N_p = \abs{S}$ divides $G$.
+
+**Note:** $N_p = \abs{G : N_G(P)}$ for all Sylow $p$-subgroups $P$ of $G$.
+
+Now fix any $P \in S$. $P$ also acts on $S$ by conjugation, so it makes sense to consider $\operatorname{Fix}_P(S) \ni P$. We claim that $P$ is the only member of this set. Assuming that this claim is proved, we apply the preceding lemma to obtain $\abs{S} \equiv \abs{\operatorname{Fix}_P(S)} \mod p$, so we must have $N_p = \abs{S} \equiv 1 \mod p$.
+
+To prove the claim, assume $Q \in \operatorname{Fix}_P(S)$. Then for all $x \in P$, we have $xQx^{-1} = Q$, implying $P \le N_G(Q)$. Thus $P$ and $Q$ are both Sylow $p$-subgroups of $G$, so they are conjugate: $P = t^{-1}Qt$ for some $t \in N_G(Q)$. Therefore $P = Q$. **QED**
+
+## Applications
+
+**Problem:** Prove that $2016!+1$ is divisible by $2017$.
+
+**Theorem** (Wilson's Theorem): For all primes $p$, $(p-1)!+1$ is divisible by $p$.
+
+**Homework #1.** Prove Wilson's theorem.
+
+*Hint:* First prove that the number of Sylow $p$-subgroups of $S_p$ is $(p-2)!$. Then apply the third Sylow theorem.
+
+**Homework #2.** Prove that $UT_n(p)$ is a Sylow $p$-subgroup of $GL_n(p)$ for $p$ prime. Here, $GL_n(p)$ denotes the group $GL_n(\Z_p)$ of invertible $n \times n$ matrices with entries in $\Z_p$, and $UT_n(p)$ denotes the subgroup of unit upper-triangular matrices.
+
+**Homework #3.** Let $\epsilon: G \to H$ be an epimorphism. Then for every Sylow $p$-subgroup $P$ of $G$, $\epsilon(P)$ is a Sylow $p$-subgroup of $H$.
+
+_(Example on dihedral groups omitted.)_
+
+## Groups of Order $pq$
+
+**Corollary:** For every pair of primes $p$ and $q$, there are at most two groups of order $pq$ up to isomorphism.
+
+*Proof:* WLOG let $p < q$. Observe that the number $N_q$ of Sylow $q$-subgroups must divide $pq$, hence it must divide $p$ (since it cannot divide $q$, being congruent to $1 \mod q$). Thus we must have $N_q = 1$. Let $A$ be the unique Sylow $q$-subgroup of $G$. Then $A \trianglelefteq G$.
+
+Now we also have that $N_p$ is divible by $pq$ and $N_p \equiv 1 \mod p$. Thus the only possibilities are $N_p = 1$, or $N_p = q$ if $q \equiv 1 \mod p$. If $N_p = 1$, then by letting $B$ be the unique Sylow $p$-subgroup of $G$, we obtain an isomorphism $G \cong A \times B \cong \Z_p \times \Z_q \cong \Z_{pq}$.
+
+**Homework #4.** Prove that $\Z_p \times \Z_q \cong \Z_{pq}$ when $p$ and $q$ are distinct primes.
+
+If $N_p = q$, then there are two possibilities: $\Z_{pq}$ and $\Z_q \rtimes \Z_p$. This will be proven later in the course.
+
+
+
+# Lecture 14 (2016-10-11)
+
+**Definition:** $G$ is an ___extension___ of a group $A$ by a group $B$ if $A \trianglelefteq G$ and $G/A \cong B$. In other words, there is a short exact sequence
+~ Math
+1 \longrightarrow A \longrightarrow G \longrightarrow B \longrightarrow 1
+~
+
+**Examples:**
+
+1. $GL_n(\R)$ is an extension of $SL_n(\R)$ by $\R^\times$.
+
+2. $G = A \times B$ is an extension of $A$ by $B$.
+
+3. $T_n(\R)$ is an extension of $UT_n(\R)$ by $(\R^\times)^n$.
+
+**Definition:** An extension $1 \to A \to G \overset{\epsilon}{\to} B \to 1$ is called a ___split extension___ if there exists a subgroup $B' \le G$ such that the map $\epsilon$, when restricted to $B'$, is an isomorphism. In this case, we write $G = A \rtimes B$.
+
+**Examples:** All three of the preceding extensions split, as follows.
+
+1. Take $B'$ to be the subgroup of diagonal matrices of the form $\operatorname{diag}(*, 1, \dots, 1)$.
+
+2. Take $B' = B$.
+
+3. Take $B'$ to be the subgroup of all diagonal matrices.
+
+**Homework #1.** Show that $D_{2n} = \Z_n \rtimes \Z_2$ and $S_3 = \Z_3 \rtimes \Z_2$.
+
+## Example of a Non-split Extension
+
+Take $C$ to be the group of $3 \times 3$ matrices of the form
+
+    1 0 *
+    0 1 0
+    0 0 1
+
+Then $C \cong \R$ is a central subgroup of $UT_3(\R)$, and $UT_3(\R) / C \cong \R \oplus \R$ by sending
+
+    1 a c
+    0 1 b  -> (a,b).
+    0 0 1
+
+Hence $UT_3(\R)$ is an extension of $C \cong \R$ by $\R \oplus \R$.
+
+**Homework #2.** Show that this extension does not split.
+
+*Hint:* If it did, then we would have $UT_3(\R) \cong \R^3$.
+
+**Corollary:** Every group of order $pq$, where $p<q$ are distinct primes, is a split extension $\Z_q \rtimes \Z_p$.
+
+**Corollary:** If $p<q$ are distinct primes and $q \equiv 1 \mod p$, there exists a unique non-cyclic split extension $\Z_q \rtimes \Z_p$.
+
+These facts will be proven later in the course, once we know some facts about fields.
+
+## Abelian Groups
+
+**Definition:** Let $C$ be a class of groups. A group $G \in C$ generated by a subset $X = \{x_i : i \in I\}$ is called a ___free group___ in $C$ with ___basis___ $X$ (or ___free generating set___ $X$) if for any other group $A \in C$ generated by $\{a_i : i \in I\} \subseteq A$ there is a homomorphism $\epsilon: G \to A$ such that $\epsilon(x_i) = a_i$ for all $i \in I$.
+
+($G$ is also called the free group of rank $\abs{I}$ in $C$. Indeed, there is a unique free group of cardinality $\abs{I}$ if it exists.)
+
+**Homework #3.** There is no free group of rank $\ge 1$ in the class of all finite groups. _(Solved in class.)_
+
+Let $\mathcal{A}$ denote the class of all abelian groups.
+
+**Theorem:** For every $r \in \N$, there exists a unique free group of rank $r$ in $\mathcal{A}$. This is $\Z \oplus \cdots \oplus \Z$ (with $r$ copies of $\Z$).
+
+*Proof:* First observe that $\Z^r$ is free in $\mathcal{A}$. Indeed, if $B \in \mathcal{A}$ is generated by $\{b_1, \dots, b_r\} \subseteq B$, then by sending $(n_1, \dots, n_r) \mapsto n_1b_1 + \cdots + n_rb_r$, we obtain a homomorphism of the desired form. Uniqueness is guaranteed by the lemma proven below. **QED**
+
+**Lemma:** Let $F_1, F_2 \in \mathcal{A}$ be two free groups of the same rank. Then $F_1 \cong F_2$.
+
+*Proof:* Let $F_1$ have basis $\{x_i: i \in I\}$ and $F_2$ have basis $\{y_i: i \in I\}$. Then there exists $\epsilon: F_1 \to F_2$ and $\delta: F_2 \to F_1$ such that $\epsilon(x_i) = y_i$ and $\delta(y_i) = x_i$. Composing $\epsilon$ and $\delta$ gives identity maps on $F_1$ and $F_2$, so $\epsilon$ and $\delta$ are themselves isomorphisms. **QED**
+
+
+
+# Lecture 15 (2016-10-18)
+
+## Decomposition Theorem for Finitely-Generated Abelian Groups
+
+**Theorem:** Let $G$ be a finitely generated abelian group. Then $G$ decomposes as $G = \Z^n \oplus \Z_{q_1} \oplus \cdots \oplus \Z_{q_k}$ where $n \in \N \cup \{0\}$ and every $q_i$ is a power of some prime. Moreover, the group $G$ uniquely defines the collection of numbers $\{q_1, \dots, q_k\}$ and $n$.
+
+$\Z^n$ is called the ___free part___ of $G$, and $\Z_{q_1}, \dots, \Z_{q_k}$ are called the ___primary multiples___ or ___primary cyclic subgroups___.
+
+**Lemma:** For all $n_1, \dots, n_m \in \N$ there exist $\alpha_1, \dots, \alpha_m \in \Z$ such that $\operatorname{gcd}(n_1, \dots, n_m) = \alpha_1 n_1 + \cdots + \alpha_m n_m$.
+
+The proof is to repeatedly apply the extended Euclidean GCD algorithm.
+
+**Lemma:** Let $A = \Z^n$ and $B \le A$. Then $B$ is also a free abelian group of rank $\le n$, and there exist free generating sets $a_1, \dots, a_n$ of $A$ and $b_1, \dots, b_k$ of $B$ such that $b_i = m_i \cdot a_i$ for some coefficients $m_i \in \Z$.
+
+*Proof:* Let $x_1, \dots, x_n$ be any free generating set of $A$. We first claim that $B$ is generated by at most $n$ elements. We proceed by induction on $n$. For $n = 1$, the claim is obvious. For $n > 1$, we can write $A = \Z \oplus \Z^{n-1}$, whence $A/\Z \cong \Z^{n-1}$. If $\epsilon: A \to A/\Z$ denotes the quotient map, then $\epsilon(B)$ is generated by at most $n-1$ elements $\epsilon(y_1), \dots, \epsilon(y_{k-1})$ (where $k \le n$). Let $y_k$ be the generator of $\Z \cap B$.
+
+Let $b \in B$ be arbitrary. Then
+~ Math
+\epsilon(b) = \alpha_1 \epsilon(y_1) + \cdots + \alpha_{k-1} \epsilon(y_{k-1})
+~
+for some $\alpha_1, \dots, \alpha_{k-1} \in \Z$. We can equivalently write this as
+~ Math
+\epsilon(b - \alpha_1 \epsilon(y_1) - \cdots - \alpha_{k-1} \epsilon(y_{k-1})) = 0
+~
+and hence $b - \alpha_1 \epsilon(y_1) - \cdots - \alpha_{k-1} \epsilon(y_{k-1}) \in B \cap \Z$. Since $B \cap \Z$ is generated by $y_k$, we can write
+~ Math
+b - \alpha_1 \epsilon(y_1) - \cdots - \alpha_{k-1} \epsilon(y_{k-1}) = \alpha_k y_k
+~
+for some $\alpha_k \in \Z$. This shows that all elements of $B$ can be expressed as an integer linear combination of elements $x_i$.
+
+Now suppose $y_1, \dots, y_k$, $k \le n$, form a generating set of $B$. Let $y_i = \alpha_{ij}x_j$. Then by integer row reduction of the matrix $[\alpha_{ij}]$, we can obtain the desired generating set. **QED**
+
+**Corollary:** A subgroup of a free abelian group is again free abelian.
+
+**Remark:** Note that a subgroup of a finitely generated group is __not necessarily finitely generated!__ For example, $SL_n(\Z)$ is finitely generated by elementary matrices, but has infinitely generated subgroups.
+
+*Proof of Theorem:* Let $G = A/B$, where $A \cong \Z^n$. Let $a_1, \dots, a_n$ and $b_1, \dots, b_n$ be generating sets of $A$ and $B$ such that $b_i = m_i \cdot a_i$. (Take $b_{k+1}, \dots, b_n = 0$ if the rank of $B$ is less than the rank of $A$.)
+
+*Claim 1.* $G = \ev{a_1 + B, \dots, a_n + B}$. This should be clear; a generating set for a group is also a generating set for an arbitrary quotient.
+
+*Claim 2.* $G = \ev{a_1 + B} \oplus \cdots \oplus \ev{a_n + B}$. Indeed, if $\ev{a_i + B}$ intersects $\ev{\dots, a_{i-1} + B, a_{i+1} + B, \dots}$ nontrivially, then $b_i$ is a linear combination of the other $b_j$'s, a contradiction.
+
+*Claim 3.* If $\ev{a_i + B}$ is finite and cyclic, then it decomposes as a direct sym of primary cyclic groups. This decomposition occurs in the obvious way, using the prime factorization.
+
+This ends the existence part of the proof. For uniqueness, suppose a given abelian group $G$ has two decompositions of this form. By considering the quotient of $G$ by its torsion subgroup, we have that the rank of the free part is uniquely defined. Moreover, by repeatedly considering the maximal primary order of the elements of the torsion subgroup, we obtain uniqueness of the decomposition of the primary part. **QED**
+
+**Homework 1.** Show that Lemma 2 does not hold for general abelian groups. For example, consider $\Z_2 \oplus \Z_8$.
+
+**Homework 2.** Let $A = \Z^3 = \ev{x_1, x_2, x_3}$. Let $B = \ev{2x_1 + 3x_2, 2x_2 + 2x_3}$. Let $C = \ev{x_1, 2x_3, 3x_1 + 6x_3}$. Are the groups $A/B$ and $A/C$ isomorphic?
+
+
+
+# Lecture 16 (2016-10-20)
+
+**Definition:** A nontrivial group is ___simple___ if it has no nontrivial proper normal subgroups.
+
+**Examples:** $\Z_n$ is simple iff $n$ is prime.
+
+**Theorem 1:** $A_n$ is simple iff $n = 3$ or $n \ge 5$.
+
+**Theorem 2:** $PSL_n(F) = SL_n(F) / \{\pm I\}$ is simple for all fields $F$, except $F = F_2$ or $F = F_3$ for $n = 2$.
+
+**Theorem 3:** There are no simple groups of odd order other than $\Z_p$.
+
+**Definition:** A series of subgroups $G_1 \trianglelefteq G_2 \trianglelefteq \cdots \trianglelefteq G_k = G$ is called a ___normal series___ in $G$ if $G_i \trianglelefteq G$ for all $i$.
+
+**Note:** Normality is not transitive! If $A \trianglelefteq B \trianglelefteq C$, we cannot conclude $A \trianglelefteq C$. _(Example omitted.)_
+
+**Theorem:** Every finite group $G$ has a ___subnormal series___
+~ Math
+\{1\} = G_0 \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_k = G
+~
+such that $G_i / G_{i-1}$ is simple for all $1 \le i \le k$.
+
+Here, in, a subnormal series we do not require that each $G_i$ is normal in $G$. We also say that a subgroup $N \le G$ is ___subnormal___ if there is a subnormal series beginning with $N$ and ending in $G$.
+
+*Proof:* Let $N$ be any nontrivial proper normal subgroup in $G$. Then by induction, there exist $\{1\} = N_0 \trianglelefteq N_1 \trianglelefteq \cdots \trianglelefteq N_m = N$ and $\{1\} = H_0 \trianglelefteq H_1 \trianglelefteq \cdots \trianglelefteq H_n = G/N$ such that quotients of adjacent groups are simple. Let $\epsilon: G \to G/N$ be the quotient map, and let $G_i = \epsilon^{-1}(H_i)$. Then
+~ Math
+\{1\} = N_0 \trianglelefteq N_1 \trianglelefteq \cdots \trianglelefteq N_m \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_n = G
+~
+is the desired series. We show this in two steps:
+
+**Fact #1.** If $\epsilon: A \to B$ is a homomorphism and $N \trianglelefteq B$, then $\epsilon^{-1}(N) \trianglelefteq A$. The proof is completely straightforward, and this implies that $G_i \trianglelefteq G_{i+1}$.
+
+**Fact #2.** $G_i / G_{i-1} \cong (G_i / N) / (G_{i-1} / N) \cong H_i / H_{i-1}$ is simple. **QED**
+
+## Nilpotent Groups
+
+**Definition:** A group $G$ is nilpotent if there exists a normal series $\{1\} = G_0 \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_k = G$ such that $G_i / G_{i-1} \le Z(G / G_{i-1})$.
+
+**Lemma:** For all groups $G$ and every series of this form, the following are equivalent:
+
+1. $G_i / G_{i-1} \le Z(G / G_{i-1})$.
+2. $[G_i, G] \le G_{i-1}$.
+
+*Proof:* Straightforward.
+
+**Examples:** Abelian groups. $1 \trianglelefteq A$.
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container

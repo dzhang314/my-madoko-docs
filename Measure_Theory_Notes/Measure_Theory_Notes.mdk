@@ -6,11 +6,14 @@ Package: physics
 
 ~ MathDefs
 \newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
 \newcommand{\Rext}{{\R \cup \{\infty\}}}
 \newcommand{\RExt}{{\R \cup \{-\infty, \infty\}}}
 ~
 
 [TITLE]
+
+# Elementary Measure Theory
 
 A ___measurable space___ is an ordered pair $(X, \Sigma)$ consisting of a set $X$ and a collection $\Sigma$ of subsets of $X,$ satisfying the following axioms:
 
@@ -19,6 +22,8 @@ A ___measurable space___ is an ordered pair $(X, \Sigma)$ consisting of a set $X
 3. $\Sigma$ is closed under countable union and countable intersection.
 
 A collection $\Sigma$ satisfying these properties is called a ___$\bm{\sigma}$-algebra___ on $X.$ The members of $\Sigma$ are called ___measurable sets___. (This terminology is completely analogous to "topological space," "topology," and "open sets." Like in point-set topology, we will often notationally suppress the $\sigma$-algebra $\Sigma$ when it is clear from context.)
+
+There is a standard way to turn a topological space $(X, T)$ into a measurable space $(X, \Sigma)$ by letting $\Sigma$ be the closure of $T$ under complements and countable union/intersection. The $\sigma$-algebra obtained in this fashion is called the ___Borel $\bm{\sigma}$-algebra___ of the topological space $(X, T),$ and the members of $\Sigma$ are called ___Borel subsets___ of $X.$ When the set $X$ has a usual topology (e.g. $X = \R^n$ or $X = \C^n$) which is implicitly understood, we will speak of Borel subsets without further qualification.
 
 A function $f: X \to Y$ between two measurable spaces is ___measurable___ if the inverse image of every measurable set is measurable. Clearly, the identity function on any measurable space is measurable, and by the same argument as for continuous functions, the composition of two measurable functions is measurable. Thus, the collection of all measurable spaces forms a category, with measurable functions as morphisms.
 
@@ -38,4 +43,55 @@ Then we say that $\mu$ is a ___probability measure___. The triple $(X, \Sigma, \
 
 --------------------------------------------------------------------------------
 
+Let $X$ be an arbitrary topological space. A function $f: X \to [-\infty, \infty]$ is ___lower semicontinuous___ if $f^{-1}([-\infty, c])$ is a closed subset of $X$ for all $c \in \R.$
+
+**Proposition:** If $X$ is a metric space, then a function $f: X \to [-\infty, \infty]$ is lower semicontinuous iff $\displaystyle \liminf_{y \to x} f(y) \ge f(x)$ for all $x \in X.$
+
+*Proof:* Suppose $f$ is lower semicontinuous, and let $x \in X$ be given. It suffices to show that
+~ Math
+\liminf_{n \to \infty} f(y_n) = \lim_{n \to \infty} \inf_{m \ge n} f(y_m) \ge f(x)
+~
+for all sequences $\{y_n\}$ converging to $x.$ Thus, suppose we are given such a sequence, and define
+~ Math
+a_n = \inf_{m \ge n} f(y_m).
+~
+The sequence $\{a_n\}$ increases monotonically, so to show that $\lim_{n \to \infty} a_n \ge f(x),$ we simply need to show that $\{a_n\}$ is not bounded above by any $c < f(x).$ We proceed by contradiction: if $\{a_n\}$ is bounded above by some $c < f(x),$ then $\{y_n\}$ lies inside the closed set $f^{-1}([-\infty, c]).$ But by hypothesis, $y_n$ converges to $x,$ and because closed sets contain their limit points, we must have $x \in f^{-1}([-\infty, c]).$ It follows that $f(x) \le c < f(x);$ this is the desired contradiction.
+
+Conversely, suppose $\liminf_{y \to x} f(y) \ge f(x)$ for all $x \in X,$ and let $c \in \R$ be given. We want to show that $f^{-1}([-\infty, c])$ is a closed subset of $X,$ so it suffices to show that it contains its limit points. Thus, suppose we have a sequence $\{y_n\}$ lying inside $f^{-1}([-\infty, c])$ which converges to a point $x \in X.$ By hypothesis, $\liminf_{n \to \infty} f(y_n) \ge f(x).$ Since the $\liminf$ of a sequence upper-bounded by $c$ is necessarily also $\le c,$ we must have $f(x) \le c$, and $x \in f^{-1}([-\infty, c]),$ as desired. **QED**
+
+If we are given an arbitrary function $f: X \to [-\infty, \infty],$ we can construct a lower semicontinuous function $f_\text{lsc},$ called the ___lower semicontinuous regularization___ of $f,$ as follows:
+~ Math
+f_\text{lsc}(x) = \sup_{G \ni x \text{ open}} \qty[\inf_{y \in G} f(y)]
+~
+First, let us verify that this function is indeed lower semicontinuous.
+
+**Proposition:** Let $X$ be an arbitrary topological space and $f: X \to [-\infty, \infty]$ an arbitrary function. Then $f_\text{lsc}$ is lower semicontinuous.
+
+*Proof:* Let $c \in \R$ be given. We want to show that $f_\text{lsc}^{-1}([-\infty, c])$ is a closed subset of $X,$ or equivalently, that $f_\text{lsc}^{-1}((c, \infty])$ is an open subset. Suppose we are given some $x \in f_\text{lsc}^{-1}((c, \infty]).$ Since $f_\text{lsc}(x) > c,$ we can find an open neighborhood $G$ of $x$ such that $\inf_{y \in G} f(y) > c.$ It follows that $G \subseteq f_\text{lsc}^{-1}((c, \infty]),$ since for each $y \in G,$ we have
+~ Math
+f_\text{lsc}(y) = \sup_{H \ni y \text{ open}} \qty[\inf_{z \in H} f(z)]
+\ge \inf_{z \in G} f(z) > c.
+~
+This shows that $f_\text{lsc}^{-1}((c, \infty])$ is open, since it contains an open neighborhood about each of its points. **QED**
+
+Next, we will show that lower semicontinuous regularization can only decrease the values of a function. In addition, if the function being regularized is lower semicontinuous to begin with, then the regularization does nothing. (One might say that lower semicontinuous regularization is an *idempotent* operation.)
+
+**Proposition:** Let $X$ be an arbitrary topological space and $f: X \to [-\infty, \infty]$ an arbitrary function. Then $f_\text{lsc} \le f,$ and if $f$ is lower semicontinuous, then $f_\text{lsc} = f.$
+
+*Proof:* For any $x \in X$ and any open neighborhood $G$ of $x,$ we must have
+~ Math
+\inf_{y \in G} f(y) \le f(x).
+~
+By definition, $f_\text{lsc}(x)$ is the $\sup$ of the LHS over all open neighborhoods $G \ni x.$ Since the $\sup$ of a set of numbers upper-bounded by $f(x)$ is itself $\le f(x),$ we have $f_\text{lsc}(x) \le f(x),$ as desired.
+
+Now suppose $f$ is lower semicontinuous, and let $x \in X$ be given. Pick a real number $c < f(x).$ By hypothesis, $f^{-1}((c, \infty])$ is an open set, and because $x \in f^{-1}((c, \infty]),$ we can pick an open neighborhood $G$ of $x$ lying inside $f^{-1}((c, \infty]).$ It follows that
+~ Math
+f_\text{lsc}(x) = \sup_{H \ni x \text{ open}} \qty[\inf_{y \in H} f(y)]
+\ge \inf_{y \in G} f(y) \ge c.
+~
+Since the preceding argument works for any $c < f(x),$ by taking $c$ arbitrarily close to $f(x)$ we see that $f_\text{lsc}(x) = f(x).$ **QED**
+
+We will now see that $f_\text{lsc}$ is the greatest lower semicontinuous function which is $\le f.$
+
+**Proposition:** Let $X$ be an arbitrary topological space and $f: X \to [-\infty, \infty]$ an arbitrary function. If $g: X \to [-\infty, \infty]$ is a lower semicontinuous function satisfying $g(x) \le f(x)$ for all $x \in X,$ then $g(x) \le f_\text{lsc}(x)$ for all $x \in X.$
 

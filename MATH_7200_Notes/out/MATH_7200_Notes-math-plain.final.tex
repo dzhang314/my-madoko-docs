@@ -8,6 +8,8 @@
 \usepackage{bm}
 \usepackage{physics}
 \usepackage{mathtools}
+\usepackage{parskip}
+\usepackage{tikz-cd}
 
 
 \begin{document}
@@ -15,412 +17,2107 @@
 
 \begin{mdSnippets}
 %mdk-begin-mathdefs
-%mdk-data-line={16}
+%mdk-data-line={18}
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
-\newcommand{\K}{\mathbb{K}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\id}{\operatorname{id}}
+\newcommand{\im}{\operatorname{im}}
 \newcommand{\pt}{\operatorname{pt}}
 
-%mdk-data-line={29}
+%mdk-data-line={32}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={29}
+%mdk-data-line={32}
 \begin{mdInlineSnippet}[3749c81335a8e871bf9f2db98f164954]%mdk
 $x_0 \in X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={29}
+%mdk-data-line={32}
 \begin{mdInlineSnippet}[f288949a1cfcf488cce502f4f069e2d5]%mdk
 $\pi_1(X, x_0).$\end{mdInlineSnippet}%mdk
-%mdk-data-line={35}
+%mdk-data-line={38}
 \begin{mdInlineSnippet}[77f353ed85d3658eda1329e103b0b3eb]%mdk
 $f_0, f_1: X \to Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={35}
+%mdk-data-line={38}
 \begin{mdInlineSnippet}[ad83bbaed4ef4c956398eee9ef3acb22]%mdk
 $f_0 \simeq f_1,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={35}
+%mdk-data-line={38}
 \begin{mdInlineSnippet}[7173693cb1e2ae0aef2a56c765b754db]%mdk
 $H: X \times I \to Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={35}
+%mdk-data-line={38}
 \begin{mdInlineSnippet}[5f289fd0137d22f86b4018c31ae3cf62]%mdk
 $H(x,i) = f_i(x)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={35}
+%mdk-data-line={38}
 \begin{mdInlineSnippet}[4b9c178c75708eafb4595787a424ccaa]%mdk
 $i = 0,1.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={37}
+%mdk-data-line={40}
 \begin{mdInlineSnippet}[2385fde6b300ad088e0c2711c9da8a74]%mdk
 $f: X \to Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={37}
+%mdk-data-line={40}
 \begin{mdInlineSnippet}[59ace33d8a359a98e80c12d6b681addb]%mdk
 $g: Y \to X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={37}
+%mdk-data-line={40}
 \begin{mdInlineSnippet}[045f19ed0033a9cc6341fa617f8d7658]%mdk
 $fg = \id_Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={37}
+%mdk-data-line={40}
 \begin{mdInlineSnippet}[fabd2190deb58f0f5dba23c52025b7c2]%mdk
 $gf = \id_X.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={37}
+%mdk-data-line={40}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={37}
+%mdk-data-line={40}
 \begin{mdInlineSnippet}[57cec4137b614c87cb4e24a3d003a3e0]%mdk
 $Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={39}
+%mdk-data-line={42}
 \begin{mdInlineSnippet}[bc11cf658715d130a37ac60ac17afb52]%mdk
 $\R^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={39}
+%mdk-data-line={42}
 \begin{mdInlineSnippet}[da60012cc5a08022d6e117767c2a5a09]%mdk
 $t.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[d0f35fde97e74ab778136c6a547b70ee]%mdk
 $X^0$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[e470ae345bd3a83f540c6b2df300a429]%mdk
 $X^n,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[7b15fd4da637b7f997c7098a7b91177a]%mdk
 $\bm{n}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[24214dfd7ef2c4a434578d47668a8731]%mdk
 $X^{n-1}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
 $n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[3313a0c6ce4b693e65a96d6b0532e11d]%mdk
 $\{e_\alpha^n\}_{\alpha \in A}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[38ed531adce238c5e7d6650240704339]%mdk
 $\phi_\alpha: S_\alpha^{n-1} \to X^{n-1}.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdInlineSnippet}[a59b8a15c4329382643f06ef08f01884]%mdk
 $X^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={45}
+%mdk-data-line={48}
 \begin{mdDisplaySnippet}[657f3e5b8bd2250ee30fe4cfb35e552f]%mdk
-\[%mdk-data-line={47}
+\[%mdk-data-line={50}
 \frac{\qty(\bigsqcup_{\alpha \in A} e_\alpha^n) \sqcup X^{n-1}}{x \sim \phi_\alpha(x)}
 \]%mdk
 \end{mdDisplaySnippet}%mdk
-%mdk-data-line={49}
+%mdk-data-line={52}
 \begin{mdInlineSnippet}[9dd4e461268c8034f5c8564e155c67a6]%mdk
 $x$\end{mdInlineSnippet}%mdk
-%mdk-data-line={49}
+%mdk-data-line={52}
 \begin{mdInlineSnippet}[b152fae0e938bc1b046e58969d3f4dbf]%mdk
 $\phi_\alpha(x)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={49}
+%mdk-data-line={52}
 \begin{mdInlineSnippet}[3ede2f901dfef7e4bbda4a529428aafe]%mdk
 $x \in \partial e_\alpha^n.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={55}
+%mdk-data-line={58}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={55}
+%mdk-data-line={58}
 \begin{mdInlineSnippet}[b3490d104fb2099d4d4b8eab62bc6b69]%mdk
 $A \subseteq X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={55}
+%mdk-data-line={58}
 \begin{mdInlineSnippet}[3e55c67dc75b376ff0aca959198bbb0d]%mdk
 $X/A$\end{mdInlineSnippet}%mdk
-%mdk-data-line={55}
+%mdk-data-line={58}
 \begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
 $A$\end{mdInlineSnippet}%mdk
-%mdk-data-line={55}
+%mdk-data-line={58}
 \begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
 $A$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[27b93eae1bbb5a75db52dd7b49a47e64]%mdk
 $\bm{X}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[833e36d1a5a93dedb10c85f50ced9ce7]%mdk
 $CX$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[756635ec7a8596680ce6012aec4185cb]%mdk
 $(X \times I) / (X \times \{0\} \sim \pt).$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[26d34f122c7d90a3b9b52a8fe00c7c92]%mdk
 $X \times I$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[c5c6b36796a5cfb3b845cd7881e3fee4]%mdk
 $SX$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[867edc56cf3e14f273b0af096d63f90e]%mdk
 $(X \times I) / (X \times \{0\} \sim \pt_1,\ X \times \{1\} \sim \pt_2)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[2385fde6b300ad088e0c2711c9da8a74]%mdk
 $f: X \to Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[5feade52f51b7f09e56060524e6a7bc0]%mdk
 $M_f$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[3d5af879b9a2845f2e22776311d3465c]%mdk
 $(CX \sqcup Y) / ((x,1) \sim f(x)).$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[57cec4137b614c87cb4e24a3d003a3e0]%mdk
 $Y$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[8f394246ac7b87ad5d7021366a3a1982]%mdk
 $CX,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={57}
+%mdk-data-line={60}
 \begin{mdInlineSnippet}[e3cde3f61de01c172fa395c723c68d2f]%mdk
 $f.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={63}
+%mdk-data-line={66}
 \begin{mdInlineSnippet}[38823755931fd0c754e6cb15c9f5cab5]%mdk
 $\pi_1(X)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={63}
+%mdk-data-line={66}
 \begin{mdInlineSnippet}[4d50b474c7a8b790bdd18aa1ee199f42]%mdk
 $\pi_1$\end{mdInlineSnippet}%mdk
-%mdk-data-line={63}
+%mdk-data-line={66}
 \begin{mdInlineSnippet}[903faf99a14b55b7ad3d1020786c49a8]%mdk
 $S^3$\end{mdInlineSnippet}%mdk
-%mdk-data-line={63}
+%mdk-data-line={66}
 \begin{mdInlineSnippet}[8667d53568b8ceb81652fab65e90ef19]%mdk
 $S^{1,000,000}.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={65}
+%mdk-data-line={68}
 \begin{mdInlineSnippet}[495edfc0da54d7dcdd6c26c5936a2cfb]%mdk
 $S^1 \to X,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={65}
+%mdk-data-line={68}
 \begin{mdInlineSnippet}[d59e5ba91d5fc07df31916ac6ba67b74]%mdk
 $S^n \to X.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[7b15fd4da637b7f997c7098a7b91177a]%mdk
 $\bm{n}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[8ccf5ed00a0a223b1fa6e5485f915e04]%mdk
 $\Delta^n,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
 $n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
 $\Delta^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[73c52abe970b02794ea8257fd5a27613]%mdk
 $\R^m$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[6f8f57715090da2632453988d9a1501b]%mdk
 $m$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[40b85027598d87611b1c8d5d11e46812]%mdk
 $n+1$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdInlineSnippet}[7b15fd4da637b7f997c7098a7b91177a]%mdk
 $\bm{n}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={69}
+%mdk-data-line={72}
 \begin{mdDisplaySnippet}[069e4a92dd4a552620cea2e8d26e44ea]%mdk
-\[%mdk-data-line={71}
+\[%mdk-data-line={74}
 \Delta^n = \qty{(t_0, t_1, \dots, t_n) \in \R^{n+1} :
   t_i \ge 0\ \forall i \text{ and } \sum_{i=0}^n t_i = 1}.
 \]%mdk
 \end{mdDisplaySnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
 $n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[8ccf5ed00a0a223b1fa6e5485f915e04]%mdk
 $\Delta^n,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[865c0c0b4ab0e063e5caa3387c1a8741]%mdk
 $i$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[cee44a4736519848cd908612350c85fe]%mdk
 $(n-1)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[d0529ae6238cc99878079e94b6603d62]%mdk
 $\bm{i}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[18b400a6199f02a9683e149665072868]%mdk
 $\Delta^n.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[18b400a6199f02a9683e149665072868]%mdk
 $\Delta^n.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
 $\Delta^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={74}
+%mdk-data-line={77}
 \begin{mdInlineSnippet}[8e868ac513440a44c48a6615cc6396fa]%mdk
 $\partial \Delta^n.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={76}
+%mdk-data-line={79}
 \begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
 $X,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={76}
+%mdk-data-line={79}
 \begin{mdInlineSnippet}[6f176ddb436398fce815f5303c7a434c]%mdk
 $\bm{\Delta}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={76}
+%mdk-data-line={79}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={76}
+%mdk-data-line={79}
 \begin{mdInlineSnippet}[89bc1cdfd5759e6ee0c66443646a4e33]%mdk
 $\{\sigma_\alpha: \Delta^n \to X\}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={76}
+%mdk-data-line={79}
 \begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
 $n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={76}
+%mdk-data-line={79}
 \begin{mdInlineSnippet}[7b7f9dbfea05c83784f8b85149852f08]%mdk
 $\alpha$\end{mdInlineSnippet}%mdk
-%mdk-data-line={78}
+%mdk-data-line={81}
 \begin{mdInlineSnippet}[65682806072dcf74dadc3c350c0cb157]%mdk
 $\sigma_\alpha$\end{mdInlineSnippet}%mdk
-%mdk-data-line={78}
+%mdk-data-line={81}
 \begin{mdInlineSnippet}[3ae19ef6dd9a4c44396bde50714375a9]%mdk
 $\operatorname{int}(\Delta^n) = \Delta^n \setminus \partial \Delta^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={78}
+%mdk-data-line={81}
 \begin{mdInlineSnippet}[4202025ca33a0244467654fcec511b07]%mdk
 $x \in X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={80}
+%mdk-data-line={83}
 \begin{mdInlineSnippet}[65682806072dcf74dadc3c350c0cb157]%mdk
 $\sigma_\alpha$\end{mdInlineSnippet}%mdk
-%mdk-data-line={80}
+%mdk-data-line={83}
 \begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
 $\Delta^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={80}
+%mdk-data-line={83}
 \begin{mdInlineSnippet}[8eac3a977c07b4551a222a193a0599b0]%mdk
 $\sigma_\beta: \Delta^{n-1} \to X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={82}
+%mdk-data-line={85}
 \begin{mdInlineSnippet}[b3490d104fb2099d4d4b8eab62bc6b69]%mdk
 $A \subseteq X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={82}
+%mdk-data-line={85}
 \begin{mdInlineSnippet}[438321702f1468ba131943e904c0d5d9]%mdk
 $\sigma_\alpha^{-1}(A)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={82}
+%mdk-data-line={85}
 \begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
 $\Delta^n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={82}
+%mdk-data-line={85}
 \begin{mdInlineSnippet}[4732a703569514c5db685bc796a7ebaf]%mdk
 $\alpha.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={84}
+%mdk-data-line={87}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={84}
+%mdk-data-line={87}
 \begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
 $\Delta$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
 $\Delta$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
 $X,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[cb1d7c6a00d98b1e446dcd1eb0201c8f]%mdk
 $\Delta_n(X)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[89bc1cdfd5759e6ee0c66443646a4e33]%mdk
 $\{\sigma_\alpha: \Delta^n \to X\}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
 $n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
 $X.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[d4d3bec903ebcfbe2511ce3d9951a745]%mdk
 $\sigma_\alpha,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdInlineSnippet}[bb09f24b3543d72ac19fbe2a0af10dbe]%mdk
 $\partial_n: \Delta_n(X) \to \Delta_{n-1}(X)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={86}
+%mdk-data-line={89}
 \begin{mdDisplaySnippet}[9b1f52078d92eff7b8ffc516bce1b80f]%mdk
-\[%mdk-data-line={88}
+\[%mdk-data-line={91}
 \partial_n(\sigma_\alpha) = \sum_{i=0}^n (-1)^i
   \eval{\sigma_\alpha}_{[v_0, \dots, \hat{v}_i, \dots, v_n]}
 \]%mdk
 \end{mdDisplaySnippet}%mdk
-%mdk-data-line={91}
+%mdk-data-line={94}
 \begin{mdInlineSnippet}[1df181eaa1bb40a0067c06ead197170d]%mdk
 $v_i$\end{mdInlineSnippet}%mdk
-%mdk-data-line={91}
+%mdk-data-line={94}
 \begin{mdDisplaySnippet}[3c787819aa205237b1ab0247c5e6af9b]%mdk
-\[%mdk-data-line={93}
+\[%mdk-data-line={96}
 \Delta_{n+1}(X) \overset{\partial_{n+1}}{\longrightarrow}
 \Delta_{n}(X) \overset{\partial_{n}}{\longrightarrow}
 \Delta_{n-1}(X) \overset{\partial_{n+1}}{\longrightarrow}
 \cdots \overset{\partial_{1}}{\longrightarrow} \Delta_0(X).
 \]%mdk
 \end{mdDisplaySnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[bfb8158d29b977d384fd028bb66c6290]%mdk
 $A_*$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[11b6688f633f1839d91ea2501f3293c0]%mdk
 $d_n: A_n \to A_{n-1}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[a630ae745659559adf449bf608149147]%mdk
 $d^2 = 0.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[27178de89c53d06da7205800993e6232]%mdk
 $d_n \circ d_{n+1} = 0$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[36cb6ed5283e452800c275dd6934aecc]%mdk
 $n.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[d988dfdf976133534db9c4febc95c50f]%mdk
 $A_*,$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[a39f07818df5450f4892bfb83a9c660d]%mdk
 $H_*(A)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
-\begin{mdInlineSnippet}[83af0cb0d878fe72fb2a84e162a4ddeb]%mdk
-$H_n(A) = \ker d_n / \operatorname{im} d_{n+1}.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
+\begin{mdInlineSnippet}[a19203b46a635600ae68ff48045cd88e]%mdk
+$H_n(A) = \ker d_n / \im d_{n+1}.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[bfb8158d29b977d384fd028bb66c6290]%mdk
 $A_*$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[9cdc8ae413823ea39b066720168cbdbc]%mdk
 $\ker d_n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
-\begin{mdInlineSnippet}[8828f81d05873bfabafca1702ae094c7]%mdk
-$\operatorname{im} d_{n+1}$\end{mdInlineSnippet}%mdk
-%mdk-data-line={99}
+%mdk-data-line={102}
+\begin{mdInlineSnippet}[5ee8a4d278b83d41842506c4d6faf132]%mdk
+$\im d_{n+1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={102}
 \begin{mdInlineSnippet}[a39f07818df5450f4892bfb83a9c660d]%mdk
 $H_*(A)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={101}
+%mdk-data-line={104}
 \begin{mdInlineSnippet}[3ffcd86d6a26df8410ee6347d228fa17]%mdk
 $\partial^2 = 0$\end{mdInlineSnippet}%mdk
-%mdk-data-line={103}
+%mdk-data-line={106}
 \begin{mdInlineSnippet}[c61c1f5a0477f12628e1bcd5842fc71f]%mdk
 $\Delta_*(X)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={103}
+%mdk-data-line={106}
 \begin{mdInlineSnippet}[25a3ea63c43faa90fb8ccfd1d5acce8d]%mdk
 $H_*(\Delta_*(X))$\end{mdInlineSnippet}%mdk
-%mdk-data-line={103}
+%mdk-data-line={106}
 \begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
 $X.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={103}
+%mdk-data-line={106}
 \begin{mdInlineSnippet}[a4b3f540e4d87f6a015ec59ffeac5fca]%mdk
 $H_n^\Delta(X).$\end{mdInlineSnippet}%mdk
-%mdk-data-line={105}
+%mdk-data-line={108}
 \begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
 $X.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={105}
+%mdk-data-line={108}
 \begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
 $\Delta$\end{mdInlineSnippet}%mdk
-%mdk-data-line={105}
+%mdk-data-line={108}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={107}
+%mdk-data-line={110}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={107}
+%mdk-data-line={110}
 \begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
 $n$\end{mdInlineSnippet}%mdk
-%mdk-data-line={107}
+%mdk-data-line={110}
 \begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
 $\Delta$\end{mdInlineSnippet}%mdk
-%mdk-data-line={107}
+%mdk-data-line={110}
 \begin{mdInlineSnippet}[d849b5092a0ead6c610a8d170c4c8a0e]%mdk
 $H_n^\Delta(X)$\end{mdInlineSnippet}%mdk
-%mdk-data-line={109}
+%mdk-data-line={112}
 \begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
 $X$\end{mdInlineSnippet}%mdk
-%mdk-data-line={109}
+%mdk-data-line={112}
 \begin{mdInlineSnippet}[374a07cbbe8900d60d6d8328186f6e91]%mdk
 $H_k^\Delta(X) = 0$\end{mdInlineSnippet}%mdk
-%mdk-data-line={109}
+%mdk-data-line={112}
 \begin{mdInlineSnippet}[e15739a5dc7f246786829f5bf4e6d172]%mdk
 $k > n.$\end{mdInlineSnippet}%mdk
-%mdk-data-line={109}
+%mdk-data-line={120}
+\begin{mdInlineSnippet}[7b15fd4da637b7f997c7098a7b91177a]%mdk
+$\bm{n}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={120}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={120}
+\begin{mdInlineSnippet}[4904fc5971f099c3bc76f5a7e8167ad6]%mdk
+$\sigma: \Delta^n \to X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={120}
+\begin{mdInlineSnippet}[a4b0f057136c40bbaa524f1ee267f816]%mdk
+$C_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={120}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={120}
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={120}
+\begin{mdDisplaySnippet}[0fe76f49f2c0facd7e92c23f6760c6da]%mdk
+\[%mdk-data-line={122}
+\cdots \longrightarrow C_{n+1}(X)
+\overset{\partial_{n+1}}{\longrightarrow} C_n(X)
+\overset{\partial_{n}}{\longrightarrow} C_{n-1}(X)
+\longrightarrow \cdots
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={127}
+\begin{mdDisplaySnippet}[9e73fa299f8da56339c93438437e1461]%mdk
+\[%mdk-data-line={129}
+\partial_n(\sigma) = \sum_{i=0}^n (-1)^i
+\eval{\sigma}_{[v_0, \dots, \hat{v}_i, \dots, v_n]}.
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={132}
+\begin{mdInlineSnippet}[0424ba8cc32c70b3241fb012cd9ca2a3]%mdk
+$\eval{\sigma}_{[v_0, \dots, \hat{v}_i, \dots, v_n]}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={132}
+\begin{mdInlineSnippet}[5617245d319a6a24743a6d8fdb9a861b]%mdk
+$\Delta^{n-1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={132}
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={132}
+\begin{mdInlineSnippet}[5cf621a86a26130c285eecb3ecef4fd7]%mdk
+$\partial^2 = 0.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={134}
+\begin{mdInlineSnippet}[7b15fd4da637b7f997c7098a7b91177a]%mdk
+$\bm{n}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={134}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={134}
+\begin{mdInlineSnippet}[570579ba9ce26340a1b419c5ff113eed]%mdk
+$H_n(X),$\end{mdInlineSnippet}%mdk
+%mdk-data-line={134}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={134}
+\begin{mdDisplaySnippet}[e0f0437a91aede23cb3a87aa673258b4]%mdk
+\[%mdk-data-line={136}
+H_n(X) = \ker \partial_n / \im \partial_{n+1}.
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={139}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={139}
+\begin{mdInlineSnippet}[42a3f25fac759dcb0d34c64580c5b8b3]%mdk
+$X',$\end{mdInlineSnippet}%mdk
+%mdk-data-line={139}
+\begin{mdInlineSnippet}[5a8b3cc01210a71b68dab9a2f6725215]%mdk
+$H_n(X) \equiv H_n(X').$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[1171bd68fef4916e94ad457fdc70c348]%mdk
+$S(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
+$\Delta$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[cee44a4736519848cd908612350c85fe]%mdk
+$(n-1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
+$\Delta$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[1171bd68fef4916e94ad457fdc70c348]%mdk
+$S(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={141}
+\begin{mdInlineSnippet}[78ea892312a5dcfcfd73fa79fd3f9eb9]%mdk
+$H_n^\Delta(S(X)) = H_n(X).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[195246810f9bfc228bca491859062b14]%mdk
+$\xi$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[6d60b6d7e1027e8fd453a581e1dc9c93]%mdk
+$\xi = \sum_i \epsilon_i \sigma_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[c300966b80a90444e09d6c85734df8d6]%mdk
+$\epsilon_i = \pm 1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[65445646e7a531a2185d03b58b4d60e1]%mdk
+$\sigma_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[248b9f7836d8f964019d51ce9b8ea547]%mdk
+$\partial\xi$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[cee44a4736519848cd908612350c85fe]%mdk
+$(n-1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={145}
+\begin{mdInlineSnippet}[b2399e70ecf221893a399bbf617cebd2]%mdk
+$\pm 1.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={147}
+\begin{mdInlineSnippet}[7caf2c67048a9c0f8a5abce388bee3ed]%mdk
+$H_1(X)$\end{mdInlineSnippet}%mdk
+\begin{mdInlineSnippet}[495edfc0da54d7dcdd6c26c5936a2cfb]%mdk
+$S^1 \to X,$\end{mdInlineSnippet}%mdk
+\begin{mdInlineSnippet}[16d6a13697e6af8dcf74bbc529075a6a]%mdk
+$H_2(X)$\end{mdInlineSnippet}%mdk
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={151}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={151}
+\begin{mdInlineSnippet}[811af3eaf5072942b182c9e93f449881]%mdk
+$X = \bigsqcup_\alpha X_\alpha,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={151}
+\begin{mdInlineSnippet}[5422964c0534f8f14433e27e098c7946]%mdk
+$H_n(X) = \bigoplus_\alpha H_n(X_\alpha).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={153}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={153}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={153}
+\begin{mdInlineSnippet}[cabd645662873b433f7f8c5feddca604]%mdk
+$X_\alpha.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={153}
+\begin{mdInlineSnippet}[78438c4a353c1a1cbe1c36410a007313]%mdk
+$C_n(X) = \bigoplus_\alpha C_n(X_\alpha).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={155}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={155}
+\begin{mdInlineSnippet}[eba585a5a8b9a49f70c07dcfaed9b8d7]%mdk
+$H_0(X) = \mathbb{Z}.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={155}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={155}
+\begin{mdInlineSnippet}[8bff2196c2e2709bd987b2ee5a306004]%mdk
+$H_0(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={155}
+\begin{mdInlineSnippet}[8325de039973dcd9d95b97320bfe5627]%mdk
+$\mathbb{Z},$\end{mdInlineSnippet}%mdk
+%mdk-data-line={157}
+\begin{mdInlineSnippet}[001735ffc957891ffa50378c65131de9]%mdk
+$H_0(X) = C_0(X) / \im \partial_1.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={157}
+\begin{mdInlineSnippet}[205282848fee4fd63738e0f3d54e3922]%mdk
+$\epsilon: C_0(X) \to \mathbb{Z}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={157}
+\begin{mdInlineSnippet}[cfcd208495d565ef66e7dff9f98764da]%mdk
+$0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={157}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={157}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={157}
+\begin{mdInlineSnippet}[92e4da341fe8f4cd46192f21b6ff3aa7]%mdk
+$\epsilon$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[9e6d5918836c92dd450eaeb9419c8544]%mdk
+$\ker \epsilon = \im \partial_1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[c9bd1c232f8a99321047524c8a350956]%mdk
+$\im \partial_1 \subseteq \ker \epsilon$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[c1c9bb0f9e313628cbf855b66f004ec5]%mdk
+$\partial_1.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[cfcd208495d565ef66e7dff9f98764da]%mdk
+$0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[82ae1bb331ff1a6015276ae2dca52881]%mdk
+$\sum_i n_i \sigma_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[7eecda1e4e8dc034aaf8c32dc8138405]%mdk
+$\sum_i n_i = 0.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[210df94061859e1b1fe776f0c53e4a4f]%mdk
+$x_0 \in X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[3af17f863ac49c81c13d9507e226e980]%mdk
+$i,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[2caae0145f7808182c3fcc066df41a09]%mdk
+$\tau_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[3e0d691f3a530e6c7e079636f20c111b]%mdk
+$x_0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[51bce2ec33bfdd97b8a777a30b47ce72]%mdk
+$x_i.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[2caae0145f7808182c3fcc066df41a09]%mdk
+$\tau_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[c4ca4238a0b923820dcc509a6f75849b]%mdk
+$1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[65445646e7a531a2185d03b58b4d60e1]%mdk
+$\sigma_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[c512d37245b2d4b860a6f8090c747d5b]%mdk
+$\sigma_0.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[344bd0f9b3aaefe01eeb47cd530182d2]%mdk
+$\partial \tau_i = \sigma_i - \sigma_0,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={159}
+\begin{mdInlineSnippet}[a259bef1d05b8baefd589fc231fa4ca9]%mdk
+$\partial\qty(\sum_i n_i \tau_i) = \sum_i n_i \sigma_i - \sum_i n_i \sigma_0 = \sum_i n_i \sigma_i.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={161}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={161}
+\begin{mdInlineSnippet}[51d982d78a4b9ba6cb9ff7fc77977ff0]%mdk
+$H_n(X) = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={161}
+\begin{mdInlineSnippet}[de41f86e42a74b61a37b3a76b7f5edfb]%mdk
+$n > 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={161}
+\begin{mdInlineSnippet}[a4d924076645a1dd54c433135ab4033c]%mdk
+$H_0(X) = \Z.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[1a58f249932a2915e61842f01ae0feca]%mdk
+$n,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[23a6a367446985b3204af24ebfc3841c]%mdk
+$\Z,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[930ad16209e8bdb4500e74f977f05579]%mdk
+$\partial_n = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[a7c520a2b972cb7aed6352a0b434a556]%mdk
+$\partial_n = \id$\end{mdInlineSnippet}%mdk
+%mdk-data-line={163}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={167}
+\begin{mdInlineSnippet}[265a73054d77b3d99fcab570fd7e6a28]%mdk
+$\tilde{H}_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={167}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={167}
+\begin{mdDisplaySnippet}[94f14b54d4e6b3245210434f7e31868c]%mdk
+\[%mdk-data-line={169}
+\cdots \longrightarrow C_2(X)
+\overset{\partial_2}{\longrightarrow} C_1(X)
+\overset{\partial_1}{\longrightarrow} C_0(X)
+\overset{\epsilon}{\longrightarrow} \Z
+\longrightarrow 0.
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[c015c8e1c0f723e8deb3636475453b91]%mdk
+$\tilde{H}_n(X) = H_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[f31544eb08d1defae48d137df396be67]%mdk
+$n > 0,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[5ff590c22318eb88b25fbf571f18fce2]%mdk
+$H_0(X) \equiv \tilde{H}_0(X) \oplus \Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[1458a437b3c6456f9ebf61d46c9ed13e]%mdk
+$\Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[1458a437b3c6456f9ebf61d46c9ed13e]%mdk
+$\Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[7d6774ade191488268831fe319436d4f]%mdk
+$(-1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={175}
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={177}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={177}
+\begin{mdInlineSnippet}[a89489085c7d72443798f56d8a96286d]%mdk
+$\pi_1(X) \to H_1(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={177}
+\begin{mdInlineSnippet}[7caf2c67048a9c0f8a5abce388bee3ed]%mdk
+$H_1(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={177}
+\begin{mdInlineSnippet}[af893a6186b4f6d8fd5e57c9d12edef8]%mdk
+$\pi_1(X).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={187}
+\begin{mdInlineSnippet}[2385fde6b300ad088e0c2711c9da8a74]%mdk
+$f: X \to Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={187}
+\begin{mdInlineSnippet}[45b902cf2d786590c22172c023684053]%mdk
+$f_*: H_n(X) \to H_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[bb330fc3042dd4f8f1625bf18e21900f]%mdk
+$f_\#: C_n(X) \to C_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[a2ab7d71a0f07f388ff823293c147d21]%mdk
+$\sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[588d7ab353958959b7e6f6d8ed8c6560]%mdk
+$f \circ \sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[b3194771005d40112302e6e90c6e83fb]%mdk
+$Y,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[44eade69fa16e6f586be7d04c61d3abd]%mdk
+$f_\#$\end{mdInlineSnippet}%mdk
+%mdk-data-line={189}
+\begin{mdInlineSnippet}[9ccf784ea952cf215ac21ce915d922f9]%mdk
+$f_\# \partial = \partial f_\#.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={195}
+\begin{mdInlineSnippet}[44eade69fa16e6f586be7d04c61d3abd]%mdk
+$f_\#$\end{mdInlineSnippet}%mdk
+%mdk-data-line={195}
+\begin{mdInlineSnippet}[d65f6001fc2388557bceefe2bca43d36]%mdk
+$\partial\alpha = 0,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={195}
+\begin{mdInlineSnippet}[bfb0ce92b61b7ce4639504a3ae6a6cc7]%mdk
+$\partial f_\# \alpha = f_\# \partial \alpha = f_\# 0 = 0.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={195}
+\begin{mdInlineSnippet}[44eade69fa16e6f586be7d04c61d3abd]%mdk
+$f_\#$\end{mdInlineSnippet}%mdk
+%mdk-data-line={195}
+\begin{mdInlineSnippet}[19dacf6cb841d0e3150bd5a1f1c10a7e]%mdk
+$f_\#\partial\beta = \partial f_\# \beta.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={199}
+\begin{mdInlineSnippet}[020bcebe7b1f2dcc86de7a42e674c99c]%mdk
+$(f \circ g)_* = f_* \circ g_*$\end{mdInlineSnippet}%mdk
+%mdk-data-line={200}
+\begin{mdInlineSnippet}[b656b00f1513c61012d1e697010ebfa1]%mdk
+$(\id_X)_* = \id_{H_n(X)}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={204}
+\begin{mdInlineSnippet}[bfc5ec2ab19c4beeb1bafa721e3da9dc]%mdk
+$f,g: X \to Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={206}
+\begin{mdInlineSnippet}[2385fde6b300ad088e0c2711c9da8a74]%mdk
+$f: X \to Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={206}
+\begin{mdInlineSnippet}[45b902cf2d786590c22172c023684053]%mdk
+$f_*: H_n(X) \to H_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={206}
+\begin{mdInlineSnippet}[36cb6ed5283e452800c275dd6934aecc]%mdk
+$n.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={208}
+\begin{mdInlineSnippet}[1341e2772acf002a68e1fb9de246aa3d]%mdk
+$\Delta^n \times I$\end{mdInlineSnippet}%mdk
+%mdk-data-line={208}
+\begin{mdInlineSnippet}[06fc1a78b9aaaee997b0adbfa5992f6c]%mdk
+$(n+1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={208}
+\begin{mdInlineSnippet}[1341e2772acf002a68e1fb9de246aa3d]%mdk
+$\Delta^n \times I$\end{mdInlineSnippet}%mdk
+%mdk-data-line={208}
+\begin{mdInlineSnippet}[3aca88695196ca30322a8e5177704dcc]%mdk
+$[v_0, \dots, v_n]$\end{mdInlineSnippet}%mdk
+%mdk-data-line={208}
+\begin{mdInlineSnippet}[8db4d2c437d6a616ae0c835ee77bbad4]%mdk
+$[w_0, \dots, w_n]$\end{mdInlineSnippet}%mdk
+%mdk-data-line={208}
+\begin{mdDisplaySnippet}[5bf58dae17954a327bdc21a1d0d711cd]%mdk
+\[%mdk-data-line={210}
+[v_0, \dots, v_i, w_i, \dots, w_n]
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={212}
+\begin{mdInlineSnippet}[06fc1a78b9aaaee997b0adbfa5992f6c]%mdk
+$(n+1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={212}
+\begin{mdInlineSnippet}[865c0c0b4ab0e063e5caa3387c1a8741]%mdk
+$i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={212}
+\begin{mdInlineSnippet}[1341e2772acf002a68e1fb9de246aa3d]%mdk
+$\Delta^n \times I$\end{mdInlineSnippet}%mdk
+%mdk-data-line={212}
+\begin{mdInlineSnippet}[06fc1a78b9aaaee997b0adbfa5992f6c]%mdk
+$(n+1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={214}
+\begin{mdInlineSnippet}[b6d9f9c512822dc16c3713968e350e50]%mdk
+$F: X \times I \to Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={214}
+\begin{mdInlineSnippet}[a08d932e48f342e9aa8d14af43dc0019]%mdk
+$f = F_0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={214}
+\begin{mdInlineSnippet}[b513de97680c5dd2552e500cc42f5ddf]%mdk
+$g = F_1,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={214}
+\begin{mdInlineSnippet}[21ca47404041bee8e54d6b6c1cdb2b3a]%mdk
+$P: C_n(X) \to C_{n+1}(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={214}
+\begin{mdDisplaySnippet}[51abad51c57ee8e8f7a60e8a51f4a15c]%mdk
+\[%mdk-data-line={216}
+P(\sigma) = \sum_{i=0}^n (-1)^i \eval{\qty[F \circ (\sigma \times \id_I)]}_{[v_0, \dots, v_i, w_i, \dots, w_n]}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={219}
+\begin{mdInlineSnippet}[b28bbf03d77c4d263f348ddcd3e77f40]%mdk
+$\partial P = g_\# - f_\# - P\partial.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={219}
+\begin{mdDisplaySnippet}[e83f40789618261f22328e786f8836c4]%mdk
+\[%mdk-data-line={221}
+\begin{aligned}
+\partial P(\sigma) &= \sum_{j \le i} (-1)^i (-1)^j
+\eval{[F \circ (\sigma \times \id_I)]}_{
+  [v_0, \dots, \hat{v}_j, \dots, v_i, w_i, \dots, w_n]} \\
+&\phantom{{}={}} + \sum_{j \ge i} (-1)^i (-1)^{j+1}
+\eval{[F \circ (\sigma \times \id_I)]}_{
+  [v_0, \dots, v_i, w_i, \dots, \hat{w}_j, \dots, w_n]}
+\end{aligned}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={230}
+\begin{mdInlineSnippet}[627d981a4b082e7396585b995ef51925]%mdk
+$i=j$\end{mdInlineSnippet}%mdk
+%mdk-data-line={230}
+\begin{mdInlineSnippet}[98f6398bf6ca3c5adbea1f24c1914fc5]%mdk
+$i=j=0,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={230}
+\begin{mdDisplaySnippet}[f33085e30149932b35a2ecc13507839b]%mdk
+\[%mdk-data-line={232}
+\eval{[F \circ (\sigma \times \id_I)]}_{
+  [\hat{v}_0, w_0, \dots, w_n]} = g_\#(\sigma),
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={235}
+\begin{mdInlineSnippet}[9a96383a19c760dee139fc83c97f0e8b]%mdk
+$i=j=n,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={235}
+\begin{mdDisplaySnippet}[1b62643004f74569c7e0f35ff02bb564]%mdk
+\[%mdk-data-line={237}
+-\eval{[F \circ (\sigma \times \id_I)]}_{
+  [v_0, \dots, v_n, \hat{w}_n]} = -f_\#(\sigma).
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={240}
+\begin{mdInlineSnippet}[5e846e6a46e86cb904ce31e585fe322c]%mdk
+$P(\partial\sigma).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={242}
+\begin{mdInlineSnippet}[ce5b3597912972020ca35f5f69eda940]%mdk
+$\alpha \in C_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={242}
+\begin{mdDisplaySnippet}[9335f5637e25114ead124f6e3d5081f0]%mdk
+\[%mdk-data-line={244}
+g_\#(\alpha) - f_\#(\alpha) = \partial P(\alpha).
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={246}
+\begin{mdInlineSnippet}[8c3d7d44e135d4cdcd21043df9f01fa7]%mdk
+$g_\#(\alpha)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={246}
+\begin{mdInlineSnippet}[c7f54189bb8f8cb62b7544384c4e40cd]%mdk
+$f_\#(\alpha)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={248}
+\begin{mdInlineSnippet}[fde56d53b90323ab2a11de5a3573b235]%mdk
+$\partial P + P \partial = g_\# - f_\#$\end{mdInlineSnippet}%mdk
+%mdk-data-line={248}
+\begin{mdInlineSnippet}[44c29edb103a2872f519ad0c9a0fdaaa]%mdk
+$P$\end{mdInlineSnippet}%mdk
+%mdk-data-line={248}
+\begin{mdInlineSnippet}[260c1e08450c781a1148e7906f384644]%mdk
+$g_\#$\end{mdInlineSnippet}%mdk
+%mdk-data-line={248}
+\begin{mdInlineSnippet}[c0a46e48605b3a5b53c2dc0023f30088]%mdk
+$f_\#.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={254}
+\begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
+$A$\end{mdInlineSnippet}%mdk
+%mdk-data-line={254}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={254}
+\begin{mdInlineSnippet}[d6edffcd440d56b568db91babfb3388a]%mdk
+$H_*(X),$\end{mdInlineSnippet}%mdk
+%mdk-data-line={254}
+\begin{mdInlineSnippet}[b4ad0ab48c4768598797a650b4aa8593]%mdk
+$H_*(A),$\end{mdInlineSnippet}%mdk
+%mdk-data-line={254}
+\begin{mdInlineSnippet}[b2fdf17f80ff3dfb83a33445873291e3]%mdk
+$H_*(X/A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={254}
+\begin{mdDisplaySnippet}[6aa407a33fe855f5432fd5cc17734800]%mdk
+\[%mdk-data-line={256}
+\cdots \longrightarrow A_{n+1}
+\overset{\alpha_{n+1}}{\longrightarrow} A_n
+\overset{\alpha_{n}}{\longrightarrow} A_{n-1}
+\longrightarrow \cdots
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={261}
+\begin{mdInlineSnippet}[28cbf9ed836d1fc2711ab9f71fd7709b]%mdk
+$\ker\alpha_n = \im\alpha_{n+1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={261}
+\begin{mdInlineSnippet}[36cb6ed5283e452800c275dd6934aecc]%mdk
+$n.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={263}
+\begin{mdInlineSnippet}[553dee3ae26e3aba72c22396e3eb72ab]%mdk
+$0 \longrightarrow A \overset{\alpha}{\longrightarrow} B$\end{mdInlineSnippet}%mdk
+%mdk-data-line={263}
+\begin{mdInlineSnippet}[7b7f9dbfea05c83784f8b85149852f08]%mdk
+$\alpha$\end{mdInlineSnippet}%mdk
+%mdk-data-line={264}
+\begin{mdInlineSnippet}[cbd9c5d52529107e89d1a87fe9c8d48f]%mdk
+$A \overset{\alpha}{\longrightarrow} B \longrightarrow 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={264}
+\begin{mdInlineSnippet}[7b7f9dbfea05c83784f8b85149852f08]%mdk
+$\alpha$\end{mdInlineSnippet}%mdk
+%mdk-data-line={265}
+\begin{mdInlineSnippet}[a93e9015ea023f7e48610706754e05b4]%mdk
+$0 \longrightarrow A \overset{\alpha}{\longrightarrow} B \longrightarrow 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={265}
+\begin{mdInlineSnippet}[7b7f9dbfea05c83784f8b85149852f08]%mdk
+$\alpha$\end{mdInlineSnippet}%mdk
+%mdk-data-line={266}
+\begin{mdInlineSnippet}[d554924e0393e32311fe97685b7e2746]%mdk
+$0 \longrightarrow A \overset{\alpha}{\longrightarrow} B \overset{\beta}{\longrightarrow} C \longrightarrow 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={266}
+\begin{mdInlineSnippet}[7b7f9dbfea05c83784f8b85149852f08]%mdk
+$\alpha$\end{mdInlineSnippet}%mdk
+%mdk-data-line={266}
+\begin{mdInlineSnippet}[b0603860fcffe94e5b8eec59ed813421]%mdk
+$\beta$\end{mdInlineSnippet}%mdk
+%mdk-data-line={266}
+\begin{mdInlineSnippet}[332a001ded6382ebf64562b71fea424d]%mdk
+$\ker\beta = \im\alpha,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={266}
+\begin{mdInlineSnippet}[db8563b8c3ad373551ab6c2d931b990a]%mdk
+$C = B/\im\alpha$\end{mdInlineSnippet}%mdk
+%mdk-data-line={268}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={268}
+\begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
+$A$\end{mdInlineSnippet}%mdk
+%mdk-data-line={268}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={268}
+\begin{mdDisplaySnippet}[093c9a14e37df367f2e5f6a9ca9fe001]%mdk
+\[%mdk-data-line={270}
+\cdots \to \widetilde{H}_n(A)
+\to \widetilde{H}_n(X)
+\to \widetilde{H}_n(X/A)
+\to \widetilde{H}_{n-1}(A)
+\to \widetilde{H}_{n-1}(X)
+\to \cdots
+\to \widetilde{H}_0(X/A)
+\to 0.
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={279}
+\begin{mdInlineSnippet}[0b4b48f8900a597aab9e4ed256a65bd0]%mdk
+$\widetilde{H}_n(A) \to \widetilde{H}_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={279}
+\begin{mdInlineSnippet}[865dc7a17c56ac19589c9563f4f5ce73]%mdk
+$\widetilde{H}_n(X) \to \widetilde{H}_n(X/A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={279}
+\begin{mdInlineSnippet}[ae0c7480709f9b7fd065db217023c90f]%mdk
+$\widetilde{H}_n(X/A) \to \widetilde{H}_{n-1}(A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={281}
+\begin{mdInlineSnippet}[88769d6fe468bd40568a9d4a1082131d]%mdk
+$(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={283}
+\begin{mdInlineSnippet}[4e2a3ce611454c8386094776861503ff]%mdk
+$S^n.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={293}
+\begin{mdInlineSnippet}[84f5bfc192c0c627e1ae2e1b24bd4f01]%mdk
+$Z \subseteq A \subseteq X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={293}
+\begin{mdInlineSnippet}[21c2e59531c8710156d34a3c30ac81d5]%mdk
+$Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={293}
+\begin{mdInlineSnippet}[4675773653557201b63811ae89973c60]%mdk
+$A,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={293}
+\begin{mdInlineSnippet}[4ec20a9b4ddb3ba7f0752dbd43c93566]%mdk
+$(X-Z, A-Z) \hookrightarrow (X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={293}
+\begin{mdInlineSnippet}[ed0e21e94ece0e1b84c7fc6de9119b19]%mdk
+$H_n(X-Z, A-Z) \cong H_n(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={293}
+\begin{mdInlineSnippet}[36cb6ed5283e452800c275dd6934aecc]%mdk
+$n.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[e3f6efa21df0f1578e53cdc90deb89c9]%mdk
+$A,B \subseteq X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[412bd1def2f1b61da9169d88e6c8b9e9]%mdk
+$X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[f32565591c18ffe80aa9fab243f5a566]%mdk
+$(B, A \cap B) \hookrightarrow (X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[21277b743200b59d2410cb5671dc31ae]%mdk
+$H_n(B, A \cap B) \cong H_n(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[36cb6ed5283e452800c275dd6934aecc]%mdk
+$n.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[7b8f2d143687d4489eef1c93de6c966c]%mdk
+$B = X - Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={295}
+\begin{mdInlineSnippet}[56508e10b5c98b0c4f61026d74672000]%mdk
+$Z = X - B.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={297}
+\begin{mdInlineSnippet}[edc5fb26bb39ae8bd95fe26fc5c07299]%mdk
+$H_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={297}
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[87345c4ab862140e56e3f657c1300c82]%mdk
+$\mathcal{U} = \{U_j\}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[3d2f9e254afe4be361f104d3748e8570]%mdk
+$X.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[a4b0f057136c40bbaa524f1ee267f816]%mdk
+$C_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[0423b3c17f8466798c725f08e8cc4074]%mdk
+$\sum n_i \sigma_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[65445646e7a531a2185d03b58b4d60e1]%mdk
+$\sigma_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[5cb805dc8086d3de35657fd7e0e3e962]%mdk
+$U_j \in \mathcal{U}.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[8214565ca05dd1a8eabbce7ac874e167]%mdk
+$\partial_n: C_n(X) \to C_{n-1}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[bf5e05b84825ff6aed944c12bf276793]%mdk
+$C_{n-1}^\mathcal{U}(X),$\end{mdInlineSnippet}%mdk
+%mdk-data-line={299}
+\begin{mdInlineSnippet}[7f5cee67244b36317febfccedb0be45c]%mdk
+$H_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={301}
+\begin{mdInlineSnippet}[7699b18c801edfa0d3c740c23c28ed6d]%mdk
+$i: C_n^\mathcal{U}(X) \to C_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={301}
+\begin{mdInlineSnippet}[55d6bfe3d4a37b723d1598959b2c3b98]%mdk
+$p: C_n(X) \to C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={301}
+\begin{mdInlineSnippet}[957b527bcfbad2e80f58d20683931435]%mdk
+$ip$\end{mdInlineSnippet}%mdk
+%mdk-data-line={301}
+\begin{mdInlineSnippet}[72ab8af56bddab33b269c5964b26620a]%mdk
+$pi$\end{mdInlineSnippet}%mdk
+%mdk-data-line={301}
+\begin{mdInlineSnippet}[9deb1340ace9453e7c3b21bd29fefb01]%mdk
+$H_n^\mathcal{U}(X) \cong H_n(X).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[33d0070d7d7098fbc8df767f0b15c96a]%mdk
+$Y \subseteq \R^m$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[f88d6e8fb0d43e67829847c05d29df9f]%mdk
+$LC_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[7ab9dac0ad027513b3fac991a31b4731]%mdk
+$\Delta^n \to Y.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[c9ce6ec358e7dc9b300fd6ce0b76a9a6]%mdk
+$S: LC_n(Y) \to LC_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[35239d52c2a3a397bded0da8c363b7e4]%mdk
+$\partial S = S \partial,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[5dbc98dcc983a70728bd082d1a47546e]%mdk
+$S$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[57e8d00c81a5e01fc6dc74de2ed2a018]%mdk
+$T: LC_n(Y) \to LC_{n+1}(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={307}
+\begin{mdInlineSnippet}[e283fb9c7b72c180741abf668b835c8f]%mdk
+$\partial T + T \partial = \id - S.$\end{mdInlineSnippet}%mdk
+%mdk-data-line={309}
+\begin{mdInlineSnippet}[8dc7bef21710b2828343aebe925983ed]%mdk
+$\sigma \in C_n(X),$\end{mdInlineSnippet}%mdk
+%mdk-data-line={309}
+\begin{mdInlineSnippet}[7bb1afcaacdba37c469bc950677051e3]%mdk
+$S(\sigma) = \sigma_\# S(\Delta^n),$\end{mdInlineSnippet}%mdk
+%mdk-data-line={309}
+\begin{mdInlineSnippet}[6601cc12fe3b0ff4341a8748ef6fdcc3]%mdk
+$\sigma: \Delta^n \to X,$\end{mdInlineSnippet}%mdk
+%mdk-data-line={309}
+\begin{mdInlineSnippet}[d744785af39f8c0665691cef99b42bc7]%mdk
+$\sigma_\#: C_n(\Delta^n) \to C_n(X).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={309}
+\begin{mdInlineSnippet}[e65abafdab37ab18e9660b92910f9c4c]%mdk
+$T: C_n(X) \to C_{n+1}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={309}
+\begin{mdInlineSnippet}[d67a35c7236046bbd08a1ae069cb0718]%mdk
+$T(\sigma) = \sigma_\# T(\Delta^n).$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[a68b706e4a5b28180bfba1df82a8710b]%mdk
+$\Delta^0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[a68b706e4a5b28180bfba1df82a8710b]%mdk
+$\Delta^0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[de6ae510db4543398a7c013370558398]%mdk
+$\Delta^1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[5617245d319a6a24743a6d8fdb9a861b]%mdk
+$\Delta^{n-1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={319}
+\begin{mdInlineSnippet}[00178f10a40e91f76517d52061ef2a42]%mdk
+$(n+1)!$\end{mdInlineSnippet}%mdk
+%mdk-data-line={323}
+\begin{mdInlineSnippet}[3aca88695196ca30322a8e5177704dcc]%mdk
+$[v_0, \dots, v_n]$\end{mdInlineSnippet}%mdk
+%mdk-data-line={323}
+\begin{mdInlineSnippet}[ef00f9fcebe0f6012699dd160f2d9f49]%mdk
+$\frac{n}{n-1} \operatorname{diam}([v_0, \dots, v_n])$\end{mdInlineSnippet}%mdk
+%mdk-data-line={327}
+\begin{mdInlineSnippet}[57cec4137b614c87cb4e24a3d003a3e0]%mdk
+$Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={327}
+\begin{mdInlineSnippet}[f88d6e8fb0d43e67829847c05d29df9f]%mdk
+$LC_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={327}
+\begin{mdInlineSnippet}[78f60b2b7159898a4508a64a543798d0]%mdk
+$\Delta^n \to Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={329}
+\begin{mdDisplaySnippet}[132db1fcab4f2238e70295890bfef2a1]%mdk
+\[%mdk-data-line={331}
+\cdots \longrightarrow LC_n(Y)
+\longrightarrow LC_{n-1}(Y)
+\longrightarrow \cdots
+\longrightarrow LC_{1}(Y)
+\longrightarrow LC_{0}(Y)
+\longrightarrow LC_{-1}(Y)
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={338}
+\begin{mdInlineSnippet}[d6ef7dc2e77ffd718259b55cbf1740dc]%mdk
+$LC_{-1}(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={338}
+\begin{mdInlineSnippet}[fd012be125e1b23b6f2f07dad1d59753]%mdk
+$[\varnothing]$\end{mdInlineSnippet}%mdk
+%mdk-data-line={338}
+\begin{mdInlineSnippet}[57cec4137b614c87cb4e24a3d003a3e0]%mdk
+$Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={340}
+\begin{mdInlineSnippet}[59dc30afd8936ee6f368ab526269a31a]%mdk
+$b \in Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={340}
+\begin{mdInlineSnippet}[07a77d5fe67690a5ab4a41f56cdcc0db]%mdk
+$b: LC_n(Y) \to LC_{n+1}(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={340}
+\begin{mdDisplaySnippet}[0f7a75a86de249eb8a3c2a01774ff521]%mdk
+\[%mdk-data-line={342}
+b([w_0, \dots, w_n]) = [b, w_0, \dots, w_n]
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={344}
+\begin{mdInlineSnippet}[f88d6e8fb0d43e67829847c05d29df9f]%mdk
+$LC_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={344}
+\begin{mdInlineSnippet}[5a4e657118950703265c8ab763990e58]%mdk
+$C_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={344}
+\begin{mdInlineSnippet}[8db4d2c437d6a616ae0c835ee77bbad4]%mdk
+$[w_0, \dots, w_n]$\end{mdInlineSnippet}%mdk
+%mdk-data-line={344}
+\begin{mdInlineSnippet}[92eb5ffee6ae2fec3ad71c777531578f]%mdk
+$b$\end{mdInlineSnippet}%mdk
+%mdk-data-line={346}
+\begin{mdDisplaySnippet}[0959f0067bc30168c314103418a9f4de]%mdk
+\[%mdk-data-line={348}
+\partial b [w_0, \dots, w_n] = [w_0, \dots, w_n] - b \partial [w_0, \dots, w_n].
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={350}
+\begin{mdInlineSnippet}[92eb5ffee6ae2fec3ad71c777531578f]%mdk
+$b$\end{mdInlineSnippet}%mdk
+%mdk-data-line={350}
+\begin{mdInlineSnippet}[38249f538b50785967877e7c5400afb8]%mdk
+$\id$\end{mdInlineSnippet}%mdk
+%mdk-data-line={350}
+\begin{mdInlineSnippet}[324e3316c85b677cd99d0fa460986887]%mdk
+$\partial b + b \partial = \id - 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={352}
+\begin{mdInlineSnippet}[c9ce6ec358e7dc9b300fd6ce0b76a9a6]%mdk
+$S: LC_n(Y) \to LC_n(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={352}
+\begin{mdInlineSnippet}[aa25833725a95dd2ad6fe44c5c24a2a9]%mdk
+$\lambda: \Delta^n \to Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={352}
+\begin{mdInlineSnippet}[d6542dacaf0120b506170e660cedcc7e]%mdk
+$b_\lambda$\end{mdInlineSnippet}%mdk
+%mdk-data-line={352}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={352}
+\begin{mdInlineSnippet}[57cec4137b614c87cb4e24a3d003a3e0]%mdk
+$Y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={352}
+\begin{mdDisplaySnippet}[c4223b63070774c8c519f4f8ef80fde6]%mdk
+\[%mdk-data-line={354}
+S(\lambda) = b_\lambda S(\partial \lambda).
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={356}
+\begin{mdInlineSnippet}[ca4f7148e09712d6ec2f25893d7c1ebf]%mdk
+$S[\varnothing] = [\varnothing]$\end{mdInlineSnippet}%mdk
+%mdk-data-line={356}
+\begin{mdInlineSnippet}[bc59d209a5b3ab859258dfcd9d7ae7b2]%mdk
+$S = \id$\end{mdInlineSnippet}%mdk
+%mdk-data-line={356}
+\begin{mdInlineSnippet}[c10b30af2ca82b997c02b71a76e1d330]%mdk
+$n=-1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={356}
+\begin{mdInlineSnippet}[0e1176caf07d2ed21c19fc899be7e7df]%mdk
+$n=0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={358}
+\begin{mdDisplaySnippet}[13d376b82c163da5de15b99bce97e57b]%mdk
+\[%mdk-data-line={360}
+\begin{aligned}
+\partial S \lambda &= \partial b_\lambda (S \partial \lambda) \\
+&= S \partial \lambda - b_\lambda \partial (S \partial \lambda) \\
+&= S \partial \lambda - b_\lambda S \partial \partial \lambda.
+\end{aligned}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={366}
+\begin{mdInlineSnippet}[0d09d5db3928f15e95c273466db302af]%mdk
+$\partial S = S \partial$\end{mdInlineSnippet}%mdk
+%mdk-data-line={366}
+\begin{mdInlineSnippet}[57e8d00c81a5e01fc6dc74de2ed2a018]%mdk
+$T: LC_n(Y) \to LC_{n+1}(Y)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={366}
+\begin{mdInlineSnippet}[5dbc98dcc983a70728bd082d1a47546e]%mdk
+$S$\end{mdInlineSnippet}%mdk
+%mdk-data-line={366}
+\begin{mdInlineSnippet}[38249f538b50785967877e7c5400afb8]%mdk
+$\id$\end{mdInlineSnippet}%mdk
+%mdk-data-line={366}
+\begin{mdInlineSnippet}[a166348ec58327d3a28160c617029872]%mdk
+$T = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={366}
+\begin{mdInlineSnippet}[c10b30af2ca82b997c02b71a76e1d330]%mdk
+$n=-1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={366}
+\begin{mdDisplaySnippet}[f02de521a4fb13db1d6e03de43febb41]%mdk
+\[%mdk-data-line={368}
+T\lambda = b_\lambda(\lambda - T\partial\lambda)
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={370}
+\begin{mdInlineSnippet}[4b152567a12fdbcd2200b4dc72f4a7ca]%mdk
+$n \ge 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={370}
+\begin{mdInlineSnippet}[11216912378bdf2913faa0e406ea21a2]%mdk
+$\partial T + T \partial = \id - S$\end{mdInlineSnippet}%mdk
+%mdk-data-line={370}
+\begin{mdDisplaySnippet}[1ce9efe0a0e7a0c3dd3695714c126293]%mdk
+\[%mdk-data-line={372}
+\begin{aligned}
+\partial T \lambda &= \partial b_\lambda (\lambda - T \partial \lambda) \\
+&= \lambda - T\partial\lambda - b_\lambda \partial(\lambda - T\partial\lambda) \\
+&= \lambda - T\partial\lambda - b_\lambda (S\partial\lambda + T\partial\partial\lambda) \\
+&= \lambda - T\partial\lambda - S\lambda 
+\end{aligned}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[c121fbcf6c37a3019dabc3c5a572c5a5]%mdk
+$\Delta^n \to X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdInlineSnippet}[77665de0e95365fa1dc92a8d5bb44a10]%mdk
+$S: C_n(X) \to C_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={383}
+\begin{mdDisplaySnippet}[10c3483e0610628d75c5f185275fdac5]%mdk
+\[%mdk-data-line={385}
+S\sigma = \sigma_\# S(\Delta^n).
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[77e336c4e05ebdffe7290cad0969b2ef]%mdk
+$S(\id_{\Delta^n})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[76e07b0019dc2308633800eb4ec2d8fe]%mdk
+$S(\Delta^n)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[e4840de202160d1eb0e86093450d0124]%mdk
+$S\sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[a2ab7d71a0f07f388ff823293c147d21]%mdk
+$\sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdInlineSnippet}[5dbc98dcc983a70728bd082d1a47546e]%mdk
+$S$\end{mdInlineSnippet}%mdk
+%mdk-data-line={387}
+\begin{mdDisplaySnippet}[0bed742c6465d39dfc9e6427e519bbbc]%mdk
+\[%mdk-data-line={389}
+\begin{aligned}
+\partial S \sigma &= \partial \sigma_\# S \Delta^n \\
+&= \sigma_\# \partial S \Delta^n \\
+&= \sigma_\# S \partial \Delta^n \\
+&= \sigma_\# S \sum_{i=0}^n (-1)^i \Delta_i^n \\
+&= \sum_{i=0}^n (-1)^i \sigma_\# S \Delta_i^n \\
+&= \sum_{i=0}^n (-1)^i S\qty(\eval{\sigma}_{\Delta_i^n}) \\
+&= S\qty(\sum_{i=0}^n (-1)^i \eval{\sigma}_{\Delta_i^n}) \\
+&= S \partial \sigma
+\end{aligned}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={400}
+\begin{mdInlineSnippet}[27552cc6b650caf924e47b257e4a37e4]%mdk
+$\Delta_i^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={400}
+\begin{mdInlineSnippet}[865c0c0b4ab0e063e5caa3387c1a8741]%mdk
+$i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={400}
+\begin{mdInlineSnippet}[26ab61fa8024f78da62a405a1e574d8f]%mdk
+$\Delta^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={400}
+\begin{mdInlineSnippet}[b9ece18c950afbfa6b0fdbfa4ff731d3]%mdk
+$T$\end{mdInlineSnippet}%mdk
+%mdk-data-line={400}
+\begin{mdInlineSnippet}[e65abafdab37ab18e9660b92910f9c4c]%mdk
+$T: C_n(X) \to C_{n+1}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={400}
+\begin{mdDisplaySnippet}[68ba3d7b0da661dc7f44821d29930321]%mdk
+\[%mdk-data-line={402}
+T\sigma = \sigma_\# T(\Delta^n).
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={404}
+\begin{mdInlineSnippet}[11216912378bdf2913faa0e406ea21a2]%mdk
+$\partial T + T \partial = \id - S$\end{mdInlineSnippet}%mdk
+%mdk-data-line={408}
+\begin{mdDisplaySnippet}[70b2e4d53988d3e6e5dfe2ac377030a4]%mdk
+\[%mdk-data-line={410}
+D_m = \sum_{i=0}^{m-1} TS^i
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={412}
+\begin{mdInlineSnippet}[acb3e55fe00e6af9a6d16095f841b683]%mdk
+$S^i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={412}
+\begin{mdInlineSnippet}[865c0c0b4ab0e063e5caa3387c1a8741]%mdk
+$i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={412}
+\begin{mdInlineSnippet}[5dbc98dcc983a70728bd082d1a47546e]%mdk
+$S$\end{mdInlineSnippet}%mdk
+%mdk-data-line={412}
+\begin{mdInlineSnippet}[9ef394e713e227faae2af8c607f59aff]%mdk
+$D_m$\end{mdInlineSnippet}%mdk
+%mdk-data-line={412}
+\begin{mdInlineSnippet}[38249f538b50785967877e7c5400afb8]%mdk
+$\id$\end{mdInlineSnippet}%mdk
+%mdk-data-line={412}
+\begin{mdInlineSnippet}[78d7bfd21d4f391ab445da23b6a3ff0c]%mdk
+$S^m$\end{mdInlineSnippet}%mdk
+%mdk-data-line={412}
+\begin{mdDisplaySnippet}[1608843e9b5da6b42a9b087b89552f70]%mdk
+\[%mdk-data-line={414}
+\begin{aligned}
+\partial D_m + D_m \partial &= \sum_{i=0}^{m-1} \partial TS^i + TS^i \partial \\
+&= \sum_{i=0}^{m-1} \partial TS^i + T\partial S^i \\
+&= \sum_{i=0}^{m-1} (\partial T + T\partial) S^i \\
+&= \sum_{i=0}^{m-1} (\id - S) S^i \\
+&= \sum_{i=0}^{m-1} S^i - S^{i+1} \\
+&= S^0 - S^m = \id - S^m.
+\end{aligned}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[8905be2392a721e82fcff840d0380fee]%mdk
+$\sigma: \Delta^n \to X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[6f8f57715090da2632453988d9a1501b]%mdk
+$m$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[6039c168b84e99e5abcfe539f931fa96]%mdk
+$S^m(\sigma)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[f0f971a02c8be6e924896886f0d33425]%mdk
+$S^m(\Delta^n)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[f7170ae16468a99e1650c4b67c087e5d]%mdk
+$\sigma^{-1}(\mathcal{U})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[6f8f57715090da2632453988d9a1501b]%mdk
+$m$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[262d18dc91428fc2e5d8184100839045]%mdk
+$m(\sigma)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={424}
+\begin{mdInlineSnippet}[6f8f57715090da2632453988d9a1501b]%mdk
+$m$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[3877e976fb1fac39dd8372c12c4a2512]%mdk
+$D: C_n(X) \to C_{n+1}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[aff51e18c983e8642d2a809c01fa5332]%mdk
+$D\sigma = D_{m(\sigma)}\sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[895816816fed5d022ae5e83fc27269f2]%mdk
+$\rho: C_n(X) \to C_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[5a9f511441791cdedc4bb3d79efa115f]%mdk
+$\partial D + D \partial = \id - \rho$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[4a3bf155df190ad15e6fa998635fa688]%mdk
+$\rho = \id - \partial D - D \partial$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[cf65cf50904a62ecca8a7e7294eda8d7]%mdk
+$\partial \rho = \rho \partial$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[87679b49dfdb1a04272b3c20d8732f6a]%mdk
+$\rho\sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={426}
+\begin{mdDisplaySnippet}[c2c850a9af4b7dd4bd88435c93368ca2]%mdk
+\[%mdk-data-line={428}
+\begin{aligned}
+\rho(\sigma) &= \sigma - \partial D \sigma - D \partial \sigma \\
+&= \sigma - \partial D_{m(\sigma)} \sigma - D \partial \sigma \\
+&= S^{m(\sigma)} \sigma  + D_{m(\sigma)} \partial \sigma - D \partial \sigma
+\end{aligned}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[f6cfbac76f1213200e20b2740ca9e172]%mdk
+$S^{m(\sigma)} \sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[42cb7a1840727ee59a35604a581f88ed]%mdk
+$D_{m(\sigma)} \partial \sigma - D \partial \sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[b4398a4393c1f7aa762bfad075bc5074]%mdk
+$D_{m(\sigma)} (\sigma_j) - D_{m(\sigma_j)} (\sigma_j)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[94006b2a5a7808d87aeae326cdebe770]%mdk
+$\sigma_j$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[363b122c528f54df4a0446b6bab05515]%mdk
+$j$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[a2ab7d71a0f07f388ff823293c147d21]%mdk
+$\sigma$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[5e4d2193f27963b5f6f9599bc4676aa5]%mdk
+$m(\sigma_j) \le m(\sigma)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={434}
+\begin{mdInlineSnippet}[928d40b749cea90c3d57b209f1c0dffa]%mdk
+$C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={436}
+\begin{mdInlineSnippet}[d2606be4e0cd2c9a6179c8f2e3547a85]%mdk
+$\rho$\end{mdInlineSnippet}%mdk
+%mdk-data-line={436}
+\begin{mdInlineSnippet}[3714d0151ff63d8122bea863fb9950b8]%mdk
+$\rho: C_n(X) \to C_n^\mathcal{U}(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={436}
+\begin{mdInlineSnippet}[555bac372a117e13b7ce05d998e6aab0]%mdk
+$\partial D + D \partial = \id - i\rho$\end{mdInlineSnippet}%mdk
+%mdk-data-line={436}
+\begin{mdInlineSnippet}[3ed0cb1a50f18ace2e3256d42535d3ff]%mdk
+$\rho i = \id$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdInlineSnippet}[f0544c45761b7c131d0a91478e8dd59d]%mdk
+$\mathcal{U} = \{A, B\}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdInlineSnippet}[3ae988101fbe917d736d5724f68353d0]%mdk
+$C_n^\mathcal{U}(X) = C_n(A+B)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdInlineSnippet}[f623e75af30e62bbd73d6df5b50bb7b5]%mdk
+$D$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdInlineSnippet}[d2606be4e0cd2c9a6179c8f2e3547a85]%mdk
+$\rho$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
+$A$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
+$A$\end{mdInlineSnippet}%mdk
+%mdk-data-line={440}
+\begin{mdDisplaySnippet}[2b3bb20918660320ac288195deae4194]%mdk
+\[%mdk-data-line={442}
+C_n(A+B) / C_n(A) \overset{\rho}{\longrightarrow} C_n(X) / C_n(A)
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={444}
+\begin{mdInlineSnippet}[f623e75af30e62bbd73d6df5b50bb7b5]%mdk
+$D$\end{mdInlineSnippet}%mdk
+%mdk-data-line={444}
+\begin{mdInlineSnippet}[8f460bf519ff080eecc5e8bfae90b29b]%mdk
+$H_n(B, A \cap B)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={444}
+\begin{mdInlineSnippet}[c49e35a0b69d383a310fe573f1bd1a5d]%mdk
+$C_n(B) / C_n(A \cap B) = C_n(A+B) / C_n(A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={444}
+\begin{mdInlineSnippet}[8cbb4d6796b7ef87fd0011cadfffb417]%mdk
+$C_n(X) / C_n(A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={444}
+\begin{mdInlineSnippet}[b0c4475880528253a72c2ac54a24ab3f]%mdk
+$H_n(X, A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={444}
+\begin{mdInlineSnippet}[314abb4914510f950b793edfc2a281ef]%mdk
+$H_n(B, A \cap B) \cong H_n(X, A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={452}
+\begin{mdInlineSnippet}[0534f81194bbcba87094b5a58fbfabfb]%mdk
+$f: (X,A) \to (Y,B)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={452}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={452}
+\begin{mdDisplaySnippet}[95228618035b05d3ec66e1bb43d110b4]%mdk
+\[%mdk-data-line={454}
+f_*: H_n(X) \to H_n(Y) \qquad
+f_*: H_n(A) \to H_n(B) \qquad
+f_*: H_n(X,A) \to H_n(Y,B)
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
+$\Delta$\end{mdInlineSnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
+$A$\end{mdInlineSnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[88769d6fe468bd40568a9d4a1082131d]%mdk
+$(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[826e698bb62f93de6d805b99dab0728a]%mdk
+$\Delta_n(X,A) = \Delta_n(X) / \Delta_n(A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={468}
+\begin{mdInlineSnippet}[278347a1c1cc64ba0faef4cc9708143c]%mdk
+$H_n^\Delta(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={470}
+\begin{mdInlineSnippet}[1996832d3efc45d4e690a435b4f26adc]%mdk
+$H_n^\Delta(X) \to H_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={470}
+\begin{mdInlineSnippet}[3e03c540080bd8faa8c2fff3d28c68ab]%mdk
+$H_n^\Delta(X,A) \to H_n(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={472}
+\begin{mdInlineSnippet}[8bdca871aa4499dcb88d10bd0ab2140e]%mdk
+$A = \varnothing$\end{mdInlineSnippet}%mdk
+%mdk-data-line={474}
+\begin{mdInlineSnippet}[3e03c540080bd8faa8c2fff3d28c68ab]%mdk
+$H_n^\Delta(X,A) \to H_n(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={474}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={474}
+\begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
+$\Delta$\end{mdInlineSnippet}%mdk
+%mdk-data-line={474}
+\begin{mdInlineSnippet}[88769d6fe468bd40568a9d4a1082131d]%mdk
+$(X,A)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={476}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={476}
+\begin{mdInlineSnippet}[8bdca871aa4499dcb88d10bd0ab2140e]%mdk
+$A = \varnothing$\end{mdInlineSnippet}%mdk
+%mdk-data-line={476}
+\begin{mdInlineSnippet}[fd221a37cf78ff3720cc2612be61dc45]%mdk
+$X^k$\end{mdInlineSnippet}%mdk
+%mdk-data-line={476}
+\begin{mdInlineSnippet}[8ce4b16b22b58894aa86c421e8759df3]%mdk
+$k$\end{mdInlineSnippet}%mdk
+%mdk-data-line={476}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={476}
+\begin{mdDisplaySnippet}[51813dbe833d5b1e97f128ea9793d26f]%mdk
+\[%mdk-data-line={479}
+\begin{tikzcd}
+  H_{n+1}^\Delta(X^k, X^{k-1}) \arrow[r] \arrow[d] &
+  H_n^\Delta(X^{k-1}) \arrow[r] \arrow[d] &
+  H_n^\Delta(X^k) \arrow[r] \arrow[d] &
+  H_n^\Delta(X^k, X^{k-1}) \arrow[r] \arrow[d] &
+  H_{n-1}^\Delta(X^{k-1}) \arrow[d] \\
+  H_{n+1}(X^k, X^{k-1}) \arrow[r] &
+  H_n(X^{k-1}) \arrow[r] &
+  H_n(X^k) \arrow[r] &
+  H_n(X^k, X^{k-1}) \arrow[r] &
+  H_{n-1}(X^{k-1})
+\end{tikzcd}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={493}
+\begin{mdInlineSnippet}[8ce4b16b22b58894aa86c421e8759df3]%mdk
+$k$\end{mdInlineSnippet}%mdk
+%mdk-data-line={493}
+\begin{mdInlineSnippet}[c6642b331f31d8bf7d7a4956eadabe90]%mdk
+$\Delta_n(X^k, X^{k-1}) = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={493}
+\begin{mdInlineSnippet}[7806ed6b650e3b71b87023e03538821d]%mdk
+$n \ne k$\end{mdInlineSnippet}%mdk
+%mdk-data-line={493}
+\begin{mdInlineSnippet}[6315f8d8cff32c95c7daaf0c0e810715]%mdk
+$\Delta_n(X^n, X^{n-1}) = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={493}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={493}
+\begin{mdDisplaySnippet}[ebd828d0ce834a2aea052bc4fa1ffc2c]%mdk
+\[%mdk-data-line={495}
+H_n^\Delta(X^k, X^{k-1}) = \begin{cases}
+  0 & \text{if } n \ne k \\
+  \text{free abelian on $k$-simplices} & \text{if } n = k
+\end{cases}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={500}
+\begin{mdInlineSnippet}[86fc0bcc6ecda2b38647f916356e434f]%mdk
+$(\bigsqcup_\alpha \Delta_\alpha^k, \bigsqcup_\alpha \partial \Delta_\alpha^k) \to (X^k, X^{k-1})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={500}
+\begin{mdInlineSnippet}[7b7f9dbfea05c83784f8b85149852f08]%mdk
+$\alpha$\end{mdInlineSnippet}%mdk
+%mdk-data-line={500}
+\begin{mdInlineSnippet}[8ce4b16b22b58894aa86c421e8759df3]%mdk
+$k$\end{mdInlineSnippet}%mdk
+%mdk-data-line={500}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={500}
+\begin{mdDisplaySnippet}[70f244a7b2142e7d91b23515629e9196]%mdk
+\[%mdk-data-line={502}
+H_n(X^k, X^{k-1}) = \begin{cases}
+  0 & \text{if } n \ne k \\
+  \text{free abelian on characteristic maps of $k$-simplices} & \text{if } n = k
+\end{cases}
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={507}
+\begin{mdInlineSnippet}[d0882bee42218a34e658f6ae80d56668]%mdk
+$H_n^\Delta(X^k, X^{k-1}) \cong H_n(X^k, X^{k-1})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={507}
+\begin{mdInlineSnippet}[7fac23a4d6e58ba59a63825d6dae9eb0]%mdk
+$H_n^\Delta(X^k) \to H_n(X^k)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={509}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={509}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={509}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[1996832d3efc45d4e690a435b4f26adc]%mdk
+$H_n^\Delta(X) \to H_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[fbade9e36a3f36d3d676c1b808451dd7]%mdk
+$z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[fbade9e36a3f36d3d676c1b808451dd7]%mdk
+$z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={511}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[1996832d3efc45d4e690a435b4f26adc]%mdk
+$H_n^\Delta(X) \to H_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[fbade9e36a3f36d3d676c1b808451dd7]%mdk
+$z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[fbade9e36a3f36d3d676c1b808451dd7]%mdk
+$z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[06fc1a78b9aaaee997b0adbfa5992f6c]%mdk
+$(n+1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[06fc1a78b9aaaee997b0adbfa5992f6c]%mdk
+$(n+1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[06fc1a78b9aaaee997b0adbfa5992f6c]%mdk
+$(n+1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={513}
+\begin{mdInlineSnippet}[8fcd01a17ad602c542f98b916cba57f4]%mdk
+$z=0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={515}
+\begin{mdInlineSnippet}[8bdca871aa4499dcb88d10bd0ab2140e]%mdk
+$A = \varnothing$\end{mdInlineSnippet}%mdk
+%mdk-data-line={515}
+\begin{mdInlineSnippet}[7fc56270e7a70fa81a5935b72eacbe29]%mdk
+$A$\end{mdInlineSnippet}%mdk
+%mdk-data-line={519}
+\begin{mdInlineSnippet}[eeb19425dac5318257867db7c80e29f8]%mdk
+$f: S^n \to S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={519}
+\begin{mdInlineSnippet}[a3b5d12978b7752be972cbaeb2fdcbb9]%mdk
+$f_*: H_n(S^n) \to H_n(S^n)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={519}
+\begin{mdInlineSnippet}[c958a1026cb77fb3f2d34cfb8380bb12]%mdk
+$H_n(S^n) = \Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={519}
+\begin{mdInlineSnippet}[0c01dfafa13143d74203cf8f017db9dc]%mdk
+$f_*: \Z \to \Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={519}
+\begin{mdInlineSnippet}[e4f013f31dd712e9561f2e01524c24ac]%mdk
+$f_*(1)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={519}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={521}
+\begin{mdInlineSnippet}[d8f664427d504295010bfcb2392d5574]%mdk
+$\deg \id = 1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[13ef0e16fa6c1b25edb796184838eb25]%mdk
+$\deg f = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[e45f9defbc7ee662b3a7cd96f7c31d7f]%mdk
+$x_0 \in S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[6ccaa37bfdcb1af941854fc43324cf90]%mdk
+$S^n \overset{f}{\longrightarrow} S^n \setminus \{x_0\} \overset{\iota}{\longrightarrow} S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[f74115260830faf5178589e98c061a4e]%mdk
+$S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={522}
+\begin{mdInlineSnippet}[b72c5f6d7870b9bed62c86bd79e30acb]%mdk
+$f_*$\end{mdInlineSnippet}%mdk
+%mdk-data-line={523}
+\begin{mdInlineSnippet}[74970a6131b2cc81f95003654fd1dcb4]%mdk
+$f \simeq g$\end{mdInlineSnippet}%mdk
+%mdk-data-line={523}
+\begin{mdInlineSnippet}[8f38b3ad5fda012fbbced22c47064fbe]%mdk
+$\deg f = \deg g$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[167d168beb62c6615edd4cc979b768e5]%mdk
+$\deg f = -1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[967878d1da852d4b07a961e3168b0fff]%mdk
+$\Delta$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[f74115260830faf5178589e98c061a4e]%mdk
+$S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[bfba2cf00f2ac3982b1bcd9dffe2a988]%mdk
+$\Delta_1^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[63a14dc50bcb6b6cc54f095e86969c4a]%mdk
+$\Delta_2^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[241bed81b6e1c4d8f8db7c7f4e6f3759]%mdk
+$\Delta_1^n - \Delta_2^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[00cfba8ffb91d00ee35c35860abfcf18]%mdk
+$H_n(S^n)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={524}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={525}
+\begin{mdInlineSnippet}[dcc1f9715835cca779eaa058a7ae8955]%mdk
+$x \mapsto -x$\end{mdInlineSnippet}%mdk
+%mdk-data-line={525}
+\begin{mdInlineSnippet}[94a238c5c0f5daf07334d435a8680790]%mdk
+$(-1)^{n+1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={525}
+\begin{mdInlineSnippet}[40b85027598d87611b1c8d5d11e46812]%mdk
+$n+1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={526}
+\begin{mdInlineSnippet}[eeb19425dac5318257867db7c80e29f8]%mdk
+$f: S^n \to S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={526}
+\begin{mdInlineSnippet}[ca7d69044f2c5666f86b4ac1af52005d]%mdk
+$\deg f = (-1)^{n+1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={526}
+\begin{mdInlineSnippet}[93b005502e82023c811b29f0e5260faf]%mdk
+$f(x) \ne x$\end{mdInlineSnippet}%mdk
+%mdk-data-line={526}
+\begin{mdInlineSnippet}[50bbd36e1fd2333108437a2ca378be62]%mdk
+$f(x)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={526}
+\begin{mdInlineSnippet}[d25c186e3f3096a9ff4a918f7b3141d4]%mdk
+$-x$\end{mdInlineSnippet}%mdk
+%mdk-data-line={526}
+\begin{mdDisplaySnippet}[734b60104e47487acc009a7e79621da6]%mdk
+\[%mdk-data-line={528}
+f_t(x) = \frac{(1-t)f(x) - tx}{\norm{(1-t)f(x) - tx}}.
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={533}
+\begin{mdInlineSnippet}[f74115260830faf5178589e98c061a4e]%mdk
+$S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={533}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdInlineSnippet}[70148f95c08937695dfa9ad2d002c2dc]%mdk
+$x \mapsto v(x)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdInlineSnippet}[837db4dff033cbb15454328f9690b124]%mdk
+$x \in S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdInlineSnippet}[6668cae114cc8d4dc991ac6152f99da5]%mdk
+$v(x)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdInlineSnippet}[9dd4e461268c8034f5c8564e155c67a6]%mdk
+$x$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdInlineSnippet}[6668cae114cc8d4dc991ac6152f99da5]%mdk
+$v(x)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdInlineSnippet}[c0e2dc76eff09f7d0a9f0e8f0a251dba]%mdk
+$(\cos t)x + (\sin t)v(x)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={535}
+\begin{mdDisplaySnippet}[d605d2e14b5f8473e37bc48542aa74cb]%mdk
+\[%mdk-data-line={537}
+f_t(x) = (\cos t)x + (\sin t)v(x) \qquad 0 \le t \le \pi
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={539}
+\begin{mdInlineSnippet}[6668cae114cc8d4dc991ac6152f99da5]%mdk
+$v(x)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={539}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={541}
+\begin{mdInlineSnippet}[0efd788024567518a5b4293e0931ae9b]%mdk
+$n = 2k+1$\end{mdInlineSnippet}%mdk
+%mdk-data-line={541}
+\begin{mdDisplaySnippet}[89ab6cc2de86d46cdbf20ee7fabe5e20]%mdk
+\[%mdk-data-line={543}
+(x_1, x_2, \dots, x_{2k}, x_{2k+1}, x_{2k+2}) \mapsto (-x_2, x_1, -x_4, x_3, \dots, -x_{2k+2}, x_{2k+1}).
+\]%mdk
+\end{mdDisplaySnippet}%mdk
+%mdk-data-line={547}
+\begin{mdInlineSnippet}[618d5f7110d98bf7e3715419b9b94847]%mdk
+$\Z / 2\Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={547}
+\begin{mdInlineSnippet}[f74115260830faf5178589e98c061a4e]%mdk
+$S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={547}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[eeb19425dac5318257867db7c80e29f8]%mdk
+$f: S^n \to S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[de41f86e42a74b61a37b3a76b7f5edfb]%mdk
+$n > 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[88e7917ff6537a4f19596b223aa3dd6d]%mdk
+$y \in S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[415290769594460e2e485922904f345d]%mdk
+$y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[94cf76c83cb10f30500733ccdd413d5e]%mdk
+$f^{-1}(y) = \{x_1, \dots, x_n\}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[2613ee0449498d55793453205b97e8b8]%mdk
+$U_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[1ba8aaab47179b3d3e24b0ccea9f4e30]%mdk
+$x_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[2613ee0449498d55793453205b97e8b8]%mdk
+$U_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[5206560a306a2e085a437fd258eb57ce]%mdk
+$V$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[415290769594460e2e485922904f345d]%mdk
+$y$\end{mdInlineSnippet}%mdk
+%mdk-data-line={553}
+\begin{mdInlineSnippet}[83253edf52be1a36a2769f5bf8b270be]%mdk
+$f(U_i - \{x_i\}) \subseteq V - \{y\}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={557}
+\begin{mdInlineSnippet}[8fa14cdd754f91cc6554c9e71929cce7]%mdk
+$f$\end{mdInlineSnippet}%mdk
+%mdk-data-line={557}
+\begin{mdInlineSnippet}[1ba8aaab47179b3d3e24b0ccea9f4e30]%mdk
+$x_i$\end{mdInlineSnippet}%mdk
+%mdk-data-line={557}
+\begin{mdInlineSnippet}[fe713916cb7b43b1839bda7e8b2b97b6]%mdk
+$\deg f |_{x_i}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={557}
+\begin{mdInlineSnippet}[4191e504a0cfa31ca97f98acd42eb143]%mdk
+$\Z \to \Z$\end{mdInlineSnippet}%mdk
+%mdk-data-line={557}
+\begin{mdInlineSnippet}[1e40d907f654e48d0e32e2b23f197aac]%mdk
+$f_*: H_n(U_i, U_i - \{x_i\}) \to H_n(V, V - \{y\})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={559}
+\begin{mdInlineSnippet}[e66871016daad214cd9fe0d5bb26ec20]%mdk
+$\deg f = \sum_{i=1}^m \deg f |_{x_i}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={561}
+\begin{mdInlineSnippet}[f74115260830faf5178589e98c061a4e]%mdk
+$S^n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={561}
+\begin{mdInlineSnippet}[e6373ba6940df286edfac5039a9a45db]%mdk
+$S^{n+1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={565}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={569}
+\begin{mdInlineSnippet}[81aa844f4548f7eefe2f54c951fa5166]%mdk
+$H_k(X^n, X^{n-1}) = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={569}
+\begin{mdInlineSnippet}[5da474bee72c1e809669a36de3279587]%mdk
+$k \ne n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={569}
+\begin{mdInlineSnippet}[5a6e16fa660db51fe08e043d951ea4da]%mdk
+$H_n(X^n, X^{n-1})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={569}
+\begin{mdInlineSnippet}[7b8b965ad4bca0e41ab51de7b31363a1]%mdk
+$n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={569}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={570}
+\begin{mdInlineSnippet}[60cc7f9bc057776071a39dbd623195ef]%mdk
+$H_k(X^n) = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={570}
+\begin{mdInlineSnippet}[bc6b8c3214113aa8dbf4b5754b2bf3c3]%mdk
+$k > n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={570}
+\begin{mdInlineSnippet}[91c3ae40f49a95075eb5df142d02b567]%mdk
+$H_k(X) = 0$\end{mdInlineSnippet}%mdk
+%mdk-data-line={570}
+\begin{mdInlineSnippet}[ee882b1e1a91226fb8217b116aa109bc]%mdk
+$k > \dim X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={571}
+\begin{mdInlineSnippet}[20b60840b270bac0d6aa88dc7c2e0f41]%mdk
+$\iota: X^n \to X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={571}
+\begin{mdInlineSnippet}[26368707ca912fe2af7b5985bd161870]%mdk
+$\iota_*: H_k(X^n) \to H_k(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={571}
+\begin{mdInlineSnippet}[77046b62c2a801c5ece06bf7f9f32add]%mdk
+$k < n$\end{mdInlineSnippet}%mdk
+%mdk-data-line={573}
+\begin{mdInlineSnippet}[02129bb861061d1a052c592e2dc6b383]%mdk
+$X$\end{mdInlineSnippet}%mdk
+%mdk-data-line={577}
+\begin{mdInlineSnippet}[350660f7a4dc54707d92b2d89392c010]%mdk
+$(X^{n+1}, X^n)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={577}
+\begin{mdInlineSnippet}[a1abf7ec7b9c3b6278627c855ac145c9]%mdk
+$(X^n, X^{n-1})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={577}
+\begin{mdInlineSnippet}[b67a33bf8ee0d620b86987f262f56189]%mdk
+$(X^{n-1}, X^{n-2})$\end{mdInlineSnippet}%mdk
+%mdk-data-line={577}
+\begin{mdInlineSnippet}[3bde5c71067f2d0732e27d1598d0e3f1]%mdk
+$\dots$\end{mdInlineSnippet}%mdk
+%mdk-data-line={581}
+\begin{mdInlineSnippet}[517fcdd73d25659ef908429291d858bc]%mdk
+$H_n^{CW}(X) \cong H_n(X)$\end{mdInlineSnippet}%mdk
+%mdk-data-line={583}
+\begin{mdInlineSnippet}[0a4c2a4267fae752868fbc86d46c2300]%mdk
+$H_n(X) = H_n(X^n) / \im \partial_{n+1}$\end{mdInlineSnippet}%mdk
+%mdk-data-line={583}
 
 \end{mdSnippets}
 

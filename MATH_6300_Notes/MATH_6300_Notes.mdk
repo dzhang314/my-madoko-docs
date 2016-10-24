@@ -14,6 +14,8 @@ Package: mathtools
 
 ~ MathDefs
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
 ~
@@ -32,17 +34,17 @@ _(Discussion of syllabus omitted.)_
 
 ## Binary relations
 
-**Definition:** A ___binary relation___ on a set $X$ is a subset $R \subseteq X^2$ of the Cartesian square of $X.$ If $(x,y) \in R,$ we write $x \mathrel{R} y$ and say that $x$ is $R$-related to $y.$
+**Definition:** A ___binary relation___ on a set $X$ is a subset $R \subseteq X^2$ of the Cartesian square of $X$. If $(x,y) \in R,$ we write $x \mathrel{R} y$ and say that $x$ is $R$-related to $y$.
 
 **Examples:**
 
-1. Divisibility is a relation on $\N = \{1, 2, 3, \dots\}.$ (For the purposes of this course, $0$ is not a natural number.) Here, $x \mathrel{R} y$ iff $x$ is divisible by $y.$
+1. Divisibility is a relation on $\N = \{1, 2, 3, \dots\}$. (For the purposes of this course, $0$ is not a natural number.) Here, $x \mathrel{R} y$ iff $x$ is divisible by $y$.
 
 2. $\le$ is a relation on $\R$
 
-3. $=$ is a relation on any set $X.$
+3. $=$ is a relation on any set $X$.
 
-4. Love on $X = \{\text{all people}\}.$
+4. Love on $X = \{\text{all people}\}$.
 
 ## Representing relations by graphs
 
@@ -54,28 +56,28 @@ _(Example of graph for divisibility relation on $X = \{1, 2, 3, 4, 5, 6\}$ omitt
 
 **Definition:** A relation $R$ on a set $X$ is called
 
-1. ___reflexive___ if $\forall x \in X,\ x \mathrel{R} x.$
-2. ___symmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \implies y \mathrel{R} x.$
-3. ___antisymmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} x \implies x = y.$
-4. ___transitive___ if $\forall x,y,z \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} z \implies x \mathrel{R} z.$
+- ___reflexive___ if $\forall x \in X,\ x \mathrel{R} x$.
+- ___symmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \implies y \mathrel{R} x$.
+- ___antisymmetric___ if $\forall x,y \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} x \implies x = y$.
+- ___transitive___ if $\forall x,y,z \in X,\ x \mathrel{R} y \text{ and } y \mathrel{R} z \implies x \mathrel{R} z$.
 
 _(Checking these conditions on the four previous examples omitted.)_
 
 **Definition:** A relation $R$ on a set $X$ is called an ___order___ (or ___partial order___) if it is reflexive, antisymmetric, and transitive.
 
-A standard notation for order relations is $\precsim.$ We write $x \prec y$ if $x \precsim y$ but $x \ne y.$
+A standard notation for order relations is $\precsim$. We write $x \prec y$ if $x \precsim y$ but $x \ne y$.
 
-**Examples:** Divisibility, $\le,$ and $=$ on $\N.$
+**Examples:** Divisibility, $\le,$ and $=$ on $\N$.
 
 Note that when representing an order relation as a graph, we can omit self-loops and edges which are implied by transitivity. Moreover, if we arrange the vertices so that all edges are oriented upwards, we can omit explicit arrows. The resulting diagram is called a ___Hasse diagram___.
 
 _(Example of Hasse diagram for divisibility on $\{1, \dots, 9\}$ omitted. See camera roll.)_
 
-**Definition:** A ___Hasse diagram___ of an order ${\precsim} \subseteq X \times X$ is a graph with vertex set $X$ and an edge connecting $x$ up to $y$ if "$y$ is next to $x$," i.e., if $x \prec y$ and there exists no $z$ such that $x \prec z \prec y.$
+**Definition:** A ___Hasse diagram___ of an order ${\precsim} \subseteq X \times X$ is a graph with vertex set $X$ and an edge connecting $x$ up to $y$ if "$y$ is next to $x$," i.e., if $x \prec y$ and there exists no $z$ such that $x \prec z \prec y$.
 
 Now let $X$ be a ___poset___ (i.e. ___partially ordered set___, a set equipped with an order relation).
 
-**Definition:** Elements $x,y \in X$ are called ___comparable___ if $x \precsim y$ or $y \precsim x.$ Otherwise, they are ___incomparable___.
+**Definition:** Elements $x,y \in X$ are called ___comparable___ if $x \precsim y$ or $y \precsim x$. Otherwise, they are ___incomparable___.
 
 **Definition:** $\precsim$ is called a ___total order___ (or ___linear order___) if any two elements of $X$ are comparable.
 
@@ -83,17 +85,17 @@ Note that Hasse diagrams of linear orders are simply lines.
 
 **Definition:** An element $a \in X$ is called
 
-1. ___minimal___ if there is no $x \in X$ such that $x \prec a.$
-2. ___maximal___ if there is no $x \in X$ such that $a \prec x.$
-3. ___greatest___ (or ___largest___) if $\forall x \in X,\ x \precsim a.$
-3. ___least___ (or ___smallest___) if $\forall x \in X,\ a \precsim x.$
+- ___minimal___ if there is no $x \in X$ such that $x \prec a$.
+- ___maximal___ if there is no $x \in X$ such that $a \prec x$.
+- ___greatest___ (or ___largest___) if $\forall x \in X,\ x \precsim a$.
+- ___least___ (or ___smallest___) if $\forall x \in X,\ a \precsim x$.
 
 **Homework #1.** Prove that the greatest (and least) element is always unique (if it exists).
 
 **Definition:** Given a subset $Y \subseteq X,$ an element $a \in X$ is called
 
-1. a ___lower bound___ for $Y$ if $\forall y \in Y,\ a \precsim y.$
-2. an ___upper bound___ for $Y$ if $\forall y \in Y,\ y \precsim a.$
+- a ___lower bound___ for $Y$ if $\forall y \in Y,\ a \precsim y$.
+- an ___upper bound___ for $Y$ if $\forall y \in Y,\ y \precsim a$.
 
 A ___chain___ in $X$ is a subset where any two elements are comparable.
 
@@ -106,3 +108,455 @@ _(Examples of lower bounds, upper bounds, and chains omitted.)_
 *Proof:* Take $X = \{\text{all linearly independent subsets of }V\}$ ordered by inclusion. Checking the hypothesis of Zorn's lemma is easy, and we obtain a maximal linearly independent subset. This is clearly a basis. **QED**
 
 **Homework #2.** Which combinations of the properties \{reflexive, symmmetric, antisymmetric, transitive\} are possible? In principle there are 16 combinations, but not all of these are possible.
+
+
+
+# Lecture 3 (2016-09-01)
+
+## Equivalence relations and partitions
+
+**Definition:** A relation $R$ on a set $X$ is called an ___equivalence___ (or ___equivalence relation___) if it is symmetric, reflexive, and transitive.
+
+**Examples:** 
+
+0. Equality on any set.
+1. Congruence modulo $5$ on $\Z$.
+2. Take $X = \N,$ and let $x \mathrel{R} y$ if $x$ and $y$ have the same number of digits.
+
+Let $\sim$ be an equivalence relation on $X$. For every $x \in X,$ we define the ___equivalence class of $\bm{x}$___, denoted by $[x],$ as the set
+~ Math
+[x] = \{y \in X : x \sim y \}.
+~
+
+**Definition:** A collection of subsets $\{X_i\}_{i \in I}$ are said to form a ___partition___ of $X$ (or alternatively, $X$ is said to be the ___disjoint union___ of the subsets $X_i,$ symbolized $X = \bigsqcup_{i \in I} X_i$) if $X = \bigcup_{i \in I} X_i$ and for all $i,j \in I,$ if $i \ne j,$ then $X_i \cap X_j = \varnothing$.
+
+**Proposition:** Let $\sim$ be an equivalence relation on a set $X$. Then the corresponding equivalence classes form a partition of $X$.
+
+*Proof:* It is immediate to see that $X = \bigcup_{a \in X} [a],$ since each $a \in X$ is always a member of its own equivalence class by reflexivity. Hence it suffices to show that if $[a] \ne [b],$ then $[a] \cap [b] = \varnothing$. Suppose, for contradiction, that there exists some $c \in [a] \cap [b]$. Then $a \sim c$ and $b \sim c$. Since $\sim$ is symmetric, we have $c \sim b,$ and by transitivity, we have $a \sim b$. Now observe that if $x \in [b],$ then we have $a \sim b \sim x,$ hence $a \sim x,$ and $x \in [a]$. This shows that $[b] \subseteq [a]$. By reversing $a$ and $b,$ this argument shows just as well that $[a] \subseteq [b],$ hence $[a] = [b]$. This is the desired contradiction. **QED**
+
+**Examples** (corresponding to example relations above):
+
+0. $[x] = \{x\}$.
+1. $\{5n : n \in \Z\},$ $\{5n+1 : n \in \Z\},$ $\dots,$ $\{5n+4 : n \in \Z\}$.
+
+## Operations on sets
+
+**Definition:** An ___$\bm{n}$-ary operation___ on a set $X$ is a function $f: X^n \to X$. The number $n$ is called the ___arity___ of $f$.
+
+**Examples:**
+
+1. 1-ary (unary): taking additive inverse in $\R$. This is the function $f(x) = -x$. Similarly, taking multiplicative inverse in $\R \setminus \{0\}$.
+2. 2-ary (binary): addition, subtraction, multiplication on $\R$. Division on $\R$ is _not_ an operation. Note that for binary operations, instead of writing ${+}(1,2),$ we instead write $1+2$.
+3. 3-ary (ternary): vector triple product of vectors in $\R^3$.
+
+Henceforth, the word "operation" will refer exclusively to binary operations.
+
+**Definition:** An operation $*$ on $X$ is called
+
+- ___commutative___ if for all $x,y \in X$ we have $x * y = y * x$.
+- ___associative___ if for all $x,y,z \in X$ we have $x * (y * z) = (x * y) * z$.
+
+**Proposition:** If an operation $*$ on a set $X$ is associative, then for any sequence $x_1, \dots, x_n \in X,$ the product $x_1 * x_2 * \cdots * x_n$ is independent of the arrangement of parentheses.
+
+*Proof:* Induction.
+
+## Preorders (for homework)
+
+**Definition:** A ___preorder___ relation on a set $X$ is any reflexive and transitive relation.
+
+**Example:** Take $X = \N,$ and define $x \mathrel{R} y$ iff the number of digits of $x$ is less than or equal to (in the standard sense) the number of digits of $y$.
+
+Given a preorder $R$ on $X,$ define a relation $\sim$ on $X$ by the rule $x \sim y$ iff $x \mathrel{R} y$ and $y \mathrel{R} x$.
+
+**Homework #1.** Prove that $\sim$ is an equivalence relation on $X$.
+
+Let $Y$ be the set of equivalence of classes (written $Y = X / {\sim}$). Define a relation $\precsim$ on $Y$ by $[x] \precsim [y]$ if $x \mathrel{R} y$.
+
+**Homework #2.** Prove that $\precsim$ is well-defined. That is, if we have $[x'] = [x]$ and $[y'] = [y],$ then $[x] \precsim [y]$ iff $[x'] \precsim [y']$. This is necessary to show that the definition of $\precsim$ is independent of the choice of representatives in equivalence classes.
+
+**Homework #3.** Prove that $\precsim$ is an order relation on $Y$.
+
+## Elementary group theory
+
+**Definition:** A ___group___ is a set $G$ with a binary operation $*$ such that
+
+- $*$ is associative: $(a*b)*c = a*(b*c)$ for all $a,b,c \in G$.
+- There exists a special element $e \in G$ such that $a * e = e * a = a$ for all $a \in G$.
+- For every $a \in G$ there exists $b \in G$ such that $a * b = b * a = e$.
+
+The operation $*$ is often denoted by $+$ (if it is commutative) or by $\cdot$ (in the general case). We often omit the dot and write $ab$ for $a \cdot b$. The element $e$ is usually denoted by $0$ or $1$ accordingly, and is called the ___identity___ (or ___unit___) of $G$. The inverse element $b$ of $a$ is usually denoted by $-a$ (if $+$ is used) or $a^{-1}$ (if $\cdot$ is used).
+
+**Examples:**
+
+- $\Z$ with the usual addition.
+- $\Q \setminus \{0\}$ with the usual multiplication.
+- $\Z$ with subtraction is ___not___ a group, since subtraction is not associative.
+- $\R^{n \times n} = M_n(\R)$ is a group under matrix addition, but not matrix multiplication. $GL_n(\R)$ is a group under matrix multiplication, but not matrix addition. Same with $SL_n(\R)$.
+
+
+
+# Lecture 04 (2016-09-06)
+
+## Further examples of groups
+
+- $\Z_n = \Z / n\Z = \{0, 1, \dots, n-1\},$ the group of integers modulo $n,$ with operation $a \oplus b$ given by the remainder of $a+b$ when divided by $n$. (Henceforth we denote $\oplus$ by $+$ when there is no confusion.)
+
+- The dihedral group $D_{2n},$ sometimes denoted $D_n,$ given by the symmetries of a regular $n$-gon ($n$ rotations and $n$ reflections).
+
+- The infinite dihedral group $D_\infty$ of all isometries of $\R$ that preserve $\Z$ setwise. Elements of $D_\infty$ include translations by an integer, reflections through an integer, and reflections through half-integers.
+
+- The symmetric group $S_n$ of all bijections from $\{1, \dots, n\}$ to itself. Recall that elements of $S_n$ can be written in the 2-line notation
+~ Math
+\mqty(
+    1 & 2 & \cdots & n-1 & n \\
+    f(1) & f(2) & \cdots &  f(n-1) & f(n)
+)
+~
+or the 1-line notation $(f(1), f(2), \dots, f(n-1), f(n))$. We will use the convention that $(f \circ g)(x) = f(g(x))$. Recall that $\abs{S_n} = n!$.
+
+## Elementary Properties of Groups
+
+**Theorem:** Let $G$ be a group. Then
+
+1. The neutral element of $G$ is unique.
+2. Every element of $G$ has a unique inverse.
+
+Henceforth we will denote the inverse of $g \in G$ by $g^{-1}$.
+
+3. For all $g \in G,$ $(g^{-1})^{-1} = g$.
+4. For all $f,g \in G,$ $(fg)^{-1} = g^{-1} f^{-1}$.
+
+We now define $g^n = \underbrace{gg\cdots g}_{n \text{ times}},$ and $g^{-n} = (g^n)^{-1}$.
+
+5. For all $g \in G$ and $m,n \in \Z,$ $(g^m)^n = g^{mn}$.
+6. For all $g \in G$ and $m,n \in \Z,$ $g^m g^n = g^{m+n}$.
+7. _(Cancellation Law)_ For every $a,b,c \in G,$ if $ac = bc,$ then $a = b$. Similarly, if $ca = cb,$ then $a = b$.
+
+*Proof:*
+
+1. Suppose $e_1, e_2 \in G$ both satisfy $ge_1 = e_1g = ge_2 = e_2g = g$ for all $g \in G$. Then in particular, $e_1e_2 = e_1 = e_2$.
+2. Suppose that for some $g \in G,$ there exist $a,b \in G$ such that $ga = ag = gb = bg = 1$. Then $agb = a = b$.
+3. Immediate.
+
+*Remark:* If $G$ is a group and we have $a,b \in G$ such that $ab = 1,$ then $a = b^{-1}$ and $b = a^{-1}$. This is easy to show by considering $bab$.
+
+4. $fgg^{-1}f^{-1} = ff^{-1} = 1$.
+5. Use the same proof as for integers.
+6. Use the same proof as for integers.
+7. Multiply both sides by $c^{-1}$. **QED**
+
+## Group Terminology
+
+- The ___order___ $\abs{G}$ of a group $G$ is the number of elements of $G$.
+- The ___order___ of an element $g \in G$ is the minimal natural number $n$ such that $g^n = 1$. If such a number does not exist, the order of $g$ is $\infty$. We denote the order of $g$ by $\abs{g}$. Note that $\abs{1} = 1$.
+- A group $G$ is called ___Abelian___ if its operation is commutative. That is, for all $a,b \in G,$ we have $ab = ba$.
+
+**Examples:**
+
+1. $(\R, +),$ $(\Z, +),$ and $(\Q, +),$ are Abelian groups of infinite order.
+2. $GL_n(\R)$ is Abelian iff $n=1,$ and has infinite order. Unlike the preceding example, it has elements of finite order.
+3. The orders of the elements of $\Z_6$ are $\abs{0} = 1,$ $\abs{1} = \abs{5} = 6,$ $\abs{2} = \abs{4} = 3,$ and $\abs{3} = 2$.
+
+**Homework:**
+
+1. Find orders of all elements in $S_3$.
+2. When is $S_n$ abelian?
+
+
+**Theorem:** Let $G$ be a group, and $g \in G$. Suppose $g^k = 1$ for some $k \in \N$. Then $k$ is divisible by $\abs{g}$.
+
+*Proof:* Let $n = \abs{g},$ and let $d = \gcd(n,k)$. By elementary number theory, there exist $a,b \in \Z$ such that $d = an+bk$. It follows that $g^d = g^{an+bk} = (g^n)^a (g^k)^b = 1$. By the definition of $\abs{g},$ we must have $d = n$. Thus $k$ is divisible by $n$. **QED**
+
+**Question:** Can we find an example of a group $G$ with elements $a,b \in G$ such that $\abs{a}, \abs{b} < \infty$ but $\abs{ab} = \infty$?
+
+One immediately observes that this is impossible if $G$ is abelian. For an easy example, take $G = D_\infty$.
+
+
+
+# Lecture 05 (2016-09-08)
+
+Let $G$ be a group throughout.
+
+## Conjugation and Conjugacy Classes
+
+**Definition:** Elements $a,b \in G$ are said to be ___conjugate___ if there exists $t \in G$ such that $t^{-1}at = b$. When this occurs, we write $a \sim b$.
+
+**Proposition:** $\sim$ is an equivalence relation.
+
+*Proof:*
+
+1. $a \sim a$ since $a = 1^{-1} a 1$.
+2. $a \sim b$ means there exists $t \in G$ such that $t^{-1}at = b$. It follows that $a = tbt^{-1} = (t^{-1})^{-1} b t^{-1},$ so $b \sim a$.
+3. $a \sim b$ and $b \sim c$ means there exists $s,t \in G$ such that $s^{-1}as = b$ and $t^{-1}bt = c$. It follows that $u^{-1}au = c$ for $u = st,$ since
+~ Math
+(st)^{-1}ast = t^{-1}(s^{-1}as)t = t^{-1}bt = c.
+~
+
+**QED**
+
+**Definition:** Equivalence classes with respect to $\sim$ are called conjugacy classes.
+
+**Example:** Matrices in $GL_n(\C)$ are conjugate iff their Jordan normal forms are the same (up to permutation of the Jordan blocks).
+
+## Subgroups
+
+**Definition:** A subset $S \subseteq G$ is a ___subgroup___ if it is itself a group with respect to the operation in $G$. Equivalently, it is a subset $S \subseteq G$ such that
+
+1. For all $x,y \in S,$ we have $xy \in S$.
+2. $1 \in S$.
+3. For all $x \in S,$ we have $x^{-1} \in S$.
+
+**Notation:** We write $S \le G$ to indicate that $S$ is a subgroup of $G$. This should not be confused with $S \subseteq G,$ which indicates inclusion of the sets $S$ and $G$.
+
+**Examples:**
+
+1. $\Z \le \Q \le \R \le \C$.
+2. $SL_n(\Q) \le GL_n(\Q) \le GL_n(\R) \le GL_n(\C)$.
+3. $\N \subseteq \Z$ is NOT a subgroup.
+
+**Definition:** Let $X \subseteq G$. The ___normalizer___ of $X$ in $G$ is
+~ Math
+N_G(X) = \{g \in G : \forall x \in X,\
+g^{-1}xg \in X \text{ and } gxg^{-1} \in X \}.
+~
+The ___centralizer___ of $X$ in $G$ is
+~ Math
+C_G(X) = \{ g \in G : \forall x \in X,\
+g^{-1}xg = x \}.
+~
+If $X = \{a\}$ is a singleton, then we write $N_G(a)$ instead of $N_G(\{a\}),$ and similarly $C_G(a)$ instead of $C_G(\{a\})$.
+
+**Theorem:** For every $X \subseteq G,$ the normalizer $N_G(X)$ and the centralizer $C_G(X)$ are subgroups of $G$.
+
+*Proof:*
+
+1. If $a,b \in N_G(X),$ then for all $x \in X,$ we have
+~ Math
+  a^{-1}xa \in X \qquad axa^{-1} \in X \qquad b^{-1}xb \in X \qquad bxb^{-1} \in X.
+~
+It follows that $(ab)^{-1}x(ab) = b^{-1}(a^{-1}xa)b = b^{-1}x'b \in X$ where $x' = a^{-1}xa \in X$. By a similar calculation, $(ab)x(ab)^{-1} \in G$. Thus, $N_G(X)$ is closed under taking products.
+
+2. $1 \in N_G(X)$ is obvious.
+
+3. If $a \in N_G(X),$ then $a^{-1} \in N_G(X)$ is clear.
+
+**Homework #1.** Complete the proof of this theorem for $C_G(X)$. **QED**
+
+**Definition:** The ___center___ of a group is
+~ Math
+Z(G) = C_G(G) = \{ g \in G : \forall a \in G, [g,a] = 1 \}
+~
+where we have defined the ___commutator___ $[x,g] = x^{-1}g^{-1}xg$ of elements of $G$.
+
+**Example:** If $G$ is abelian, then for all $X \subseteq G$ we have $N_G(X) = C_G(X) = Z(G) = G$.
+
+**Definition:** We say that a subgroup $S \le G$ is ___generated___ by a subset $X \subseteq G$ (or that $X$ is a ___generating set___ of $S$) if every element of $S$ can be expressed as a product of elements of $X$ and their inverses.
+
+**Definition:** Let $X \subseteq G$. Define
+~ Math
+\ev{X} = \{x_1 \cdots x_k : k \in \N,\ x_i \in X \text{ or } x_i^{-1} \in X,\ i = 1,\dots,k\}.
+~
+
+**Proposition:** $\ev{X}$ is a subgroup for all nonempty $X \subseteq G$. Moreover, $S$ is generated by $X \subseteq S$ iff $S = \ev{X}$.
+
+**Example:** $\Z$ is generated by $\{1\}$ and $\{2,2017\},$ but not $\{2,2016\}$.
+
+**Homework #2.** Show that $GL_n(\R)$ is generated by elementary matrices of the form
+
+- $E_{ij},$ the matrix obtained from $I_n$ by swapping row $i$ and row $j$
+- $D_i(r),$ the diagonal matrix with $r \ne 0$ in the $i$th place and ones elsewhere
+- $A_{ij},$ the identity matrix with an extra one added in its $(i,j)$ entry
+
+_Hint:_ Recall that all nonsingular matrices can be reduced to the identity matrix via elementary row operations. Use the fact that there is a 1-1 correspondence between elementary row operations and left multiplication by an elementary matrix of the above form.
+
+**Definition:** We say that a group $G$ is ___finitely generated___ if there exists a finite $X \subseteq G$ such that $G = \ev{X}$.
+
+**Examples:**
+
+1. $\Z$ is finitely generated.
+2. Any finite group is finitely generated.
+3. $\R$ is not finitely generated (by cardinality).
+4. $\Q$ is not finitely generated.
+
+**Homework #3.** Prove that $\Q$ is not finitely generated.
+
+**Definition:** A subgroup $S \le G$ is called ___normal___ if for every $a \in S$ and $g \in G,$ we have $g^{-1}ag \in S$. If this is the case, we write $S \triangleleft G$.
+
+**Examples:**
+
+1. If $G$ is abelian, then every subgroup is normal.
+2. $SL_n(\R) \triangleleft GL_n(\R)$.
+3. $T_n(\R),$ the group of all invertible upper-triangular matrices, is a non-normal subgroup of $GL_n(\R)$ (for $n > 1$).
+
+**Homework #4.**
+
+1. Let $G$ be a group, and define $G' = \ev{[x,y] : x,y \in G}$. Prove that $G'$ is always a normal subgroup of $G$.
+2. Prove that $Z(G)$ is a normal subgroup of $G$.
+3. Let $S \le G$. Prove that $S$ is always a normal subgroup in the normalizer $N_G(S)$.
+
+
+
+# Lecture 06 (2016-09-13)
+
+## Group Homomorphisms
+
+**Definition:** Let $\phi: G \to H$ be a map from a group $G$ to a group $H$. $\phi$ is called a ___homomorphism___  if for all $x,y \in G$, we have $\phi(xy) = \phi(x) \phi(y)$.
+
+A homomorphism is called
+
+- an ___epimorphism___ if it is surjective,
+- a ___monomorphism___ if it is injective, and
+- an ___isomorphism___ if it is bijective.
+
+**Examples:**
+
+0. Let $\phi: S_n \to \Z_n$ be defined by $\phi(f) = f(1) - 1$. This is ___not___ a homomorphism for $n \ge 3$.
+1. Let $\phi: \Z \to \Z$ be the function $\phi(z) = nz$. This is a homomorphism.
+2. Let $\phi: \Z \to \Z_n$ be defined by $\phi(z) =$ the remainder of $z$ when dividied by $n$. This is a homomorphism.
+3. $\det: GL_n(\R) \to (\R \setminus \{0\}, \times)$ is a homomorphism.
+4. $\log: ((0, \infty), \times) \to \R$ is a homomorphism.
+5. $\phi: \R \to (\C \setminus \{0\}, \times)$ defined by $\phi(x) = e^{ix}$ is a homomorphism.
+
+_(Classification of preceding examples as epi/mono/iso omitted.)_
+
+## Properties of Homomorphisms
+
+**Proposition:** Let $\phi: G \to H$ be a homomorphism. Then:
+
+1. $\phi(1) = 1$.
+2. For every $g \in G$, $\phi(g^{-1}) = \phi(g)^{-1}$.
+3. If $g \in G$ and $\abs{g}$ is finite, then $\abs{\phi(g)}$ divides $\abs{g}$.
+
+**Homework #1.** Prove statement (3) above.
+
+*Proof:* For (1), observe that
+~ Math
+\phi(1) = \phi(1 \cdot 1) = \phi(1) \cdot \phi(1).
+~
+Canceling $\phi(1)$, we obtain $\phi(1) = 1$. For (2), we have
+~ Math
+\phi(g^{-1}) \cdot \phi(g) = \phi(g^{-1} g) = \phi(1) = 1
+~
+showing that $\phi(g^{-1})$ is the inverse of $\phi(g)$. **QED**
+
+**Proposition:** Isomorphism is an equivalence relation on the class of all groups. For reflexivity, take the identity map, and for transitivity, use compositions.
+
+**Homework #2.** Prove that if $\phi: G \to H$ is an isomorphism, then $\phi^{-1}: H \to G$ is also an isomorphism.
+
+**Definition:** A group $G$ is called ___cyclic___ if there exists an element $g \in G$ such that $G = \ev{g}$.
+
+**Theorem:** Every cyclic group is isomorphic to $\Z$ or $\Z_n$ for some $n$.
+
+*Proof:* Let $G = \ev{x}$. Then $G = \{x^k: k \in \Z\}$.
+
+- Case 1: $\abs{x} = \infty$. Then $\phi: x^k \mapsto k$ is an isomorphism $G \to \Z$. To see that $\phi$ is well-defined, suppose $x^k = x^m$. Then $x^{k-m} = 1$, so $k-m = 0$. $\phi$ is then clearly surjective and injective.
+
+- Case 2: $\abs{x} = n \in \Z$. Then $x^n = 1$, so $\phi: x^k \mapsto k \mathrel{\operatorname{mod}} n$ is an isomorphism $G \to \Z_n$.
+
+**QED**
+
+## Kernels and Cosets
+
+**Definition:** Let $\phi: G \to H$ be a homomorphism. The ___kernel___ of $\phi$ is
+~ Math
+\ker \phi = \{g \in G : \phi(g) = 1\}.
+~
+
+**Lemma:**
+
+1. $\ker \phi \triangleleft G$.
+2. $\phi(G) \le H$.
+
+*Proof:*
+
+1. We first show that $\ker \phi \le G$. If $g,h \in \ker \phi$, then $\phi(gh) = \phi(g)\phi(h) = 1 \cdot 1 = 1$. Hence, $gh \in \ker \phi$. Clearly $1 \in \ker \phi$. Finally, if $g \in \ker \phi$, then $\phi(g^{-1}) = \phi(g)^{-1} = 1^{-1} = 1$. Thus, $g^{-1} \in \ker \phi$.
+
+  To see that $\ker \phi \triangleleft G$, let $f \in G$ and $g \in \ker \phi$ be arbitrary. Then
+~ Math
+\phi(f^{-1}gf) = \phi(f^{-1}) \phi(g) \phi(f) = \phi(f^{-1}) \phi(f) = 1.
+~
+  Thus, $f^{-1}gf \in \ker \phi$.
+
+**Homework #3.** Prove statement (2) of this lemma. **QED**
+
+**Definition:** Let $H \le G$. Given $g \in G$, the set
+~ Math
+gH = \{gh : h \in H\}
+~
+is called a ___left coset___ of $H$ in $G$. Similarly, the set
+~ Math
+Hg = \{hg : h \in H\}
+~
+is called a ___right coset___ of $H$ in $G$.
+
+Define a relation $\sim$ on $G$ by $x \sim y$ iff $x^{-1}y \in H$.
+
+**Lemma:** $\sim$ is an equivalence relation on $G$. Moreover, the equivalence classes of $\sim$ are precisely the left cosets of $H$ in $G$, with $[g] = gH$.
+
+**Corollary:** Left cosets form a partition of $G$.
+
+**Remark:** The corresponding statements for right cosets are true, with completely symmetric proofs. Simply replace $x^{-1}y \in H$ by $xy^{-1} \in H$.
+
+*Proof:* _(Omitted straightforward verification that $\sim$ is an equivalence relation.)_
+
+For (2), first observe that $[x] \subseteq xH$. Indeed, if $x \sim y$, then $x^{-1}y = h$ for some $h \in H$. It follows that $y = xh \in xH$. Next, observe that $xH \subseteq [x]$. Indeed, if $f \in xH$, then $f = xh$ for some $h \in H$. Then $f^{-1}x = h^{-1}x^{-1}x = h^{-1} \in H$. **QED**
+
+
+
+# Lecture 07 (2016-09-15)
+
+_(Examples of kernels of homomorphisms omitted.)_
+
+**Proposition:** If $\phi: G \to H$ is a homomorphism, then $\phi$ is a monomorphism iff $\ker \phi = \{1\}$.
+
+_(Straightforward proof omitted.)_
+
+## Quotient Groups
+
+Let $N \triangleleft G$. Note that for every $g \in G$, we have $gN = Ng$. Indeed, if $n \in N$, then $gn = (gng^{-1})g = n'g \in Ng$ where $n' = gng^{-1} \in N$. The reverse inclusion can be proven symmetrically.
+
+**Definition:** The ___quotient group of $\bm{G}$ modulo $\bm{N}$___ is
+~ Math
+G/N = \{gN : g \in G\}.
+~
+We define for all cosets $fN$, $gN$ of $N$ the operation
+~ Math
+fN \cdot gN = fgN.
+~
+
+**Lemma:** This operation is well-defined, and $G/N$ is a group under this operation.
+
+*Proof:*
+
+1. *Well-definedness.* Suppose $fN = f'N$ and $gN = g'N$. Recall that $aN = bN$ iff $a^{-1}b \in N$. We want to show that $f'g'N = fgN$. We have that $f' = fm$ and $g' = gn$ for some $m,n \in N$. It follows that
+~ Math
+(fg)^{-1}(f'g') = g^{-1} f^{-1} fm gn = g^{-1} mgn = m'n
+~
+where $m' = g^{-1} mg \in N$. Hence, $f'g'N = fgN$.
+
+2. *Associativity.*
+~ Math
+\begin{aligned}
+(fN \cdot gN) \cdot hN &= fN \cdot (gN \cdot hN) \\
+(fgN) \cdot hN &= fN \cdot (ghN) \\
+(fg)hN &= f(gh)N
+\end{aligned}
+~
+
+3. *Existence of identity.* $1_{G/N} = 1_G N$.
+
+4. *Existence of inverses.* $(gN)^{-1} = g^{-1}N$.
+
+**QED**
+
+**Examples:**
+
+0. If $N = \{1\}$, then $G/N \cong G$ for all $G$.
+1. If $N = G$, then $G/N \cong \{1\}$ for all $G$.
+2. $\Z / n\Z = \Z_n$.
+
+**Theorem** (First Isomorphism Theorem): Let $\phi: G \to H$ be a homomorphism. Then $\phi(G) \cong G / \ker \phi$.
+
+*Proof:* Let $N = \ker \phi$. Define $\alpha: G/N \to \phi(G)$ by $\alpha(gN) = \phi(g)$.
+
+1. *Well-definedness.* Suppose $gN = fN$.

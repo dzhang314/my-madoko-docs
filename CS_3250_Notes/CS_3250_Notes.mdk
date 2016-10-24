@@ -94,3 +94,105 @@ This course will examine three aspects of algorithms:
 3. Complexity of Problems (Difficult!)
 
 _(Discussion of these aspects omitted. Discussion of complexity of songs omitted.)_
+
+
+
+# Lecture 4 (2016-08-31)
+
+## Introduction to Graphs
+
+A ___graph___ is a collection of ___vertices/nodes/points___ linked by ___edges/arcs/lines___. When describing the running times of graph algorithms, we write $n$ for the number of vertices and $m$ for the number of edges. A graph algorithm running on $O(n+m)$ time is said to be ___linear___ in the input graph.
+
+For the purposes of this class, a "graph" without further qualification should be assumed to be an undirected simple graph with no self-loops. We will explicitly specify when we want directed graphs (aka digraphs), multigraphs, or graphs with loops.
+
+If $x$ is a vertex in a graph, the ___degree___ of $x$ is the number of edges touching $x.$ (Self-loops count twice, to ensure that the sum of all vertex degrees is twice the total number of edges.) The ___neighbors___ of $x$ are the vertices reachable from $x$ by traversing one edge (note that $x$ is not a neighbor of itself). For simple graphs, a ___path___ can be equivalently regarded as a sequence of neighboring edges or of neighoring vertices, and a ___cycle___ is a path that begins and ends at the same vertex.
+
+Two standard representations of graphs are ___adjacency lists___ and ___adjacency matrices___. Be aware that both representations have advantages and disadvantages --- it's not a simple time/space tradeoff!
+
+
+
+# Lecture 5 (2016-09-02)
+
+## Directed Acyclic Graphs and Topological Sort
+
+Directed acyclic graphs (___DAG___s) naturally occur in job scheduling problems. Here, we represent jobs as vertices, and we put an edge between jobs $i$ and $j$ if job $i$ needs to be done before job $j.$ In this context, the "needs to be done before" relation is transitive, so there may be more than one DAG that represents a certain set of constraints. Putting in all the unnecessary edges is taking the ___transitive closure___ of a DAG; taking them out is called ___transitive reduction___.
+
+A ___topological sort___ of a directed acyclic graph (DAG) is an ordering $v_1 v_2 \dots v_n$ of its vertices such that no edge goes backwards. There is a simple algorithm that finds a topological sort of a DAG, which runs in $O(m+n)$ time on adjacency lists.
+
+- Tag each vertex with its indegree (by iterating over the set of all edges).
+- Repeat
+  - Find a vertex $v$ with no in-edges.
+  - Output and delete $v,$ along with all its out-edges.
+- until no vertices remain.
+
+If we have a weighted DAG, a natural question to ask is to identify the longest path. For job scheduling, this gives the ___critical path___ --- the rate-limiting path that can't be sped up by adding parallelization. There is a simple $O(n+m)$ algorithm for finding this longest path once we have a topological sort.
+
+- For $i = 1$ to $n$
+  - Look at all the in-edges of $v_i,$ and let $e_i: v_j \to v_i$ be the edge of maximal weight.
+    - Because the edges are topologically sorted, we know that $j < i.$
+  - Define $a_i = a_j + w(e),$ or $a_i = 0$ if there is no such edge.
+- End for.
+- The length of the maximal path is now $\max_i a_i.$ The path itself can be recovered by traversing the edges $e_i$ in reverse order.
+
+
+
+# Lecture 6 (2016-09-05)
+
+## Breadth-First Search and Depth-First Search
+
+An obvious application of BFS is to compute the shortest path from one vertex to all other vertices. BFS and DFS are somewhat easier on adjacency lists, so we will assume this representation for the rest of this lecture.
+
+_(See OneNote for example BFS execution.)_
+
+BFS is $O(m+n).$ Each adjacency list is traversed once $(2m),$ and afterwards, we scan the vertices to make sure everything is marked as visited $(n).$
+
+While executing a BFS, we can construct a _BFS tree_, a subgraph of the original graph $G$ given by the pattern of traversals executed by the search. In general, whenever we have a subtree $T$ of a graph $G,$ we can group the edges of $G$ in the following way:
+
+- _Tree edges_, which are edges of $G$ that appear in $T.$
+- _Back edges_, which are edges of $G$ that do not appear in $T,$ but do appear in its transitive closure. (We regard $T$ as a directed graph, with edges pointing away from the root. Some sources allow edges appearing in $T$ to be back edges as well.)
+- _Cross edges_, which are edges of $G$ that appear in neither $T$ nor its transitive closure.
+
+Observe that, with respect to a BFS tree, a graph can have tree edges and cross edges, but not back edges.
+
+_(See OneNote for example DFS execution.)_
+
+DFS is also $O(m+n)$ for the same reason. (Make sure to maintain a pointer to the current child being examined in each adjacency list, so that no link is traversed twice.) DFS can produce tree edges and back edges, but not cross edges. Indeed, suppose we have an edge $x-y$ and suppose WLOG that $x$ is visited first. Then $y$ appears in the adjacency list of $x,$ and the search will not "back out" of $x$ until $y$ is explored. Therefore $x$ will necessarily be an ancestor of $y.$
+
+
+
+# Lecture 7 (2016-09-07)
+
+## Identifying Articulation Points in a Graph
+
+Naiive algorithm:
+
+- For each vertex $v$
+  - Test if $G-\{v\}$ is connected
+  - If not, output $v$
+
+Runs in $O(n(n+m))$ time.
+
+Clever algorithm: Run DFS on $G$ and build a DFS tree. Mark each vertex with how far back in the DFS tree one can reach by starting at that vertex. See OneNote for details.
+
+~ Math
+\operatorname{back}(v) = \min(\operatorname{back}(\operatorname{children}(v)), \operatorname{DFS\#}(\operatorname{neighbors}(v)))
+~
+
+
+
+# Lecture 8 (2016-09-09)
+
+When DFS is run on a directed graph, we obtain a DFS tree (or more generally a DFS forest, if the input graph is not connected). This DFS tree can have back-edges, forward-edges, tree-edges, and cross-edges, defined analogously to the undirected case. Unlike the undirected case, DFS trees on directed graphs ___can contain cross-edges!___ (In addition to forward, back, and tree-edges.) But note that ___these cross-edges can only run from high DFS# to low DFS#___.
+
+__Definition:__ A directed graph is ___weakly connected___ if, after throwing away the directions, it is a connected undirected graph. It is ___strongly connected___ is there is a path (both ways) between any pair of vertices. It is ___(???) connected___ if there is a path (one way) between any pair of vertices.
+
+Any directed graph admits a decomposition into ___strongly connected components___, maximal strongly connected subgraphs, such that each vertex lies inside precisely one strongly connected component. (Some such components might be trivial, i.e., consist of a single vertex.)
+
+--------------------------------------------------------------------------------
+
+**Theorem:** Let $I(L)$ denote the number of inversions in a list $L.$ Bubblesort does _not_ run in $O(n + I(L))$ time.
+
+*Proof:* Consider the generalized example
+~ Math
+L_n = [2, 3, \dots, n-1, n, 1].
+~
