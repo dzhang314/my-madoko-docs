@@ -1,0 +1,39 @@
+Title: [TOPIC NAME HERE] - David K. Zhang - Personal Website
+
+[INCLUDE=../include/DZ_Bootstrap.mdk]
+[INCLUDE=../include/navbar/DZ_Navbar_LecNotes.html]
+
+~ Begin MathDefs
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\C}{\mathbb{C}}
+~ End MathDefs
+
+~ Begin Container
+
+~ Begin Center
+# Notes on Quantum Mechanics {-}
+
+By David K. Zhang
+~ End Center
+
+&br;
+~ Begin Panel {.panel-info}
+~ Begin Panel-Heading
+#### Under Construction! {-; margin=0px; padding=0px}
+~ End Panel-Heading
+~ End Panel
+
+For a wavefunction $f(x)$ in the $x$ basis:
+
+~ Math
+\begin{aligned}
+\bra{x}\ket{f} &= f(x) \\
+\bra{p}\ket{f} &= f(x)
+\end{aligned}
+~
+
+[INCLUDE=../include/DZ_Footer]
+
+~ End Container
