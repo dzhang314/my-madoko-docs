@@ -14,7 +14,10 @@ Package: mathtools
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\acts}{\curvearrowright}
+\newcommand{\nin}{\trianglelefteq}
+\newcommand{\nni}{\trianglerighteq}
 ~ End MathDefs
 
 ~ Begin Container
@@ -1218,6 +1221,45 @@ Conversely, $\{1\} = Q_0 \le Q_1 \le \cdots \le Q_{s-1} = G/Z(G)$ is a nilpotent
 *Proof:* The reverse implication follows from the previous theorem and property 3. The forward implication follows from the following lemma: every subgroup of a nilpotent group is subnormal. To see this, let $H \le G$ with $G$ nilpotent. Let $\phi: G \to G/Z(G)$. By induction, $\phi(H)$ is subnormal in $\phi(G) = G/Z(G)$. Thus there exists a subnormal series $\phi(H) = Q_0 \trianglelefteq Q_1 \trianglelefteq \cdots \trianglelefteq Q_k = \phi(G)$. By taking $H_i = \phi^{-1}(Q_i)$, we obtain a subnormal series from $H \ker \phi$ to $G$. But $H$ is normal in $H \ker \phi$, so we are done.
 
 Returning to the proof of the theorem, let $G$ be nilpotent. Then for all Sylow $p$-subgroups $P \le G$, we have $P \trianglelefteq G$. It follows that $N_G(N_G(P)) = N_G(P)$, and the lemma then implies the claim. (Some details omitted here.) **QED**
+
+# Lecture 18 (2016-10-27)
+
+## Solvable Groups: Definition
+
+**Homework:** Show that $S_3$ is solvable but not nilpotent.
+
+**Definition:** A group $G$ is ___solvable___ if one of the following equivalent conditions holds:
+
+1. There exists a normal series $G = G_0 \nni G_1 \nni \cdots \nni G_k = \{1\}$ such that $G_i / G_{i+1}$ is abelian for all $i$.
+
+2. Define $G^{(0)} = G$ and $G^{(n+1)} = [G^{(n)}, G^{(n)}] = \ev{[g, h] : g,h \in G^{(n)}}$. (This is called the ___derived series___ of $G$.) There exists $k \in \N$ such that $G^{(k)} = \{1\}$.
+
+**Example:** Every group of order $pq$ is solvable for $p,q$ prime. This is easy to show using the first condition, but hard to show using the second.
+
+**Theorem:** The two defining conditions for solvability are indeed equivalent.
+
+*Proof:* We show that (1) implies (2) by induction. Given a normal series $G = G_0 \nni G_1 \nni \cdots \nni G_k = \{1\}$ such that $G_i / G_{i+1}$ is abelian for all $i$, it is clear that $G_0 = G^{(0)}$. Now if $G^{(i-1)} \le G_{i-1}$, then
+~ Math
+G^{(i)} = [G^{(i-1)},G^{(i-1)}] = \ev{[g,h] : g,h \in G^{(i-1)}} \le \ev{[g,h] : g,h \in G_{i-1}} = G_{i-1}'
+~
+and it suffices to show that $G_{i-1}' \le G_i$. To see this, let $f,g \in G_{i-1}$. Then $[fG_i, gG_i] = [f, g]G_i = G_i$ since $G_{i-1} / G_i$ is abelian, and $[f, g] \in G_{i}$. Thus $G^{(i)} \le G_i$ for all $i$, and if $G^{(k)} \le G_k = \{1\}$, we must have $G^{(k)} = \{1\}$.
+
+To see that (2) implies (1), we first show that the derived series is normal. To do this, we will need the following lemmas.
+
+**Lemma 1:** Suppose $N \nin G$, $H \le N$, and for all $\alpha \in \Aut(N)$ we have $\alpha(H) = H$. Then $H \nin N$.
+
+*Proof:* For all $g \in G$ we have $g^{-1}Ng = N$. Define $\alpha_g: N \to N$ by $\alpha_g(f) = g^{-1}fg$. Then $\alpha_g \in \Aut(N)$. Since $\alpha_g(H) = g^{-1}Hg = H$ for all $g$, we have $H \nin G$, and consequently $H \nin N$ as desired. **QED**
+
+**Lemma 2:** $\alpha(G') = G'$ for all groups $G$ and $\alpha \in \Aut(G)$.
+
+*Proof:* $\alpha([g, h]) = [\alpha(g), \alpha(h)]$, so $\alpha$ takes generators to generators. **QED**
+
+These lemmas imply that the derived series is a normal series. To see that quotients are abelian, note that $[aG^{(i)}, bG^{(i)}] = [a, b]G^{(i)} = 1\cdot G^{(i)}$. **QED**
+
+**Examples:**
+
+0. Abelian groups are precisely the solvable groups of solvability class 1.
+1. Nilpotent groups are solvable.
 
 [INCLUDE=../include/DZ_Footer]
 
