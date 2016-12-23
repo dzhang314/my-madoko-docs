@@ -187,12 +187,3 @@ When DFS is run on a directed graph, we obtain a DFS tree (or more generally a D
 __Definition:__ A directed graph is ___weakly connected___ if, after throwing away the directions, it is a connected undirected graph. It is ___strongly connected___ is there is a path (both ways) between any pair of vertices. It is ___(???) connected___ if there is a path (one way) between any pair of vertices.
 
 Any directed graph admits a decomposition into ___strongly connected components___, maximal strongly connected subgraphs, such that each vertex lies inside precisely one strongly connected component. (Some such components might be trivial, i.e., consist of a single vertex.)
-
---------------------------------------------------------------------------------
-
-**Theorem:** Let $I(L)$ denote the number of inversions in a list $L.$ Bubblesort does _not_ run in $O(n + I(L))$ time.
-
-*Proof:* Consider the generalized example
-~ Math
-L_n = [2, 3, \dots, n-1, n, 1].
-~
