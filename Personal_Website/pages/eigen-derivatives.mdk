@@ -10,6 +10,7 @@ Package: cancel
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
+\providecommand{\C}{}
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\vv}{\mathbf{v}}
 \newcommand{\vo}{\mathbf{0}}
@@ -23,13 +24,6 @@ Package: cancel
 
 By David K. Zhang
 ~ End Center
-
-&br;
-~ Begin Panel {.panel-info}
-~ Begin Panel-Heading
-#### Under Construction! {-; margin=0px; padding=0px}
-~ End Panel-Heading
-~ End Panel
 
 Consider the generalized eigenvalue problem 
 ~ Equation {#gen-eig}

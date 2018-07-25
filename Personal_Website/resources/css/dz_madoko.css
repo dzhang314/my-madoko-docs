@@ -1,7 +1,7 @@
 /* ---------------------------------------------------
    Various settings to display madoko elements correctly.
    For example, lines in tables or a table of contents.
-   Customed version by David K. Zhang.
+   Customized version by David K. Zhang.
 
    All rules use specific madoko classes and never just
    a generic element. This means one can safely include

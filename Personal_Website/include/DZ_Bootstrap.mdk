@@ -1,6 +1,6 @@
 
 Css           : Clear
-Css           : ../resources/css/DZ_MADOKO.css
+Css           : ../resources/css/dz_madoko.css
 Css           : https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/readable/bootstrap.min.css
 
 Html Meta     : http-equiv="X-UA-Compatible" content="IE=edge"
