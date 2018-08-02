@@ -5,6 +5,7 @@ Package: bm
 Package: physics
 
 ~ MathDefs
+\providecommand{\C}{}
 \newcommand{\R}{\mathbb{R}}
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\Rext}{{\R \cup \{\infty\}}}
