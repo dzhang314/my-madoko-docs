@@ -1,0 +1,129 @@
+CSS: Clear
+CSS: https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/litera/bootstrap.min.css
+
+Logo: False
+
+Math Mode: static
+TeX2: True
+Package: madoko2
+Package: mathtools
+Package: physics
+
+math-inline { input: math; }
+Math { input: math; .para-block; text-align: center; margin: 1em 0em; }
+MathB { input: math; .para-block; text-align: center; margin: 1em 0em 0em 0em; }
+Strong { tex-cmd: "\textbf"; }
+Em { tex-cmd: "\emph"; }
+
+Title { text-align: center; tight: true; margin-bottom: 1em }
+Subtitle { text-align: center; tight: true; margin-bottom: 2em }
+
+body {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  max-width: 50em;
+  margin: 1em auto;
+  padding: 0em 2em;
+}
+
+.body-font { font-family: Georgia, Cambria, Times, serif; }
+
+p { text-align: justify; .body-font; }
+
+qed: [&#9744;]{float: right}
+@if tex {
+  qed: [\qed{}]{input: texraw}
+}
+
+Definition {
+  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
+            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+            **Definition:**&nl;&source;&nl;\
+            ~~ End Card-Body&nl;\
+            ~ End Card';
+  tight: true;
+}
+
+Notation {
+  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
+            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+            **Notation:**&nl;&source;&nl;\
+            ~~ End Card-Body&nl;\
+            ~ End Card';
+  tight: true;
+}
+
+Theorem {
+  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
+            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+            **Theorem:** &source;&nl;\
+            ~~ End Card-Body&nl;\
+            ~ End Card';
+  tight: true;
+}
+
+Well {
+  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
+            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+            &source;&nl;\
+            ~~ End Card-Body&nl;\
+            ~ End Card';
+  tight: true;
+}
+
+BigWell {
+  replace: '~ Begin Card { margin-bottom: 1em; }&nl;\
+            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; .body-font; }&nl;\
+            &source;&nl;\
+            ~~ End Card-Body&nl;\
+            ~ End Card';
+}
+
+MathCard {
+  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
+            &source;&nl;\
+            ~ End Card';
+  tight: true;
+}
+
+TheoremBody {
+  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+            **Theorem:** &source;&nl;\
+            ~~ End Card-Body';
+  tight: true;
+}
+
+RemarkBody {
+  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; tight: true; .body-font; }&nl;\
+            *Remark:* &source;&nl;\
+            ~~ End Card-Body';
+  tight: true;
+}
+
+RemarkMBody {
+  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; .body-font; }&nl;\
+            *Remark:* &source;&nl;\
+            ~~ End Card-Body';
+}
+
+ProofBody {
+  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; .body-font; }&nl;\
+            *Proof:* &source;&qed;&nl;\
+            { margin: 0px; }&nl;\
+            ~~ End Card-Body';
+  tight: true;
+}
+
+ExtraBody {
+  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; tight: true; .body-font; }&nl;\
+            &source;&nl;\
+            ~~ End Card-Body';
+  tight: true;
+}
+
+DefinitionBody {
+  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+            **Definition:**&nl;&source;&nl;\
+            ~~ End Card-Body';
+  tight: true;
+}

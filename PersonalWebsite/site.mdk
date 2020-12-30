@@ -1,0 +1,100 @@
+Prelude: DZPrelude
+
+We denote by $\Ord$ the class of ordinal numbers. Following von Neumann's construction, we identify each ordinal number $\alpha \in \Ord$ with the well-ordered set of all smaller ordinals.
+
+~ Begin Definition
+A ***surreal number*** is a function from an ordinal number to the 2-element set $\{+, -\}.$ The class of surreal numbers is denoted by $\No.$
+~ End Definition
+
+Clearly, there are at least as many surreal numbers as ordinal numbers, so $\No$ is a proper class. We will later see that $\Ord$ embeds into $\No$ in a natural way.
+
+~ Begin Notation { #birthday; label: "birthday"; }
+The domain of a surreal number $x \in \No$ is called its ***birthday***, denoted by $\beta(x).$ Hence, we may write $x: \beta(x) \to \{+, -\}.$
+~ End Notation
+
+Conway imagines that the surreal numbers are constructed inductively, with the empty sequence $()$ being created on "day zero." On day one, its descendants $(+)$ and $(-)$ are born. Then, on day two, each of these two sequences gives rise to two more by concatenation of a $+$ or $-;$ so that $(+)$ gives birth to $(++)$ and $(+-)$, while $(-)$ gives birth to $(-+)$ and $(--).$ Continuing in this fashion, $2^n$ new surreal numbers are born on the $n$^th^ day. This process continues transfinitely, with $2^\omega$ new surreal numbers being born on day $\omega.$
+
+~ Begin Definition
+We say that a surreal number $x \in \No$ is ***simpler*** than a surreal number $y \in \No,$ denoted by $x \simplereq y,$ if $x$ is an initial segment of $y.$ We write $x \simpler y$ to mean $x \simplereq y$ and $x \ne y.$
+~ End Definition
+
+~ Begin Definition
+~~ Begin MathDisplay { text-align: center; }
+a + b \coloneqq \{ a^L + b,\ a + b^L \} \mid \{ a^R + b,\ a + b^R \}
+~~ End MathDisplay
+~ End Definition
+
+~ Begin Definition
+We say that two positive surreal numbers $x, y \in \No$ are in the same ***Archimedean class***, denoted by $x \sim y,$ if there exists an integer $n \in \N$ such that $nx \ge y$ and $x \le ny.$ On the other hand, if $nx < y$ for all $n \in \N,$ we write $x \ll y,$ or equivalently, $y \gg x.$
+~ End Definition
+
+For any two positive surreal numbers $x, y \in \No,$ we either have $x \ll y,$ $x \sim y,$ or $x \gg y.$
+
+~ Begin MathCard
+~~ Begin TheoremBody
+A positive surreal number is the simplest element of its Archimedean class if and only if it can be written in the form $\omega^x$ for some $x \in \No$.
+~~ End TheoremBody
+~~ Begin ProofBody
+~~ End ProofBody
+~ End MathCard
+
+
+~ Begin MathCard
+~~ Begin TheoremBody
+Let $F, G \subset \No$ be sets of surreal numbers. (Note that this notation indicates that $F$ and $G$ are sub_sets_ of $\No,$ as opposed to sub_classes_.) If $F < G,$ then there exists a unique simplest surreal number $x \in \No$ satisfying $F < x < G.$
+~~ End TheoremBody
+~~ Begin RemarkBody
+To say that $x$ is the _simplest_ such surreal number means that $x$ is an initial segment of any surreal number $y \in \No$ satisfying $F < y < G.$
+~~ End RemarkBody
+~~ Begin ProofBody
+If $F = G = \varnothing,$ then we take the empty sequence. If $F$ is non-empty but $G$ is empty, then we take a sufficiently long sequence of $+;$ similarly, if $F$ is empty but $G$ is non-empty, then we take a sufficiently long sequence of $-.$
+
+Now, if both $F$ and $G$ are non-empty, then there exists a least ordinal $\alpha \in \Ord$ such that any member of $F$ differs from any member of $G$ somewhere in their first $\alpha$ places. Indeed, if there were no such $\alpha,$ then there would exist a member of $F$ that agrees with a member of $G$ in _every_ place, contradicting our assumption that $F < G.$ Because we picked $\alpha$ to be the _least_ such ordinal, for every $\gamma < \alpha,$ there exist members of $F$ and $G$ who agree in their first $\gamma$ places.
+
+We now consider two cases. If $\alpha$ is a limit ordinal, then any $\gamma < \alpha$ satisfies $\gamma + 1 < \alpha.$
+~~ End ProofBody
+~ End MathCard
+
+<hr />
+
+~ MathDisplay { text-align: center; }
+\begin{aligned}
+x &= r \sin(\theta) \cos(\phi) \\
+y &= r \sin(\theta) \sin(\phi) \\
+z &= r \cos(\theta)
+\end{aligned}
+~
+
+<hr />
+
+~ MathDisplay { text-align: center; }
+\begin{aligned}
+\pdv{x}{r} &= \sin(\theta) \cos(\phi) &
+\pdv{x}{\theta} &= r \cos(\theta) \cos(\phi) &
+\pdv{x}{\phi} &= -r \sin(\theta) \sin(\phi) \\
+\pdv{y}{r} &= \sin(\theta) \sin(\phi) &
+\pdv{y}{\theta} &= r \cos(\theta) \sin(\phi) &
+\pdv{y}{\phi} &= r \sin(\theta) \cos(\phi) \\
+\pdv{z}{r} &= \cos(\theta) &
+\pdv{z}{\theta} &= -r \sin(\theta) &
+\pdv{z}{\phi} &= 0
+\end{aligned}
+~
+
+<hr />
+
+~ Definition
+Let $M$ be a smooth manifold. A ***tangent vector*** at a point $p \in M$ is an $\R$-linear map $X_p : C^\infty(M) \to \R$ satisfying the _Leibniz identity_
+~~ MathDisplay { text-align: center; margin-top: 1em; margin-bottom: 0.5em; }
+X_p(f g) = X_p(f) g(p) + f(p) X_p(g).
+~~
+The set of all tangent vectors at the point $p$ is called the ***tangent space*** at $p,$ denoted by $T_p M.$
+{ margin: 0px; }
+~
+
+It can be verified that a linear combination of tangent vectors is another tangent vector (i.e., the Liebniz identity is preserved under linear combination), so each tangent space $T_p M$ is naturally a vector space over $\R.$
+
+~ Theorem
+$\dim T_p M = \dim M$ for all $p \in M.$
+~
+

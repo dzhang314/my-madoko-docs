@@ -1,0 +1,13 @@
+
+~ { input: mathdefs; }
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\R}{{\mathbb{R}}}
+\providecommand{\C}{}
+\renewcommand{\C}{{\mathbb{C}}}
+\newcommand{\No}{{\mathbf{No}}}
+\newcommand{\Ord}{{\mathbf{Ord}}}
+\newcommand{\simpler}{\mathrel{{\lt}_{\mathsf{s}}}}
+\newcommand{\simplereq}{\mathrel{{\le}_{\mathsf{s}}}}
+~
