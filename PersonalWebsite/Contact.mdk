@@ -4,10 +4,25 @@ Title: David K. Zhang - Personal Website
 [INCLUDE="DZMathDefs.mdk"]
 [INCLUDE="DZHeader.html"]
 
-~ Title { color: gray; margin-bottom: 2.5em; }
+~ Title { margin-bottom: 2em; }
 ~~ H4 { tight: true; font-weight: normal; }
-New site, who dis?
+Let's get in touch.
 ~~
 ~
+
+For business: $\textsf{dkzhang@stanford.edu}$
+{ font-family: inherit; margin-bottom: 0.1em; color: black; }
+
+For pleasure: <a href="https://www.facebook.com/dzhang314">facebook.com/dzhang314</a>
+{ font-family: inherit; margin-bottom: 0.1em; }
+
+For photos: <a href="https://www.instagram.com/zhangthemaster/">instagram.com/zhangthemaster</a>
+{ font-family: inherit; margin-bottom: 0.1em; }
+
+For anything else: $\textsf{dzhang314@gmail.com}$
+{ font-family: inherit; }
+
+(You can't copy/paste the e-mail addresses on purpose.)
+{ font-family: inherit; }
 
 [INCLUDE=DZFooter.mdk]
