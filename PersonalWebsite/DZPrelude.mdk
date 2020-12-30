@@ -15,7 +15,7 @@ MathB { input: math; .para-block; text-align: center; margin: 1em 0em 0em 0em; }
 Strong { tex-cmd: "\textbf"; }
 Em { tex-cmd: "\emph"; }
 
-Title { text-align: center; tight: true; margin-bottom: 1em }
+Title { text-align: center; tight: true; margin-top: 5.5em; margin-bottom: 1em }
 Subtitle { text-align: center; tight: true; margin-bottom: 2em }
 
 body {

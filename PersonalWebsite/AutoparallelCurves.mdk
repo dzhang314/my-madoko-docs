@@ -2,6 +2,7 @@ Prelude: DZPrelude
 Title: Autoparallel Curves - David K. Zhang - Personal Website
 
 [INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
 
 ~ Title
 <h4>Autoparallel Curves, the Levi-Civita Connection,<br>and the Geodesic Equation</h4>
@@ -22,7 +23,7 @@ Let $M$ be a smooth manifold, and let $\gamma: \R \to M$ be a smooth curve. The 
 Let $M$ be a smooth manifold with affine connection $\nabla$, and let $\gamma: \R \to M$ be a smooth curve. We say that $\gamma$ is ***autoparallel*** if $\nabla_{\dot{\gamma}} \dot{\gamma} = 0.$
 ~
 
-Geometrically speaking, autoparallel curves are those which are "as straight as possible" (i.e., never deviating from their current direction of travel) and move at uniform speed. Indeed, the condition $\nabla_{\dot{\gamma}} \dot{\gamma} = 0$ precisely stipulates that they have constant velocity. Of course, we don't have a formal notion of speed or angle in the absence of a metric, so this is only a vague metaphor for now.
+Geometrically speaking, autoparallel curves are those which are "as straight as possible" (i.e., never deviating from their current direction of travel) and move at uniform speed. Indeed, the condition $\nabla_{\dot{\gamma}} \dot{\gamma} = 0$ stipulates that they have constant velocity. Of course, we don't have a formal notion of speed or angle in the absence of a metric, so this is only a vague metaphor for now.
 
 If we write the condition $\nabla_{\dot{\gamma}} \dot{\gamma} = 0$ in terms of a coordinate basis, we obtain:
 
@@ -143,13 +144,13 @@ We now take a step that presently appears artificial, but will turn out to have 
 By plugging this expression for $\dot{\gamma}^a \dot{\gamma}^b \partial_b g_{ac}$ into the Euler--Lagrange equation and moving all terms to the same side, we obtain:
 
 ~ Math
-\ddot{\gamma}^a g_{ac} + \frac{1}{2} \dot{\gamma}^a \dot{\gamma}^b \qty(\partial_a g_{bc} + \partial_b g_{ca} - \partial_c g_{ab}) = 0 \\
+\ddot{\gamma}^a g_{ac} + \frac{1}{2} \dot{\gamma}^a \dot{\gamma}^b \qty(\partial_a g_{bc} + \partial_b g_{ca} - \partial_c g_{ab}) = 0
 ~
 
 In order to isolate $\ddot{\gamma},$ we contract both sides with $g^{cd},$ noting that $\ddot{\gamma}^a g_{ac} g^{cd} = \ddot{\gamma}^a \delta_a^d = \ddot{\gamma}^d.$
 
 ~ Math
-\ddot{\gamma}^d + \frac{1}{2} \dot{\gamma}^a \dot{\gamma}^b g^{cd} \qty(\partial_a g_{bc} + \partial_b g_{ca} - \partial_c g_{ab}) = 0 \\
+\ddot{\gamma}^d + \frac{1}{2} \dot{\gamma}^a \dot{\gamma}^b g^{cd} \qty(\partial_a g_{bc} + \partial_b g_{ca} - \partial_c g_{ab}) = 0
 ~
 
 We are now poised to make a remarkable observation. This equation has precisely the form of an autoparallel equation $\ddot{\gamma}^d + \dot{\gamma}^a \dot{\gamma}^b \Gamma^d{}_{ab} = 0$ if we define the following connection coefficients:
@@ -184,7 +185,7 @@ The autoparallel curves of ${}^{\textsf{LC}} \nabla$ are so important that they 
 ~ Definition
 Let $(M, g)$ be a (pseudo-)Riemannian manifold. A smooth curve $\gamma: \R \to M$ is called a ***geodesic*** if it is autoparallel with respect to the Levi-Civita connection ${}^{\mathsf{LC}} \nabla$ on $M,$ or equivalently, if it satisfies the ***geodesic equation***
 ~~ Math
-\ddot{\gamma}^d + \frac{1}{2} \dot{\gamma}^a \dot{\gamma}^b g^{cd} \qty[\partial_a g_{bc} + \partial_b g_{ca} - \partial_c g_{ab}] = 0 \\
+\ddot{\gamma}^d + \frac{1}{2} \dot{\gamma}^a \dot{\gamma}^b g^{cd} \qty[\partial_a g_{bc} + \partial_b g_{ca} - \partial_c g_{ab}] = 0
 ~~
 in some coordinate chart around each of its points.
 { margin: 0px; }
@@ -238,10 +239,12 @@ Another application of the symmetrization trick yields the identity $\frac{1}{2}
 
 This is the equivalent of the geodesic equation for curves with variable-speed parameterizations. Notice that it does not have the form of an autoparallel equation, since such curves are not autoparallel in general.
 
-Note that the variable-speed geodesic equation does not constitue a system of $n = \dim M$ independent second-order differential equations as $d$ runs from 1 to $n.$ This system is rank-deficient, since if we contract both sides with $\gamma^e g_{de}$, we find the trivial identity
+Note that the variable-speed geodesic equation does not constitute a system of $n = \dim M$ independent second-order differential equations as $d$ runs from 1 to $n.$ This system is rank-deficient, since if we contract both sides with $\gamma^e g_{de}$, we find the trivial identity
 
 ~ Math
 \qty(\dot{\gamma} \cdot \dot{\gamma}) \qty(\dot{\gamma}^a \dot{\gamma}^b \dot{\gamma}^c \Gamma_{abc} + \ddot{\gamma} \cdot \dot{\gamma}) = \qty(\dot{\gamma} \cdot \dot{\gamma}) \qty(\dot{\gamma}^a \dot{\gamma}^b \dot{\gamma}^c \Gamma_{abc} + \ddot{\gamma} \cdot \dot{\gamma}).
 ~
 
 Thus, if we were to try to solve an initial value problem for the variable-speed geodesic equation, we would find one free parameter at each time step, corresponding to the speed of the parameterization.
+
+[INCLUDE=DZFooter.mdk]
