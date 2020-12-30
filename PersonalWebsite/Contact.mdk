@@ -23,6 +23,6 @@ For anything else: $\textsf{dzhang314@gmail.com}$
 { font-family: inherit; }
 
 (You can't copy/paste the e-mail addresses on purpose.)
-{ font-family: inherit; }
+{ font-family: inherit; margin-bottom: 2em; }
 
 [INCLUDE=DZFooter.mdk]

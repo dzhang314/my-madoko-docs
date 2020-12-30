@@ -4,10 +4,16 @@ Title: David K. Zhang - Personal Website
 [INCLUDE="DZMathDefs.mdk"]
 [INCLUDE="DZHeader.html"]
 
-~ Title { color: gray; margin-bottom: 2.5em; }
+~ Title { margin-bottom: 2em; }
 ~~ H4 { tight: true; font-weight: normal; }
-New site, who dis?
+Hey! I'm David.
 ~~
 ~
+
+This is where you'll find the things I do and the notes I write.
+{ font-family: inherit; }
+
+I'm a second-year Ph.D. student at <a href="https://www.stanford.edu/" style="color: #B83A4B;">Stanford University</a>, in the [Institute for Computational and Mathematical Engineering](https://icme.stanford.edu/).
+{ font-family: inherit; margin-bottom: 2em; }
 
 [INCLUDE=DZFooter.mdk]
