@@ -13,7 +13,10 @@ Hey! I'm David.
 This is where you'll find the things I do and the notes I write.
 { font-family: inherit; }
 
-I'm a second-year Ph.D. student at <a href="https://www.stanford.edu/" style="color: #B83A4B;">Stanford University</a>, in the [Institute for Computational and Mathematical Engineering](https://icme.stanford.edu/).
+I'm a second-year Ph.D. student at <a href="https://www.stanford.edu/" style="color: #B83A4B;">Stanford University</a> in the <a href="https://icme.stanford.edu/" style="color: #d17d00;">Institute for Computational and Mathematical Engineering</a>. You've probably seen me if you live in the area; I'm the guy with the big hair and the ukulele.
+{ font-family: inherit; }
+
+I previously studied mathematics, physics, computer science, and scientific computing at <a href="https://www.vanderbilt.edu/" style="color: #bf9539;">Vanderbilt University</a>. If you were a freshman in 2015, you might have known me as the stairwell guitar guy in Hank House. I had to downsize when I flew out to Cali --- couldn't fit my guitar on the plane.
 { font-family: inherit; margin-bottom: 2em; }
 
 [INCLUDE=DZFooter.mdk]
