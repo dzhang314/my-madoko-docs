@@ -1,0 +1,13 @@
+Prelude: DZPrelude
+Title: Projects - David K. Zhang - Personal Website
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title { color: gray; margin-bottom: 2.5em; }
+~~ H4 { tight: true; font-weight: normal; }
+New site, who dis?
+~~
+~
+
+[INCLUDE=DZFooter.mdk]
