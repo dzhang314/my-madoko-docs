@@ -3,7 +3,11 @@ import shutil
 import sys
 
 
+SITE_REPO_DIR = "C:\\Users\\Zhang\\Documents\\GitHub\\dzhang314.github.com"
+
+
 def build_and_move(src_name: str, dst_name: str):
+    print("Building", src_name + ".mdk", "->", dst_name + ".html")
     os.system("madoko " + src_name + ".mdk")
     os.renames(os.path.join("out", src_name + ".html"),
                os.path.join("site", dst_name + ".html"))
@@ -31,3 +35,10 @@ build_and_move("AutoparallelCurves", "notes/autoparallel-curves")
 
 if os.path.isdir("out"):
     shutil.rmtree("out")
+
+if os.path.isdir(SITE_REPO_DIR):
+    for root, dirs, files in os.walk("site"):
+        for fname in files:
+            shutil.move(os.path.join(root, fname), os.path.join(
+                root, fname).replace("site", SITE_REPO_DIR, 1))
+    shutil.rmtree("site")
