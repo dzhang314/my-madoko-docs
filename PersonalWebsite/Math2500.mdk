@@ -1,5 +1,5 @@
 Prelude: DZPrelude
-Title: Notes Template - David K. Zhang - Personal Website
+Title: MATH 2500 - David K. Zhang - Personal Website
 
 h3 { margin: 1em 0em 0.5em 0em; }
 
@@ -39,7 +39,7 @@ Introductory remarks and discussion of syllabus.
 
 ~ MathCard
 ~~ LongDefinitionBody { tight: false; }
-A ***vector space*** $V$ is a set with two operations:
+A ___vector space___ $V$ is a set with two operations:
 { margin-bottom: 0.5em; }
 
 * *Vector addition*: $\forall \vx, \vy \in V,$ there is a vector $\vx + \vy \in V.$
@@ -93,7 +93,7 @@ We need to show that $\vo + \vo = \vo.$ This follows from [VS3]{font-family:sans
 We will temporarily leave the realm of abstract vector spaces and return to $\R^n.$ Recall that any vector $\vx \in \R^n$ is an $n$-tuple of real numbers. We adopt the convention that $\vx$ be written $(x_1, \ldots, x_n)$ when interpreted as a point, and $\mqty[x_1 \\ \vdots \\x_n]$ when interpreted as a vector.  Points are simply visualized as points in $\R^n,$ while vectors are visualized as directed line segments from the origin $\vo$ to the point $\vx.$
 
 ~ Definition
-If $\vx = (x_1, \ldots, x_n),\ \vy = (y_1, \ldots, y_n) \in \R^n,$ then the ***distance*** from $x$ to $y$ is
+If $\vx = (x_1, \ldots, x_n),\ \vy = (y_1, \ldots, y_n) \in \R^n,$ then the ___distance___ from $x$ to $y$ is
 ~~ MathB
 \norm{\vx - \vy} \coloneqq \sqrt{(x_1-y_1)^2 + \cdots + (x_n-y_n)^2}.
 ~~
@@ -102,7 +102,7 @@ If $\vx = (x_1, \ldots, x_n),\ \vy = (y_1, \ldots, y_n) \in \R^n,$ then the ***d
 This definition generalizes the Pythagorean theorem for $n = 1,2,3.$
 
 ~ LongDefinition
-The ***length*** (a.k.a. ***norm***, ***magnitude***) of a vector $\vx = \mqty[x_1 \\ \vdots \\ x_n] \in \R^n$ is
+The ___length___ (a.k.a. ___norm___, ___magnitude___) of a vector $\vx = \mqty[x_1 \\ \vdots \\ x_n] \in \R^n$ is
 ~~ Math
 \norm{x} \coloneqq \sqrt{x_1^2 + \cdots + x_n^2},
 ~~
@@ -116,11 +116,11 @@ How do scalar multiplication and vector addition interact with this geometric in
 ~
 
 ~ Definition
-If $c>0,$ then we say that the vectors $\vx$ and $c\vx$ have the ***same direction***. On the other hand, if $c<0,$ then they have ***opposite directions***.
+If $c > 0,$ then we say that the vectors $\vx$ and $c\vx$ have the ___same direction___. On the other hand, if $c < 0,$ then they have ___opposite directions___.
 ~
 
 ~ Definition
-We call two vectors $\vx, \vy \in \R^n$ ***parallel*** if one is a scalar multiple of the other, i.e., $\exists c \in \R$ such that $\vy = c\vx$ or $\vx = c\vy.$
+We call two vectors $\vx, \vy \in \R^n$ ___parallel___ if one is a scalar multiple of the other, i.e., $\exists c \in \R$ such that $\vy = c\vx$ or $\vx = c\vy.$
 ~
 
 Under this definition, the zero vector $\vo$ is parallel to every vector.
@@ -128,7 +128,7 @@ Under this definition, the zero vector $\vo$ is parallel to every vector.
 If $\vx, \vy \in \R^2,$ then $\vx + \vy$ can be interpreted as the fourth point of the parallelogram with legs $\vx$ and $\vy$ (situated at the origin). This can be confirmed by checking that the vector from $\vy$ to $\vx + \vy$ has the same slope as $\vx,$ and vice versa. We call this interpretation the _parallelogram law of vector addition_.
 
 ~ LongDefinition
-If $\vx = \mqty[x_1 \\ \vdots \\ x_n], \vy = \mqty[y_1 \\ \vdots \\ y_n] \in \R^n,$ then their ***dot product*** is
+If $\vx = \mqty[x_1 \\ \vdots \\ x_n], \vy = \mqty[y_1 \\ \vdots \\ y_n] \in \R^n,$ then their ___dot product___ is
 
 ~~ Math
 \vx \cdot \vy \coloneqq x_1y_1 + x_2y_2 + \cdots + x_ny_n.
