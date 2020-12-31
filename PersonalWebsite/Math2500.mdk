@@ -1,7 +1,6 @@
 Prelude: DZPrelude
 Title: Notes Template - David K. Zhang - Personal Website
 
-ul { .body-font; }
 h3 { margin: 1em 0em 0.5em 0em; }
 
 [INCLUDE="DZMathDefs.mdk"]

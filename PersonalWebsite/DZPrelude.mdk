@@ -29,15 +29,17 @@ body {
 .body-font { font-family: Georgia, Cambria, Times, serif; }
 
 p { text-align: justify; .body-font; }
+ul { .body-font; }
+ol { .body-font; }
 
 qed: [&#9744;]{float: right}
 @if tex {
   qed: [\qed{}]{input: texraw}
 }
 
-MathCard { .card; margin-bottom: 1em; }
-BoxBody { .card-body; .bg-white; padding: 0.35em 0.55em; tight: true; .body-font; }
-LongBoxBody { .card-body; .bg-white; padding: 0.35em 0.55em; }
+MathCard { .card; .mb-3; }
+BoxBody { .card-body; padding: 0.35em 0.55em; tight: true; .body-font; }
+LongBoxBody { .card-body; padding: 0.35em 0.55em; }
 WellBody { .card-body; .bg-light; padding: 0.35em 0.55em; tight: true; .body-font; }
 LongWellBody { .card-body; .bg-light; padding: 0.35em 0.55em; }
 
