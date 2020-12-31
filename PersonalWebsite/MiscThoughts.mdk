@@ -150,6 +150,16 @@ This strategy is used in [this paper](https://arxiv.org/pdf/1505.02478.pdf) to e
 
 -----
 
+There exists a field called _constructive gravity_ dedicated to the following question: given a collection of equations describing the dynamics of a matter field, what is the corresponding diffeomorphism-invariant theory of gravity? That is, what tensor fields are required to describe the spacetime geometry to which this matter couples, and what field equations do those tensor fields satisfy?
+
+The methods of constructive gravity can describe more general spacetime geometries than the Lorentzian metrics of standard general relativity. For example, there are so-called _area metric manifolds_ which, instead of carrying a metric $g_{ab}$ which measures tangent lengths, carry an _area metric_ $G_{abcd}$ which measures tangent areas. Such a geometry is required to describe a spacetime in which [light can spontaneously birefract](http://dx.doi.org/10.1088/0264-9381/26/3/035024).
+
+* [Gravitational Closure of Matter Field Equations](https://doi.org/10.1103/PhysRevD.97.084036)
+* [Covariant constructive gravity: A step-by-step guide towards alternative theories of gravity](https://doi.org/10.1103/PhysRevD.101.084025)
+* [Gravitational dynamics for all tensorial spacetimes carrying predictive, interpretable, and quantizable matter](http://dx.doi.org/10.1103/PhysRevD.85.104042)
+
+-----
+
 ~ Math
 \begin{aligned}
 x &= r \sin(\theta) \cos(\phi) \\
