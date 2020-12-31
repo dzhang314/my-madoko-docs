@@ -35,95 +35,164 @@ qed: [&#9744;]{float: right}
   qed: [\qed{}]{input: texraw}
 }
 
-Definition {
-  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
-            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
-            **Definition:**&nl;&source;&nl;\
-            ~~ End Card-Body&nl;\
-            ~ End Card';
-  tight: true;
+MathCard { .card; margin-bottom: 1em; }
+BoxBody { .card-body; .bg-white; padding: 0.35em 0.55em; tight: true; .body-font; }
+LongBoxBody { .card-body; .bg-white; padding: 0.35em 0.55em; }
+WellBody { .card-body; .bg-light; padding: 0.35em 0.55em; tight: true; .body-font; }
+LongWellBody { .card-body; .bg-light; padding: 0.35em 0.55em; }
+
+Box {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin BoxBody&nl;\
+            &source;&nl;\
+            ~~ End BoxBody&nl;\
+            ~ End MathCard';
 }
 
-Notation {
-  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
-            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
-            **Notation:**&nl;&source;&nl;\
-            ~~ End Card-Body&nl;\
-            ~ End Card';
-  tight: true;
-}
-
-Theorem {
-  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
-            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
-            **Theorem:** &source;&nl;\
-            ~~ End Card-Body&nl;\
-            ~ End Card';
-  tight: true;
+LongBox {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin LongBoxBody&nl;\
+            &source;&nl;\
+            ~~ End LongBoxBody&nl;\
+            ~ End MathCard';
 }
 
 Well {
-  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
-            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin WellBody&nl;\
             &source;&nl;\
-            ~~ End Card-Body&nl;\
-            ~ End Card';
-  tight: true;
+            ~~ End WellBody&nl;\
+            ~ End MathCard';
 }
 
-BigWell {
-  replace: '~ Begin Card { margin-bottom: 1em; }&nl;\
-            ~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; .body-font; }&nl;\
+LongWell {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin LongWellBody&nl;\
             &source;&nl;\
-            ~~ End Card-Body&nl;\
-            ~ End Card';
+            ~~ End LongWellBody&nl;\
+            ~ End MathCard';
 }
 
-MathCard {
-  replace: '~ Begin Card { margin-bottom: 1em; tight: true; }&nl;\
+Definition {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin DefinitionBody&nl;\
             &source;&nl;\
-            ~ End Card';
-  tight: true;
+            ~~ End DefinitionBody&nl;\
+            ~ End MathCard';
 }
 
-TheoremBody {
-  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
-            **Theorem:** &source;&nl;\
-            ~~ End Card-Body';
-  tight: true;
-}
-
-RemarkBody {
-  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; tight: true; .body-font; }&nl;\
-            *Remark:* &source;&nl;\
-            ~~ End Card-Body';
-  tight: true;
-}
-
-RemarkMBody {
-  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; .body-font; }&nl;\
-            *Remark:* &source;&nl;\
-            ~~ End Card-Body';
-}
-
-ProofBody {
-  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; .body-font; }&nl;\
-            *Proof:* &source;&qed;&nl;\
-            { margin: 0px; }&nl;\
-            ~~ End Card-Body';
-  tight: true;
-}
-
-ExtraBody {
-  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-white; tight: true; .body-font; }&nl;\
+LongDefinition {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin LongDefinitionBody&nl;\
             &source;&nl;\
-            ~~ End Card-Body';
-  tight: true;
+            ~~ End LongDefinitionBody&nl;\
+            ~ End MathCard';
 }
 
 DefinitionBody {
-  replace: '~~ Begin Card-Body { padding: 0.35em 0.55em; .bg-light; tight: true; .body-font; }&nl;\
+  replace: '~~ Begin WellBody&nl;\
             **Definition:**&nl;&source;&nl;\
-            ~~ End Card-Body';
-  tight: true;
+            ~~ End WellBody';
+}
+
+LongDefinitionBody {
+  replace: '~~ Begin LongWellBody&nl;\
+            **Definition:**&nl;&source;&nl;\
+            ~~ End LongWellBody';
+}
+
+Notation {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin NotationBody&nl;\
+            &source;&nl;\
+            ~~ End NotationBody&nl;\
+            ~ End MathCard';
+}
+
+LongNotation {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin LongNotationBody&nl;\
+            &source;&nl;\
+            ~~ End LongNotationBody&nl;\
+            ~ End MathCard';
+}
+
+NotationBody {
+  replace: '~~ Begin WellBody&nl;\
+            **Notation:**&nl;&source;&nl;\
+            ~~ End WellBody';
+}
+
+LongNotationBody {
+  replace: '~~ Begin LongWellBody&nl;\
+            **Notation:**&nl;&source;&nl;\
+            ~~ End LongWellBody';
+}
+
+Theorem {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin TheoremBody&nl;\
+            &source;&nl;\
+            ~~ End TheoremBody&nl;\
+            ~ End MathCard';
+}
+
+LongTheorem {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin LongTheoremBody&nl;\
+            &source;&nl;\
+            ~~ End LongTheoremBody&nl;\
+            ~ End MathCard';
+}
+
+TheoremBody {
+  replace: '~~ Begin WellBody&nl;\
+            **Theorem:** &source;&nl;\
+            ~~ End WellBody';
+}
+
+LongTheoremBody {
+  replace: '~~ Begin LongWellBody&nl;\
+            **Theorem:** &source;&nl;\
+            ~~ End LongWellBody';
+}
+
+Remark {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin RemarkBody&nl;\
+            &source;&nl;\
+            ~~ End RemarkBody&nl;\
+            ~ End MathCard';
+}
+
+LongRemark {
+  replace: '~ Begin MathCard&nl;\
+            ~~ Begin LongRemarkBody&nl;\
+            &source;&nl;\
+            ~~ End LongRemarkBody&nl;\
+            ~ End MathCard';
+}
+
+RemarkBody {
+  replace: '~~ Begin BoxBody&nl;\
+            *Remark:*&nl;&source;&nl;\
+            ~~ End BoxBody';
+}
+
+LongRemarkBody {
+  replace: '~~ Begin LongBoxBody&nl;\
+            *Remark:*&nl;&source;&nl;\
+            ~~ End LongBoxBody';
+}
+
+ProofBody {
+  replace: '~~ Begin BoxBody&nl;\
+            *Proof:*&nl;&source;&qed;&nl;\
+            ~~ End BoxBody';
+}
+
+LongProofBody {
+  replace: '~~ Begin LongBoxBody&nl;\
+            *Proof:*&nl;&source;&qed;&nl;\
+            ~~ End LongBoxBody';
 }

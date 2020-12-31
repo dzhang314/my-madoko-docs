@@ -32,6 +32,7 @@ build_and_move("Publications", "publications")
 build_and_move("Contact", "contact")
 
 build_and_move("AutoparallelCurves", "notes/autoparallel-curves")
+build_and_move("Math2500", "notes/math-2500")
 
 if os.path.isdir("out"):
     shutil.rmtree("out")

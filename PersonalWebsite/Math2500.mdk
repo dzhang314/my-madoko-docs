@@ -1,0 +1,151 @@
+Prelude: DZPrelude
+Title: Notes Template - David K. Zhang - Personal Website
+
+ul { .body-font; }
+h3 { margin: 1em 0em 0.5em 0em; }
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title
+#### MATH 2500 Notes<br>Multivariable Calculus and Linear Algebra
+~
+
+~ Subtitle
+As taught by Prof. Bruce Hughes\
+Vanderbilt University --- Fall Semester 2015\
+Transcribed by David K. Zhang
+~
+
+~ Card { .border-danger; margin-bottom: 1em; }
+~~ Card-Header { tight: true; .bg-danger; .text-white; padding: 0.35em 0.55em; }
+**Warning!**
+~~
+~~ Card-Body { padding: 0.35em 0.55em; }
+The following notes were taken **live in-class** during Prof. Hughes' MATH 2500 lectures. They are provided as a **historical record** of what topics were covered during each day of class. For readers who aim to learn this material for the first time, they are **incomplete** in several crucial ways:
+{ font-family: inherit; }
+
+* Gaps in the logical flow of ideas due to missed classes.
+* Omitted discussions, proofs, and examples which I considered unnecessary.
+* Missing sections which were written down on paper and never typeset.
+{ margin-bottom: 0.5em; font-family: inherit; }
+~~
+~
+
+### Lecture 01 (2015-08-26)
+
+Introductory remarks and discussion of syllabus.
+
+### Lecture 02 (2015-08-28)
+
+~ MathCard
+~~ LongDefinitionBody { tight: false; }
+A ***vector space*** $V$ is a set with two operations:
+{ margin-bottom: 0.5em; }
+
+* *Vector addition*: $\forall \vx, \vy \in V,$ there is a vector $\vx + \vy \in V.$
+* *Scalar multiplication*: $\forall t \in \mathbb{R},$ $\forall \vx \in V,$ there is a vector $t\vx \in V.$
+{ margin-bottom: 0.5em;} 
+
+These operations must satisfy the following properties:
+{ margin-bottom: 0.5em;} 
+
+* [VS1]{font-family:sans-serif}. $\forall \vx, \vy \in V,$ $\vx + \vy = \vy + \vx.$
+* [VS2]{font-family:sans-serif}. $\forall \vx, \vy, \vz \in V,$ $(\vx + \vy)  + \vz = \vx + (\vy  + \vz).$
+* [VS3]{font-family:sans-serif}. $\exists \vo \in V$ such that $\forall \vx \in V,$ $\mathbf{0} + \vx = \vx.$ ($\vo$ is called a *zero vector*.)
+* [VS4]{font-family:sans-serif}. $\forall \vx \in V,$ $\exists \vy \in V$ such that $\vx + \vy = \vo.$ ($\vy$ is called an *additive inverse* of $\vx,$ and is denoted by $-\vx.$)
+* [VS5]{font-family:sans-serif}. $\forall s, t \in \mathbb{R},$ $\forall \vx \in V,$ $(st)\vx = s(t\vx).$
+* [VS6]{font-family:sans-serif}. $\forall s \in \mathbb{R},$ $\forall \vx, \vy \in V,$ $s(\vx + \vy) = s\vx + s\vy.$
+* [VS7]{font-family:sans-serif}. $\forall s, t \in \mathbb{R},$ $\forall \vx \in V,$ $(s + t)\vx = s\vx + t\vx.$
+* [VS8]{font-family:sans-serif}. $\forall \vx \in V,$ $1\vx = \vx.$
+{ margin-bottom: 0em;} 
+~~
+~
+
+~ MathCard
+~~ TheoremBody
+Vector addition has the cancellation property. That is, if $\vx, \vy, \vz \in V$ and $\vx + \vy = \vx + \vz,$ then $\vy = \vz.$
+~~
+~~ ProofBody
+By hypothesis, $\vx + \vy = \vx + \vz.$ Applying [VS1]{font-family:sans-serif}, we have $\vy + \vx = \vz + \vx.$ Letting $(-\vx)$ be the additive inverse of $\vx$ (using [VS4]{font-family:sans-serif}), we have $(\vy + \vx) + (-\vx) = (\vz + \vx) + (-\vx).$ We use [VS2]{font-family:sans-serif} to regroup this as $\vy + (\vx + (-\vx)) = \vz + (\vx + (-\vx)),$ and [VS4]{font-family:sans-serif} to conclude that $\vy + \vo = \vz + \vo.$ Finally, applying [VS3]{font-family:sans-serif} and [VS1]{font-family:sans-serif}, we have $\vy = \vz,$ as desired.
+~~
+~
+
+~ MathCard
+~~ TheoremBody
+The additive inverse of a vector is unique. In other words, if $\vx, \vy, \vz \in V$ satisfy $\vy + \vx = \vo$ and $\vz + \vx = \vo,$ then $\vy = \vz.$
+~~
+~~ ProofBody
+It follows that $\vx + \vy = \vx + \vz.$ The cancellation property implies $\vy = \vz.$
+~~
+~
+
+~ MathCard
+~~ TheoremBody
+$-\vo = \vo.$
+~~
+~~ ProofBody
+We need to show that $\vo + \vo = \vo.$ This follows from [VS3]{font-family:sans-serif}.
+~~
+~
+
+### Lecture 03 (2015-08-31)
+
+We will temporarily leave the realm of abstract vector spaces and return to $\R^n.$ Recall that any vector $\vx \in \R^n$ is an $n$-tuple of real numbers. We adopt the convention that $\vx$ be written $(x_1, \ldots, x_n)$ when interpreted as a point, and $\mqty[x_1 \\ \vdots \\x_n]$ when interpreted as a vector.  Points are simply visualized as points in $\R^n,$ while vectors are visualized as directed line segments from the origin $\vo$ to the point $\vx.$
+
+~ Definition
+If $\vx = (x_1, \ldots, x_n),\ \vy = (y_1, \ldots, y_n) \in \R^n,$ then the ***distance*** from $x$ to $y$ is
+~~ MathB
+\norm{\vx - \vy} \coloneqq \sqrt{(x_1-y_1)^2 + \cdots + (x_n-y_n)^2}.
+~~
+~
+
+This definition generalizes the Pythagorean theorem for $n = 1,2,3.$
+
+~ LongDefinition
+The ***length*** (a.k.a. ***norm***, ***magnitude***) of a vector $\vx = \mqty[x_1 \\ \vdots \\ x_n] \in \R^n$ is
+~~ Math
+\norm{x} \coloneqq \sqrt{x_1^2 + \cdots + x_n^2},
+~~
+i.e., the distance from $\vx$ to the origin.
+{ margin: 0px; }
+~
+
+How do scalar multiplication and vector addition interact with this geometric interpretation? If $c \in \R,$ $\vx \in \R^n,$ then
+~ Math
+\norm{c\vx} = \sqrt{(cx_1)^2 + \cdots + (cx_n)^2} = \abs{c} \sqrt{x_1^2 + \cdots + x_n^2} = \abs{c} \norm{\vx}.
+~
+
+~ Definition
+If $c>0,$ then we say that the vectors $\vx$ and $c\vx$ have the ***same direction***. On the other hand, if $c<0,$ then they have ***opposite directions***.
+~
+
+~ Definition
+We call two vectors $\vx, \vy \in \R^n$ ***parallel*** if one is a scalar multiple of the other, i.e., $\exists c \in \R$ such that $\vy = c\vx$ or $\vx = c\vy.$
+~
+
+Under this definition, the zero vector $\vo$ is parallel to every vector.
+
+If $\vx, \vy \in \R^2,$ then $\vx + \vy$ can be interpreted as the fourth point of the parallelogram with legs $\vx$ and $\vy$ (situated at the origin). This can be confirmed by checking that the vector from $\vy$ to $\vx + \vy$ has the same slope as $\vx,$ and vice versa. We call this interpretation the _parallelogram law of vector addition_.
+
+~ LongDefinition
+If $\vx = \mqty[x_1 \\ \vdots \\ x_n], \vy = \mqty[y_1 \\ \vdots \\ y_n] \in \R^n,$ then their ***dot product*** is
+
+~~ Math
+\vx \cdot \vy \coloneqq x_1y_1 + x_2y_2 + \cdots + x_ny_n.
+~~
+
+This is an operation $\R^n \times \R^n \to \R.$
+{ margin: 0px; }
+~
+
+Observe that $\vx \cdot \vx = x_1^2 + \cdots + x_n^2 = \norm{\vx}^2.$ This is the *length formula*.
+
+Basic algebraic properties of the dot product (See Proposition 2.1 in Shifrin):
+
+1. $\forall \vx, \vy \in \R^n,$ $\vx \cdot \vy = \vy \cdot \vx.$
+* $\forall \vx \in \R^n,$ $\vx \cdot \vx \ge 0$ and $\vx \cdot \vx = 0$ iff $\vx = \vo.$
+* $\forall c \in \R,$ $\forall \vx, \vy \in \R^n,$ $(c\vx) \cdot \vy = c(\vx \cdot \vy).$
+* $\forall \vx, \vy, \vz \in \R^n,$ $\vx \cdot (\vy + \vz) = \vx \vdot \vy + \vx \cdot \vz.$
+
+[INCLUDE=DZFooter.mdk]

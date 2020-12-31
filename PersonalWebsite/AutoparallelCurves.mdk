@@ -38,15 +38,13 @@ If we write the condition $\nabla_{\dot{\gamma}} \dot{\gamma} = 0$ in terms of a
 \end{aligned}
 ~
 
-~ MathCard
-~~ RemarkMBody
+~ LongBox
 Strictly speaking, the intermediate expressions in this calculation don't make any sense. For example, what does $\nabla_{\partial_a} \dot{\gamma}^b$ mean? The velocity vector $\dot{\gamma}$ is only specified along the image of the curve $\gamma,$ so there's nothing to differentiate if $\gamma$ doesn't travel in the $\partial_a$ direction.
 
 The proper way to make this mathematically sensible is to introduce the notion of a covariant derivative along a curve $\nabla_\gamma$ as opposed to a vector field $\nabla_{\!X}.$ It turns out that a unique such operation is induced by any affine connection $\nabla,$ and it enjoys properties so strikingly similar to $\nabla_{\!X}$ that we get the right answer by blindly computing as though we were working with vector fields.
 
 For details of this construction, see page 101 of Lee's _Introduction to Riemannian Manifolds_, second edition.
 { margin: 0px; }
-~~
 ~
 
 Modulo this technical disclaimer, this calculation proves (or at least strongly suggests) the following statement.

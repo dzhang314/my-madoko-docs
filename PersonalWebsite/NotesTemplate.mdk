@@ -1,0 +1,17 @@
+Prelude: DZPrelude
+Title: Notes Template - David K. Zhang - Personal Website
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title
+<h4>Title of Notes</h4>
+~
+
+~ Subtitle
+David K. Zhang --- Month Day, 2021
+~
+
+This is a paragraph.
+
+[INCLUDE=DZFooter.mdk]

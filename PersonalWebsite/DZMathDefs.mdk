@@ -6,8 +6,14 @@
 \newcommand{\R}{{\mathbb{R}}}
 \providecommand{\C}{}
 \renewcommand{\C}{{\mathbb{C}}}
+
 \newcommand{\No}{{\mathbf{No}}}
 \newcommand{\Ord}{{\mathbf{Ord}}}
 \newcommand{\simpler}{\mathrel{{\lt}_{\mathsf{s}}}}
 \newcommand{\simplereq}{\mathrel{{\le}_{\mathsf{s}}}}
+
+\newcommand{\vo}{{\mathbf{0}}}
+\newcommand{\vx}{{\mathbf{x}}}
+\newcommand{\vy}{{\mathbf{y}}}
+\newcommand{\vz}{{\mathbf{z}}}
 ~
