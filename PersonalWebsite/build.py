@@ -29,10 +29,12 @@ os.mkdir("site")
 build_and_move("Home", "index")
 build_and_move("Projects", "projects")
 build_and_move("Publications", "publications")
+build_and_move("About", "about")
 build_and_move("Contact", "contact")
 
 build_and_move("AutoparallelCurves", "notes/autoparallel-curves")
 build_and_move("Math2500", "notes/math-2500")
+build_and_move("MiscThoughts", "notes/misc-thoughts")
 
 if os.path.isdir("out"):
     shutil.rmtree("out")

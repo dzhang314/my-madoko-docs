@@ -10,7 +10,7 @@ Package: mathtools
 Package: physics
 
 math-inline { input: math; }
-Math { input: math; .para-block; text-align: center; margin: 1em 0em; }
+Math { input: math; .para-block; text-align: center; margin-top: 1em; margin-bottom: 0.6em; }
 MathB { input: math; .para-block; text-align: center; margin: 1em 0em 0em 0em; }
 Strong { tex-cmd: "\textbf"; }
 Em { tex-cmd: "\emph"; }
@@ -195,6 +195,20 @@ ProofBody {
 
 LongProofBody {
   replace: '~~ Begin LongBoxBody&nl;\
-            *Proof:*&nl;&source;&qed;&nl;\
+            *Proof:*&nl;&source;&nl;&qed;&nl;\
+            { margin-bottom: 0em; }&nl;\
+            ~~ End LongBoxBody';
+}
+
+ProofSketchBody {
+  replace: '~~ Begin BoxBody&nl;\
+            *Proof sketch:*&nl;&source;&qed;&nl;\
+            ~~ End BoxBody';
+}
+
+LongProofSketchBody {
+  replace: '~~ Begin LongBoxBody&nl;\
+            *Proof sketch:*&nl;&source;&nl;&qed;&nl;\
+            { margin-bottom: 0em; }&nl;\
             ~~ End LongBoxBody';
 }

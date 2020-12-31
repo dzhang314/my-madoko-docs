@@ -1,0 +1,188 @@
+Prelude: DZPrelude
+Title: Misc. Thoughts - David K. Zhang - Personal Website
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title { margin-bottom: 2em; }
+#### Miscellaneous Thoughts
+~
+
+This page contains a disorganized collection of ideas that I'm learning and thinking about, but have yet to coalesce into a coherent narrative. Feel free to look around --- you might find something interesting!
+
+-----
+
+~ Definition
+A connected (pseudo-)Riemannian manifold $M$ is said to be ___extensible___ if $M$ can be isometrically embedded as an open submanifold of a strictly larger connected (pseudo-)Riemannian manifold. Otherwise, we say that $M$ is ___inextensible___ or ___maximal___.
+~
+
+~ LongWell
+**Hopf--Rinow Theorem:** Let $M$ be a connected Riemannian manifold. The following are equivalent:
+
+1. $M$ is geodesically complete.
+2. $M$ is geodesically complete at some point $p \in M.$
+3. $M$ has the Heine--Borel property.
+4. $M$ is complete as a metric space.
+
+Moreover, if any of these statements hold, then there exists a length-minimizing geodesic joining any two points of $M.$
+{ margin: 0px; }
+~
+
+----
+
+We denote by $\Ord$ the class of ordinal numbers. Following von Neumann's construction, we identify each ordinal number $\alpha \in \Ord$ with the transitive set of all smaller ordinals, well-ordered with respect to the set membership relation ${\in}.$
+
+~ Definition
+A ***surreal number*** is a function from an ordinal number to the 2-element set $\{+, -\}.$ The class of surreal numbers is denoted by $\No.$
+~
+
+Clearly, there are at least as many surreal numbers as ordinal numbers, so $\No$ is a proper class. We will later see that $\Ord$ embeds into $\No$ in a natural way.
+
+~ Begin Notation { #birthday; label: "birthday"; }
+The domain of a surreal number $x \in \No$ is called its ***birthday***, denoted by $\beta(x).$
+~ End Notation
+
+Conway imagines that the surreal numbers are constructed inductively, with the empty sequence $()$ being created on "day zero." (Recall that in von Neumann's construction, the empty set is the ordinal number zero.) On day one, its descendants $(+)$ and $(-)$ are born via concatenation of a ${+}$ or ${-}.$ Then, on day two, $(+)$ gives birth to $(++)$ and $(+-)$, while $(-)$ gives birth to $(-+)$ and $(--).$ Continuing in this fashion, $2^n$ new surreal numbers are born on the $n$^th^ day. This process continues transfinitely, with $2^\alpha$ new surreal numbers born on each day $\alpha \in \Ord.$
+
+~ Begin Definition
+We say that a surreal number $x \in \No$ is ***simpler*** than a surreal number $y \in \No,$ denoted by $x \simplereq y,$ if $x$ is an initial segment of $y.$ We write $x \simpler y$ to mean $x \simplereq y$ and $x \ne y.$
+~ End Definition
+
+~ MathCard
+~~ TheoremBody
+Let $F, G \subset \No$ be sets of surreal numbers. (Note that this notation indicates that $F$ and $G$ are sub_sets_ of $\No,$ as opposed to sub_classes_.) If $F < G,$ then there exists a unique simplest surreal number $x \in \No$ satisfying $F < x < G.$
+~~
+~~ LongProofSketchBody
+If $F = G = \varnothing,$ then we take the empty sequence. If $F$ is non-empty but $G$ is empty, then we take a sufficiently long sequence of $+;$ similarly, if $F$ is empty but $G$ is non-empty, then we take a sufficiently long sequence of $-.$
+
+If both $F$ and $G$ are non-empty, then there exists a least ordinal $\alpha$ such that any member of $F$ differs from any member of $G$ somewhere in their first $\alpha$ places. (Indeed, if there were no such $\alpha,$ then there would exist a member of $F$ that agrees with a member of $G$ in _every_ place, contradicting our assumption that $F < G.$) Because we picked $\alpha$ to be the _least_ such ordinal, for every $\gamma < \alpha,$ there exist members of $F$ and $G$ who agree in their first $\gamma$ places. This uniquely determines $x(\gamma)$ for all $\gamma < \alpha.$
+
+We now consider two cases. If $\alpha$ is a limit ordinal, then we have a well-defined surreal number $x: \alpha \to \{{+}, {-}\}.$ If $x \notin F$ and $x \notin G,$ then $x$ works; otherwise, either $x \in F$ or $x \in G,$ but not both (since $F < G$). If $x \in F,$ then we append just enough $+$ signs to get a number that exceeds $F;$ similarly with $-$ signs for $G.$
+
+On the other hand, if $\alpha$ is a successor ordinal, then we have a well-defined surreal number $x: (\alpha - 1) \to \{{+}, {-}\}.$ Let $F'$ denote the set of tails of $x$ in $F,$ and let $G'$ denote the set of tails of $x$ in $G.$ Note that neither $F'$ nor $G'$ are empty, since by construction, $x$ has tails in both $F$ and $G$ (even if the only tail is the empty tail). By the definition of $\alpha,$ for any $a \in F'$ and $b \in G',$ we have $a(0) < b(0).$ If neither $F'$ nor $G'$ contains the empty sequence, then $a(0) = {-}$ and $b(0) = {+},$ so $x$ works. Otherwise, suppose $F'$ contains the empty sequence. We append a single ${+}$ to $x$ to exceed $F,$ followed by just enough ${-}$ signs to slip under $G.$
+~~
+~
+
+~ Notation
+Given $F, G \subset \No$ with $F < G,$ we denote by $F \mid G$ the simplest surreal number $x \in \No$ satisfying $F < x < G.$ We call the pair of sets $(F, G)$ a ___representation___ of $x,$ and write $x = F \mid G.$
+~
+
+~ Theorem
+Let $F, G \subset \No$ with $F < G,$ and let $\alpha$ be the least ordinal for which $\beta(x) < \alpha$ for all $x \in F \cup G.$ Then $\beta(F \mid G) \le \alpha.$
+~
+
+Note that the inequality $\beta(x) < \alpha$ in the statement of the preceding theorem cannot be replaced by $\beta(x) \le \alpha.$ Indeed, if $F = \{(+)\}$ and $G = \{(++)\},$ then $F \mid G = ({+}{+}{-}).$
+
+~ Definition
+The ___canonical representation___ of a surreal number $x \in \No$ is the representation $x = F \mid G$ where $F$ is the set of initial segments of $x$ which are less than $x$ itself, and $G$ is the set of initial segments of $x$ exceeding $x.$
+~
+
+~ Definition
+~~ Math { margin: 0px; }
+a + b \coloneqq \{ a^L + b,\ a + b^L \} \mid \{ a^R + b,\ a + b^R \}
+~~
+~
+
+~ Definition
+We say that two positive surreal numbers $x, y \in \No$ are in the same ***Archimedean class***, denoted by $x \sim y,$ if there exists an integer $n \in \N$ such that $nx \ge y$ and $x \le ny.$ On the other hand, if $nx < y$ for all $n \in \N,$ we write $x \ll y,$ or equivalently, $y \gg x.$
+~
+
+For any two positive surreal numbers $x, y \in \No,$ we either have $x \ll y,$ $x \sim y,$ or $x \gg y.$
+
+~ Definition
+~~ Math { margin: 0px; }
+\omega^x \coloneqq \{ 0, 2^n \omega^{x^L} \} \mid \{ 2^{-n} \omega^{x^R} \}
+~~
+~
+
+~ LongTheorem
+Let $x, y \in \No$.
+{ .mb-1; }
+
+* $\omega^x > 0.$
+* $x < y$ if and only if $\omega^x \ll \omega^y.$
+* $\omega^0 = 1.$
+* $\omega^{x+y} = \omega^x \omega^y.$
+* If $x$ is an ordinal, then $\omega^x$ agrees with ordinal exponentiation in the usual sense.
+{ .mb-0; }
+~
+
+~ Theorem
+A positive surreal number is the simplest element of its Archimedean class if and only if it can be written in the form $\omega^x$ for some $x \in \No$.
+~
+
+~ MathCard
+~~ LongTheoremBody
+Every surreal number $x \in \No$ admits a unique representation in the form
+~~~ Math
+x = \sum_{\alpha < \beta} r_\alpha \omega^{y_\alpha}
+~~~
+where $\beta \in \Ord,$ $(y_\alpha)_{\alpha < \beta}$ is a strictly decreasing sequence of surreal numbers, and $(r_\alpha)_{\alpha < \beta}$ is a sequence of nonzero real numbers. If $x$ is an ordinal, then this representation coincides with the Cantor normal form.
+{ margin: 0px; }
+~~
+~~ DefinitionBody
+This representation is called the ___Conway normal form___ of $x.$
+~~
+~~ ProofSketchBody
+The technique is somewhat analogous to the algorithm for computing continued fractions. Repeatedly extract the largest Archimedean class from $x,$ and show that this procedure must terminate at some transfinite stage.
+~~
+~
+
+It follows from the existence of Conway normal forms that every surreal number can be uniquely written as the sum of a real number (the $\omega^0$ term), an infinitesimal number (the terms with negative exponents), and a purely infinite number (the terms with positive exponents).
+
+~ LongDefinition
+For $x, y \in \No,$ let $r_y(x)$ denote the real-valued coefficient of $\omega^y$ in the Conway normal form of $x$, with $r_y(x) \coloneqq 0$ if $\omega^y$ does not occur. We say that a sequence $(x_n)_{n \in \N}$ of surreal numbers ___converges___ to $x,$ denoted by $x = \lim_{n \to \infty} x_n,$ if $r_y(x) = \lim_{n \to \infty} r_y(x_n)$ for all $y \in \No.$
+
+If, for each fixed $y,$ the sequence $r_y(x_n)$ is eventually constant, then we say that $(x_n)_{n \in \N}$ ___converges absolutely___ to $x.$
+{ margin: 0px; }
+~
+
+Note that any (possibly multivariate) formal power series with real coefficients, even if wildly divergent on real-valued arguments, is absolutely convergent when fed infinitesimal surreal arguments.
+
+This suggests a powerful design pattern for extending real functions $f: \R \to \R$ to the surreals.
+
+* Split a surreal number $x \in \No$ into infinitesimal, real, and purely infinite parts.
+* Use any power series, even a divergent power series, to define $f$ on infinitesimals.
+* Define $f$ as usual on the reals.
+* Find an inductive definition of $f$ on purely infinite numbers, say, of the form $\omega^y.$
+
+This strategy is used in [this paper](https://arxiv.org/pdf/1505.02478.pdf) to extend the natural logarithm to $\No.$
+
+-----
+
+~ Math
+\begin{aligned}
+x &= r \sin(\theta) \cos(\phi) \\
+y &= r \sin(\theta) \sin(\phi) \\
+z &= r \cos(\theta)
+\end{aligned}
+~
+
+-----
+
+~ Math
+\begin{aligned}
+\pdv{x}{r} &= \sin(\theta) \cos(\phi) &
+\pdv{x}{\theta} &= r \cos(\theta) \cos(\phi) &
+\pdv{x}{\phi} &= -r \sin(\theta) \sin(\phi) \\
+\pdv{y}{r} &= \sin(\theta) \sin(\phi) &
+\pdv{y}{\theta} &= r \cos(\theta) \sin(\phi) &
+\pdv{y}{\phi} &= r \sin(\theta) \cos(\phi) \\
+\pdv{z}{r} &= \cos(\theta) &
+\pdv{z}{\theta} &= -r \sin(\theta) &
+\pdv{z}{\phi} &= 0
+\end{aligned}
+~
+
+-----
+
+~ Definition
+Let $M$ be a smooth manifold. A ***tangent vector*** at a point $p \in M$ is an $\R$-linear map $X_p : C^\infty(M) \to \R$ satisfying the _Leibniz identity_
+~~ Math
+X_p(f g) = X_p(f) g(p) + f(p) X_p(g).
+~~
+The set of all tangent vectors at the point $p$ is called the ***tangent space*** at $p,$ denoted by $T_p M.$
+{ margin: 0px; }
+~
+
+[INCLUDE=DZFooter.mdk]
