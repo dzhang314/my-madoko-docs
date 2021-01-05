@@ -1,0 +1,105 @@
+Prelude: DZPrelude
+Title: Fitting Elbow Curves - David K. Zhang - Personal Website
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title
+#### Fitting Elbow Curves
+~
+
+~ Subtitle
+David K. Zhang --- January 3^rd^, 2021
+~
+
+
+~ Math
+f(x \mid b, m, k) \coloneqq \begin{cases}
+  b - m(k-x) &\text{ if } x < k \\
+  b          &\text{ if } x \ge k
+\end{cases}
+~
+
+This model describes a situation where two variables $x$ and $y$ are linearly related up to a ___saturation point___ $x = k.$ After this point, further increases in $x$ no longer change $y.$ We will call $b$ the ___saturated value___ of $y,$ and $m$ the ___slope___.
+
+~ Align
+L(b, m, k) &\coloneqq \frac{1}{2} \sum_{i=1}^N (y_i - f(x_i))^2 \\
+&= \frac{1}{2} \sum_{i=1}^N \qty(y_i - b + m(k-x_i) \mathbf{1}\qty[x_i < k])^2
+~
+
+~ Align
+\pdv{L}{b} &= -\sum_{i=1}^N \qty(y_i - b + m(k-x_i) \mathbf{1}\qty[x_i < k]) \\
+\pdv{L}{m} &= \sum_{x_i < k} (k-x_i) \qty(y_i - b + m(k-x_i)) \\
+\pdv{L}{k} &= m \sum_{x_i < k} \qty(y_i - b + m(k-x_i))
+~
+
+~ Align
+N_p &\coloneqq \#\qty{ i = 1, \dots, N : x_i < k } \\
+\Sigma y &\coloneqq \sum_{i=1}^N y_i \\
+\Sigma_p x &\coloneqq \sum_{x_i < k} x_i \\
+\Sigma_p y &\coloneqq \sum_{x_i < k} y_i \\
+\Sigma_p x^2 &\coloneqq \sum_{x_i < k} x_i^2 \\
+\Sigma_p x y &\coloneqq \sum_{x_i < k} x_i y_i
+~
+
+Note that we need to distinguish between $\Sigma_p x^2$ and $(\Sigma_p x)^2.$
+
+~ Align
+\pdv{L}{b} &= -\Sigma y + N b - (N_p k - \Sigma_p x)m \\
+\pdv{L}{m} &= k \Sigma_p y - \Sigma_p x y - (N_p k - \Sigma_p x)b + (k^2 N_p - 2k \Sigma_p x + \Sigma_p x^2)m \\
+\pdv{L}{k} &= m \big[\Sigma_p y - N_p b + (N_p k - \Sigma_p x)m \big]
+~
+
+~ Align
+                   N & b && - &                     (N_p k - \Sigma_p x) & m &&= \Sigma y \\
+                 N_p & b && - &                     (N_p k - \Sigma_p x) & m &&= \Sigma_p y \\
+(N_p k - \Sigma_p x) & b && - & (k^2 N_p - 2k \Sigma_p x + \Sigma_p x^2) & m &&= k \Sigma_p y - \Sigma_p x y \\
+~
+
+These are the equations we need to solve to find the optimal parameter values.
+
+By taking the difference of the first two equations, we immediately find:
+~ Math
+b = \frac{\Sigma y - \Sigma_p y}{N - N_p}
+~
+This makes intuitive sense; the least-squares estimate for the saturated value $b$ is the average of all $y$ values past the saturation point $x = k.$
+
+~ Math
+M \coloneqq \mqty[
+                 N &                     N_p k - \Sigma_p x & \Sigma y \\
+               N_p &                     N_p k - \Sigma_p x & \Sigma_p y \\
+N_p k - \Sigma_p x & k^2 N_p - 2k \Sigma_p x + \Sigma_p x^2 & k \Sigma_p y - \Sigma_p x y \\
+]
+~
+
+~ Align
+\det(M) &= (N - N_p)(\Sigma_p x \Sigma_p x y - \Sigma_p x^2 \Sigma_p y) \\
+&\hspace{1cm} + (\Sigma y - \Sigma_p y)(N_p \Sigma_p x^2 - (\Sigma_p x)^2) \\
+&\hspace{1cm} + (N - N_p)(\Sigma_p x \Sigma_p y - N_p \Sigma_p x y)k
+~
+
+~ Math
+k = \frac{\Sigma_p x \Sigma_p x y - \Sigma_p x^2 \Sigma_p y}{N_p \Sigma_p x y - \Sigma_p x \Sigma_p y} + \frac{N_p \Sigma_p x^2 - (\Sigma_p x)^2}{N_p \Sigma_p x y - \Sigma_p x \Sigma_p y} \cdot \frac{\Sigma y - \Sigma_p y}{N - N_p}
+~
+
+~ Math
+m = \frac{N_p b - \Sigma_p y}{N_p k - \Sigma_p x}
+~
+
+~ Align
+L(b, m, k)
+&= \qty(
+  \frac{1}{2} \Sigma y^2
+  + \frac{1}{2} m^2 \Sigma_p x^2
+  - m \Sigma_p x y
+  - \frac{1}{2} N_p (b - m k)^2
+  - \frac{1}{2} (N - N_p) b^2
+)
+~
+
+
+```
+  asdf
+```
+
+[INCLUDE=DZFooter.mdk]

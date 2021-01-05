@@ -12,6 +12,8 @@ Package: physics
 math-inline { input: math; }
 Math { input: math; .para-block; text-align: center; margin-top: 1em; margin-bottom: 0.6em; }
 MathB { input: math; .para-block; text-align: center; margin: 1em 0em 0em 0em; }
+Align { replace:"~ Begin Math&nl;\begin{aligned}&nl;&source;&nl;\end{aligned}&nl;~ End Math" }
+AlignB { replace:"~ Begin MathB&nl;\begin{aligned}&nl;&source;&nl;\end{aligned}&nl;~ End MathB" }
 Strong { tex-cmd: "\textbf"; }
 Em { tex-cmd: "\emph"; }
 
