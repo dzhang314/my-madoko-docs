@@ -86,20 +86,13 @@ k = \frac{\Sigma_p x \Sigma_p x y - \Sigma_p x^2 \Sigma_p y}{N_p \Sigma_p x y - 
 m = \frac{N_p b - \Sigma_p y}{N_p k - \Sigma_p x}
 ~
 
-~ Align
-L(b, m, k)
-&= \qty(
+~ Math
+L(b, m, k) =
   \frac{1}{2} \Sigma y^2
   + \frac{1}{2} m^2 \Sigma_p x^2
   - m \Sigma_p x y
   - \frac{1}{2} N_p (b - m k)^2
   - \frac{1}{2} (N - N_p) b^2
-)
 ~
-
-
-```
-  asdf
-```
 
 [INCLUDE=DZFooter.mdk]
