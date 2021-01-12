@@ -40,9 +40,9 @@ qed: [&#9744;]{float: right}
 }
 
 MathCard { .card; .mb-3; }
-BoxBody { .card-body; padding: 0.35em 0.55em; tight: true; .body-font; }
+BoxBody { .card-body; padding: 0.35em 0.55em; tight: true; text-align: justify; .body-font; }
 LongBoxBody { .card-body; padding: 0.35em 0.55em; }
-WellBody { .card-body; .bg-light; padding: 0.35em 0.55em; tight: true; .body-font; }
+WellBody { .card-body; .bg-light; padding: 0.35em 0.55em; tight: true; text-align: justify; .body-font; }
 LongWellBody { .card-body; .bg-light; padding: 0.35em 0.55em; }
 
 Box {

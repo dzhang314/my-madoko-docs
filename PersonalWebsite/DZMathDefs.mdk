@@ -7,12 +7,19 @@
 \providecommand{\C}{}
 \renewcommand{\C}{{\mathbb{C}}}
 
+\newcommand{\eps}{{\varepsilon}}
+
 \newcommand{\No}{{\mathbf{No}}}
 \newcommand{\Ord}{{\mathbf{Ord}}}
 \newcommand{\simpler}{\mathrel{{\lt}_{\mathsf{s}}}}
 \newcommand{\simplereq}{\mathrel{{\le}_{\mathsf{s}}}}
 
+\newcommand{\vd}{{\mathbf{d}}}
+\newcommand{\vg}{{\mathbf{g}}}
 \newcommand{\vo}{{\mathbf{0}}}
+\newcommand{\vs}{{\mathbf{s}}}
+\renewcommand{\vu}{{\mathbf{u}}}
+\newcommand{\vv}{{\mathbf{v}}}
 \newcommand{\vx}{{\mathbf{x}}}
 \newcommand{\vy}{{\mathbf{y}}}
 \newcommand{\vz}{{\mathbf{z}}}
