@@ -36,6 +36,12 @@ build_and_move("AutoparallelCurves", "notes/autoparallel-curves")
 build_and_move("Math2500", "notes/math-2500")
 build_and_move("MiscThoughts", "notes/misc-thoughts")
 
+build_and_move("PCREODatabase5059", "data/pcreo-database-50-59")
+build_and_move("PCREODatabase6069", "data/pcreo-database-60-69")
+build_and_move("PCREODatabase7079", "data/pcreo-database-70-79")
+build_and_move("PCREODatabase8089", "data/pcreo-database-80-89")
+build_and_move("PCREODatabase9099", "data/pcreo-database-90-99")
+
 if os.path.isdir("out"):
     shutil.rmtree("out")
 
