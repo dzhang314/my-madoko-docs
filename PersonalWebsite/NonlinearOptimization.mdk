@@ -1,0 +1,168 @@
+Prelude: DZPrelude
+Title: Nonlinear Optimization - David K. Zhang - Personal Website
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title
+#### Quasi-Newton Methods for Nonlinear Optimization
+~
+
+~ Subtitle
+David K. Zhang --- March 2^nd^, 2021
+~
+
+These notes discuss the problem of locally minimizing a smooth nonlinear function $f: \R^n \to \R$ without constraints (i.e., the feasible region is all of $\R^n$). We consider methods which begin at a specified initial point $\vx_0 \in \R^n$ and iteratively produce a sequence of points $\vx_0,$ $\vx_1,$ $\vx_2,$ $\ldots \in \R^n$ which (hopefully!) converge to a local minimizer of $f.$ The simplest example of such a method is ___gradient descent___, which is defined by the recurrence
+~ Math
+\vx_{k+1} = \vx_{k} - \alpha \nabla f(\vx_{k}).
+~
+Here, $\alpha > 0$ is a parameter called the ___step size___ or, in the context of machine learning, the ___learning rate___. Another example is ___Newton's method___, which is defined by the recurrence
+~ Math
+\vx_{k+1} = \vx_{k} - [\nabla^2 f(\vx_k)]^{-1} \nabla f(\vx_{k}).
+~
+Here, $\nabla^2 f(\vx_k)$ denotes the ___Hessian matrix___ of the objective function $f,$ and $[\nabla^2 f(\vx_k)]^{-1}$ denotes its inverse, which is then applied to the gradient vector $\nabla f(\vx_{k}).$ Note that Newton's method doesn't require its user to manually specify a learning rate; instead, this formula can be thought of as determining a natural learning rate via the curvature of the objective function.
+
+For these notes, I will assume that you are already familiar with gradient descent, Newton's method, and their respective performance characteristics. I assume you are aware that gradient descent takes less computational work per iteration than Newton's method, but converges much more slowly for ___ill-conditioned___ objective functions (i.e., functions that exhibit high curvature in some directions, but low curvature in others). Before we proceed, I'll take a moment to introduce some standard notation in the nonlinear optimization literature:
+
+~ Align
+\vg_k &\coloneqq \nabla f(\vx_k) \\
+H_k &\coloneqq \nabla^2 f(\vx_k) \\
+\vs_k &\coloneqq \vx_k - \vx_{k-1} \\
+\vy_k &\coloneqq \vg_k - \vg_{k-1}
+~
+
+~ Box
+**Note:** Some authors define $\vs_k \coloneqq \vx_{k+1} - \vx_{k}$ and $\vy_k \coloneqq \vg_{k+1} - \vg_{k}.$ I prefer to avoid this convention, because I don't want my formulas to "look into the future," so to speak.
+~
+
+Using these abbreviations, we can rewrite Newton's method as follows:
+
+~ Math
+\vx_{k+1} = \vx_{k} - H_k^{-1} \vg_k
+~
+
+Newton's method is the gold standard for local nonlinear optimization of smooth functions. However, for large-scale optimization problems, it can be very time-consuming to compute the exact Hessian matrix $H_k \coloneqq \nabla^2 f(\vx_k)$ and solve a linear system to obtain $H_k^{-1} \vg_k$. The idea of a ___quasi-Newton method___ is to substitute an approximation $B_k$ for the true Hessian $H_k$ which is good enough that we can still make progress, but is easier to compute than the full matrix $\nabla^2 f(\vx_k)$ of second partial derivatives.
+
+In order to develop this idea, we need to have a rigorous notion of what it means for $B_k$ to be "close enough" to $H_k.$ For example, one obvious way to define "close enough" would be to require that $\norm{B_k - H_k} < \eps$ in some suitably chosen matrix norm, such as the operator norm or Frobenius norm. This would be an unwise definition, because we would have to calculate the exact Hessian matrix $H_k$ in order to verify that $\norm{B_k - H_k}$ is small enough, when the whole idea of quasi-Newton methods was to avoid computing $H_k$ in the first place.
+
+Instead, we will consider the _algebraic_ properties of $H_k,$ and declare $B_k$ to be "close enough" if it satisfies those same properties. The defining characteristic of the Hessian matrix $H_k$ is that it measures second-order change in the objective function $f,$ or equivalently, first-order change in its gradient $\nabla f.$
+
+~ Align
+\nabla f(\vx_{k-1}) &= \nabla f(\vx_k) + \qty[\nabla^2 f(\vx_k)] (\vx_{k-1} - \vx_k) + \cdots \\
+\vg_{k-1} &= \vg_k + H_k (\vx_{k-1} - \vx_k) + \cdots \\
+~
+
+Discarding higher-order terms yields the approximate identity $\vy_k \approx H_k \vs_k.$ Since this is the defining property of the Hessian $H_k,$ it is natural that we ask our approximation $B_k$ to satisfy $\vy_k \approx B_k \vs_k.$ In the optimization literature, this is known as the ___secant equation___.
+
+~ Box
+**Note:** Some authors use $B_k$ to denote an approximation to the Hessian $H_k,$ while others use $B_k$ to denote an approximation to its inverse $H_k^{-1}.$ The secant equation will appear to be backwards in papers that adopt the opposite convention. Unfortunately, both are common.
+~
+
+We also note that the Hessian matrix $H_k$ is symmetric (since partial derivative operators commute) and positive-definite (in a neighborhood of a local minimum). We will therefore require our approximation $B_k$ to also be symmetric and positive-definite.
+
+Now, these three requirements (symmetry, positive-definiteness, and the secant equation) are far from enough to uniquely pin down a choice of $B_k.$ We will use our remaining degrees of freedom to pick a matrix $B_k$ which is _as easy as possible to work with_. Recall that it takes $O(n^3)$ time to solve a general $n \times n$ linear system in order to calculate $B_k^{-1} \vg_k.$ If we choose a matrix $B_k$ which has some special structure (e.g., a diagonal matrix), we can reduce the $O(n^3)$ cost to $O(n^2),$ or possibly even $O(n).$
+
+The simplest possible choice of $B_k$ would be a positive scalar multiple of the identity matrix, $B_k \coloneqq \beta_k I.$ When $\beta_k > 0,$ this is certainly symmetric and positive-definite. However, unless $\vs_k$ and $\vy_k$ are parallel vectors (which will generally not be the case), there is very little hope that a scalar multiple of the identity matrix will be able to satisfy the secant equation $\vy_k = \beta_k \vs_k$. Nonetheless, we can still proceed by asking that the _error_ in the secant equation be as small as possible. That is, we determine the optimal value of $\beta_k$ by minimizing the squared Euclidean norm of the residual:
+
+~ Math
+\min_{\beta_k} \norm{\vy_k - \beta_k \vs_k}_2^2
+~
+
+This is a one-dimensional optimization problem which we can solve analytically by differentiating with respect to $\beta_k$ and setting the derivative equal to zero.
+
+~ Align
+0 &\overset{!}{=}
+\pdv{\beta_k} \norm{\vy_k - \beta_k \vs_k}_2^2 \\
+&= \pdv{\beta_k} \qty[(\vy_k - \beta_k \vs_k)^T (\vy_k - \beta_k \vs_k)] \\
+&= \pdv{\beta_k} \qty[\vy_k^T \vy_k - 2 \beta_k \vs_k^T \vy_k + \beta_k^2 \vs_k^T \vs_k] \\
+&= - 2 \vs_k^T \vy_k + 2\beta_k \vs_k^T \vs_k
+~
+
+~ Math
+\implies\quad \beta_k = \frac{\vs_k^T \vy_k}{\vs_k^T \vs_k}
+~
+
+By plugging this optimal choice of $\beta_k$ into the quasi-Newton update equation $\vx_{k+1} = \vx_{k} - B_k^{-1} \vg_k$, we obtain the following iterative formula:
+
+~ Well
+~~ Math { .mt-2; .mb-0; }
+\vx_{k+1} = \vx_k - \frac{\vs_k^T \vs_k}{\vs_k^T \vy_k} \vg_k
+~~
+~
+
+This is called the [___Barzilai--Borwein method___](https://doi.org/10.1093/imanum/8.1.141), first published in 1988.
+
+~ Box
+**Aside:** Isn't it remarkable that these simple considerations have led us to the forefront of mathematical research within the last fifty years? To be clear, I say "simple" as opposed to "easy," because coming up with any idea for the first time is never easy. Nonetheless, we have reached this point without the need for divine inspiration or esoteric theorems of mathematical analysis. We started off on the right foot, made reasonable choices at each juncture, and arrived at a wildly successful discovery (the original Barzilai--Borwein paper has been cited over 2,400 times).
+~
+
+At this point, we pause to make an important observation. If we take the secant equation $\vy_k = B_k \vs_k$ and multiply both sides by $B_k^{-1}$, we arrive at the equivalent form $B_k^{-1} \vy_k = \vs_k.$ We will call this the ___dual secant equation___, and to clarify the distinction, we will call the original secant equation $\vy_k = B_k \vs_k$ the ___primal secant equation___. (Note that these names are not standardized in the nonlinear optimization literature.) Now, we just derived the Barzilai--Borwein method by determining the value of $\beta_k$ that minimizes the residual in the primal secant equation. What if we had
+instead minimized the residual in the dual secant equation?
+
+~ Math
+\min_{\beta_k} \norm{\beta_k^{-1} \vy_k - \vs_k}_2^2
+~
+
+~ Align
+0 &\overset{!}{=}
+\pdv{\beta_k} \norm{\beta_k^{-1} \vy_k - \vs_k}_2^2 \\
+&= \pdv{\beta_k} \qty[\beta_k^{-2} \vy_k^T \vy_k - 2 \beta_k^{-1} \vs_k^T \vy_k + \vs_k^T \vs_k] \\
+&= -2 \beta_k^{-3} \vy_k^T \vy_k + 2 \beta_k^{-2} \vs_k^T \vy_k \\
+&= -2 \beta_k^{-3} \qty[\vy_k^T \vy_k - \beta_k \vs_k^T \vy_k]
+~
+
+~ Math
+\implies\quad \beta_k = \frac{\vy_k^T \vy_k}{\vs_k^T \vy_k}
+~
+
+This alternative optimal value of $\beta_k$ gives rise to a new iterative formula, called the ___dual Barzilai--Borwein method___.
+
+~ Well
+~~ Math { .mt-2; .mb-0; }
+\vx_{k+1} = \vx_k - \frac{\vs_k^T \vy_k}{\vy_k^T \vy_k} \vg_k
+~~
+~
+
+Observe that this method is nearly identical to the original Barzilai--Borwein method, except that the original scaling factor $\beta_k$ has been replaced by its reciprocal $\beta_k^{-1},$ and the vectors $\vs_k$ and $\vy_k$ have been interchanged. This makes perfect sense, because the dual secant equation $B_k^{-1} \vy_k = \vs_k$ is nothing more than the primal secant equation $B_k \vs_k = \vy_k$ after replacing $B_k$ by $B_k^{-1}$ and exchanging the roles of $\vs_k$ and $\vy_k.$ This observation leads us to the following ___principle of duality___:
+
+~ Well
+__Principle of duality__: Given any quasi-Newton optimization method in which the approximate Hessian $B_k$ is constructed from $\vs_k$ and $\vy_k,$ we obtain its corresponding ___dual method___ by swapping $B_k \leftrightarrow B_k^{-1}$ and $\vs_k \leftrightarrow \vy_k.$
+~
+
+The two Barzilai--Borwein methods we have just derived constitute our first example of a primal/dual pair of quasi-Newton methods.
+
+-----
+
+~ Well
+[**Under construction!**]{ color: #C00000; } This section contains a derivation of the next natural quasi-Newton method, the ___Symmetric Rank-One___ (SR1) method, but the text hasn't been written yet.
+~
+
+Symmetric first-order update ansatz: $B_k = B_{k-1} - \vu \vu^T$
+
+Impose the primal secant equation: $B_k \vs_k = \vy_k$
+
+$\norm{\qty(B_{k-1} - \vu \vu^T) \vs_k - \vy_k}_2$
+
+$\norm{\qty(B_{k-1} \vs_k - \vy_k) - \vu \vu^T \vs_k}_2$
+
+$\displaystyle \vu = \frac{B_{k-1} \vs_k - \vy_k}{\sqrt{\vs_k^T \qty(B_{k-1} \vs_k - \vy_k)}}$
+
+$\displaystyle B_k = B_{k-1} - \frac{\qty(B_{k-1} \vs_k - \vy_k) \qty(B_{k-1} \vs_k - \vy_k)^T}{\vs_k^T \qty(B_{k-1} \vs_k - \vy_k)}$
+
+$\displaystyle B_k^{-1} = \qty(B_{k-1} - \vu \vu^T)^{-1} = B_{k-1}^{-1} + \frac{B_{k-1}^{-1} \vu \vu^T B_{k-1}^{-1}}{1 - \vu^T B_{k-1}^{-1} \vu} = B_{k-1}^{-1} + \vv \vv^T$
+
+$\displaystyle \vv = \frac{B_{k-1}^{-1} \vu}{\sqrt{1 - \vu^T B_{k-1}^{-1} \vu}}$
+
+$\displaystyle B_{k-1}^{-1} \vu = \frac{\vs_k - B_{k-1}^{-1} \vy_k}{\sqrt{\vs_k^T \qty(B_{k-1} \vs_k - \vy_k)}}$
+
+$\displaystyle \vu^T B_{k-1}^{-1} \vu = \frac{\vs_k^T B_{k-1} \vs_k + \vy_k^T B_{k-1}^{-1} \vy_k - 2 \vs_k^T \vy_k}{\vs_k^T \qty(B_{k-1} \vs_k - \vy_k)}$
+
+$\displaystyle 1 - \vu^T B_{k-1}^{-1} \vu = \frac{\vs_k^T \vy_k - \vy_k^T B_{k-1}^{-1} \vy_k}{\vs_k^T \qty(B_{k-1} \vs_k - \vy_k)}$
+
+$\displaystyle \vv = \frac{\vs_k - B_{k-1}^{-1} \vy_k}{\sqrt{\vy_k^T \qty(\vs_k - B_{k-1}^{-1} \vy_k)}}$
+
+$\displaystyle B_k^{-1} = B_{k-1}^{-1} + \frac{\qty(\vs_k - B_{k-1}^{-1} \vy_k) \qty(\vs_k - B_{k-1}^{-1} \vy_k)^T}{\vy_k^T \qty(\vs_k - B_{k-1}^{-1} \vy_k)}$
+
+This shows that the SR1 method is self-dual.
+
+[INCLUDE=DZFooter.mdk]
