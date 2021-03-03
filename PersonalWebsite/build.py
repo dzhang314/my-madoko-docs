@@ -35,6 +35,8 @@ build_and_move("Contact", "contact")
 build_and_move("AutoparallelCurves", "notes/autoparallel-curves")
 build_and_move("Math2500", "notes/math-2500")
 build_and_move("MiscThoughts", "notes/misc-thoughts")
+build_and_move("NonlinearOptimization", "notes/nonlinear-optimization")
+build_and_move("AlgebraicGeometry", "notes/algebraic-geometry")
 
 build_and_move("PCREODatabase5059", "data/pcreo-database-50-59")
 build_and_move("PCREODatabase6069", "data/pcreo-database-60-69")
