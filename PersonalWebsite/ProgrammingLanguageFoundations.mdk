@@ -1,0 +1,57 @@
+Prelude: DZPrelude
+Title: Programming Language Foundations - David K. Zhang - Personal Website
+
+[INCLUDE="DZMathDefs.mdk"]
+[INCLUDE="DZHeader.html"]
+
+~ Title
+#### CS 358: Programming Language Foundations
+#####  Stanford University, Winter Quarter 2021
+~
+
+~ Subtitle
+As taught by Marco Patrignani and Marco Vassena &br;
+Transcribed by David K. Zhang
+~
+
+### 2021-01-12
+
+The ___untyped lambda calculus___ (___ULC___) is a very simple programming language consisting of natural numbers, functions, and application. The ___terms___ (i.e., syntactic constructs) of the language are:
+
+~ Align
+t &\Coloneqq n \mid x && \text{(natural numbers and variables)} \\
+&\phantom{{} \Coloneqq n} \mid \lambda x.\, t && \text{(function definition)} \\
+&\phantom{{} \Coloneqq n} \mid t\, t && \text{(function application)} \\
+&\phantom{{} \Coloneqq n} \mid t \oplus t && \text{(binary operations: $+$, $-$, $\cdot$)}
+~
+
+As programmers, we have an intuitive understanding of what these symbols mean. But in order to _prove_ things about the execution of a programming language, we need a formal definition of its _operational semantics_. There are two common approaches: ___structural operational semantics___ (___SOS___) and ___contextual operational semantics___ (___COS___). COS is a newer approach which is more common in modern work, but SOS is still widely used because it tends to work better with proof assistants. We will later prove that these two approaches are equivalent, so the choice is largely a matter of technical convenience.
+
+In the SOS world, there is a further choice between ___small-step___ (___SS___) and ___big-step___ (___BS___) semantics, while COS is usually defined with small steps. In both worlds, there is also a choice between ___call-by-value___ (___CBV___) semantics, which corresponds to eager evaluation, and ___call-by-name___ (___CBN___) semantics, which corresponds to lazy evaluation.
+
+Our first example of operational semantics will be SOS-SS-CBV for ULC. But before we can begin defining any kind of operational semantics, we first need a notion of ___program state___, which captures all pertinent semantic information about a program while it is running. For example, if our programming language included mutable variables or memory cells, our program state would have to include their values at a particular point in time. If our language included named constants or functions, then our program state would need to include a lexical environment to look up names in. However, ULC is a pure functional language with no named bindings, so the only program state we need to consider is what term we are currently evaluating.
+
+~ Align
+\Omega &\Coloneqq t
+~
+
+Defining operational semantics means prescribing a list of rules by which one program state $\Omega$ can step to another program state $\Omega'.$ Terms which are capable of immediately taking a step are called ___redexes___, of which there are two types in ULC: $n \oplus n',$ binary operations between natural numbers, and $(\lambda x.\, t)\, v,$ the application of a function to a ___value___ (i.e., a natural number or function).
+
+~ Align
+v &\Coloneqq n \mid \lambda x.\, t
+~
+
+In CBV, if a function is applied to an argument which is not yet a value, then the argument needs to be further evaluated until it becomes a value. (This rule will be modified when we define CBN semantics later.)
+
+Evaluation of redexes in ULC is specified by the following rules:
+
+* (OP): $n \oplus n' \to n'',$ where $n'' = \llbracket n \oplus n' \rrbracket.$
+* (BETA): $(\lambda x.\, t)\, v \to t[v/x],$ where $t[v/x]$ denotes the term $t$ with every occurrence of $x$ replaced by $v.$
+
+Now, a complicated term in ULC might contain many redexes as sub-terms. To unambiguously define evaluation of such terms, we need a rule that specifies which redex should be evaluated first. The SOS approach to this problem is to define a system of _syntax-directed_ evaluation rules which implicitly enforce a particular evaluation order.
+
+~ Math
+\frac{t_1 \to t_1'}{t_1 \, t_2 \to t_1' \, t_2}
+~
+
+[INCLUDE=DZFooter.mdk]

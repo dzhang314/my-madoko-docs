@@ -1,4 +1,3 @@
-
 ~ { input: mathdefs; }
 \newcommand{\N}{{\mathbb{N}}}
 \newcommand{\Z}{{\mathbb{Z}}}
@@ -18,15 +17,29 @@
 \newcommand{\simpler}{\mathrel{{\lt}_{\mathsf{s}}}}
 \newcommand{\simplereq}{\mathrel{{\le}_{\mathsf{s}}}}
 
-\newcommand{\normalin}{\trianglelefteq}
-
 \newcommand{\vd}{{\mathbf{d}}}
 \newcommand{\vg}{{\mathbf{g}}}
 \newcommand{\vo}{{\mathbf{0}}}
+\newcommand{\vp}{{\mathbf{p}}}
 \newcommand{\vs}{{\mathbf{s}}}
 \renewcommand{\vu}{{\mathbf{u}}}
 \newcommand{\vv}{{\mathbf{v}}}
 \newcommand{\vx}{{\mathbf{x}}}
 \newcommand{\vy}{{\mathbf{y}}}
 \newcommand{\vz}{{\mathbf{z}}}
+
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\SymS}{{\mathsf{S}}}
+\newcommand{\DihD}{{\mathsf{D}}}
+\newcommand{\SphS}{{\mathbb{S}}}
+\newcommand{\normalin}{\trianglelefteq}
+\newcommand{\actson}{\curvearrowright}
+\newcommand{\nucnorm}[1]{\norm{#1}_{*}}
+
+\newcommand{\LieGL}{{\mathsf{GL}}}
+\newcommand{\LieSL}{{\mathsf{SL}}}
+\newcommand{\LieO}{{\mathsf{O}}}
+\newcommand{\LieSO}{{\mathsf{SO}}}
+\newcommand{\LieU}{{\mathsf{U}}}
+\newcommand{\LieSU}{{\mathsf{SU}}}
 ~

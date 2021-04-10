@@ -12,6 +12,315 @@ This page contains a disorganized collection of ideas that I'm learning and thin
 
 -----
 
+~ LongDefinition
+The ___nuclear norm___ (a.k.a. ___trace norm___) of a matrix $A \in \C^{m \times n}$ is the quantity
+~~ Math
+\nucnorm{A} \coloneqq \sum_{i=1}^{\min(m,n)} \sigma_i(A)
+~~
+where $\sigma_i(A)$ denotes the $i^{\text{th}}$ singular value of $A.$
+{ .mb-0; }
+~
+
+The nuclear norm is a powerful tool in computational mathematics because it can be interpreted as a convex relaxation of the rank function. (More precisely, the nuclear norm is the convex envelope of the rank function when restricted to the unit ball in the $\ell^2 \to \ell^2$ operator norm.) In matrix recovery problems, adding a penalty term proportional to the nuclear norm encourages a solver to find low-rank solutions.
+
+The nuclear norm also has a special interpretation for Hermitian matrices. Recall that the singular values of a Hermitian matrix $A \in \C^{n \times n}$ are the absolute values of its eigenvalues, i.e., $\sigma_i = \abs{\lambda_i}.$ It follows that $\nucnorm{A} = \sum_{i=1}^n \abs{\lambda_i}$ when $A$ is Hermitian. Moreover, when $A$ is both Hermitian and positive (semi)definite, we can drop the absolute value bars and write $\nucnorm{A} = \sum_{i=1}^n \lambda_i = \tr(A)$. This property is, presumably, the justification for the name "trace norm."
+
+Because the definition of $\nucnorm{A}$ depends only on the singular values of $A,$ it is clear that the nuclear norm is ___unitarily invariant___, i.e., that $\nucnorm{A} = \nucnorm{U\!AV}$ for all $U \in \LieU(m)$ and $V \in \LieU(n).$ (Here, $\LieU(n) \subseteq \C^{n \times n}$ denotes the set of $n \times n$ unitary matrices.) However, we cannot conclude directly from the definition that the nuclear norm is a submultiplicative matrix norm. In order to prove this, we will first establish the following variational characterization:
+
+~ MathCard
+~~ LongTheoremBody
+For all square matrices $A \in \C^{n \times n},$
+~~~ Math
+\nucnorm{A} = \max_{U,V \in \LieU(n)} \trace \abs{U^\dagger \! A V}
+~~~
+where $\abs{U^\dagger \! A V}$ denotes the matrix obtained by taking the absolute value of each entry of $U^\dagger \! A V.$ Moreover, the maximum is achieved whenever $U^\dagger \! A V$ is a diagonal matrix.
+{ .mb-0; }
+~~
+~~ LongProofBody
+Let $A = W\Sigma Z^\dagger$ denote a singular value decomposition of $A,$ where $W,Z \in \LieU(n)$ and $\Sigma = \operatorname{diag}(\sigma_1, \dots, \sigma_n)$ is a diagonal matrix of singular values. Then
+~~~ Math
+\max_{U,V \in \LieU(n)} \trace \abs{U^\dagger \! A V}
+\ge \trace \abs{W^\dagger \! A Z}
+= \trace \abs{\Sigma}
+= \sum_{i=1}^n \sigma_i
+= \nucnorm{A}.
+~~~
+We now must show that $\trace \abs{U^\dagger \! A V} \le \nucnorm{A}$ for all $U,V \in \LieU(n).$ Observe that as $U$ ranges over all unitary matrices, the product $WU$ also ranges over all unitary matrices. The same holds for $V$ and $ZV.$ Thus, under the change of variables $(U, V) \mapsto (WU, ZV),$ it suffices to show that
+~~~ Math
+\trace \abs{U^\dagger W^\dagger \! A Z V} = \trace \abs{U^\dagger \Sigma V} \le \nucnorm{A}
+~~~
+for all $U,V \in \LieU(n).$ This is proven by the following computation:
+~~~ Align
+\trace \abs{U^\dagger \Sigma V}
+&= \sum_{i=1}^n \abs{(U^\dagger \Sigma V)_{ii}} \\
+&= \sum_{i=1}^n \abs{\sum_{j=1}^n (U^\dagger)_{ij} \sigma_j V_{ji}} \\
+&\le \sum_{i=1}^n \sum_{j=1}^n \abs{U^*_{ji} \sigma_j V_{ji}}
+&& \text{(triangle inequality)} \\
+&= \sum_{j=1}^n \sigma_j \sum_{i=1}^n \abs{U_{ji}} \abs{V_{ji}} \\
+&\le \sum_{j=1}^n \sigma_j \sum_{i=1}^n \frac{1}{2} \qty(\abs{U_{ji}}^2 + \abs{V_{ji}}^2)
+&& \text{(AM-GM inequality)} \\
+&= \frac{1}{2} \sum_{j=1}^n \sigma_j \qty(\sum_{i=1}^n \abs{U_{ji}}^2 + \sum_{i=1}^n \abs{V_{ji}}^2) \\
+&= \frac{1}{2} \sum_{j=1}^n \sigma_j \cdot \qty(1 + 1)
+&& \text{($U,V$ have orthonormal rows)} \\
+&= \sum_{j=1}^n \sigma_j \\
+&= \nucnorm{A}
+~~~
+~~
+~~ LongWellBody
+**Corollary:** If $A \in \C^{n \times n}$ is a Hermitian matrix, then
+~~~ Math
+\nucnorm{A} = \max_{U \in \LieU(n)} \trace \abs{U^\dagger \! A U}.
+~~~
+Moreover, the maximum value is achieved when $U$ diagonalizes $A.$
+{ .mb-0; }
+~~
+~
+
+~ Definition
+A ___density matrix___ is a Hermitian positive semidefinite matrix with trace 1.
+~
+
+-----
+
+Consider a quantum system with Hamiltonian $\hat{H},$ eigenvalues $E_n,$ and corresponding eigenvectors $\ket{n}\!.$ Its partition function is
+~ Math
+Z \coloneqq \sum_n e^{-\beta E_n} = \sum_n \mel{n}{e^{-\beta \hat{H}}}{n} = \Trace(e^{-\beta \hat{H}}).
+~
+Recall that by introducing a resolution of the identity, we can verify the identity $Z = \Trace(e^{-\beta \hat{H}})$ in any basis. For example, in the position basis, we have:
+~ Align
+Z &= \sum_n \mel{n}{e^{-\beta \hat{H}}}{n} \\
+&= \sum_n \bra{n} \qty[\int \ket{\vx} \bra{\vx} \dd{\vx}] e^{-\beta \hat{H}} \qty[\int \ket{\vx'} \bra{\vx'} \dd{\vx'}] \ket{n} \\
+&= \sum_n \iint \bra{n} \ket{\vx} \bra{\vx} e^{-\beta \hat{H}} \ket{\vx'} \bra{\vx'} \ket{n} \dd{\vx} \dd{\vx'} \\
+&= \iint \bra{\vx'} \qty[\sum_n \ket{n} \bra{n}] \ket{\vx} \bra{\vx} e^{-\beta \hat{H}} \ket{\vx'} \dd{\vx} \dd{\vx'} \\
+&= \iint \bra{\vx'} \ket{\vx} \bra{\vx} e^{-\beta \hat{H}} \ket{\vx'} \dd{\vx} \dd{\vx'} \\
+&= \iint \delta(\vx - \vx') \bra{\vx} e^{-\beta \hat{H}} \ket{\vx'} \dd{\vx} \dd{\vx'} \\
+&= \int \bra{\vx} e^{-\beta \hat{H}} \ket{\vx} \dd{\vx}
+~
+Now, if the system consists of $N$ distinguishable particles in $d$ spatial dimensions, then the Hamiltonian $\hat{H}$ has the form
+~ Math
+\hat{H} = \hat{T} + \hat{V} = \sum_{i=1}^N \frac{\hat{p}_i^2}{2m_i} + V(\hat{\vx}_1, \dots, \hat{\vx}_N).
+~
+In the classical limit $\hbar \to 0,$ the canonical commutation relation $[x_{ij}, p_{k\ell}] = i\hbar \delta_{ik} \delta_{j\ell} = O(\hbar)$ vanishes. It follows that the kinetic energy $\hat{T}$ and potential energy $\hat{V}$ operators commute, and we can write:
+~ Align
+Z &= \Trace(e^{-\beta \hat{T}} e^{-\beta \hat{V}}) \\
+&= \int \bra{\vx} e^{-\beta \hat{T}} e^{-\beta \hat{V}} \ket{\vx} \dd{\vx} \\
+&= \int \bra{\vx} e^{-\beta \hat{T}} \qty[\int \ket{\vx'} \bra{\vx'} \dd{\vx'}] e^{-\beta \hat{V}} \ket{\vx} \dd{\vx} \\
+&= \iint \bra{\vx} e^{-\beta \hat{T}} \ket{\vx'} \bra{\vx'} e^{-\beta \hat{V}} \ket{\vx} \dd{\vx} \dd{\vx'} \\
+&= \iint \bra{\vx} e^{-\beta \hat{T}} \ket{\vx'} e^{-\beta V(\vx)} \delta(\vx - \vx') \dd{\vx} \dd{\vx'} \\
+&= \int \bra{\vx} e^{-\beta \hat{T}} \ket{\vx} e^{-\beta V(\vx)} \dd{\vx} \\
+&= \int \bra{\vx} \qty[\int \ket{\vp} \bra{\vp} \dd{\vp}] e^{-\beta \hat{T}} \qty[\int \ket{\vp'} \bra{\vp'} \dd{\vp'}] \ket{\vx} e^{-\beta V(\vx)} \dd{\vx} \\
+&= \iiint \bra{\vx} \ket{\vp} \bra{\vp} e^{-\beta \hat{T}} \ket{\vp'} \bra{\vp'} \ket{\vx} e^{-\beta V(\vx)} \dd{\vx} \dd{\vp} \dd{\vp'} \\
+&= \iiint \bra{\vx} \ket{\vp} e^{-\beta T(\vp)} \delta(\vp - \vp') \bra{\vp'} \ket{\vx} e^{-\beta V(\vx)} \dd{\vx} \dd{\vp} \dd{\vp'} \\
+&= \iiint \bra{\vx} \ket{\vp} e^{-\beta T(\vp)} \bra{\vp} \ket{\vx} e^{-\beta V(\vx)} \dd{\vx} \dd{\vp} \\
+&= \frac{1}{(2\pi\hbar)^{Nd}} \iiint e^{-\beta H(\vx, \vp)} e^{i\vp \cdot \vx/\hbar} e^{-i\vp \cdot \vx/\hbar} \dd{\vx} \dd{\vp} \\
+&= \frac{1}{h^{Nd}} \iiint e^{-\beta H(\vx, \vp)} \dd{\vx} \dd{\vp}
+~
+In the penultimate step, we use the fact that
+~ Math
+\bra{\vx} \ket{\vp} = \frac{e^{i\vp \cdot \vx / \hbar}}{(2\pi \hbar)^{Nd/2}} \qquad\text{ and }\qquad \bra{\vp} \ket{\vx} = \frac{e^{-i\vp \cdot \vx / \hbar}}{(2\pi \hbar)^{Nd/2}}.
+~
+This calculation explains the appearance of Planck's constant $h$ in the formula for the classical partition function. In classical thermodynamics, the value of $h$ is immaterial, since we always compute physically observable quantities by taking a derivative of the logarithm of $Z.$ However, the quantum-mechanical perspective shows that $h$ is the correct measure of phase-space volume.
+
+-----
+
+~ MathCard
+~~ WellBody
+**Cayley's Theorem:** Every group $G$ is isomorphic to a subgroup of $\Sym(G).$
+~~
+~~ ProofBody
+Send each element $g \in G$ to the permutation of $G$ defined by $x \mapsto gx.$
+~~
+~
+
+~ MathCard
+~~ WellBody
+**Strong Cayley Theorem:** For each subgroup $H$ of a group $G,$ there exists a homomorphism $\varphi: G \to \SymS_m,$ where $m \coloneqq \abs{G:H},$ whose kernel is the largest normal subgroup of $G$ contained in $H.$
+~~
+~~ BoxBody
+*Remark:* There is no requirement that $G,$ $H,$ or $\abs{G:H}$ be finite. This statement still makes sense when $m$ is interpreted as a cardinal number.
+~~
+~~ LongProofBody
+Consider the action of $G$ by left multiplication on the set of left cosets of $H.$ This action identifies each element $g \in G$ with a permutation of a set containing $\abs{G:H} = m$ elements, i.e., an element of $\SymS_m.$ This defines the desired homomorphism $\varphi: G \to \SymS_m.$
+
+Observe that $g \in \ker \varphi$ if and only if left multiplication by $g$ fixes every left coset of $H,$ i.e.,
+~~~ Align
+&& g(aH) = aH \qquad \forall a \in G \\
+\iff && a^{-1} gaH = H \qquad \forall a \in G \\
+\iff && a^{-1} ga \in H \qquad \forall a \in G \\
+\iff && g \in aHa^{-1} \qquad \forall a \in G \\
+~~~
+This shows that $\ker\varphi = \bigcap_{a \in G} aHa^{-1}.$ Now, any normal subgroup $N \normalin G$ satisfying $N \subseteq H$ also satisfies $N = aNa^{-1} \subseteq aHa^{-1}$ for all $a \in G,$ which proves $N \subseteq \ker \varphi.$
+~~
+~
+
+Note that Cayley's theorem is the special case $H = \{1_G\}$ of the strong Cayley theorem.
+
+~ MathCard
+~~ WellBody
+**Corollary:** If a finite group $G$ has a subgroup $H \le G$ whose index $p \coloneqq \abs{G:H}$ is the smallest prime factor of $\abs{G},$ then $H \normalin G.$
+~~
+~~ LongProofBody
+Let $\varphi: G \to \SymS_p$ denote the homomorphism induced by the left action of $G$ on the collection of left cosets of $H.$ The strong Cayley theorem tells us that $K \coloneqq \ker \varphi$ is the largest normal subgroup of $G$ contained in $H.$ We will prove that, in fact, $K = H.$
+
+Since we already know $K \subseteq H,$ to establish equality, it suffices to prove $\abs{K} \ge \abs{H}.$ We will do this by proving that every prime power which divides $\abs{H}$ also divides $\abs{K}.$
+
+Observe via the first isomorphism theorem that $G/K$ is isomorphic to a subgroup of $\SymS_p.$ By Lagrange's theorem, $\abs{G:K}$ divides $\abs{\SymS_p} = p!.$ But since $\abs{G:K} = \abs{G:H}\abs{H:K} = p\abs{H:K},$ we may conclude that $\abs{H:K}$ divides $(p-1)!.$ In particular, $\abs{H:K}$ cannot have any prime factors $\ge p.$
+
+Now, let $q$ be a prime for which $q^k$ divides $\abs{H},$ where $k \ge 1.$ Since $\abs{H} = \abs{H:K} \abs{K},$ we know that $\abs{H:K}$ and $\abs{K}$ must collectively share $k$ factors of $q.$ However, $q$ cannot be a prime factor of $\abs{H:K},$ since any prime factor of $\abs{H}$ is also a prime factor of $\abs{G} = \abs{G:H}\abs{H},$ and by hypothesis, $q \ge p.$ Therefore, $q^k$ divides $\abs{K}.$
+~~
+~
+
+This generalizes the fact that every subgroup of index 2 is normal. Thus, to prove that a group of order 99 is not simple, it suffices to find a subgroup of index 3.
+
+Every group acts on itself by conjugation: $(g, x) \mapsto gxg^{-1}.$
+
+~ MathCard
+~~ LongWellBody
+**Orbit-Stabilizer Theorem:** Let $G \actson X.$ For any $x \in X,$
+~~~ Math
+\abs{G} = \abs{Gx} \abs{G_x}
+~~~
+where $Gx$ denotes the orbit of $x$ under $G,$ and $G_x$ denotes the stabilizer subgroup of $x.$
+{ .mb-0; }
+~~
+~~ BoxBody
+_Remark:_ This statement holds in cardinal arithmetic regardless of whether $\abs{G}$ is finite.
+~~
+~~ ProofBody
+Elements of the orbit $Gx$ correspond to cosets of the stabilizer $G_x$ in $G.$ Hence, $\abs{G}$ equals the number of cosets $\abs{Gx}$ multiplied by the size $\abs{G_x}$ of each coset.
+~~
+~
+
+~ MathCard
+~~ WellBody
+**Burnside's Lemma:** Let $G \actson X$ with both $G$ and $X$ finite. Then
+~~~ Math
+\abs{X/G} = \frac{1}{\abs{G}} \sum_{g \in G} \abs{X^g}
+~~~
+where $\abs{X/G}$ denotes the number of distinct orbits, and $X^g$ denotes the set of elements of $X$ which are fixed by a given $g \in G.$
+{ .mb-0; }
+~~
+~~ LongProofBody
+Consider the quantity $\sum_{g \in G} \sum_{x \in X} [gx = x],$ where $[gx = x]$ denotes the _Iverson bracket_ (i.e., 1 if $gx = x,$ otherwise 0). On one hand, we can write
+~~~ Math
+\sum_{g \in G} \sum_{x \in X} [gx = x] = \sum_{g \in G} \sum_{x \in X^g} 1 = \sum_{g \in G} \abs{X^g}.
+~~~
+However, by changing the order of summation, we can apply the orbit-stabilizer theorem to write
+~~~ Math
+\sum_{g \in G} \sum_{x \in X} [gx = x] = \sum_{x \in X} \sum_{g \in G} [gx = x] = \sum_{x \in X} \abs{G_x} = \abs{G} \sum_{x \in X} \frac{1}{\abs{Gx}}.
+~~~
+To complete the proof, observe that $\abs{X/G} = \sum_{x \in X} \abs{Gx}^{-1},$ since each distinct orbit contributes a total of 1 to this sum.
+~~
+~
+
+~ MathCard
+~~ WellBody
+**Cauchy's Theorem:** Let $G$ be a finite group. If a prime number $p$ divides $\abs{G},$ then $G$ contains an element of order $p.$
+~~
+~~ LongProofBody
+Consider the set
+~~~ Math
+X \coloneqq \{ (x_1, x_2, \dots, x_p) \in G^p : x_1 x_2 \cdots x_p = 1_G \}.
+~~~
+Observe that $\abs{X} = \abs{G}^{p-1},$ since the first $p-1$ elements of $(x_1, x_2, \dots, x_p)$ can be chosen freely; the final element is then uniquely determined. Since (by hypothesis) $p$ divides $\abs{G},$ it follows that $p$ also divides $\abs{X}.$
+
+Let $\Z_p \actson X$ by cyclic permutations. (Note that $x_1 x_2 \cdots x_p = 1_G$ implies $x_2 \cdots x_p x_1 = 1_G$.) This action partitions $X$ into orbits, and since the only subgroups of $\Z_p$ are itself and the trivial group, the orbit-stabilizer theorem implies that every orbit has size 1 or $p.$ Since $\abs{X} \equiv 0 \mod p,$ the number of orbits of size 1 must be divisible by $p.$ There is at least one such orbit, given by the element $(1_G, 1_G, \dots, 1_G) \in X,$ so we can conclude that there are at least $p-1$ others. Every such orbit yields an element of $G$ of order $p.$
+~~
+~
+
+~ MathCard
+~~ WellBody
+**Sylow's First Theorem:** Let $G$ be a finite group, and $p$ a prime number. If $p^k$ divides $\abs{G},$ for any $k \ge 0,$ then $G$ contains a subgroup of order $p^k.$
+~~
+~~ ProofBody
+
+~~
+~
+
+-----
+
+A function $f: \R^n \to \R$ is ___harmonic___ if it is annihilated by the Laplacian: $\nabla^2 f = 0.$ Think of $\nabla^2 f(\vx)$ as measuring the difference between $f(\vx)$ and the average value that $f$ assumes at nearby points. At a local minimizer $\vx^*,$ the quantity $\nabla^2 f(\vx^*)$ is positive, because the value of $f$ at any point near $\vx^*$ exceeds $f(\vx^*).$
+
+Note that if $f$ is harmonic, then so is any partial derivative of $f,$ since partial derivative operators commute with the Laplacian.
+
+~ MathCard
+~~ WellBody
+**Mean Value Property: **Let $f: \R^n \to \R$ be a harmonic function, and let $\nu$ denote the normalized surface area measure on the unit sphere $S^{n-1}$ embedded in $\R^n.$ For any $\vx \in \R^n$ and $r \ge 0,$
+~~~ Math { .mb-0; }
+f(\vx) = \int_{S^{n-1}} f(\vx  + r\vy) \dd{\nu(\vy)}.
+~~~
+~~
+~~ LongProofBody
+The claim is trivial for $r = 0,$ since the integrand is identically $f(\vx).$ We complete the proof by showing that the RHS is constant as a function of $r.$ To do this, we differentiate and apply the divergence theorem:
+~~~ Align
+\pdv{r} \qty[\int_{S^{n-1}} f(\vx  + r\vy) \dd{\nu(\vy)}] &= \int_{S^{n-1}} \vy \cdot \nabla f(\vx  + r\vy) \dd{\nu(\vy)} \\
+&= \int_{B^n} \nabla^2 f(\vx  + r\vy) \dd{\mu(\vy)} = 0
+~~~
+Here, $B^n \subset \R^n$ denotes the volume bounded by $S^{n-1},$ and $\mu$ denotes a scalar multiple of Lebesgue measure on $B^n.$ Since $f$ was assumed to be harmonic, the integrand vanishes identically.
+~~
+~~ WellBody
+**Corollary:** The value of a harmonic function at a point is also equal to its average value over a ball centered at that point. (The sphericity of the ball is important; this statement does not hold for an arbitrarily-shaped neighborhood.)
+~~
+~
+
+The class of harmonic functions is remarkably well-behaved. For example, a converse to the mean value property also holds: any continuous function which satisfies the mean value property must be harmonic. Moreover, all harmonic functions are real analytic. (This is proven by establishing bounds on the growth rate of the $n^{\text{th}}$ derivative of a harmonic function.) As a corollary, harmonic functions are uniquely determined by their values in an arbitrarily small neighborhood (or, in fact, a germ at a single point).
+
+~ Well
+**Liouville's Theorem:** Any function which is harmonic on all of $\R^n$ is either constant or unbounded (above and below).
+~
+
+One might naturally ask whether ___Laplace's equation___ $\nabla^2 f = 0$ admits weak solutions which are not classical solutions. This is not the case.
+
+~ Well
+**Weyl's Lemma:** Every weak solution of Laplace's equation $\nabla^2 f = 0$ is a classical solution up to redefinition on a set of measure zero.
+~
+
+-----
+
+In this section, an ___operator___ is a map that takes a function $f : \R \to \R$ and returns a function $Lf : \R \to \R.$ In this context, we call $f$ the ___input signal___ and $Lf$ the ___output signal___. We will particularly be interested in operators that are ___linear___ and ___translation-invariant___, abbreviated ___LTI___. (Technically, we ought to say "translation-equivariant," but this slightly imprecise terminology is deeply entrenched.)
+
+If we know what an LTI operator $L$ does to a function, then we also know what it does to any linear combination of translates of said function. Now, _any_ function can be thought of as a linear combination of ___unit impulses___ $\delta,$ so if we know the ___impulse response___ $h \coloneqq L\delta,$ then we know how $L$ acts on any function. In particular, $Lf = L(\delta * f) = (L\delta) * f = h * f,$ where $*$ denotes ___convolution___.
+
+We interpret $h(t)$ as the amount of the input signal $f$ which is reverberated after a time delay of $t.$ We say that the operator $L$ is ___causal___ if $h(t) = 0$ for all $t < 0;$ this means that $L$ does not look into the future (i.e., the input signal at a future time cannot affect the output signal at a past time).
+
+It is a remarkable fact that complex exponential signals $f(t) \coloneqq e^{i \omega t}$ are eigenfunctions of _any_ LTI operator $L.$ The corresponding eigenvalue can be computed from the impulse response $h \coloneqq L \delta$ as follows:
+
+~ Math
+(Lf)(t) = \int_{-\infty}^{\infty} h(u) f(t-u) \dd{u}
+= \int_{-\infty}^{\infty} h(u) e^{i \omega (t - u)} \dd{u}
+= e^{i \omega t} \int_{-\infty}^{\infty} h(u) e^{-i \omega u} \dd{u}
+~
+
+Thus, if we define the function $\hat{h}: \R \to \R$ by
+
+~ Math
+\hat{h}(\omega) \coloneqq \int_{-\infty}^{\infty} h(u) e^{-i \omega u} \dd{u}
+~
+
+then we see that $\hat{h}(\omega)$ is the corresponding eigenvalue for the eigenvector $e^{i \omega t}$ of the LTI operator with impulse response $h.$ The function $\hat{h}$ is called the ___Fourier transform___ of $h,$ and is commonly denoted either by addition of a hat $\hat{h}$ or a calligraphic $\mathcal{F},$ as in $\hat{h} = \mathcal{F}h.$ This is clearly well-defined for $h \in L^1(\R),$ and we will later show that $\mathcal{F}$ can be extended to $L^2(\R).$
+
+It is natural to ask whether a function $h$ is uniquely determined by its Fourier transform $\hat{h}.$ This is the case, and in fact, there is an explicit ___inversion formula___ for computing $h$ from $\hat{h}.$
+
+~ Math
+h(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{h}(\omega) e^{i\omega t} \dd{\omega}
+~
+
+This defines the ___inverse Fourier transform___ $\mathcal{F}^{-1}.$ [**TODO:** Prove the Fourier inversion formula for the case where $h$ and $\hat{h}$ are both in $L^1(\R)$.]
+
+~ Math
+\mathcal{F}(f * h) = (\mathcal{F} f) (\mathcal{F} h)
+~
+
+~ Math
+\braket{f}{g} = \frac{1}{2\pi} \braket{\mathcal{F} f}{\mathcal{F} g}
+~
+
+-----
+
+Suppose we observe a stochastic process $Y_t = X_t + Z_t$ which is the sum of a signal component $X_t$ and a noise component $Z_t.$
+
+-----
+
 ~ MathCard
 ~~ WellBody
 **Problem:** How many edges does an icosahedron have?
