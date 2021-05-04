@@ -13,6 +13,169 @@ This page contains a disorganized collection of ideas that I'm learning and thin
 -----
 
 ~ LongDefinition
+A ___decision tree___ on $n$ variables is a full binary tree $T$ in which each internal node is labeled with an index $i \in \{1, \dots, n\}$ and each leaf is labeled a result $r \in \{0,1\}.$
+
+**[TODO: Draw a picture of a decision tree.]**
+
+Every decision tree $T$ on $n$ variables defines a Boolean function $\{0,1\}^n \to \{0,1\}$ as follows:
+
+**[TODO: Illustrate examples of decision tree computation.]**
+
+Given a Boolean function $f : \{0,1\}^n \to \{0,1\},$ we say that a decision tree $T$ ___computes___ $f$ if $T(x) = f(x)$ for every bit string $x \in \{0,1\}^n.$
+
+The ___depth___ of a decision tree $T$ is the length of a longest path in $T$ from the root to any leaf. Here, the ___length___ of a path is defined as the number of _edges_ it traverses, so that a tree consisting only of a single leaf has depth zero.
+{ .mb-0; }
+~
+
+We can construct a decision tree $T$ that computes any Boolean function $f : \{0,1\}^n \to \{0,1\}$ by simply writing the truth table for $f$ along the bottom row of a complete binary tree of depth $n.$ This is a highly inefficient decision tree having $2^n$ leaves and $2^n-1$ internal nodes. The nontrivial question is whether a given function $f$ admits a _smaller_ decision tree.
+
+If a Boolean function $f$ can be computed by a very shallow decision tree, then only a few bits of $x$ are needed to deduce the value of $f(x).$ This suggests that $f$ is, in some sense, a very simple function. We formalize this notion in the following definition:
+
+~ Definition
+The ___decision tree complexity___ of a Boolean function $f: \{0,1\}^n \to \{0,1\},$ denoted by $D(f),$ is the minimum depth of any decision tree $T$ that computes $f.$
+~
+
+~ Definition
+Let $x \in \{0,1\}^n$ and $S \subseteq [n].$ The ___restriction___ of $x$ to $S,$ denoted by $x|_S,$ is the bit string $x_{i_1} x_{i_2} \cdots x_{i_\abs{S}},$ where $i_1 < i_2 < \cdots < i_{\abs{S}}$ denotes the enumeration of $S = \{i_1, i_2, \dots, i_{\abs{S}}\}$ in increasing order.
+~
+
+For example, if $x = 011010$ and $S = \{1, 3, 5\},$ then $x|_S = 011.$ Similarly, $x|_{\{2,4,6\}} = 100,$ and $x|_\varnothing$ is the empty string.
+
+~ Definition
+Let $f: \{0,1\}^n \to \{0,1\}$ and $x \in \{0,1\}^n.$ A ___certificate___ for $f$ at $x$ is a set $S \subseteq [n]$ with the following property: for all $x' \in \{0,1\}^n,$ if $x|_S = x'|_S,$ then $f(x) = f(x').$
+~
+
+Certificates always exist, since the full set $[n]$ is always a certificate for any $f$ at any $x.$ The nontrivial question is whether a given function admits _smaller_ certificates. Intuitively, small certificates suggest that a function has low complexity, since only a small number of bits of $x$ are needed to deduce the value of $f(x).$
+
+~ LongDefinition
+The ___certificate complexity___ of a Boolean function $f: \{0,1\}^n \to \{0,1\}$ ___at___ a bit string $x \in \{0,1\}^n$ is the smallest cardinality of any certificate for $f$ at $x.$
+~~ Math { .mb-1; }
+C_x(f) \coloneqq \min_{\substack{S \subseteq [n] \\ \text{$S$ is a certificate for $f$ at $x$}}} \abs{S}
+~~
+The ___certificate complexity___ of $f$ is
+~~ Math { .mt-2; .mb-0; }
+C(f) \coloneqq \max_{x \in \{0,1\}^n} C_x(f).
+~~
+~
+
+This definition introduces two distinct but related notions: "certificate complexity of _f_" and "certificate complexity of _f_ at _x_." This is analogous to the separate but related notions of "continuity of _f_" and "continuity of _f_ at _x_" in topology.
+
+~ MathCard
+~~ TheoremBody
+$C(f) \le D(f)$ for any Boolean function $f : \{0,1\}^n \to \{0,1\}.$
+~~
+~~ ProofBody
+Let $T$ be a minimal-depth decision tree that computes $f.$ For any bit string $x \in \{0,1\}^n,$ the set of indices queried when computing $T(x)$
+~~
+~
+
+$\deg(f)$
+
+$\apxdeg(f)$
+
+-----
+
+In this section, we denote by $\SphS^1$ the unit circle in the complex plane, i.e.,
+~ Math
+\SphS^1 \coloneqq \{ z \in \C : \abs{z} = 1 \}.
+~
+Observe that $\SphS^1$ is a group under multiplication, and that the group-theoretic inverse of $z \in \SphS^1$ is simply its complex conjugate $z^*.$ Moreover, $\SphS^1$ is a topological group under the subspace topology inherited from the usual topology on $\C.$
+
+~ Definition
+The ___Pontryagin dual___ of a locally compact abelian group $G$ is the topological group $\widehat{G} \coloneqq \operatorname{Hom}_{\mathbf{TopGrp}}(G, \SphS^1)$ of continuous group homomorphisms from $G$ to the circle group $\SphS^1,$ endowed with the operation of pointwise multiplication and the topology of uniform convergence on compact sets.
+~
+
+~ Theorem
+If $G$ is a locally compact abelian group, then so is $\widehat{G}.$
+~
+
+Having shown that $\widehat{G}$ is itself a locally compact abelian group, it now makes sense to consider the double Pontryagin dual $\widehat{\!\vphantom{\rule{1pt}{8.2pt}}\smash{\widehat{G}}}.$
+
+~ Well
+**Pontryagin Duality Theorem:** For any locally compact abelian group $G,$ the evaluation homomorphism $G \hookrightarrow \widehat{\!\vphantom{\rule{1pt}{8.2pt}}\smash{\widehat{G}}}$ is an isomorphism of topological groups (i.e., a group isomorphism and a homeomorphism).
+~
+
+-----
+
+~ Math
+\ind_{=} : \prod_{A : \UU} \ \prod_{C : \prod\limits_{x : A} \prod\limits_{y : A} \qty[(x \mathrel{=_A} y) \to \UU]}
+\qty[\qty(\prod_{x : A} C(x, x, \refl_x)) \to \prod_{x : A} \ \prod_{y : A} \ \prod_{p : x \mathrel{=_A} y} C(x, y, p)]
+~
+
+~ Math
+\ind_{=}(A, C, f, x, x, \refl_x) \equiv f(x)
+~
+
+~ Math
+\transport : \prod_{A : \UU} \ \prod_{P : A \to \UU} \ \prod_{x : A} \ \prod_{y : A} \ \prod_{p : x \mathrel{=_A} y} \qty[P(x) \to P(y)]
+~
+
+We normally suppress the arguments $A,$ $x,$ and $y$ of $\transport,$ since these can be inferred from $P$ and $p.$ Thus, we write $\transport^P(p) : P(x) \to P(y).$
+
+~ Align
+\transport \equiv (A : \UU) &\mapsto (P : A \to \UU) \mapsto \ind_{=}(A, \\
+&(x : A) \mapsto (y : A) \mapsto (p : x \mathrel{=_A} y) \mapsto \qty[P(x) \to P(y)], \\
+&(x : A) \mapsto \id_{P(x)})
+~
+
+-----
+
+~ Math
+\apd : \prod_{A : \UU} \ \prod_{P : A \to \UU} \ \prod_{f : \prod\limits_{x : A} P(x)} \ \prod_{x : A} \ \prod_{y : A} \ \prod_{p : x \mathrel{=_A} y} \qty[\transport^P(p, f(x)) \mathrel{=_{P(y)}} f(y)]
+~
+
+As with $\transport,$ we normally suppress the arguments $A,$ $P,$ $x,$ and $y$ of $\apd,$ since they can be inferred from $f$ and $p.$ Thus, we write
+~ Math
+\apd_f : \prod_{p : x \mathrel{=_A} y} \qty[\transport^P(p, f(x)) \mathrel{=_{P(y)}} f(y)].
+~
+To understand $\apd,$ think of $P$ as a proposition, and $f$ as a "proof constructor" for $P.$ In other words, for each $x : A,$ $f(x)$ is a proof term for $P(x).$ Given a path $p : x \mathrel{=_A} y,$ $\apd$ says that transporting the proof term $f(x)$ across the path $p$ yields a proof which is equal to $f(y).$
+
+~ Align
+\apd \equiv (A : \UU) &\mapsto (P : A \to \UU) \mapsto \qty(f : \prod_{x : A} P(x)) \mapsto \ind_{=}(A, \\
+&(x : A) \mapsto (y : A) \mapsto (p : x \mathrel{=_A} y) \mapsto \qty[\transport^P(p, f(x)) \mathrel{=_{P(y)}} f(y)], \\
+&(x : A) \mapsto \refl_{f(x)})
+~
+
+Observe that when $y \equiv x$ and $p \equiv \refl_x,$ the type $\transport^P(p, f(x)) \mathrel{=_{P(y)}} f(y)$ judgmentally reduces to $f(x) \mathrel{=_{P(x)}} f(x).$ This type is inhabited by $\refl_{f(x)}.$
+
+-----
+
+~ LongDefinition
+Let $f, g : \prod_{(x : A)} B(x).$ A ___homotopy___ from $f$ to $g$ is a dependent function of the following type:
+~~ Math
+(f \sim g) \equiv \prod_{x : A} \qty[ f(x) \mathrel{=_{B(x)}} g(x) ]
+~~
+~
+
+~ LongDefinition
+Let $f: A \to B.$ A ___quasi-inverse___ of $f$ is an ordered triple $(g, \alpha, \beta)$ consisting of a function $g: B \to A$ and two homotopies $\alpha: f \circ g \sim \id_B$ and $\beta: g \circ f \sim \id_A.$ The type of quasi-inverses of $f$ is denoted by:
+~~ Math
+\qinv(f) \equiv \sum_{g : B \to A} \qty[(f \circ g \sim \id_B) \times (g \circ f \sim \id_A)]
+~~
+~
+
+~ LongDefinition
+Let $f: A \to B.$ We say that $f$ is an ___equivalence___ from $A$ to $B$ if there exists an ordered quadruple $(g, \alpha, h, \beta)$ consisting of two functions $g, h : B \to A$ and two homotopies $\alpha : f \circ g \sim \id_B$ and $\beta: h \circ f \sim \id_A.$ The type of such ordered quadruples is denoted by:
+~~ Math
+\isequiv(f) \equiv \Bigg[ \sum_{g : B \to A} (f \circ g \sim \id_B) \Bigg] \times \Bigg[ \sum_{h : B \to A} (h \circ f \sim \id_A) \Bigg]
+~~
+The type of equivalences from $A$ to $B$ is denoted by:
+~~ Math
+(A \simeq B) \equiv \sum_{f : A \to B} \isequiv(f)
+~~
+~
+
+Thus, we write $f: A \simeq B$ to indicate that $f$ is an equivalence from $A$ to $B.$
+
+~ Theorem
+For each $f : A \to B,$ the types $\qinv(f)$ and $\isequiv(f)$ are logically equivalent. In other words, the types $\qinv(f) \to \isequiv(f)$ and $\isequiv(f) \to \qinv(f)$ are inhabited.
+~
+
+The direction $\qinv(f) \to \isequiv(f)$ is easy, since we can send $(g, \alpha, \beta) \mapsto (g, \alpha, g, \beta).$
+
+-----
+
+~ LongDefinition
 The ___nuclear norm___ (a.k.a. ___trace norm___) of a matrix $A \in \C^{m \times n}$ is the quantity
 ~~ Math
 \nucnorm{A} \coloneqq \sum_{i=1}^{\min(m,n)} \sigma_i(A)
@@ -25,7 +188,7 @@ The nuclear norm is a powerful tool in computational mathematics because it can 
 
 The nuclear norm also has a special interpretation for Hermitian matrices. Recall that the singular values of a Hermitian matrix $A \in \C^{n \times n}$ are the absolute values of its eigenvalues, i.e., $\sigma_i = \abs{\lambda_i}.$ It follows that $\nucnorm{A} = \sum_{i=1}^n \abs{\lambda_i}$ when $A$ is Hermitian. Moreover, when $A$ is both Hermitian and positive (semi)definite, we can drop the absolute value bars and write $\nucnorm{A} = \sum_{i=1}^n \lambda_i = \tr(A)$. This property is, presumably, the justification for the name "trace norm."
 
-Because the definition of $\nucnorm{A}$ depends only on the singular values of $A,$ it is clear that the nuclear norm is ___unitarily invariant___, i.e., that $\nucnorm{A} = \nucnorm{U\!AV}$ for all $U \in \LieU(m)$ and $V \in \LieU(n).$ (Here, $\LieU(n) \subseteq \C^{n \times n}$ denotes the set of $n \times n$ unitary matrices.) However, we cannot conclude directly from the definition that the nuclear norm is a submultiplicative matrix norm. In order to prove this, we will first establish the following variational characterization:
+Because the definition of $\nucnorm{A}$ depends only on the singular values of $A,$ it is clear that the nuclear norm is ___unitarily invariant___, i.e., that $\nucnorm{A} = \nucnorm{U\!AV}$ for all $U \in \LieU(m)$ and $V \in \LieU(n).$ (Here, $\LieU(n) \subseteq \C^{n \times n}$ denotes the set of $n \times n$ unitary matrices.) However, it is not at all evident that the nuclear norm is actually a norm! In order to prove this, we will first establish the following variational characterization:
 
 ~ MathCard
 ~~ LongTheoremBody
@@ -76,9 +239,32 @@ Moreover, the maximum value is achieved when $U$ diagonalizes $A.$
 ~~
 ~
 
+~ MathCard
+~~ TheoremBody
+The nuclear norm is a norm on $\C^{n \times n}.$
+~~
+~~ LongProofBody
+Positive-definiteness and absolute homogeneity are clear, since the singular values $\sigma_i(A)$ are nonnegative and absolutely homogeneous functions of $A$, and every nonzero matrix has at least one nonzero singular value. To establish subadditivity, we perform the following computation:
+~~~ Align
+\nucnorm{A + B}
+&= \max_{U,V \in \LieU(n)} \trace \abs{U^\dagger (A + B) V} \\
+&= \max_{U,V \in \LieU(n)} \trace \abs{U^\dagger \! A V + U^\dagger \! B V} \\
+&\le \max_{U,V \in \LieU(n)} \qty(\trace \abs{U^\dagger \! A V} + \trace \abs{U^\dagger \! B V}) \\
+&\le \max_{U,V \in \LieU(n)} \trace \abs{U^\dagger \! A V} + \max_{W,Z \in \LieU(n)} \trace \abs{W^\dagger \! B Z} \\
+&= \nucnorm{A} + \nucnorm{B}
+~~~
+In the third step, we use the entrywise inequality $\abs{A+B} \le \abs{A} + \abs{B}.$
+~~
+~
+
+
+
+
 ~ Definition
 A ___density matrix___ is a Hermitian positive semidefinite matrix with trace 1.
 ~
+
+Earlier, we observed that the nuclear norm $\nucnorm{A}$ is unitarily invariant because it only depends on the singular values of $A.$ Conversely, _every_ unitarily invariant norm $\norm{\cdot} : \C^{n \times n} \to \R_{\ge 0}$ can be written as a function of the singular values, since we can always use the SVD $A = U\Sigma V^\dagger$ to write $\norm{A} = \norm{U \Sigma V^\dagger} = \norm{\Sigma}.$
 
 -----
 

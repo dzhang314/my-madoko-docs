@@ -9,6 +9,7 @@
 \let\Angstrom\AA
 \renewcommand{\AA}{{\mathbb{A}}}
 \newcommand{\EE}{{\mathbb{E}}}
+\newcommand{\UU}{{\mathcal{U}}}
 
 \newcommand{\eps}{{\varepsilon}}
 
@@ -42,4 +43,14 @@
 \newcommand{\LieSO}{{\mathsf{SO}}}
 \newcommand{\LieU}{{\mathsf{U}}}
 \newcommand{\LieSU}{{\mathsf{SU}}}
+
+\newcommand{\id}{{\mathsf{id}}}
+\newcommand{\ind}{{\mathsf{ind}}}
+\newcommand{\refl}{{\mathsf{refl}}}
+\newcommand{\transport}{{\mathsf{transport}}}
+\newcommand{\apd}{{\mathsf{apd}}}
+\newcommand{\qinv}{{\mathsf{qinv}}}
+\newcommand{\isequiv}{{\mathsf{isequiv}}}
+
+\newcommand{\apxdeg}{{\widetilde{\vphantom{\rule{0pt}{5.2pt}}\smash{\deg}}}}
 ~
