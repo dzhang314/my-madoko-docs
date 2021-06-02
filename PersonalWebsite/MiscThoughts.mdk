@@ -12,6 +12,212 @@ This page contains a disorganized collection of ideas that I'm learning and thin
 
 -----
 
+Suppose we want to solve a system of linear equations $A\vx = \vb.$ The simplest case of this problem occurs when the matrix $A \in \R^{N \times N}$ is ___symmetric___ and ___positive-definite___. In this case, we can recast $A\vx = \vb$ as a convex optimization problem for the quadratic function
+~ Math
+f(\vx) \coloneqq \frac{1}{2} \vx^T \! A \vx - \vb^T \vx.
+~
+Note that the positive-definiteness of $A$ guarantees that this function is strongly convex. Moreover, the unique global minimizer of this function occurs where
+~ Math
+\nabla f(\vx) = A\vx - \vb = \vo \quad\iff\quad A\vx = \vb.
+~
+Now, the most straightforward way to minimize a convex function is the method of ___gradient descent___ (which is also called ___steepest descent___ in the context of solving linear equations). To perform gradient descent, we pick an initial guess $\vx_0$ (when no other information is available, $\vx_0 \coloneqq \vo$ is a common choice) and compute a sequence $\vx_0, \vx_1, \vx_2, \ldots$ of approximate solutions by iterating
+~ Align
+\vx_{n+1} &\coloneqq \vx_n - \alpha_n \nabla f(\vx_n) \\
+&\phantom{:}= \vx_n - \alpha_n (A\vx_n - \vb).
+~
+In most applications of gradient descent, the ___step size___ $\alpha_n > 0$ is determined using a "line search" procedure (i.e., a one-dimensional optimization algorithm). However, there is no need to perform line search in this case, because the optimal step size for a quadratic objective function can be calculated analytically. Given an initial point $\vx \in \R^n$ and a step direction $\vd \in \R^n,$ we optimize
+~ Math
+\min_\alpha f(\vx - \alpha \vd)
+~
+by computing
+~ Align
+f(\vx - \alpha \vd)
+&= \frac{1}{2} (\vx - \alpha \vd)^T \! A (\vx - \alpha \vd) - \vb^T (\vx - \alpha \vd) \\
+&= \frac{1}{2} \vx^T \! A \vx - \alpha \vd^T \! A \vx + \frac{\alpha^2}{2} \vd^T \! A \vd - \vb^T \vx + \alpha \vb^T \vd \\
+&= \frac{\alpha^2}{2} \vd^T \! A \vd - \alpha (A\vx - \vb)^T \vd + \qty(\frac{1}{2} \vx^T \! A \vx - \vb^T \vx)
+~
+and differentiating with respect to $\alpha,$ as follows:
+~ Math
+\pdv{\alpha} f(\vx - \alpha \vd) = \alpha \vd^T \! A \vd - (A\vx - \vb)^T \vd = \vo
+\quad\implies\quad \alpha = \frac{(A\vx - \vb)^T \vd}{\vd^T \! A \vd}
+~
+Using this optimal step size, the iteration equation for gradient descent becomes
+~ Math
+\vx_{n+1} = \vx_n - \frac{(A\vx_n - \vb)^T (A\vx_n - \vb)}{(A\vx_n - \vb)^T \! A (A\vx_n - \vb)} (A\vx_n - \vb).
+~
+This equation can be simplified by defining the ___residual vector___ $\vr_n \coloneqq \vb - A\vx_n,$ upon which it simplifies to
+~ Math
+\vx_{n+1} = \vx_n + \frac{\vr_n^T \vr_n}{\vr_n^T \! A \vr_n} \vr_n.
+~
+This completes the derivation of the method of gradient descent (a.k.a. steepest descent).
+
+~ MathCard
+~~ BoxBody
+~~~ Align
+\vr_0 & \coloneqq \vb - A\vx_0    \qquad & \qquad \vr_0 & \coloneqq \vb - A\vx_0     \\
+r_0^2 & \coloneqq \norm{\vr_0}_2^2 & r_0^2 & \coloneqq \norm{\vr_0}_2^2 \\
+      &                            & \vp_0 & \coloneqq \vr_0
+~~~
+~~
+~~ BoxBody
+~~~ Align
+\vq_n     & \coloneqq A\vr_n                      & \vq_n     & \coloneqq A \vp_n                         \\
+\alpha_n  & \coloneqq \frac{r_n^2}{\vr_n^T \vq_n} & \alpha_n  & \coloneqq \frac{r_n^2}{\vp_n^T \vq_n}     \\
+\vx_{n+1} & \coloneqq \vx_n + \alpha_n \vr_n     \qquad & \qquad \vx_{n+1} & \coloneqq \vx_n + \alpha_n \vp_n          \\
+\vr_{n+1} & \coloneqq \vr_n - \alpha_n \vq_n      & \vr_{n+1} & \coloneqq \vr_n - \alpha_n \vq_n          \\
+r_{n+1}^2 & \coloneqq \norm{\vr_{n+1}}_2^2        & r_{n+1}^2 & \coloneqq \norm{\vr_{n+1}}_2^2            \\
+          &                                       & \beta_n   & \coloneqq r_{n+1}^2 \divisionsymbol r_n^2 \\
+          &                                       & \vp_{n+1} & \coloneqq \vr_{n+1} + \beta_n \vp_n
+~~~
+~~
+~
+
+Gradient descent is an extremely natural idea --- it's the first thing you'd come up with after recasting $A\vx = \vb$ as a convex optimization problem --- but it has a significant drawback. Namely, it often takes multiple steps in the same direction $\vd \in \R^n.$ This is wasteful, since a step $\alpha_1 \vd$ followed by a another step $\alpha_2 \vd$ can be combined into a single step $(\alpha_1 + \alpha_2) \vd.$
+
+Wouldn't it be nice if we got the step size right the first time? That is, whenever we take a step in a direction $\vd,$ we should choose the step size $\alpha$ in such a way that we never need to step in the same direction $\vd$ again. All future step directions should be orthogonal to $\vd.$
+
+In mathematical terms, we would like to ensure that after we take the step $\vx_{n+1} \coloneqq \vx_n - \alpha \vd,$ the remaining displacement between the approximate solution $\vx_{n+1}$ and the true solution $A^{-1} \vb$ is orthogonal to the step direction $\vd.$ This yields an equation which determines the step size $\alpha$ as follows:
+~ Align
+\vd^T (\vx_{n+1} - A^{-1} \vb) &= 0 \\
+\vd^T (\vx_n - \alpha \vd - A^{-1} \vb) &= 0 \\
+\vd^T (\vx_n - A^{-1} \vb) &= \alpha \vd^T \! \vd \\
+\alpha &= \frac{\vd^T (\vx_n - A^{-1} \vb)}{\vd^T \! \vd} \\
+~
+This equation has a serious problem. It requires us to know $A^{-1} \vb$ in order to compute the step size $\alpha,$ but the whole point of solving $A\vx = \vb$ is to _find_ $A^{-1} \vb.$ If we had $A^{-1} \vb$ in hand, then we would already be done! Unfortunately, our dream of enforcing orthogonality between $\vd$ and $\vx_{n+1} - A^{-1} \vb$ turned out to be unworkable.
+
+But wait! We derived this equation for $\alpha$ by demanding that $\vd$ be orthogonal to $\vx_{n+1} - A^{-1} \vb$ under the standard Euclidean inner product $\ev{\vx, \vy} \coloneqq \vx^T \vy.$ There is no reason to prefer this inner product over any other, and our idea can be saved by switching to another one. In particular, because $A$ is a symmetric positive-definite matrix, it defines the ___$A$-inner product___
+~ Math
+\ev{\vx, \vy}_{\! A} \coloneqq \vx^T \! A \vy.
+~
+If we ask for $\vd$ to be ___$A$-orthogonal___ to $\vx_{n+1} - A^{-1} \vb,$ then we instead obtain the following equation:;
+~ Align
+\vd^T \! A (\vx_{n+1} - A^{-1} \vb) &= 0 \\
+\vd^T (A \vx_n - \alpha A \vd - \vb) &= 0 \\
+\vd^T (A \vx_n - \vb) &= \alpha \vd^T \! A \vd \\
+\alpha &= \frac{\vd^T (A \vx_n - \vb)}{\vd^T \! A \vd} \\
+~
+Remarkably, this is the same value of $\alpha$ that we derived earlier by minimizing $f(\vx - \alpha \vd)!$ It contains no occurrences of $A^{-1},$ and can be computed purely from quantities we already know.
+
+-----
+
+In the following section, let $A \in \R^{N \times N}$ be a symmetric positive-definite matrix, and let $\vb, \vx_0 \in \R^N$ be arbitrary vectors. We define the sequences $(\alpha_n), (\beta_n) \subset \R$ and $(\vx_n), (\vr_n), (\vp_n) \subset \R^N$ by the initial conditions $\vr_0 \coloneqq \vp_0 \coloneqq \vb - A\vx_0$ and the following mutual recurrence relations:
+~ Align
+\alpha_n &\coloneqq \frac{\norm{\vr_n}_2^2}{\vp_n^T \! A \vp_n} \\
+\vx_{n+1} &\coloneqq \vx_n + \alpha_n \vp_n \\
+\vr_{n+1} &\coloneqq \vr_n - \alpha_n A \vp_n \\
+\beta_n &\coloneqq \frac{\norm{\vr_{n+1}}_2^2}{\norm{\vr_n}_2^2} \\
+\vp_{n+1} &\coloneqq \vr_{n+1} + \beta_n \vp_n
+~
+These sequences are well-defined until the first $n$ for which $\vr_n = \vo,$ at which point division by zero occurs in the definition of $\beta_n.$
+
+~ MathCard
+~~ WellBody
+**Lemma:** Each step direction $\vp_n$ is a linear combination of the residual vectors $\vr_0, \dots, \vr_n.$ In particular,
+~~~ Math
+\vp_n = \sum_{k=0}^n \frac{\norm{\vr_n}_2^2}{\norm{\vr_k}_2^2} \vr_k.
+~~~
+~~
+~
+
+~ Align
+\vp_0 &= \vr_0 \\
+\vp_1 &= \vr_1 + \frac{\norm{\vr_1}_2^2}{\norm{\vr_0}_2^2} \vr_0 \\
+\vp_2 &= \vr_2 + \frac{\norm{\vr_2}_2^2}{\norm{\vr_1}_2^2} \vp_1 \\
+&= \vr_2 + \frac{\norm{\vr_2}_2^2}{\norm{\vr_1}_2^2} \vr_1 + \frac{\norm{\vr_2}_2^2}{\norm{\vr_0}_2^2} \vr_0
+~
+
+~ MathCard
+~~ TheoremBody
+
+~~~ Align
+\vr_i^T \vr_j &= 0 \qquad\qquad i \ne j \\
+\vp_i^T \! A \vp_j &= 0 \qquad\qquad i \ne j \\
+\vr_i^T \vp_j &= \norm{\vr_j}_2^2 \qquad\, i \le j \\
+\vr_i^T \! A \vp_i &= \vp_i^T \! A \vp_i \\
+\vr_i^T \! A \vp_j &= 0 \qquad\qquad i \notin \{j, j+1\}
+~~~
+~~
+~~ LongProofBody
+We first verify that the theorem holds for $\vr_0,$ $\vp_0,$ and $\vr_1.$ Since $\vr_0 = \vp_0,$ the only nontrivial claim to verify is that
+~~~ Align
+\vr_0^T \vr_1 &= \vr_0^T \qty(\vr_0 - \alpha_0 A \vp_0) \\
+&= \vr_0^T \qty(\vr_0 - \frac{\norm{\vr_0}_2^2}{\vr_0^T \! A \vr_0} A \vr_0) \\
+&= \norm{\vr_0}_2^2 - \frac{\norm{\vr_0}_2^2}{\vr_0^T \! A \vr_0} \vr_0^T \! A \vr_0 \\
+&= 0.
+~~~
+We now proceed by induction in two stages. Suppose that the theorem holds for the vectors $\vr_0, \dots, \vr_k$ and $\vp_0, \dots, \vp_{k-1}.$ We will show that the theorem also holds for $\vp_k$ and $\vr_{k+1}.$ To prove the theorem for $\vp_k,$ we need to verify the following four claims:
+~~~ Align
+     \vr_i^T \vp_k &= \norm{\vr_k}_2^2 \qquad & \qquad i &= 0, \dots, k   \\
+\vp_i^T \! A \vp_k &= 0                       &        i &= 0, \dots, k-1 \\
+\vr_i^T \! A \vp_k &= 0                       &        i &= 0, \dots, k-1 \\
+\vr_k^T \! A \vp_k &= \vp_k^T \! A \vp_k      &          &
+~~~
+Let $i \in \{0, \dots, k\}.$ The first inductive claim follows from a direct calculation using the inductive hypothesis $\vr_i^T \vr_j = 0$ for $i \ne j$ and the formula for $\vp_k$ obtained earlier.
+~~~ Math
+\vr_i^T \vp_k = \sum_{j=0}^k \frac{\norm{\vr_k}_2^2}{\norm{\vr_j}_2^2} \vr_i^T \vr_j
+= \sum_{j=0}^k \frac{\norm{\vr_k}_2^2}{\norm{\vr_j}_2^2} \delta_{ij} \norm{\vr_j}_2^2
+= \norm{\vr_k}_2^2
+~~~
+Now, let $i \in \{0, \dots, k-1\}.$ The preceding result implies that $\vr_i^T \vp_k = \vr_{i+1}^T \vp_k = \norm{\vr_k}_2^2.$ We obtain the second inductive claim by combining this with the iteration equation $\vr_{i+1} \coloneqq \vr_i - \alpha_i A \vp_i.$
+~~~ Math
+\norm{\vr_k}_2^2
+= \vr_{i+1}^T \vp_k
+= \vr_i^T \vp_k - \alpha_i \vp_i^T \! A \vp_k
+= \norm{\vr_k}_2^2 - \alpha_i \vp_i^T \! A \vp_k
+~~~
+~~~ Math
+\qquad\implies\qquad
+\alpha_i \vp_i^T \! A \vp_k = 0
+~~~
+Since $\alpha_i > 0,$ we may conclude that $\vp_i^T \! A \vp_k = 0.$ We now apply the iteration equation $\vp_i = \vr_i + \beta_{i-1} \vp_{i-1}$ to this result to obtain the third inductive claim:
+~~~ Math
+0 = \vp_i^T \! A \vp_k
+= (\vr_i + \beta_{i-1} \vp_{i-1})^T \! A \vp_k
+= \vr_i^T \! A \vp_k + \beta_{i-1} \vp_{i-1}^T \! A \vp_k
+= \vr_i^T \! A \vp_k
+~~~
+Finally, the fourth inductive claim follows by combining the iteration equation $\vp_k = \vr_k + \beta_{k-1} \vp_{k-1}$ with a special case of the second inductive claim, namely, $\vp_{k-1}^T \! A \vp_k = 0.$
+~~~ Math
+\vp_k^T \! A \vp_k
+= \qty(\vr_k + \beta_{k-1} \vp_{k-1})^T \! A \vp_k
+= \vr_k^T \! A \vp_k + \beta_{k-1} \vp_{k-1}^T \! A \vp_k
+= \vr_k^T \! A \vp_k
+~~~
+This completes the proof that the theorem holds for $\vp_k.$ We now turn our attention to proving the theorem for $\vr_{k+1}.$ This requires us to verify two additional claims:
+~~~ Align
+     \vr_j^T \vr_{k+1} &= 0 \qquad & \qquad j &= 0, \dots, k   \\
+\vr_{k+1}^T \! A \vp_j &= 0        &        j &= 0, \dots, k-1
+~~~
+The first inductive claim requires two cases. For $j \in \{0, \dots, k-1\},$ we combine the iteration equation $\vr_{k+1} \coloneqq \vr_k - \alpha_k A \vp_k$ with the inductive hypotheses $\vr_j^T \vr_k = 0$ and $\vr_j^T \! A \vp_k = 0$ to write:
+~~~ Math
+\vr_j^T \vr_{k+1}
+= \vr_j^T \qty(\vr_k - \alpha_k A \vp_k)
+= \vr_j^T \vr_k - \alpha_k \vr_j^T \! A \vp_k
+= 0
+~~~
+On the other hand, for $j = k,$ we apply the definition $\alpha_k \coloneqq \norm{\vr_k}_2^2 / (\vp_k^T \! A \vp_k)$ together with the inductive hypothesis $\vr_k^T \! A \vp_k = \vp_k^T \! A \vp_k.$
+~~~ Math
+\vr_k^T \vr_{k+1}
+= \vr_k^T \qty(\vr_k - \alpha_k A \vp_k)
+= \vr_k^T \vr_k - \alpha_k \vr_k^T A \vp_k
+= \vr_k^T \vr_k - \frac{\norm{\vr_k}_2^2}{\vp_k^T \! A \vp_k} \vr_k^T \! A \vp_k
+= 0
+~~~
+Finally, the second inductive claim only requires one case. Let $j \in \{0, \dots, k-1\}.$ From the first inductive claim, we know that $\vr_j^T \vr_{k+1} = \vr_{j+1}^T \vr_{k+1} = 0.$ It follows that:
+~~~ Math
+0 = \vr_{k+1}^T \vr_{j+1}
+= \vr_{k+1}^T \qty(\vr_j - \alpha_j A \vp_j)
+= \vr_{k+1}^T \vr_j - \alpha_j \vr_{k+1}^T A \vp_j
+= -\alpha_j \vr_{k+1}^T A \vp_j
+~~~
+Since $\alpha_j > 0,$ we may conclude that $\vr_{k+1}^T A \vp_j = 0$. This completes the proof.
+~~
+~
+
+
+
+-----
+
 ~ LongDefinition
 A ___decision tree___ on $n$ variables is a full binary tree $T$ in which each internal node is labeled with an index $i \in \{1, \dots, n\}$ and each leaf is labeled a result $r \in \{0,1\}.$
 

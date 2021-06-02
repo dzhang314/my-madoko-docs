@@ -18,10 +18,15 @@
 \newcommand{\simpler}{\mathrel{{\lt}_{\mathsf{s}}}}
 \newcommand{\simplereq}{\mathrel{{\le}_{\mathsf{s}}}}
 
+\renewcommand{\vb}{{\mathbf{b}}}
 \newcommand{\vd}{{\mathbf{d}}}
+\newcommand{\ve}{{\mathbf{e}}}
+\newcommand{\vf}{{\mathbf{f}}}
 \newcommand{\vg}{{\mathbf{g}}}
 \newcommand{\vo}{{\mathbf{0}}}
 \newcommand{\vp}{{\mathbf{p}}}
+\newcommand{\vq}{{\mathbf{q}}}
+\newcommand{\vr}{{\mathbf{r}}}
 \newcommand{\vs}{{\mathbf{s}}}
 \renewcommand{\vu}{{\mathbf{u}}}
 \newcommand{\vv}{{\mathbf{v}}}
